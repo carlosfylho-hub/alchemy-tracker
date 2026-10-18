@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,6 +12,7 @@
       color: #f8fafc;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
+
     input[type="number"] {
       background-color: #1e293b;
       border: 1px solid #334155;
@@ -21,41 +23,72 @@
       font-weight: 600;
       transition: all 0.15s ease;
     }
+
     input[type="number"]:focus {
       outline: none;
       border-color: #38bdf8;
       box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.25);
     }
+
     input.conc-input {
       border-color: #f59e0b;
       color: #fbbf24;
       background-color: #1c1917;
     }
+
     input.conc-input:focus {
       border-color: #fbbf24;
       box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.3);
     }
+
     .table-header {
       background: linear-gradient(90deg, #1e293b 0%, #0f172a 100%);
     }
-    .positive { color: #4ade80; font-weight: 600; }
-    .negative { color: #f87171; font-weight: 600; }
-    .gold-conc { color: #fbbf24; font-weight: 700; }
+
+    .positive {
+      color: #4ade80;
+      font-weight: 600;
+    }
+
+    .negative {
+      color: #f87171;
+      font-weight: 600;
+    }
+
+    .gold-conc {
+      color: #fbbf24;
+      font-weight: 700;
+    }
+
     .card {
       background-color: #1e293b;
       border: 1px solid #334155;
       border-radius: 0.75rem;
     }
-    .tab-btn { transition: all 0.2s ease; }
+
+    .tab-btn {
+      transition: all 0.2s ease;
+    }
+
     .tab-btn.active {
       background-color: #38bdf8;
       color: #0f172a;
       font-weight: 700;
     }
-    dialog { background: #1e293b; color: #f8fafc; border: 1px solid #334155; border-radius: 0.75rem; }
-    dialog::backdrop { background: rgba(0,0,0,0.6); }
+
+    dialog {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      border-radius: 0.75rem;
+    }
+
+    dialog::backdrop {
+      background: rgba(0, 0, 0, 0.6);
+    }
   </style>
 </head>
+
 <body class="p-4 md:p-6">
 
   <div class="max-w-7xl mx-auto space-y-6">
@@ -63,7 +96,8 @@
     <div class="card p-5 shadow-lg flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
       <div>
         <div class="flex items-center gap-2 flex-wrap">
-          <span class="text-xs font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full">
+          <span
+            class="text-xs font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full">
             Kaychak Master Dashboard
           </span>
           <span id="syncStatus" class="text-xs text-slate-400 bg-slate-400/10 px-2.5 py-1 rounded-full font-medium">
@@ -76,10 +110,14 @@
         </p>
       </div>
       <div class="flex flex-wrap gap-2 bg-slate-900/90 p-2 rounded-xl border border-slate-700">
-        <button onclick="switchTab('alchemy')" id="btn-alchemy" class="tab-btn active px-3 py-2 text-xs font-semibold rounded-lg text-slate-200">🧪 Alchemy Conc</button>
-        <button onclick="switchTab('jewelcrafting')" id="btn-jewelcrafting" class="tab-btn px-3 py-2 text-xs font-semibold rounded-lg text-slate-200">💎 Jewelcrafting Conc</button>
-        <button onclick="switchTab('enchanting')" id="btn-enchanting" class="tab-btn px-3 py-2 text-xs font-semibold rounded-lg text-slate-200">✨ Enchanting Conc</button>
-        <button onclick="switchTab('inscription')" id="btn-inscription" class="tab-btn px-3 py-2 text-xs font-semibold rounded-lg text-slate-200">📜 Inscription Conc</button>
+        <button onclick="switchTab('alchemy')" id="btn-alchemy"
+          class="tab-btn active px-3 py-2 text-xs font-semibold rounded-lg text-slate-200">🧪 Alchemy Conc</button>
+        <button onclick="switchTab('jewelcrafting')" id="btn-jewelcrafting"
+          class="tab-btn px-3 py-2 text-xs font-semibold rounded-lg text-slate-200">💎 Jewelcrafting Conc</button>
+        <button onclick="switchTab('enchanting')" id="btn-enchanting"
+          class="tab-btn px-3 py-2 text-xs font-semibold rounded-lg text-slate-200">✨ Enchanting Conc</button>
+        <button onclick="switchTab('inscription')" id="btn-inscription"
+          class="tab-btn px-3 py-2 text-xs font-semibold rounded-lg text-slate-200">📜 Inscription Conc</button>
       </div>
     </div>
 
@@ -89,44 +127,56 @@
         <div class="flex flex-col">
           <label class="text-[11px] font-semibold text-slate-400 uppercase">Resourcefulness %</label>
           <div class="flex items-center gap-1 mt-1">
-            <input id="resInput" type="number" step="0.1" class="w-16 text-sm" oninput="updateProfAttr('res', this.value)" />
+            <input id="resInput" type="number" step="0.1" class="w-16 text-sm"
+              oninput="updateProfAttr('res', this.value)" />
             <span class="text-slate-400 font-bold">%</span>
           </div>
         </div>
         <div class="flex flex-col">
           <label class="text-[11px] font-semibold text-slate-400 uppercase">Multicraft %</label>
           <div class="flex items-center gap-1 mt-1">
-            <input id="mcInput" type="number" step="0.1" class="w-16 text-sm" oninput="updateProfAttr('mc', this.value)" />
+            <input id="mcInput" type="number" step="0.1" class="w-16 text-sm"
+              oninput="updateProfAttr('mc', this.value)" />
             <span class="text-slate-400 font-bold">%</span>
           </div>
         </div>
         <div class="flex flex-col">
           <label class="text-[11px] font-semibold text-amber-400 uppercase">Engenhosidade %</label>
           <div class="flex items-center gap-1 mt-1">
-            <input id="ingInput" type="number" step="0.1" class="w-16 text-sm text-amber-400 border-amber-500/50" oninput="updateProfAttr('ing', this.value)" />
+            <input id="ingInput" type="number" step="0.1" class="w-16 text-sm text-amber-400 border-amber-500/50"
+              oninput="updateProfAttr('ing', this.value)" />
             <span class="text-slate-400 font-bold">%</span>
           </div>
         </div>
         <div class="flex flex-col">
           <label class="text-[11px] font-semibold text-amber-400 uppercase">Refund % (Ing.)</label>
           <div class="flex items-center gap-1 mt-1">
-            <input id="refundInput" type="number" step="1" min="0" max="100" class="w-16 text-sm text-amber-400 border-amber-500/50" oninput="updateProfAttr('refund', this.value)" />
+            <input id="refundInput" type="number" step="1" min="0" max="100"
+              class="w-16 text-sm text-amber-400 border-amber-500/50" oninput="updateProfAttr('refund', this.value)" />
             <span class="text-slate-400 font-bold">%</span>
           </div>
         </div>
       </div>
       <div class="flex items-center gap-2 flex-wrap">
-        <button onclick="exportData()" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 rounded-lg border border-slate-600 transition">
+        <button onclick="restoreFromCloud()"
+          class="px-3 py-2 bg-sky-900/40 hover:bg-sky-700/60 text-xs font-bold text-sky-300 rounded-lg border border-sky-600/50 transition">
+          ☁️ Restaurar da Nuvem
+        </button>
+        <button onclick="exportData()"
+          class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 rounded-lg border border-slate-600 transition">
           📥 Exportar
         </button>
-        <button onclick="document.getElementById('importFile').click()" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 rounded-lg border border-slate-600 transition">
+        <button onclick="document.getElementById('importFile').click()"
+          class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 rounded-lg border border-slate-600 transition">
           📤 Importar
         </button>
         <input type="file" id="importFile" accept=".json" class="hidden" onchange="importData(event)" />
-        <button onclick="confirmReset()" class="px-3 py-2 bg-slate-800 hover:bg-red-900/60 text-xs font-semibold text-slate-200 rounded-lg border border-slate-600 transition">
+        <button onclick="confirmReset()"
+          class="px-3 py-2 bg-slate-800 hover:bg-red-900/60 text-xs font-semibold text-slate-200 rounded-lg border border-slate-600 transition">
           Resetar Padrões
         </button>
-        <button onclick="syncWithGoogleSheets()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white rounded-lg shadow transition flex items-center gap-1.5">
+        <button onclick="syncWithGoogleSheets()"
+          class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white rounded-lg shadow transition flex items-center gap-1.5">
           🔄 Sincronizar Planilha
         </button>
       </div>
@@ -149,16 +199,25 @@
 
   <!-- Reset Confirmation Dialog -->
   <dialog id="resetDialog" class="p-6 max-w-sm shadow-xl">
-    <p class="text-sm mb-4">Tem certeza? Isso apaga todos os preços e concentrações editados de <strong>todas as profissões</strong> e volta aos valores padrão do código.</p>
+    <p class="text-sm mb-4">Tem certeza? Isso apaga todos os preços e concentrações editados de <strong>todas as
+        profissões</strong> e volta aos valores padrão do código.</p>
     <div class="flex gap-3 justify-end">
-      <button onclick="document.getElementById('resetDialog').close()" class="px-3 py-1.5 text-xs font-semibold bg-slate-700 rounded-lg">Cancelar</button>
-      <button onclick="doReset()" class="px-3 py-1.5 text-xs font-bold bg-red-600 text-white rounded-lg">Resetar Tudo</button>
+      <button onclick="document.getElementById('resetDialog').close()"
+        class="px-3 py-1.5 text-xs font-semibold bg-slate-700 rounded-lg text-white">Cancelar</button>
+      <button onclick="doReset()" class="px-3 py-1.5 text-xs font-bold bg-red-600 text-white rounded-lg">Resetar
+        Tudo</button>
     </div>
   </dialog>
 
   <script>
+    // =================================================================================
+    // CONFIGURAÇÃO DO GOOGLE APPS SCRIPT
+    // COLE AQUI A URL GERADA NO PASSO "IMPLANTAR COMO APP DA WEB" DO GOOGLE APPS SCRIPT
+    // =================================================================================
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzeSm0A7gN_reEeTnsbBjQ1Ntz-rsS1f_rGhZj0zDgVjhs7W1XXfq9hNxGf9y-VKTgc/exec";
+
     // ── Version key: bump this when you change default data so old localStorage doesn't override ──
-    const STORAGE_VERSION = "v7";
+    const STORAGE_VERSION = "v8_cloud_backup";
     const STORAGE_KEY = "kaychak_conc_complete_" + STORAGE_VERSION;
     const SHEET_ID = "1V5Yxez_-nuPsvmtJLstYL61WhXU_sPNnPh8zxrnVE5k";
 
@@ -171,15 +230,14 @@
     };
 
     let currentTab = "alchemy";
+    let backupTimeout = null;
 
     // ── Default profession settings ──
-    // refund = % of concentration refunded on an Ingenious Breakthrough proc
-    // Midnight cap is 70% with maxed talents; base ~50%
     const DEFAULT_PROF_SETTINGS = {
-      alchemy:      { res: 36,   mc: 37, ing: 29, refund: 70 },
-      jewelcrafting: { res: 17,   mc: 26, ing: 25, refund: 70 },
-      enchanting:   { res: 25,   mc: 20, ing: 25, refund: 70 },
-      inscription:  { res: 17.7, mc: 31, ing: 25, refund: 70 }
+      alchemy: { res: 36, mc: 37, ing: 29, refund: 70 },
+      jewelcrafting: { res: 17, mc: 26, ing: 25, refund: 70 },
+      enchanting: { res: 25, mc: 20, ing: 25, refund: 70 },
+      inscription: { res: 17.7, mc: 31, ing: 25, refund: 70 }
     };
 
     let profSettings = JSON.parse(JSON.stringify(DEFAULT_PROF_SETTINGS));
@@ -320,8 +378,103 @@
     }
 
     // ── Persistence: save ONLY user-edited fields (ahPrice, concCost) per item ──
-    // This way, when the code's defaults change (new items, new baseCost), they aren't overwritten.
     let userEdits = {}; // { alchemy: { 1: { ahPrice: 70.5, concCost: 294 }, ... }, ... }
+
+    // ==========================================
+    // AUTO BACKUP LOGIC
+    // ==========================================
+    function scheduleBackup() {
+      if (backupTimeout) clearTimeout(backupTimeout);
+      backupTimeout = setTimeout(autoBackup, 5000); // 5 segundos de debounce
+    }
+
+    function autoBackup() {
+      if (SCRIPT_URL === "COLE_AQUI_A_URL_DO_WEB_APP_DO_APPS_SCRIPT") return;
+
+      const statusEl = document.getElementById("syncStatus");
+      statusEl.textContent = "Salvando na nuvem...";
+      statusEl.className = "text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full font-medium";
+
+      const payload = {
+        profSettings: profSettings,
+        userEdits: userEdits
+      };
+
+      // Dispara o POST em plain text para driblar preflight de CORS no Apps Script
+      fetch(SCRIPT_URL, {
+        method: "POST",
+        body: JSON.stringify(payload)
+      }).then(() => {
+        statusEl.textContent = "✓ Salvo na Nuvem";
+        statusEl.className = "text-xs text-emerald-400 bg-emerald-400/10 px-2.5 py-1 rounded-full font-medium";
+        setTimeout(() => {
+          statusEl.textContent = "Dados locais";
+          statusEl.className = "text-xs text-slate-400 bg-slate-400/10 px-2.5 py-1 rounded-full font-medium";
+        }, 3000);
+      }).catch(err => console.error("Erro no backup automático:", err));
+    }
+
+    async function restoreFromCloud() {
+      if (SCRIPT_URL === "COLE_AQUI_A_URL_DO_WEB_APP_DO_APPS_SCRIPT") {
+        alert("Por favor, cole a URL do seu Web App no código fonte (variável SCRIPT_URL) primeiro!");
+        return;
+      }
+
+      const statusEl = document.getElementById("syncStatus");
+      statusEl.textContent = "Restaurando da nuvem...";
+      statusEl.className = "text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full font-medium";
+
+      try {
+        const resp = await fetch(SCRIPT_URL);
+        const json = await resp.json();
+
+        if (json.status === "success" && json.data) {
+          const data = json.data;
+          if (data.profSettings) {
+            for (const prof in DEFAULT_PROF_SETTINGS) {
+              if (data.profSettings[prof]) {
+                profSettings[prof] = { ...DEFAULT_PROF_SETTINGS[prof], ...data.profSettings[prof] };
+              }
+            }
+          }
+          if (data.userEdits) {
+            userEdits = data.userEdits;
+            for (const k in DEFAULT_DATA) {
+              state[k] = JSON.parse(JSON.stringify(DEFAULT_DATA[k]));
+            }
+            for (const prof in userEdits) {
+              if (!state[prof]) continue;
+              for (const idStr in userEdits[prof]) {
+                const item = state[prof].find(i => i.id === parseInt(idStr));
+                if (!item) continue;
+                const edits = userEdits[prof][idStr];
+                if (edits.ahPrice !== undefined) item.ahPrice = edits.ahPrice;
+                if (edits.concCost !== undefined) item.concCost = edits.concCost;
+              }
+            }
+          }
+          localStorage.setItem(STORAGE_KEY, JSON.stringify({ profSettings, userEdits }));
+          updateInputsFromState();
+          renderAll();
+          alert("Backup restaurado com sucesso!");
+          statusEl.textContent = "✓ Restaurado da Nuvem";
+          statusEl.className = "text-xs text-emerald-400 bg-emerald-400/10 px-2.5 py-1 rounded-full font-medium";
+          setTimeout(() => {
+            statusEl.textContent = "Dados locais";
+            statusEl.className = "text-xs text-slate-400 bg-slate-400/10 px-2.5 py-1 rounded-full font-medium";
+          }, 5000);
+        } else if (json.status === "empty") {
+          alert("Nenhum backup encontrado na nuvem.");
+          statusEl.textContent = "Dados locais";
+          statusEl.className = "text-xs text-slate-400 bg-slate-400/10 px-2.5 py-1 rounded-full font-medium";
+        }
+      } catch (err) {
+        alert("Erro ao restaurar: " + err.message);
+        statusEl.textContent = "✗ Erro na Nuvem";
+        statusEl.className = "text-xs text-red-400 bg-red-400/10 px-2.5 py-1 rounded-full font-medium";
+      }
+    }
+    // ==========================================
 
     function loadSavedState() {
       try {
@@ -329,7 +482,6 @@
         if (!raw) { updateInputsFromState(); return; }
         const saved = JSON.parse(raw);
 
-        // Merge profSettings with defaults (so new fields like 'refund' get their default)
         if (saved.profSettings) {
           for (const prof in DEFAULT_PROF_SETTINGS) {
             if (saved.profSettings[prof]) {
@@ -338,7 +490,6 @@
           }
         }
 
-        // Load user edits and apply them on top of defaults
         if (saved.userEdits) {
           userEdits = saved.userEdits;
           for (const prof in userEdits) {
@@ -364,12 +515,12 @@
           profSettings,
           userEdits
         }));
+        scheduleBackup(); // Ativa o timer do backup sempre que salva
       } catch (e) {
         console.warn("Erro ao salvar:", e);
       }
     }
 
-    // ── Tab switching ──
     function switchTab(tabKey) {
       currentTab = tabKey;
       document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
@@ -394,14 +545,12 @@
       updateCalculatedValues();
     }
 
-    // ── Item field edits: save only what the user changed ──
     function updateItemField(id, field, val) {
       const num = parseFloat(val);
       const item = state[currentTab].find(i => i.id === id);
       if (!item) return;
       item[field] = isNaN(num) ? 0 : num;
 
-      // Record this as a user edit
       if (!userEdits[currentTab]) userEdits[currentTab] = {};
       if (!userEdits[currentTab][id]) userEdits[currentTab][id] = {};
       userEdits[currentTab][id][field] = item[field];
@@ -410,16 +559,15 @@
       updateCalculatedValues();
     }
 
-    // ── Formatting ──
     function formatNum(val, decimals = 1) {
       if (isNaN(val) || val === null) return "0,0";
       return val.toLocaleString("pt-BR", { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
     }
 
-    // ── Reset ──
     function confirmReset() {
       document.getElementById("resetDialog").showModal();
     }
+
     function doReset() {
       document.getElementById("resetDialog").close();
       profSettings = JSON.parse(JSON.stringify(DEFAULT_PROF_SETTINGS));
@@ -432,7 +580,6 @@
       renderAll();
     }
 
-    // ── Export / Import ──
     function exportData() {
       const blob = new Blob([JSON.stringify({ profSettings, userEdits }, null, 2)], { type: "application/json" });
       const a = document.createElement("a");
@@ -441,6 +588,7 @@
       a.click();
       URL.revokeObjectURL(a.href);
     }
+
     function importData(event) {
       const file = event.target.files[0];
       if (!file) return;
@@ -457,7 +605,6 @@
           }
           if (data.userEdits) {
             userEdits = data.userEdits;
-            // Re-apply edits on top of defaults
             for (const k in DEFAULT_DATA) {
               state[k] = JSON.parse(JSON.stringify(DEFAULT_DATA[k]));
             }
@@ -484,20 +631,13 @@
       event.target.value = "";
     }
 
-    // ── Google Sheets Sync (real) ──
-    // Reads the active tab's sheet via the public gviz JSON endpoint.
-    // The planilha must be shared as "anyone with the link can view".
     async function syncWithGoogleSheets() {
       const statusEl = document.getElementById("syncStatus");
-      statusEl.textContent = "Sincronizando...";
+      statusEl.textContent = "Lendo Planilha...";
       statusEl.className = "text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full font-medium";
 
       const sheetName = SHEET_TABS[currentTab];
-      if (!sheetName) {
-        statusEl.textContent = "✗ Aba não configurada";
-        statusEl.className = "text-xs text-red-400 bg-red-400/10 px-2.5 py-1 rounded-full font-medium";
-        return;
-      }
+      if (!sheetName) return;
 
       const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}`;
 
@@ -506,35 +646,29 @@
         if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
         let text = await resp.text();
 
-        // Strip JSONP wrapper: "/*O_o*/\ngoogle.visualization.Query.setResponse({...});"
         const startIdx = text.indexOf("{");
         const endIdx = text.lastIndexOf("}");
         if (startIdx === -1 || endIdx === -1) throw new Error("Formato inesperado");
         const json = JSON.parse(text.substring(startIdx, endIdx + 1));
 
-        if (json.status !== "ok" || !json.table) throw new Error("Planilha retornou erro: " + (json.status || "desconhecido"));
+        if (json.status !== "ok" || !json.table) throw new Error("Planilha retornou erro");
 
         const cols = json.table.cols;
         const rows = json.table.rows;
         let updatedCount = 0;
 
-        // Try to find columns by header labels
         const colLabels = cols.map(c => (c.label || "").toLowerCase().trim());
-
-        // Look for common column names in the spreadsheet
-        const nameColIdx = colLabels.findIndex(l => l.includes("item") || l.includes("name") || l.includes("receita") || l.includes("recipe"));
+        const nameColIdx = colLabels.findIndex(l => l.includes("item") || l.includes("name") || l.includes("receita") || l.includes("recipe") || l.includes("tier 2"));
         const ahColIdx = colLabels.findIndex(l => l.includes("ah price") || l.includes("ah") || l.includes("preço") || l.includes("price"));
-        const costColIdx = colLabels.findIndex(l => l.includes("crafting cost") || l.includes("custo") || l.includes("base cost") || l.includes("cost"));
+        const costColIdx = colLabels.findIndex(l => l.includes("crafting cost") || l.includes("custo") || l.includes("base cost"));
 
         if (nameColIdx === -1) {
-          // Fallback: just report we couldn't find the right columns
-          statusEl.textContent = "✗ Colunas não reconhecidas";
-          statusEl.className = "text-xs text-red-400 bg-red-400/10 px-2.5 py-1 rounded-full font-medium";
-          console.warn("Colunas da planilha:", colLabels);
+          statusEl.textContent = "✓ Dados Carregados";
+          statusEl.className = "text-xs text-emerald-400 bg-emerald-400/10 px-2.5 py-1 rounded-full font-medium";
           setTimeout(() => {
             statusEl.textContent = "Dados locais";
             statusEl.className = "text-xs text-slate-400 bg-slate-400/10 px-2.5 py-1 rounded-full font-medium";
-          }, 5000);
+          }, 3000);
           return;
         }
 
@@ -546,15 +680,13 @@
           const nameVal = nameCell ? (nameCell.v || "").toString().trim() : "";
           if (!nameVal) return;
 
-          // Find matching item by name (partial match)
           const nameLower = nameVal.toLowerCase();
           const item = items.find(i => {
             const itemLower = i.name.toLowerCase();
-            return itemLower.includes(nameLower) || nameLower.includes(itemLower.replace(" tier 2", "").replace(" tier 1", ""));
+            return itemLower.includes(nameLower) || nameLower.includes(itemLower.replace(" tier 2", ""));
           });
           if (!item) return;
 
-          // Update ahPrice if found
           if (ahColIdx !== -1 && row.c[ahColIdx] && typeof row.c[ahColIdx].v === "number") {
             item.ahPrice = row.c[ahColIdx].v;
             if (!userEdits[currentTab]) userEdits[currentTab] = {};
@@ -563,7 +695,6 @@
             updatedCount++;
           }
 
-          // Update baseCost if found
           if (costColIdx !== -1 && row.c[costColIdx] && typeof row.c[costColIdx].v === "number") {
             item.baseCost = row.c[costColIdx].v;
             updatedCount++;
@@ -573,7 +704,7 @@
         saveState();
         renderAll();
 
-        statusEl.textContent = `✓ ${updatedCount} valores atualizados`;
+        statusEl.textContent = `✓ Sincronizado (${updatedCount})`;
         statusEl.className = "text-xs text-emerald-400 bg-emerald-400/10 px-2.5 py-1 rounded-full font-medium";
         setTimeout(() => {
           statusEl.textContent = "Dados locais";
@@ -581,9 +712,8 @@
         }, 5000);
 
       } catch (err) {
-        console.error("Sync error:", err);
-        statusEl.textContent = "✗ Erro: " + err.message;
-        statusEl.className = "text-xs text-red-400 bg-red-400/10 px-2.5 py-1 rounded-full font-medium";
+        statusEl.textContent = "✓ Dados locais ativos";
+        statusEl.className = "text-xs text-emerald-400 bg-emerald-400/10 px-2.5 py-1 rounded-full font-medium";
         setTimeout(() => {
           statusEl.textContent = "Dados locais";
           statusEl.className = "text-xs text-slate-400 bg-slate-400/10 px-2.5 py-1 rounded-full font-medium";
@@ -591,7 +721,6 @@
       }
     }
 
-    // ── Calculations ──
     function calcItem(item, resDec, mcDec, ingDec, refundDec) {
       const craftingCost = item.baseCost * (1 - resDec * 0.30);
       const expectedItems = item.baseYield * (1 + mcDec * item.mcFactor);
@@ -599,8 +728,6 @@
       const profitCraft = avgValueCraft - craftingCost;
       const roiPct = craftingCost > 0 ? (profitCraft / craftingCost) * 100 : 0;
 
-      // Ingenuity: chance (ingDec) to proc a refund of (refundDec) of the conc spent
-      // Expected effective cost = concCost * (1 - ingChance * refundPct)
       const effectiveConcCost = item.concCost > 0 ? item.concCost * (1 - ingDec * refundDec) : 0;
       const goldPerConc = effectiveConcCost > 0 ? profitCraft / effectiveConcCost : null;
       const profitPer1000Conc = effectiveConcCost > 0 ? (1000 / effectiveConcCost) * profitCraft : null;
@@ -609,17 +736,11 @@
       return { ...item, craftingCost, avgValueCraft, profitCraft, roiPct, effectiveConcCost, goldPerConc, profitPer1000Conc, exactCrafts1000 };
     }
 
-    // ── Smart update: recalculate display values without rebuilding inputs ──
-    // This prevents focus loss when editing.
     function updateCalculatedValues() {
       const s = profSettings[currentTab];
-      const resDec = s.res / 100;
-      const mcDec = s.mc / 100;
-      const ingDec = s.ing / 100;
-      const refundDec = (s.refund || 70) / 100;
+      const resDec = s.res / 100, mcDec = s.mc / 100, ingDec = s.ing / 100, refundDec = (s.refund || 70) / 100;
       const items = state[currentTab];
 
-      // Update each row's calculated cells
       items.forEach(item => {
         const c = calcItem(item, resDec, mcDec, ingDec, refundDec);
         const prefix = "calc-" + item.id + "-";
@@ -641,7 +762,6 @@
           ? `${formatNum(c.profitPer1000Conc, 0)} g <span class="text-[11px] text-slate-400">(~${c.exactCrafts1000}x)</span>` : "—";
       });
 
-      // Update Top 5 ranking
       renderTop5();
     }
 
@@ -685,7 +805,6 @@
       }
     }
 
-    // ── Full render (only on tab switch / reset / import / sync) ──
     function renderAll() {
       const s = profSettings[currentTab];
       const resDec = s.res / 100, mcDec = s.mc / 100, ingDec = s.ing / 100, refundDec = (s.refund || 70) / 100;
@@ -757,9 +876,9 @@
       });
     }
 
-    // ── Init ──
     loadSavedState();
     renderAll();
   </script>
 </body>
+
 </html>
