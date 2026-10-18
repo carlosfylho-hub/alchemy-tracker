@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kaychak Crafting Sheet - Master Conc Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Wowhead Tooltips -->
+  <script>const whTooltips = { colorLinks: false, iconizeLinks: false, renameLinks: false };</script>
+  <script src="https://wow.zamimg.com/js/tooltips.js" async></script>
   <style>
     body {
       background-color: #0f172a;
@@ -86,6 +89,61 @@
     dialog::backdrop {
       background: rgba(0, 0, 0, 0.6);
     }
+
+    /* Sorting */
+    .sort-header {
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .sort-header:hover {
+      color: #38bdf8;
+    }
+
+    .sort-indicator {
+      font-size: 9px;
+      margin-left: 2px;
+      opacity: 0.8;
+    }
+
+    /* Trend Arrows */
+    .trend-up {
+      color: #4ade80;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .trend-down {
+      color: #f87171;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    /* Trade Chat Toggle */
+    .trade-toggle {
+      transition: all 0.2s ease;
+    }
+
+    .trade-toggle.direct {
+      background-color: rgba(74, 222, 128, 0.15);
+      border-color: #4ade80;
+      color: #4ade80;
+    }
+
+    /* Wowhead Links */
+    .wh-link {
+      color: #e2e8f0;
+      text-decoration: none;
+      border-bottom: 1px dotted #475569;
+      transition: color 0.15s ease;
+    }
+
+    .wh-link:hover {
+      color: #fbbf24;
+      border-bottom-color: #fbbf24;
+    }
   </style>
 </head>
 
@@ -148,6 +206,14 @@
             <span class="text-slate-400 font-bold">%</span>
           </div>
         </div>
+        <!-- AH / Trade Chat Toggle -->
+        <div class="flex flex-col">
+          <label class="text-[11px] font-semibold text-slate-400 uppercase">Canal de Venda</label>
+          <button id="tradeChatToggle" onclick="toggleAhTax()"
+            class="trade-toggle mt-1 px-3 py-1.5 text-xs font-bold rounded-lg border border-slate-600 bg-slate-800 text-slate-200">
+            🏪 AH (5% taxa)
+          </button>
+        </div>
       </div>
       <div class="flex items-center gap-2 flex-wrap">
         <button onclick="restoreFromCloud()"
@@ -204,16 +270,15 @@
   <script>
     // =================================================================================
     // CONFIGURAÇÃO DO GOOGLE APPS SCRIPT
-    // COLE AQUI A URL GERADA NO PASSO "IMPLANTAR COMO APP DA WEB" DO GOOGLE APPS SCRIPT
     // =================================================================================
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzeSm0A7gN_reEeTnsbBjQ1Ntz-rsS1f_rGhZj0zDgVjhs7W1XXfq9hNxGf9y-VKTgc/exec";
 
-    // ── Version key: bump this when you change default data so old localStorage doesn't override ──
+    // ── Version key ──
     const STORAGE_VERSION = "v8_cloud_backup";
     const STORAGE_KEY = "kaychak_conc_complete_" + STORAGE_VERSION;
+    const PREV_PRICES_KEY = STORAGE_KEY + "_prev";
     const SHEET_ID = "1V5Yxez_-nuPsvmtJLstYL61WhXU_sPNnPh8zxrnVE5k";
 
-    // Sheet tab names matching the Google Sheets tabs
     const SHEET_TABS = {
       alchemy: "Alchemy Conc",
       jewelcrafting: "Jewelcrafting Conc",
@@ -223,6 +288,9 @@
 
     let currentTab = "alchemy";
     let backupTimeout = null;
+    let ahTaxRate = 0.05;
+    let sortConfig = { key: null, dir: 'desc' };
+    let previousPrices = {};
 
     // ── Default profession settings ──
     const DEFAULT_PROF_SETTINGS = {
@@ -363,21 +431,20 @@
       inscription: dataInscription
     };
 
-    // ── Live state: starts as a copy of defaults, then user edits are merged on top ──
+    // ── Live state ──
     let state = {};
     for (const k in DEFAULT_DATA) {
       state[k] = JSON.parse(JSON.stringify(DEFAULT_DATA[k]));
     }
 
-    // ── Persistence: save ONLY user-edited fields (ahPrice, concCost) per item ──
-    let userEdits = {}; // { alchemy: { 1: { ahPrice: 70.5, concCost: 294 }, ... }, ... }
+    let userEdits = {};
 
     // ==========================================
     // AUTO BACKUP LOGIC
     // ==========================================
     function scheduleBackup() {
       if (backupTimeout) clearTimeout(backupTimeout);
-      backupTimeout = setTimeout(autoBackup, 5000); // 5 segundos de debounce
+      backupTimeout = setTimeout(autoBackup, 5000);
     }
 
     function autoBackup() {
@@ -392,11 +459,12 @@
         userEdits: userEdits
       };
 
-      // Dispara o POST em plain text para driblar preflight de CORS no Apps Script
       fetch(SCRIPT_URL, {
         method: "POST",
         body: JSON.stringify(payload)
       }).then(() => {
+        // Salva snapshot de preços atuais como "anteriores" para comparação de tendência
+        savePreviousPrices();
         statusEl.textContent = "✓ Salvo na Nuvem";
         statusEl.className = "text-xs text-emerald-400 bg-emerald-400/10 px-2.5 py-1 rounded-full font-medium";
         setTimeout(() => {
@@ -466,8 +534,79 @@
         statusEl.className = "text-xs text-red-400 bg-red-400/10 px-2.5 py-1 rounded-full font-medium";
       }
     }
-    // ==========================================
 
+    // ==========================================
+    // TREND: PREVIOUS PRICES
+    // ==========================================
+    function savePreviousPrices() {
+      const prices = {};
+      for (const prof in state) {
+        prices[prof] = {};
+        state[prof].forEach(item => { prices[prof][item.id] = item.ahPrice; });
+      }
+      try { localStorage.setItem(PREV_PRICES_KEY, JSON.stringify(prices)); } catch (e) { }
+    }
+
+    function loadPreviousPrices() {
+      try {
+        const raw = localStorage.getItem(PREV_PRICES_KEY);
+        if (raw) previousPrices = JSON.parse(raw);
+      } catch (e) { }
+    }
+
+    function getTrendArrow(item) {
+      const profPrev = previousPrices[currentTab];
+      if (!profPrev) return '';
+      const prev = profPrev[item.id];
+      if (prev === undefined || prev === null) return '';
+      const diff = item.ahPrice - prev;
+      if (Math.abs(diff) < 0.1) return '';
+      if (diff > 0) return `<span class="trend-up" title="⬆ Subiu ${formatNum(diff, 1)}g desde o último backup">⬆</span>`;
+      return `<span class="trend-down" title="⬇ Caiu ${formatNum(Math.abs(diff), 1)}g desde o último backup">⬇</span>`;
+    }
+
+    // ==========================================
+    // SORTING
+    // ==========================================
+    function sortBy(key) {
+      if (sortConfig.key === key) {
+        sortConfig.dir = sortConfig.dir === 'desc' ? 'asc' : 'desc';
+      } else {
+        sortConfig.key = key;
+        sortConfig.dir = 'desc';
+      }
+      renderAll();
+    }
+
+    function sortIndicator(key) {
+      if (sortConfig.key !== key) return '';
+      return `<span class="sort-indicator">${sortConfig.dir === 'desc' ? '▼' : '▲'}</span>`;
+    }
+
+    function clearSort() {
+      sortConfig = { key: null, dir: 'desc' };
+      renderAll();
+    }
+
+    // ==========================================
+    // AH TAX TOGGLE
+    // ==========================================
+    function toggleAhTax() {
+      ahTaxRate = ahTaxRate > 0 ? 0 : 0.05;
+      const btn = document.getElementById('tradeChatToggle');
+      if (ahTaxRate === 0) {
+        btn.classList.add('direct');
+        btn.innerHTML = '🤝 Venda Direta (0%)';
+      } else {
+        btn.classList.remove('direct');
+        btn.innerHTML = '🏪 AH (5% taxa)';
+      }
+      renderAll();
+    }
+
+    // ==========================================
+    // PERSISTENCE
+    // ==========================================
     function loadSavedState() {
       try {
         const raw = localStorage.getItem(STORAGE_KEY);
@@ -507,7 +646,7 @@
           profSettings,
           userEdits
         }));
-        scheduleBackup(); // Ativa o timer do backup sempre que salva
+        scheduleBackup();
       } catch (e) {
         console.warn("Erro ao salvar:", e);
       }
@@ -712,10 +851,13 @@
       }
     }
 
+    // ==========================================
+    // CORE CALCULATION
+    // ==========================================
     function calcItem(item, resDec, mcDec, ingDec, refundDec) {
       const craftingCost = item.baseCost * (1 - resDec * 0.30);
       const expectedItems = item.baseYield * (1 + mcDec * item.mcFactor);
-      const avgValueCraft = expectedItems * (item.ahPrice * 0.95);
+      const avgValueCraft = expectedItems * (item.ahPrice * (1 - ahTaxRate));
       const profitCraft = avgValueCraft - craftingCost;
       const roiPct = craftingCost > 0 ? (profitCraft / craftingCost) * 100 : 0;
 
@@ -743,6 +885,7 @@
         const roEl = document.getElementById(prefix + "roi");
         const gcEl = document.getElementById(prefix + "gc");
         const p1El = document.getElementById(prefix + "p1k");
+        const trEl = document.getElementById("trend-" + item.id);
 
         if (ccEl) ccEl.textContent = formatNum(c.craftingCost, 1);
         if (avEl) avEl.textContent = formatNum(c.avgValueCraft, 1);
@@ -751,6 +894,7 @@
         if (gcEl) gcEl.textContent = c.goldPerConc !== null && c.goldPerConc > 0 ? formatNum(c.goldPerConc, 2) + " g" : "—";
         if (p1El) p1El.innerHTML = c.profitPer1000Conc !== null && c.profitPer1000Conc > 0
           ? `${formatNum(c.profitPer1000Conc, 0)} g <span class="text-[11px] text-slate-400">(~${c.exactCrafts1000}x)</span>` : "—";
+        if (trEl) trEl.innerHTML = getTrendArrow(item);
       });
 
       renderTop5();
@@ -796,6 +940,9 @@
       }
     }
 
+    // ==========================================
+    // MAIN RENDER (with sorting, Wowhead links, trend arrows)
+    // ==========================================
     function renderAll() {
       const s = profSettings[currentTab];
       const resDec = s.res / 100, mcDec = s.mc / 100, ingDec = s.ing / 100, refundDec = (s.refund || 70) / 100;
@@ -808,8 +955,28 @@
       const container = document.getElementById("tabContentContainer");
       container.innerHTML = "";
 
+      const taxLabel = ahTaxRate > 0 ? 'Taxa AH: 5% inclusa' : '🤝 Venda Direta (0% taxa)';
+
       categories.forEach(cat => {
-        const catItems = calculatedItems.filter(i => i.category === cat);
+        let catItems = calculatedItems.filter(i => i.category === cat);
+
+        // Apply sorting within each category
+        if (sortConfig.key) {
+          catItems.sort((a, b) => {
+            let va = a[sortConfig.key], vb = b[sortConfig.key];
+            // Handle nulls: push nulls to end
+            if (va === null && vb === null) return 0;
+            if (va === null) return 1;
+            if (vb === null) return -1;
+            // Strings: alphabetical
+            if (typeof va === 'string') {
+              return sortConfig.dir === 'asc' ? va.localeCompare(vb) : vb.localeCompare(va);
+            }
+            // Numbers
+            return sortConfig.dir === 'asc' ? va - vb : vb - va;
+          });
+        }
+
         let rowsHtml = "";
 
         catItems.forEach(item => {
@@ -818,14 +985,26 @@
           const profit1000Text = item.profitPer1000Conc !== null && item.profitPer1000Conc > 0
             ? `${formatNum(item.profitPer1000Conc, 0)} g <span class="text-[11px] text-slate-400">(~${item.exactCrafts1000}x)</span>` : "—";
 
+          // Wowhead search link
+          const searchName = encodeURIComponent(item.name.replace(/ Tier 2$/, ''));
+          const whLink = `https://www.wowhead.com/search?q=${searchName}`;
+
+          // Trend arrow
+          const trendHtml = getTrendArrow(item);
+
           rowsHtml += `
             <tr class="hover:bg-slate-800/60 transition">
-              <td class="py-2.5 px-3 font-medium text-slate-200">${item.name}</td>
+              <td class="py-2.5 px-3 font-medium text-slate-200">
+                <a href="${whLink}" target="_blank" rel="noopener" class="wh-link" title="Ver no Wowhead">${item.name}</a>
+              </td>
               <td id="calc-${item.id}-cc" class="py-2.5 px-2 text-right font-mono text-slate-300">${formatNum(item.craftingCost, 1)}</td>
               <td id="calc-${item.id}-av" class="py-2.5 px-2 text-right font-mono text-slate-300">${formatNum(item.avgValueCraft, 1)}</td>
               <td class="py-2.5 px-2 text-right">
-                <input type="number" step="0.1" value="${item.ahPrice}" class="w-24 text-sm font-mono"
-                  onchange="updateItemField(${item.id}, 'ahPrice', this.value)" />
+                <div class="inline-flex items-center gap-1">
+                  <input type="number" step="0.1" value="${item.ahPrice}" class="w-24 text-sm font-mono"
+                    onchange="updateItemField(${item.id}, 'ahPrice', this.value)" />
+                  <span id="trend-${item.id}" class="w-3">${trendHtml}</span>
+                </div>
               </td>
               <td id="calc-${item.id}-pr" class="py-2.5 px-2 text-right font-mono ${profitClass}">${formatNum(item.profitCraft, 1)}</td>
               <td id="calc-${item.id}-roi" class="py-2.5 px-2 text-right font-mono ${profitClass}">${formatNum(item.roiPct, 1)}%</td>
@@ -843,21 +1022,24 @@
           <div class="card overflow-hidden shadow-lg">
             <div class="table-header px-4 py-3 border-b border-slate-700 flex justify-between items-center">
               <h3 class="font-bold text-amber-400 tracking-wide text-sm uppercase">${cat}</h3>
-              <span class="text-xs text-slate-400">Taxa AH: 5% inclusa</span>
+              <div class="flex items-center gap-3">
+                ${sortConfig.key ? '<button onclick="clearSort()" class="text-[10px] text-slate-500 hover:text-slate-300 transition" title="Limpar ordenação">✕ Limpar ordem</button>' : ''}
+                <span class="text-xs text-slate-400">${taxLabel}</span>
+              </div>
             </div>
             <div class="overflow-x-auto">
               <table class="w-full text-xs md:text-sm text-left border-collapse">
                 <thead>
                   <tr class="border-b border-slate-700 text-[11px] uppercase text-slate-400 bg-slate-900/40">
-                    <th class="py-2.5 px-3">Item (Tier 2)</th>
-                    <th class="py-2.5 px-2 text-right">Crafting Cost</th>
-                    <th class="py-2.5 px-2 text-right">Avg Value/Craft</th>
-                    <th class="py-2.5 px-2 text-right">AH Price (Editável)</th>
-                    <th class="py-2.5 px-2 text-right">Profit / Craft</th>
-                    <th class="py-2.5 px-2 text-right">ROI %</th>
-                    <th class="py-2.5 px-2 text-right text-amber-400 bg-amber-500/10">Conc Cost</th>
-                    <th class="py-2.5 px-2 text-right text-amber-400 bg-amber-500/10">Gold / Conc</th>
-                    <th class="py-2.5 px-3 text-right text-emerald-400 bg-amber-500/10">Lucro (1000 Conc)</th>
+                    <th class="py-2.5 px-3 sort-header" onclick="sortBy('name')">Item (Tier 2)${sortIndicator('name')}</th>
+                    <th class="py-2.5 px-2 text-right sort-header" onclick="sortBy('craftingCost')">Crafting Cost${sortIndicator('craftingCost')}</th>
+                    <th class="py-2.5 px-2 text-right sort-header" onclick="sortBy('avgValueCraft')">Avg Value${sortIndicator('avgValueCraft')}</th>
+                    <th class="py-2.5 px-2 text-right sort-header" onclick="sortBy('ahPrice')">AH Price${sortIndicator('ahPrice')}</th>
+                    <th class="py-2.5 px-2 text-right sort-header" onclick="sortBy('profitCraft')">Profit / Craft${sortIndicator('profitCraft')}</th>
+                    <th class="py-2.5 px-2 text-right sort-header" onclick="sortBy('roiPct')">ROI %${sortIndicator('roiPct')}</th>
+                    <th class="py-2.5 px-2 text-right text-amber-400 bg-amber-500/10 sort-header" onclick="sortBy('concCost')">Conc Cost${sortIndicator('concCost')}</th>
+                    <th class="py-2.5 px-2 text-right text-amber-400 bg-amber-500/10 sort-header" onclick="sortBy('goldPerConc')">Gold / Conc${sortIndicator('goldPerConc')}</th>
+                    <th class="py-2.5 px-3 text-right text-emerald-400 bg-amber-500/10 sort-header" onclick="sortBy('profitPer1000Conc')">Lucro (1000 Conc)${sortIndicator('profitPer1000Conc')}</th>
                   </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-800">${rowsHtml}</tbody>
@@ -865,8 +1047,13 @@
             </div>
           </div>`;
       });
+
+      // Refresh Wowhead tooltips (if script loaded)
+      try { if (typeof $WowheadPower !== 'undefined') $WowheadPower.refreshLinks(); } catch (e) { }
     }
 
+    // ── Init ──
+    loadPreviousPrices();
     loadSavedState();
     renderAll();
   </script>
