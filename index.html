@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alchemy Concentration - Gold/Conc Tracker</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #0f172a;
+      color: #f8fafc;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    input[type="number"] {
+      background-color: #1e293b;
+      border: 1px solid #334155;
+      color: #38bdf8;
+      border-radius: 0.375rem;
+      padding: 0.25rem 0.5rem;
+      text-align: right;
+      font-weight: 600;
+      transition: all 0.15s ease;
+    }
+    input[type="number"]:focus {
+      outline: none;
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.25);
+    }
+    input.conc-input {
+      border-color: #f59e0b;
+      color: #fbbf24;
+      background-color: #1c1917;
+    }
+    input.conc-input:focus {
+      border-color: #fbbf24;
+      box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.3);
+    }
+    .table-header {
+      background: linear-gradient(90deg, #1e293b 0%, #0f172a 100%);
+    }
+    .positive { color: #4ade80; font-weight: 600; }
+    .negative { color: #f87171; font-weight: 600; }
+    .gold-conc { color: #fbbf24; font-weight: 700; }
+    .card {
+      background-color: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 0.75rem;
+    }
+  </style>
+</head>
+<body class="p-4 md:p-6">
+
+  <div class="max-w-7xl mx-auto space-y-6">
+    <!-- Cabeçalho e Controles Globais -->
+    <div class="card p-5 shadow-lg flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full">
+            Skill Ativa: alchemy-conc-tracker
+          </span>
+          <span class="text-xs text-emerald-400 bg-emerald-400/10 px-2.5 py-1 rounded-full font-medium">
+            ✓ Salva Concentração Automaticamente
+          </span>
+        </div>
+        <h1 class="text-2xl font-bold text-white mt-2">Simulador de Lucro & Gold por Concentração</h1>
+        <p class="text-sm text-slate-400">
+          Digite o <strong>Custo de Concentração</strong> manual de cada receita nos campos dourados. Seus valores ficam salvos no navegador!
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-4 bg-slate-900/80 p-3.5 rounded-xl border border-slate-700">
+        <div class="flex flex-col">
+          <label class="text-xs font-semibold text-slate-400 uppercase">Resourcefulness %</label>
+          <div class="flex items-center gap-1 mt-1">
+            <input id="resInput" type="number" step="0.1" value="15" class="w-20 text-base" oninput="saveAndRender()" />
+            <span class="text-slate-400 font-bold">%</span>
+          </div>
+        </div>
+
+        <div class="flex flex-col">
+          <label class="text-xs font-semibold text-slate-400 uppercase">Multicraft %</label>
+          <div class="flex items-center gap-1 mt-1">
+            <input id="mcInput" type="number" step="0.1" value="30" class="w-20 text-base" oninput="saveAndRender()" />
+            <span class="text-slate-400 font-bold">%</span>
+          </div>
+        </div>
+
+        <button onclick="resetDefaults()" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 rounded-lg border border-slate-600 transition">
+          Restaurar Preços
+        </button>
+      </div>
+    </div>
+
+    <!-- Top 5 Ranking por Gold / Concentração -->
+    <div class="card p-5 shadow-lg border-amber-500/40">
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="text-base font-bold text-amber-400 uppercase tracking-wide flex items-center gap-2">
+          🏆 Top 5 Melhores Receitas (Maior Gold por Ponto de Concentração)
+        </h2>
+        <span class="text-xs text-slate-400">Preencha a coluna "Conc Cost" abaixo para ranquear</span>
+      </div>
+      <div id="topRankingContainer" class="grid grid-cols-1 md:grid-cols-5 gap-3"></div>
+    </div>
+
+    <!-- Grid Principal: Categorias Tier 2 -->
+    <div class="grid grid-cols-1 gap-6" id="tablesContainer"></div>
+
+    <!-- Tabela de Referência Tier 1 (Custo Base e Breakeven) -->
+    <div class="card p-5 shadow-lg">
+      <div class="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-2">
+        <div>
+          <h2 class="text-lg font-bold text-amber-400 uppercase tracking-wide">
+            Parâmetros Base (Tier 1 Mats & Multiplicadores)
+          </h2>
+          <p class="text-xs text-slate-400">
+            Tabela inferior da aba Alchemy Conc: edite o Custo Base (Sem Resourcefulness) caso os materiais mudem.
+          </p>
+        </div>
+        <div class="text-xs text-slate-300 bg-slate-900 px-3 py-2 rounded-lg border border-slate-700">
+          <span class="font-semibold text-sky-400">Rendimento Médio (Multicraft):</span>
+          Poções: <code id="potMultLabel">7.30</code> |
+          Phials: <code id="phialMultLabel">5.80</code> |
+          Flasks: <code id="flaskMultLabel">2.92</code>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm text-left border-collapse">
+          <thead>
+            <tr class="border-b border-slate-700 text-xs uppercase text-slate-400 bg-slate-900/50">
+              <th class="py-2.5 px-3">Receita (Base Tier 1)</th>
+              <th class="py-2.5 px-3 text-right">Custo Base (Sem Res.)</th>
+              <th class="py-2.5 px-3 text-right">Crafting Cost (Com Res.)</th>
+              <th class="py-2.5 px-3 text-right">Breakeven Tier 1 (AH)</th>
+            </tr>
+          </thead>
+          <tbody id="tier1Body" class="divide-y divide-slate-800"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "kaychak_alchemy_conc_v1";
+
+    const initialData = [
+      { id: 1, category: "LIGHT POTIONS", name: "Silvermoon Health Potion Tier 2", t1Name: "Silvermoon Health Potion Tier 1", baseCost: 31.204, ahPrice: 374.0, baseYield: 5, mcFactor: 1.5333333, concCost: 0 },
+      { id: 2, category: "LIGHT POTIONS", name: "Lightfused Mana Potion Tier 2", t1Name: "Lightfused Mana Potion Tier 1", baseCost: 69.529, ahPrice: 395.6, baseYield: 5, mcFactor: 1.5333333, concCost: 0 },
+      { id: 3, category: "LIGHT POTIONS", name: "Refreshing Serum Tier 2", t1Name: "Refreshing Serum Tier 1", baseCost: 40.000, ahPrice: 130.0, baseYield: 5, mcFactor: 1.5333333, concCost: 0 },
+      { id: 4, category: "LIGHT POTIONS", name: "Light's Potential Tier 2", t1Name: "Light's Potential Tier 1", baseCost: 247.644, ahPrice: 441.0, baseYield: 5, mcFactor: 1.5333333, concCost: 0 },
+      { id: 5, category: "LIGHT POTIONS", name: "Potion of Zealotry Tier 2", t1Name: "Potion of Zealotry Tier 1", baseCost: 480.733, ahPrice: 128.0, baseYield: 5, mcFactor: 1.5333333, concCost: 0 },
+      { id: 6, category: "LIGHT POTIONS", name: "Light's Preservation Tier 2", t1Name: "Light's Preservation Tier 1", baseCost: 161.571, ahPrice: 420.5, baseYield: 5, mcFactor: 1.5333333, concCost: 0 },
+      { id: 7, category: "LIGHT POTIONS", name: "Enlightenment Tonic Tier 2", t1Name: "Enlightenment Tonic Tier 1", baseCost: 22.513, ahPrice: 46.1, baseYield: 5, mcFactor: 1.5333333, concCost: 0 },
+
+      { id: 8, category: "PHIALS", name: "Haranir Phial of Finesse Tier 2", t1Name: "Haranir Phial of Finesse Tier 1", baseCost: 235.393, ahPrice: 592.5, baseYield: 4, mcFactor: 1.5, concCost: 0 },
+      { id: 9, category: "PHIALS", name: "Haranir Phial of Ingenuity Tier 2", t1Name: "Haranir Phial of Ingenuity Tier 1", baseCost: 75.288, ahPrice: 499.8, baseYield: 4, mcFactor: 1.5, concCost: 0 },
+      { id: 10, category: "PHIALS", name: "Haranir Phial of Perception Tier 2", t1Name: "Haranir Phial of Perception Tier 1", baseCost: 378.639, ahPrice: 578.6, baseYield: 4, mcFactor: 1.5, concCost: 0 },
+
+      { id: 11, category: "VOID POTIONS", name: "Draught of Rampant Abandon Tier 2", t1Name: "Draught of Rampant Abandon Tier 1", baseCost: 77.801, ahPrice: 300.9, baseYield: 5, mcFactor: 1.5333333, concCost: 0 },
+      { id: 12, category: "VOID POTIONS", name: "Potion of Devoured Dreams Tier 2", t1Name: "Potion of Devoured Dreams Tier 1", baseCost: 83.351, ahPrice: 250.0, baseYield: 5, mcFactor: 1.5333333, concCost: 0 },
+      { id: 13, category: "VOID POTIONS", name: "Potion of Recklessness Tier 2", t1Name: "Potion of Recklessness Tier 1", baseCost: 217.277, ahPrice: 345.0, baseYield: 5, mcFactor: 1.5333333, concCost: 0 },
+      { id: 14, category: "VOID POTIONS", name: "Amani Extract Tier 2", t1Name: "Amani Extract Tier 1", baseCost: 169.634, ahPrice: 490.6, baseYield: 5, mcFactor: 1.5333333, concCost: 0 },
+      { id: 15, category: "VOID POTIONS", name: "Void-Shrouded Tincture Tier 2", t1Name: "Void-Shrouded Tincture Tier 1", baseCost: 43.455, ahPrice: 237.5, baseYield: 5, mcFactor: 1.5333333, concCost: 0 },
+
+      { id: 16, category: "FLASKS", name: "Flask of the Shattered Sun Tier 2", t1Name: "Flask of the Shattered Sun Tier 1", baseCost: 1432.984, ahPrice: 1222.0, baseYield: 2, mcFactor: 1.533, concCost: 0 },
+      { id: 17, category: "FLASKS", name: "Flask of the Blood Knights Tier 2", t1Name: "Flask of the Blood Knights Tier 1", baseCost: 1135.707, ahPrice: 1104.4, baseYield: 2, mcFactor: 1.533, concCost: 0 },
+      { id: 18, category: "FLASKS", name: "Flask of the Magisters Tier 2", t1Name: "Flask of the Magisters Tier 1", baseCost: 998.953, ahPrice: 1088.0, baseYield: 2, mcFactor: 1.533, concCost: 0 },
+      { id: 19, category: "FLASKS", name: "Flask of Thalassian Resistance Tier 2", t1Name: "Flask of Thalassian Resistance Tier 1", baseCost: 1278.953, ahPrice: 1160.9, baseYield: 2, mcFactor: 1.533, concCost: 0 }
+    ];
+
+    let items = JSON.parse(JSON.stringify(initialData));
+
+    function loadSavedState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        const saved = JSON.parse(raw);
+        if (saved.resPct !== undefined) document.getElementById("resInput").value = saved.resPct;
+        if (saved.mcPct !== undefined) document.getElementById("mcInput").value = saved.mcPct;
+        if (Array.isArray(saved.items)) {
+          items.forEach(item => {
+            const found = saved.items.find(s => s.id === item.id);
+            if (found) {
+              if (found.concCost !== undefined) item.concCost = found.concCost;
+              if (found.ahPrice !== undefined) item.ahPrice = found.ahPrice;
+              if (found.baseCost !== undefined) item.baseCost = found.baseCost;
+            }
+          });
+        }
+      } catch (e) {
+        console.warn("Não foi possível carregar estado salvo:", e);
+      }
+    }
+
+    function saveState() {
+      try {
+        const payload = {
+          resPct: parseFloat(document.getElementById("resInput").value) || 0,
+          mcPct: parseFloat(document.getElementById("mcInput").value) || 0,
+          items: items.map(i => ({
+            id: i.id,
+            concCost: i.concCost,
+            ahPrice: i.ahPrice,
+            baseCost: i.baseCost
+          }))
+        };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+      } catch (e) {
+        console.warn("Não foi possível salvar no localStorage:", e);
+      }
+    }
+
+    function formatNum(val, decimals = 1) {
+      return val.toLocaleString("pt-BR", {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals
+      });
+    }
+
+    function updateItemField(id, field, val) {
+      const num = parseFloat(val);
+      const item = items.find(i => i.id === id);
+      if (item) {
+        item[field] = isNaN(num) ? 0 : num;
+        saveAndRender();
+      }
+    }
+
+    function resetDefaults() {
+      document.getElementById("resInput").value = 15;
+      document.getElementById("mcInput").value = 30;
+      items.forEach((item, idx) => {
+        item.baseCost = initialData[idx].baseCost;
+        item.ahPrice = initialData[idx].ahPrice;
+      });
+      saveAndRender();
+    }
+
+    function saveAndRender() {
+      saveState();
+      renderAll();
+    }
+
+    function renderAll() {
+      const resPct = parseFloat(document.getElementById("resInput").value) || 0;
+      const mcPct = parseFloat(document.getElementById("mcInput").value) || 0;
+
+      const resDec = resPct / 100;
+      const mcDec = mcPct / 100;
+
+      const potYield = 5 * (1 + mcDec * 1.5333333);
+      const phialYield = 4 * (1 + mcDec * 1.5);
+      const flaskYield = 2 * (1 + mcDec * 1.533);
+
+      document.getElementById("potMultLabel").textContent = formatNum(potYield, 2) + "x";
+      document.getElementById("phialMultLabel").textContent = formatNum(phialYield, 2) + "x";
+      document.getElementById("flaskMultLabel").textContent = formatNum(flaskYield, 2) + "x";
+
+      const calculatedItems = items.map(item => {
+        const craftingCost = item.baseCost * (1 - resDec * 0.30);
+        const expectedItems = item.baseYield * (1 + mcDec * item.mcFactor);
+        const avgValueCraft = expectedItems * (item.ahPrice * 0.95);
+        const profitCraft = avgValueCraft - craftingCost;
+        const roiPct = craftingCost > 0 ? (profitCraft / craftingCost) * 100 : 0;
+        const goldPerConc = item.concCost > 0 ? profitCraft / item.concCost : null;
+        const profitPer1000Conc = item.concCost > 0 ? (1000 / item.concCost) * profitCraft : null;
+        const exactCrafts1000 = item.concCost > 0 ? Math.floor(1000 / item.concCost) : 0;
+
+        return {
+          ...item,
+          craftingCost,
+          avgValueCraft,
+          profitCraft,
+          roiPct,
+          goldPerConc,
+          profitPer1000Conc,
+          exactCrafts1000
+        };
+      });
+
+      // Renderiza Top 5 Ranking por Gold/Conc
+      const topContainer = document.getElementById("topRankingContainer");
+      const ranked = calculatedItems
+        .filter(i => i.concCost > 0 && i.goldPerConc !== null)
+        .sort((a, b) => b.goldPerConc - a.goldPerConc)
+        .slice(0, 5);
+
+      if (ranked.length === 0) {
+        topContainer.innerHTML = `
+          <div class="col-span-5 text-center py-4 text-sm text-slate-400 bg-slate-900/50 rounded-lg border border-slate-800">
+            Digite o custo de concentração de pelo menos uma receita na coluna dourada <strong>"Conc Cost"</strong> abaixo para ver o Ranking de Gold por Concentração!
+          </div>
+        `;
+      } else {
+        topContainer.innerHTML = ranked.map((r, idx) => `
+          <div class="bg-slate-900/90 border border-slate-700 p-3 rounded-lg flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                <span class="font-bold text-amber-400">#${idx + 1} ${r.category}</span>
+                <span>${r.concCost} Conc</span>
+              </div>
+              <div class="font-semibold text-slate-100 text-sm leading-tight">${r.name}</div>
+            </div>
+            <div class="mt-3 pt-2 border-t border-slate-800 flex justify-between items-baseline">
+              <span class="text-xs text-slate-400">Gold/Conc:</span>
+              <span class="text-base font-mono gold-conc">${formatNum(r.goldPerConc, 2)}g</span>
+            </div>
+            <div class="flex justify-between items-baseline text-xs mt-1">
+              <span class="text-slate-400">1000 Conc (${r.exactCrafts1000}x):</span>
+              <span class="font-mono text-emerald-400 font-semibold">${formatNum(r.profitPer1000Conc, 0)}g</span>
+            </div>
+          </div>
+        `).join("");
+      }
+
+      const categories = ["LIGHT POTIONS", "PHIALS", "VOID POTIONS", "FLASKS"];
+      const container = document.getElementById("tablesContainer");
+      container.innerHTML = "";
+
+      categories.forEach(cat => {
+        const catItems = calculatedItems.filter(i => i.category === cat);
+        let rowsHtml = "";
+
+        catItems.forEach(item => {
+          const profitClass = item.profitCraft >= 0 ? "positive" : "negative";
+          const goldConcText = item.goldPerConc !== null ? formatNum(item.goldPerConc, 2) + " g" : "—";
+          const profit1000Text = item.profitPer1000Conc !== null
+            ? `${formatNum(item.profitPer1000Conc, 0)} g <span class="text-[11px] text-slate-400">(${item.exactCrafts1000}x)</span>`
+            : "—";
+
+          rowsHtml += `
+            <tr class="hover:bg-slate-800/60 transition">
+              <td class="py-2.5 px-3 font-medium text-slate-200">${item.name}</td>
+              <td class="py-2.5 px-2 text-right font-mono text-slate-300">${formatNum(item.craftingCost, 1)}</td>
+              <td class="py-2.5 px-2 text-right font-mono text-slate-300">${formatNum(item.avgValueCraft, 1)}</td>
+              <td class="py-2.5 px-2 text-right">
+                <input
+                  type="number"
+                  step="0.1"
+                  value="${item.ahPrice}"
+                  class="w-24 text-sm font-mono"
+                  onchange="updateItemField(${item.id}, 'ahPrice', this.value)"
+                />
+              </td>
+              <td class="py-2.5 px-2 text-right font-mono ${profitClass}">${formatNum(item.profitCraft, 1)}</td>
+              <td class="py-2.5 px-2 text-right font-mono ${profitClass}">${formatNum(item.roiPct, 1)}%</td>
+              <td class="py-2.5 px-2 text-right bg-amber-500/5">
+                <input
+                  type="number"
+                  step="1"
+                  min="0"
+                  placeholder="0"
+                  value="${item.concCost || ''}"
+                  class="w-20 text-sm font-mono conc-input"
+                  onchange="updateItemField(${item.id}, 'concCost', this.value)"
+                />
+              </td>
+              <td class="py-2.5 px-2 text-right font-mono gold-conc bg-amber-500/5">${goldConcText}</td>
+              <td class="py-2.5 px-3 text-right font-mono text-emerald-400 font-semibold bg-amber-500/5">${profit1000Text}</td>
+            </tr>
+          `;
+        });
+
+        const cardHtml = `
+          <div class="card overflow-hidden shadow-lg">
+            <div class="table-header px-4 py-3 border-b border-slate-700 flex justify-between items-center">
+              <h3 class="font-bold text-amber-400 tracking-wide text-sm uppercase">${cat}</h3>
+              <span class="text-xs text-slate-400">Taxa AH: 5% inclusa | Digite a Concentração na coluna dourada</span>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-xs md:text-sm text-left border-collapse">
+                <thead>
+                  <tr class="border-b border-slate-700 text-[11px] uppercase text-slate-400 bg-slate-900/40">
+                    <th class="py-2.5 px-3">Item (Tier 2)</th>
+                    <th class="py-2.5 px-2 text-right">Crafting Cost</th>
+                    <th class="py-2.5 px-2 text-right">Avg Value/Craft</th>
+                    <th class="py-2.5 px-2 text-right">AH Price</th>
+                    <th class="py-2.5 px-2 text-right">Profit / Craft</th>
+                    <th class="py-2.5 px-2 text-right">ROI %</th>
+                    <th class="py-2.5 px-2 text-right text-amber-400 bg-amber-500/10">Conc Cost (Manual)</th>
+                    <th class="py-2.5 px-2 text-right text-amber-400 bg-amber-500/10">Gold / Conc</th>
+                    <th class="py-2.5 px-3 text-right text-emerald-400 bg-amber-500/10">Lucro (1000 Conc)</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-800">
+                  ${rowsHtml}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        `;
+        container.innerHTML += cardHtml;
+      });
+
+      const tier1Body = document.getElementById("tier1Body");
+      tier1Body.innerHTML = "";
+
+      calculatedItems.forEach(item => {
+        const expectedItems = item.baseYield * (1 + mcDec * item.mcFactor);
+        const breakevenT1 = item.craftingCost / (expectedItems * 0.95);
+
+        tier1Body.innerHTML += `
+          <tr class="hover:bg-slate-800/50 transition">
+            <td class="py-2 px-3 text-slate-300 font-medium">${item.t1Name}</td>
+            <td class="py-2 px-3 text-right">
+              <input
+                type="number"
+                step="0.1"
+                value="${item.baseCost.toFixed(1)}"
+                class="w-24 text-xs font-mono"
+                onchange="updateItemField(${item.id}, 'baseCost', this.value)"
+              />
+            </td>
+            <td class="py-2 px-3 text-right font-mono text-slate-300">${formatNum(item.craftingCost, 1)}</td>
+            <td class="py-2 px-3 text-right font-mono text-amber-300">${formatNum(breakevenT1, 2)}</td>
+          </tr>
+        `;
+      });
+    }
+
+    loadSavedState();
+    renderAll();
+  </script>
+</body>
+</html>
