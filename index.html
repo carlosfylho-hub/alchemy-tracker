@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alchemy Concentration - Sincronizado ao Vivo</title>
+  <title>Kaychak Crafting Sheet - Master Conc Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
@@ -46,288 +46,613 @@
       border: 1px solid #334155;
       border-radius: 0.75rem;
     }
+    .tab-btn { transition: all 0.2s ease; }
+    .tab-btn.active {
+      background-color: #38bdf8;
+      color: #0f172a;
+      font-weight: 700;
+    }
+    dialog { background: #1e293b; color: #f8fafc; border: 1px solid #334155; border-radius: 0.75rem; }
+    dialog::backdrop { background: rgba(0,0,0,0.6); }
   </style>
 </head>
 <body class="p-4 md:p-6">
 
   <div class="max-w-7xl mx-auto space-y-6">
-    <!-- Cabeçalho e Controles Globais -->
+    <!-- Header -->
     <div class="card p-5 shadow-lg flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
       <div>
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2 flex-wrap">
           <span class="text-xs font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full">
-            Skill Ativa: alchemy-conc-tracker
+            Kaychak Master Dashboard
           </span>
-          <span id="syncStatus" class="text-xs text-sky-400 bg-sky-400/10 px-2.5 py-1 rounded-full font-medium">
-            Pronto para Sincronizar ao Vivo
+          <span id="syncStatus" class="text-xs text-slate-400 bg-slate-400/10 px-2.5 py-1 rounded-full font-medium">
+            Dados locais
           </span>
         </div>
-        <h1 class="text-2xl font-bold text-white mt-2">Simulador de Lucro & Gold por Concentração</h1>
+        <h1 class="text-2xl font-bold text-white mt-2">Simulador de Lucro & Concentração por Profissão</h1>
         <p class="text-sm text-slate-400">
-          Atributos: Resourcefulness (36%), Multicraft (37%), Engenhosidade (29%) + Concentrações Fixadas.
+          Alquimia com concentração fixada. Demais profissões prontas para preenchimento manual.
         </p>
       </div>
+      <div class="flex flex-wrap gap-2 bg-slate-900/90 p-2 rounded-xl border border-slate-700">
+        <button onclick="switchTab('alchemy')" id="btn-alchemy" class="tab-btn active px-3 py-2 text-xs font-semibold rounded-lg text-slate-200">🧪 Alchemy Conc</button>
+        <button onclick="switchTab('jewelcrafting')" id="btn-jewelcrafting" class="tab-btn px-3 py-2 text-xs font-semibold rounded-lg text-slate-200">💎 Jewelcrafting Conc</button>
+        <button onclick="switchTab('enchanting')" id="btn-enchanting" class="tab-btn px-3 py-2 text-xs font-semibold rounded-lg text-slate-200">✨ Enchanting Conc</button>
+        <button onclick="switchTab('inscription')" id="btn-inscription" class="tab-btn px-3 py-2 text-xs font-semibold rounded-lg text-slate-200">📜 Inscription Conc</button>
+      </div>
+    </div>
 
-      <div class="flex flex-wrap items-center gap-3 bg-slate-900/80 p-3.5 rounded-xl border border-slate-700">
+    <!-- Profession Controls -->
+    <div class="card p-4 shadow-lg flex flex-wrap items-center justify-between gap-4">
+      <div class="flex flex-wrap items-center gap-4">
         <div class="flex flex-col">
           <label class="text-[11px] font-semibold text-slate-400 uppercase">Resourcefulness %</label>
           <div class="flex items-center gap-1 mt-1">
-            <input id="resInput" type="number" step="0.1" value="36" class="w-16 text-sm" oninput="saveAndRender()" />
+            <input id="resInput" type="number" step="0.1" class="w-16 text-sm" oninput="updateProfAttr('res', this.value)" />
             <span class="text-slate-400 font-bold">%</span>
           </div>
         </div>
-
         <div class="flex flex-col">
           <label class="text-[11px] font-semibold text-slate-400 uppercase">Multicraft %</label>
           <div class="flex items-center gap-1 mt-1">
-            <input id="mcInput" type="number" step="0.1" value="37" class="w-16 text-sm" oninput="saveAndRender()" />
+            <input id="mcInput" type="number" step="0.1" class="w-16 text-sm" oninput="updateProfAttr('mc', this.value)" />
             <span class="text-slate-400 font-bold">%</span>
           </div>
         </div>
-
         <div class="flex flex-col">
           <label class="text-[11px] font-semibold text-amber-400 uppercase">Engenhosidade %</label>
           <div class="flex items-center gap-1 mt-1">
-            <input id="ingInput" type="number" step="0.1" value="29" class="w-16 text-sm text-amber-400 border-amber-500/50" oninput="saveAndRender()" />
+            <input id="ingInput" type="number" step="0.1" class="w-16 text-sm text-amber-400 border-amber-500/50" oninput="updateProfAttr('ing', this.value)" />
             <span class="text-slate-400 font-bold">%</span>
           </div>
         </div>
-
-        <button onclick="syncWithGoogleSheets()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white rounded-lg shadow transition flex items-center gap-1.5 self-end">
+        <div class="flex flex-col">
+          <label class="text-[11px] font-semibold text-amber-400 uppercase">Refund % (Ing.)</label>
+          <div class="flex items-center gap-1 mt-1">
+            <input id="refundInput" type="number" step="1" min="0" max="100" class="w-16 text-sm text-amber-400 border-amber-500/50" oninput="updateProfAttr('refund', this.value)" />
+            <span class="text-slate-400 font-bold">%</span>
+          </div>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 flex-wrap">
+        <button onclick="exportData()" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 rounded-lg border border-slate-600 transition">
+          📥 Exportar
+        </button>
+        <button onclick="document.getElementById('importFile').click()" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 rounded-lg border border-slate-600 transition">
+          📤 Importar
+        </button>
+        <input type="file" id="importFile" accept=".json" class="hidden" onchange="importData(event)" />
+        <button onclick="confirmReset()" class="px-3 py-2 bg-slate-800 hover:bg-red-900/60 text-xs font-semibold text-slate-200 rounded-lg border border-slate-600 transition">
+          Resetar Padrões
+        </button>
+        <button onclick="syncWithGoogleSheets()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white rounded-lg shadow transition flex items-center gap-1.5">
           🔄 Sincronizar Planilha
         </button>
       </div>
     </div>
 
-    <!-- Top 5 Ranking por Gold / Concentração -->
+    <!-- Top 5 Ranking -->
     <div class="card p-5 shadow-lg border-amber-500/40">
       <div class="flex items-center justify-between mb-3">
         <h2 class="text-base font-bold text-amber-400 uppercase tracking-wide flex items-center gap-2">
-          🏆 Top 5 Melhores Receitas (Maior Gold por Ponto de Concentração Efetivo)
+          🏆 Top 5 Melhores Receitas (Gold / Concentração Efetivo)
         </h2>
-        <span class="text-xs text-slate-400">Com Engenhosidade (29%)</span>
+        <span id="activeProfLabel" class="text-xs text-sky-400 font-bold uppercase">Alchemy Conc</span>
       </div>
       <div id="topRankingContainer" class="grid grid-cols-1 md:grid-cols-5 gap-3"></div>
     </div>
 
-    <!-- Grid Principal: Categorias Tier 2 -->
-    <div class="grid grid-cols-1 gap-6" id="tablesContainer"></div>
-
-    <!-- Tabela de Referência Tier 1 -->
-    <div class="card p-5 shadow-lg">
-      <div class="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-2">
-        <div>
-          <h2 class="text-lg font-bold text-amber-400 uppercase tracking-wide">
-            Parâmetros Base (Tier 1 Mats & Multiplicadores)
-          </h2>
-          <p class="text-xs text-slate-400">
-            Edite os custos base caso os materiais mudem no seu servidor.
-          </p>
-        </div>
-        <div class="text-xs text-slate-300 bg-slate-900 px-3 py-2 rounded-lg border border-slate-700">
-          <span class="font-semibold text-sky-400">Rendimento Médio (Multicraft):</span>
-          Poções: <code id="potMultLabel">7.30</code> |
-          Phials: <code id="phialMultLabel">5.80</code> |
-          Flasks: <code id="flaskMultLabel">2.92</code>
-        </div>
-      </div>
-
-      <div class="overflow-x-auto">
-        <table class="w-full text-sm text-left border-collapse">
-          <thead>
-            <tr class="border-b border-slate-700 text-xs uppercase text-slate-400 bg-slate-900/50">
-              <th class="py-2.5 px-3">Receita (Base Tier 1)</th>
-              <th class="py-2.5 px-3 text-right">Custo Base (Sem Res.)</th>
-              <th class="py-2.5 px-3 text-right">Crafting Cost (Com Res.)</th>
-              <th class="py-2.5 px-3 text-right">Breakeven Tier 1 (AH)</th>
-            </tr>
-          </thead>
-          <tbody id="tier1Body" class="divide-y divide-slate-800"></tbody>
-        </table>
-      </div>
-    </div>
+    <!-- Dynamic Tables -->
+    <div id="tabContentContainer" class="space-y-6"></div>
   </div>
 
+  <!-- Reset Confirmation Dialog -->
+  <dialog id="resetDialog" class="p-6 max-w-sm shadow-xl">
+    <p class="text-sm mb-4">Tem certeza? Isso apaga todos os preços e concentrações editados de <strong>todas as profissões</strong> e volta aos valores padrão do código.</p>
+    <div class="flex gap-3 justify-end">
+      <button onclick="document.getElementById('resetDialog').close()" class="px-3 py-1.5 text-xs font-semibold bg-slate-700 rounded-lg">Cancelar</button>
+      <button onclick="doReset()" class="px-3 py-1.5 text-xs font-bold bg-red-600 text-white rounded-lg">Resetar Tudo</button>
+    </div>
+  </dialog>
+
   <script>
-    const STORAGE_KEY = "kaychak_alchemy_conc_v7";
+    // ── Version key: bump this when you change default data so old localStorage doesn't override ──
+    const STORAGE_VERSION = "v7";
+    const STORAGE_KEY = "kaychak_conc_complete_" + STORAGE_VERSION;
     const SHEET_ID = "1V5Yxez_-nuPsvmtJLstYL61WhXU_sPNnPh8zxrnVE5k";
 
-    const initialData = [
-      { id: 1, category: "LIGHT POTIONS", name: "Silvermoon Health Potion Tier 2", t1Name: "Silvermoon Health Potion Tier 1", baseCost: 31.2, ahPrice: 69.9, baseYield: 5, mcFactor: 1.5333333, concCost: 294 },
-      { id: 2, category: "LIGHT POTIONS", name: "Lightfused Mana Potion Tier 2", t1Name: "Lightfused Mana Potion Tier 1", baseCost: 35.1, ahPrice: 87.9, baseYield: 5, mcFactor: 1.5333333, concCost: 294 },
-      { id: 3, category: "LIGHT POTIONS", name: "Refreshing Serum Tier 2", t1Name: "Refreshing Serum Tier 1", baseCost: 38.3, ahPrice: 44.6, baseYield: 5, mcFactor: 1.5333333, concCost: 129 },
-      { id: 4, category: "LIGHT POTIONS", name: "Light's Potential Tier 2", t1Name: "Light's Potential Tier 1", baseCost: 147.1, ahPrice: 99.8, baseYield: 5, mcFactor: 1.5333333, concCost: 294 },
-      { id: 5, category: "LIGHT POTIONS", name: "Potion of Zealotry Tier 2", t1Name: "Potion of Zealotry Tier 1", baseCost: 301.2, ahPrice: 144.0, baseYield: 5, mcFactor: 1.5333333, concCost: 294 },
-      { id: 6, category: "LIGHT POTIONS", name: "Light's Preservation Tier 2", t1Name: "Light's Preservation Tier 1", baseCost: 108.3, ahPrice: 90.0, baseYield: 5, mcFactor: 1.5333333, concCost: 294 },
-      { id: 7, category: "LIGHT POTIONS", name: "Enlightenment Tonic Tier 2", t1Name: "Enlightenment Tonic Tier 1", baseCost: 24.5, ahPrice: 18.5, baseYield: 5, mcFactor: 1.5333333, concCost: 129 },
+    // Sheet tab names matching the Google Sheets tabs
+    const SHEET_TABS = {
+      alchemy: "Alchemy Conc",
+      jewelcrafting: "Jewelcrafting Conc",
+      enchanting: "Enchanting Conc",
+      inscription: "Inscription Conc"
+    };
 
-      { id: 8, category: "PHIALS", name: "Haranir Phial of Finesse Tier 2", t1Name: "Haranir Phial of Finesse Tier 1", baseCost: 126.3, ahPrice: 256.0, baseYield: 4, mcFactor: 1.5, concCost: 394 },
-      { id: 9, category: "PHIALS", name: "Haranir Phial of Ingenuity Tier 2", t1Name: "Haranir Phial of Ingenuity Tier 1", baseCost: 43.8, ahPrice: 94.6, baseYield: 4, mcFactor: 1.5, concCost: 394 },
-      { id: 10, category: "PHIALS", name: "Haranir Phial of Perception Tier 2", t1Name: "Haranir Phial of Perception Tier 1", baseCost: 207.3, ahPrice: 161.0, baseYield: 4, mcFactor: 1.5, concCost: 394 },
+    let currentTab = "alchemy";
 
-      { id: 11, category: "VOID POTIONS", name: "Draught of Rampant Abandon Tier 2", t1Name: "Draught of Rampant Abandon Tier 1", baseCost: 47.1, ahPrice: 124.9, baseYield: 5, mcFactor: 1.5333333, concCost: 294 },
-      { id: 12, category: "VOID POTIONS", name: "Potion of Devoured Dreams Tier 2", t1Name: "Potion of Devoured Dreams Tier 1", baseCost: 46.7, ahPrice: 67.5, baseYield: 5, mcFactor: 1.5333333, concCost: 294 },
-      { id: 13, category: "VOID POTIONS", name: "Potion of Recklessness Tier 2", t1Name: "Potion of Recklessness Tier 1", baseCost: 143.5, ahPrice: 69.7, baseYield: 5, mcFactor: 1.5333333, concCost: 157 },
-      { id: 14, category: "VOID POTIONS", name: "Amani Extract Tier 2", t1Name: "Amani Extract Tier 1", baseCost: 115.6, ahPrice: 129.7, baseYield: 5, mcFactor: 1.5333333, concCost: 294 },
-      { id: 15, category: "VOID POTIONS", name: "Void-Shrouded Tincture Tier 2", t1Name: "Void-Shrouded Tincture Tier 1", baseCost: 39.8, ahPrice: 78.9, baseYield: 5, mcFactor: 1.5333333, concCost: 294 },
+    // ── Default profession settings ──
+    // refund = % of concentration refunded on an Ingenious Breakthrough proc
+    // Midnight cap is 70% with maxed talents; base ~50%
+    const DEFAULT_PROF_SETTINGS = {
+      alchemy:      { res: 36,   mc: 37, ing: 29, refund: 70 },
+      jewelcrafting: { res: 17,   mc: 26, ing: 25, refund: 70 },
+      enchanting:   { res: 25,   mc: 20, ing: 25, refund: 70 },
+      inscription:  { res: 17.7, mc: 31, ing: 25, refund: 70 }
+    };
 
-      { id: 16, category: "FLASKS", name: "Flask of the Shattered Sun Tier 2", t1Name: "Flask of the Shattered Sun Tier 1", baseCost: 588.5, ahPrice: 429.0, baseYield: 2, mcFactor: 1.533, concCost: 394 },
-      { id: 17, category: "FLASKS", name: "Flask of the Blood Knights Tier 2", t1Name: "Flask of the Blood Knights Tier 1", baseCost: 391.2, ahPrice: 389.9, baseYield: 2, mcFactor: 1.533, concCost: 394 },
-      { id: 18, category: "FLASKS", name: "Flask of the Magisters Tier 2", t1Name: "Flask of the Magisters Tier 1", baseCost: 365.8, ahPrice: 356.4, baseYield: 2, mcFactor: 1.533, concCost: 394 },
-      { id: 19, category: "FLASKS", name: "Flask of Thalassian Resistance Tier 2", t1Name: "Flask of Thalassian Resistance Tier 1", baseCost: 524.3, ahPrice: 381.0, baseYield: 2, mcFactor: 1.533, concCost: 394 }
+    let profSettings = JSON.parse(JSON.stringify(DEFAULT_PROF_SETTINGS));
+
+    // ── Default item data per profession ──
+    const dataAlchemy = [
+      { id: 1, category: "LIGHT POTIONS", name: "Silvermoon Health Potion Tier 2", baseCost: 31.2, ahPrice: 69.9, baseYield: 5, mcFactor: 1.5333, concCost: 294 },
+      { id: 2, category: "LIGHT POTIONS", name: "Lightfused Mana Potion Tier 2", baseCost: 35.1, ahPrice: 87.9, baseYield: 5, mcFactor: 1.5333, concCost: 294 },
+      { id: 3, category: "LIGHT POTIONS", name: "Refreshing Serum Tier 2", baseCost: 38.3, ahPrice: 44.6, baseYield: 5, mcFactor: 1.5333, concCost: 129 },
+      { id: 4, category: "LIGHT POTIONS", name: "Light's Potential Tier 2", baseCost: 147.1, ahPrice: 99.8, baseYield: 5, mcFactor: 1.5333, concCost: 294 },
+      { id: 5, category: "LIGHT POTIONS", name: "Potion of Zealotry Tier 2", baseCost: 301.2, ahPrice: 144.0, baseYield: 5, mcFactor: 1.5333, concCost: 294 },
+      { id: 6, category: "LIGHT POTIONS", name: "Light's Preservation Tier 2", baseCost: 108.3, ahPrice: 90.0, baseYield: 5, mcFactor: 1.5333, concCost: 294 },
+      { id: 7, category: "LIGHT POTIONS", name: "Enlightenment Tonic Tier 2", baseCost: 24.5, ahPrice: 18.5, baseYield: 5, mcFactor: 1.5333, concCost: 129 },
+      { id: 8, category: "PHIALS", name: "Haranir Phial of Finesse Tier 2", baseCost: 126.3, ahPrice: 256.0, baseYield: 4, mcFactor: 1.5, concCost: 394 },
+      { id: 9, category: "PHIALS", name: "Haranir Phial of Ingenuity Tier 2", baseCost: 43.8, ahPrice: 94.6, baseYield: 4, mcFactor: 1.5, concCost: 394 },
+      { id: 10, category: "PHIALS", name: "Haranir Phial of Perception Tier 2", baseCost: 207.3, ahPrice: 161.0, baseYield: 4, mcFactor: 1.5, concCost: 394 },
+      { id: 11, category: "VOID POTIONS", name: "Draught of Rampant Abandon Tier 2", baseCost: 47.1, ahPrice: 124.9, baseYield: 5, mcFactor: 1.5333, concCost: 294 },
+      { id: 12, category: "VOID POTIONS", name: "Potion of Devoured Dreams Tier 2", baseCost: 46.7, ahPrice: 67.5, baseYield: 5, mcFactor: 1.5333, concCost: 294 },
+      { id: 13, category: "VOID POTIONS", name: "Potion of Recklessness Tier 2", baseCost: 143.5, ahPrice: 69.7, baseYield: 5, mcFactor: 1.5333, concCost: 157 },
+      { id: 14, category: "VOID POTIONS", name: "Amani Extract Tier 2", baseCost: 115.6, ahPrice: 129.7, baseYield: 5, mcFactor: 1.5333, concCost: 294 },
+      { id: 15, category: "VOID POTIONS", name: "Void-Shrouded Tincture Tier 2", baseCost: 39.8, ahPrice: 78.9, baseYield: 5, mcFactor: 1.5333, concCost: 294 },
+      { id: 16, category: "FLASKS", name: "Flask of the Shattered Sun Tier 2", baseCost: 588.5, ahPrice: 429.0, baseYield: 2, mcFactor: 1.533, concCost: 394 },
+      { id: 17, category: "FLASKS", name: "Flask of the Blood Knights Tier 2", baseCost: 391.2, ahPrice: 389.9, baseYield: 2, mcFactor: 1.533, concCost: 394 },
+      { id: 18, category: "FLASKS", name: "Flask of the Magisters Tier 2", baseCost: 365.8, ahPrice: 356.4, baseYield: 2, mcFactor: 1.533, concCost: 394 },
+      { id: 19, category: "FLASKS", name: "Flask of Thalassian Resistance Tier 2", baseCost: 524.3, ahPrice: 381.0, baseYield: 2, mcFactor: 1.533, concCost: 394 }
     ];
 
-    let items = JSON.parse(JSON.stringify(initialData));
+    const dataJewelcrafting = [
+      { id: 101, category: "GEMS & PRISMS", name: "Sin'dorei Lens Tier 2", baseCost: 58.7, ahPrice: 216.0, baseYield: 1.0, mcFactor: 1.5, concCost: 0 },
+      { id: 102, category: "GEMS & PRISMS", name: "Flawless Deadly Amethyst Tier 2", baseCost: 269.3, ahPrice: 405.96, baseYield: 1.0, mcFactor: 1.5, concCost: 0 },
+      { id: 103, category: "GEMS & PRISMS", name: "Kaleidoscopic Prism Tier 2", baseCost: 355.9, ahPrice: 537.82, baseYield: 1.0, mcFactor: 1.5, concCost: 0 },
+      { id: 104, category: "GEMS & PRISMS", name: "Flawless Masterful Amethyst Tier 2", baseCost: 269.3, ahPrice: 355.0, baseYield: 1.0, mcFactor: 1.5, concCost: 0 },
+      { id: 105, category: "GEMS & PRISMS", name: "Sunglass Vial Tier 2", baseCost: 55.1, ahPrice: 280.89, baseYield: 1.0, mcFactor: 1.5, concCost: 0 },
+      { id: 106, category: "GEMS & PRISMS", name: "Flawless Quick Amethyst Tier 2", baseCost: 269.3, ahPrice: 402.64, baseYield: 1.0, mcFactor: 1.5, concCost: 0 },
+      { id: 107, category: "GEMS & PRISMS", name: "Flawless Versatile Amethyst Tier 2", baseCost: 269.3, ahPrice: 370.51, baseYield: 1.0, mcFactor: 1.5, concCost: 0 },
+      { id: 108, category: "GEMS & PRISMS", name: "Prismatic Focusing Iris Tier 2", baseCost: 120.0, ahPrice: 400.0, baseYield: 1.0, mcFactor: 1.5, concCost: 0 },
+      { id: 109, category: "GEMS & PRISMS", name: "Stabilizing Gemstone Bandolier Tier 2", baseCost: 161.8, ahPrice: 305.0, baseYield: 1.0, mcFactor: 1.5, concCost: 0 },
+      { id: 110, category: "GEMS & PRISMS", name: "Flawless Deadly Peridot Tier 2", baseCost: 269.6, ahPrice: 389.06, baseYield: 1.0, mcFactor: 1.5, concCost: 0 },
+      { id: 111, category: "GEMS & PRISMS", name: "Flawless Masterful Peridot Tier 2", baseCost: 269.6, ahPrice: 377.0, baseYield: 1.0, mcFactor: 1.5, concCost: 0 },
+      { id: 112, category: "GEMS & PRISMS", name: "Flawless Quick Peridot Tier 2", baseCost: 269.6, ahPrice: 371.89, baseYield: 1.0, mcFactor: 1.5, concCost: 0 },
+      { id: 113, category: "DIAMONDS", name: "Indecipherable Eversong Diamond Tier 2", baseCost: 458.0, ahPrice: 549.98, baseYield: 1.0, mcFactor: 1.5, concCost: 0 },
+      { id: 114, category: "GEMS & PRISMS", name: "Flawless Versatile Peridot Tier 2", baseCost: 269.6, ahPrice: 392.08, baseYield: 1.0, mcFactor: 1.5, concCost: 0 },
+      { id: 115, category: "DIAMONDS", name: "Powerful Eversong Diamond Tier 2", baseCost: 458.0, ahPrice: 489.47, baseYield: 1.0, mcFactor: 1.5, concCost: 0 },
+      { id: 116, category: "DIAMONDS", name: "Stoic Eversong Diamond Tier 2", baseCost: 458.0, ahPrice: 563.07, baseYield: 1.0, mcFactor: 1.5, concCost: 0 },
+      { id: 117, category: "DIAMONDS", name: "Telluric Eversong Diamond Tier 2", baseCost: 458.0, ahPrice: 675.75, baseYield: 1.0, mcFactor: 1.5, concCost: 0 },
+      { id: 118, category: "LAPIS & GARNET", name: "Flawless Deadly Lapis Tier 2", baseCost: 268.0, ahPrice: 326.95, baseYield: 1.0, mcFactor: 1.5, concCost: 0 },
+      { id: 119, category: "LAPIS & GARNET", name: "Flawless Masterful Lapis Tier 2", baseCost: 268.0, ahPrice: 373.99, baseYield: 1.0, mcFactor: 1.5, concCost: 0 },
+      { id: 120, category: "LAPIS & GARNET", name: "Flawless Quick Lapis Tier 2", baseCost: 268.0, ahPrice: 369.98, baseYield: 1.0, mcFactor: 1.5, concCost: 0 },
+      { id: 121, category: "LAPIS & GARNET", name: "Flawless Versatile Lapis Tier 2", baseCost: 268.0, ahPrice: 461.46, baseYield: 1.0, mcFactor: 1.5, concCost: 0 },
+      { id: 122, category: "LAPIS & GARNET", name: "Flawless Deadly Garnet Tier 2", baseCost: 267.3, ahPrice: 375.0, baseYield: 1.0, mcFactor: 1.5, concCost: 0 },
+      { id: 123, category: "LAPIS & GARNET", name: "Flawless Masterful Garnet Tier 2", baseCost: 267.3, ahPrice: 383.99, baseYield: 1.0, mcFactor: 1.5, concCost: 0 },
+      { id: 124, category: "LAPIS & GARNET", name: "Flawless Quick Garnet Tier 2", baseCost: 267.3, ahPrice: 349.95, baseYield: 1.0, mcFactor: 1.5, concCost: 0 },
+      { id: 125, category: "LAPIS & GARNET", name: "Flawless Versatile Garnet Tier 2", baseCost: 267.3, ahPrice: 374.22, baseYield: 1.0, mcFactor: 1.5, concCost: 0 }
+    ];
+
+    const dataEnchanting = [
+      { id: 201, category: "PROFESSION & TOOLS", name: "Enchant Tool - Amani Perception Tier 2", baseCost: 280.6, ahPrice: 662.17, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 202, category: "HELM & BOOTS", name: "Enchant Helm - Blessing of Speed Tier 2", baseCost: 17.8, ahPrice: 12.0, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 203, category: "PROFESSION & TOOLS", name: "Enchant Tool - Haranir Finesse Tier 2", baseCost: 277.9, ahPrice: 500.96, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 204, category: "HELM & BOOTS", name: "Enchant Helm - Empowered Blessing of Speed Tier 2", baseCost: 415.0, ahPrice: 733.0, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 205, category: "PROFESSION & TOOLS", name: "Enchant Tool - Sin'dorei Deftness Tier 2", baseCost: 561.3, ahPrice: 618.92, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 206, category: "HELM & BOOTS", name: "Enchant Helm - Rune of Avoidance Tier 2", baseCost: 17.8, ahPrice: 19.99, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 207, category: "PROFESSION & TOOLS", name: "Enchant Tool - Amani Resourcefulness Tier 2", baseCost: 280.6, ahPrice: 590.43, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 208, category: "HELM & BOOTS", name: "Enchant Helm - Empowered Rune of Avoidance Tier 2", baseCost: 420.8, ahPrice: 997.0, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 209, category: "PROFESSION & TOOLS", name: "Enchant Tool - Haranir Multicrafting Tier 2", baseCost: 555.5, ahPrice: 888.1, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 210, category: "HELM & BOOTS", name: "Enchant Helm - Hex of Leeching Tier 2", baseCost: 17.8, ahPrice: 19.81, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 211, category: "PROFESSION & TOOLS", name: "Enchant Tool - Ren'dorei Ingenuity Tier 2", baseCost: 480.9, ahPrice: 615.94, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 212, category: "HELM & BOOTS", name: "Enchant Helm - Empowered Hex of Leeching Tier 2", baseCost: 417.7, ahPrice: 744.0, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 213, category: "HELM & BOOTS", name: "Enchant Boots - Farstrider's Hunt Tier 2", baseCost: 411.1, ahPrice: 622.0, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 214, category: "SHOULDERS", name: "Enchant Shoulders - Akil'zon's Swiftness Tier 2", baseCost: 199.3, ahPrice: 480.0, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 215, category: "HELM & BOOTS", name: "Enchant Boots - Lynx's Dexterity Tier 2", baseCost: 320.1, ahPrice: 533.04, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 216, category: "SHOULDERS", name: "Enchant Shoulders - Amirdrassil's Grace Tier 2", baseCost: 415.0, ahPrice: 744.02, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 217, category: "HELM & BOOTS", name: "Enchant Boots - Shaladrassil's Roots Tier 2", baseCost: 697.1, ahPrice: 1033.0, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 218, category: "SHOULDERS", name: "Enchant Shoulders - Flight of the Eagle Tier 2", baseCost: 17.8, ahPrice: 19.0, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 219, category: "SHOULDERS", name: "Enchant Shoulders - Nature's Grace Tier 2", baseCost: 17.8, ahPrice: 20.5, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 220, category: "SHOULDERS", name: "Enchant Shoulders - Silvermoon's Mending Tier 2", baseCost: 202.4, ahPrice: 477.94, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 221, category: "CHEST", name: "Enchant Chest - Mark of Nalorakk Tier 2", baseCost: 460.2, ahPrice: 750.0, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 222, category: "SHOULDERS", name: "Enchant Shoulders - Thalassian Recovery Tier 2", baseCost: 17.8, ahPrice: 18.98, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 223, category: "CHEST", name: "Enchant Chest - Mark of the Magister Tier 2", baseCost: 481.2, ahPrice: 799.99, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 224, category: "CHEST", name: "Enchant Chest - Mark of the Rootwarden Tier 2", baseCost: 657.0, ahPrice: 984.99, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 225, category: "CHEST", name: "Enchant Chest - Mark of the Worldsoul Tier 2", baseCost: 2083.7, ahPrice: 2376.0, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 226, category: "WEAPONS", name: "Enchant Weapon - Acuity of the Ren'dorei Tier 2", baseCost: 721.8, ahPrice: 1021.65, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 227, category: "WEAPONS", name: "Enchant Weapon - Arcane Mastery Tier 2", baseCost: 712.7, ahPrice: 888.88, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 228, category: "WEAPONS", name: "Enchant Weapon - Berserker's Rage Tier 2", baseCost: 646.2, ahPrice: 899.88, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 229, category: "RINGS", name: "Enchant Ring - Eyes of the Eagle Tier 2", baseCost: 385.7, ahPrice: 519.99, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 230, category: "WEAPONS", name: "Enchant Weapon - Flames of the Sin'Dorei Tier 2", baseCost: 862.9, ahPrice: 824.98, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 231, category: "RINGS", name: "Enchant Ring - Nature's Fury Tier 2", baseCost: 320.1, ahPrice: 511.0, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 232, category: "WEAPONS", name: "Enchant Weapon - Jan'alai's Precision Tier 2", baseCost: 871.3, ahPrice: 950.97, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 233, category: "RINGS", name: "Enchant Ring - Silvermoon's Alacrity Tier 2", baseCost: 324.5, ahPrice: 511.0, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 234, category: "WEAPONS", name: "Enchant Weapon - Strength of Halazzi Tier 2", baseCost: 673.8, ahPrice: 1097.9, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 235, category: "RINGS", name: "Enchant Ring - Silvermoon's Tenacity Tier 2", baseCost: 324.5, ahPrice: 499.0, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 236, category: "WEAPONS", name: "Enchant Weapon - Worldsoul Aegis Tier 2", baseCost: 647.5, ahPrice: 355.14, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 237, category: "RINGS", name: "Enchant Ring - Zul'jin's Mastery Tier 2", baseCost: 322.1, ahPrice: 518.99, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 238, category: "WEAPONS", name: "Enchant Weapon - Worldsoul Cradle Tier 2", baseCost: 647.5, ahPrice: 1300.62, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 239, category: "WEAPONS", name: "Enchant Weapon - Worldsoul Tenacity Tier 2", baseCost: 647.5, ahPrice: 878.18, baseYield: 1.0, mcFactor: 1.2, concCost: 0 }
+    ];
+
+    const dataInscription = [
+      { id: 301, category: "INKS & CIPHERS", name: "Munsell Ink Tier 2", baseCost: 39.8, ahPrice: 64.16, baseYield: 5.0, mcFactor: 1.5, concCost: 0 },
+      { id: 302, category: "MISSIVES", name: "Thalassian Missive of Perception Tier 2", baseCost: 53.3, ahPrice: 135.0, baseYield: 2.0, mcFactor: 1.5, concCost: 0 },
+      { id: 303, category: "INKS & CIPHERS", name: "Sienna Ink Tier 2", baseCost: 64.7, ahPrice: 75.09, baseYield: 5.0, mcFactor: 1.5, concCost: 0 },
+      { id: 304, category: "MISSIVES", name: "Thalassian Missive of Multicraft Tier 2", baseCost: 53.3, ahPrice: 141.52, baseYield: 2.0, mcFactor: 1.5, concCost: 0 },
+      { id: 305, category: "MISSIVES", name: "Thalassian Missive of Ingenuity Tier 2", baseCost: 53.3, ahPrice: 133.12, baseYield: 2.0, mcFactor: 1.5, concCost: 0 },
+      { id: 306, category: "MISSIVES", name: "Thalassian Missive of Resourcefulness Tier 2", baseCost: 53.3, ahPrice: 160.0, baseYield: 2.0, mcFactor: 1.5, concCost: 0 },
+      { id: 307, category: "INKS & CIPHERS", name: "Soul Cipher Tier 2", baseCost: 29.6, ahPrice: 58.57, baseYield: 5.0, mcFactor: 1.5, concCost: 0 },
+      { id: 308, category: "INKS & CIPHERS", name: "Codified Azeroot Tier 2", baseCost: 172.2, ahPrice: 198.79, baseYield: 2.0, mcFactor: 1.5, concCost: 0 },
+      { id: 309, category: "MISSIVES", name: "Thalassian Missive of Deftness Tier 2", baseCost: 53.3, ahPrice: 122.44, baseYield: 2.0, mcFactor: 1.5, concCost: 0 },
+      { id: 310, category: "MISSIVES", name: "Thalassian Missive of Crafting Speed Tier 2", baseCost: 53.3, ahPrice: 104.28, baseYield: 2.0, mcFactor: 1.5, concCost: 0 },
+      { id: 311, category: "SIGILS & RUNES", name: "Darkmoon Sigil: Blood Tier 2", baseCost: 191.7, ahPrice: 189.99, baseYield: 1.0, mcFactor: 1.5, concCost: 0 },
+      { id: 312, category: "MISSIVES", name: "Thalassian Missive of Finesse Tier 2", baseCost: 53.3, ahPrice: 133.42, baseYield: 2.0, mcFactor: 1.5, concCost: 0 },
+      { id: 313, category: "SIGILS & RUNES", name: "Darkmoon Sigil: Hunt Tier 2", baseCost: 187.5, ahPrice: 394.0, baseYield: 1.0, mcFactor: 1.5, concCost: 0 },
+      { id: 314, category: "SIGILS & RUNES", name: "Darkmoon Sigil: Rot Tier 2", baseCost: 216.3, ahPrice: 189.41, baseYield: 1.0, mcFactor: 1.5, concCost: 0 },
+      { id: 315, category: "SIGILS & RUNES", name: "Darkmoon Sigil: Void Tier 2", baseCost: 238.2, ahPrice: 399.0, baseYield: 1.0, mcFactor: 1.5, concCost: 0 },
+      { id: 316, category: "MISSIVES", name: "Thalassian Missive of the Aurora Tier 2", baseCost: 53.3, ahPrice: 149.99, baseYield: 2.0, mcFactor: 1.5, concCost: 0 },
+      { id: 317, category: "SIGILS & RUNES", name: "Vantus Rune: Radiant Tier 2", baseCost: 238.4, ahPrice: 199.99, baseYield: 1.0, mcFactor: 1.5, concCost: 0 },
+      { id: 318, category: "MISSIVES", name: "Thalassian Missive of the Feverflare Tier 2", baseCost: 53.3, ahPrice: 159.99, baseYield: 2.0, mcFactor: 1.5, concCost: 0 },
+      { id: 319, category: "MISSIVES", name: "Thalassian Missive of the Fireflash Tier 2", baseCost: 53.3, ahPrice: 169.64, baseYield: 2.0, mcFactor: 1.5, concCost: 0 },
+      { id: 320, category: "MISSIVES", name: "Thalassian Missive of the Harmonious Tier 2", baseCost: 53.3, ahPrice: 144.0, baseYield: 2.0, mcFactor: 1.5, concCost: 0 },
+      { id: 321, category: "CONTRACTS", name: "Contract: The Amani Tribe Tier 2", baseCost: 29.4, ahPrice: 150.99, baseYield: 2.0, mcFactor: 1.5, concCost: 0 },
+      { id: 322, category: "MISSIVES", name: "Thalassian Missive of the Peerless Tier 2", baseCost: 53.3, ahPrice: 149.0, baseYield: 2.0, mcFactor: 1.5, concCost: 0 },
+      { id: 323, category: "CONTRACTS", name: "Contract: The Silvermoon Court Tier 2", baseCost: 28.9, ahPrice: 70.0, baseYield: 2.0, mcFactor: 1.5, concCost: 0 },
+      { id: 324, category: "MISSIVES", name: "Thalassian Missive of the Quickblade Tier 2", baseCost: 53.3, ahPrice: 111.88, baseYield: 2.0, mcFactor: 1.5, concCost: 0 },
+      { id: 325, category: "CONTRACTS", name: "Contract: The Hara'ti Tier 2", baseCost: 28.5, ahPrice: 68.0, baseYield: 2.0, mcFactor: 1.5, concCost: 0 },
+      { id: 326, category: "CONTRACTS", name: "Contract: The Singularity Tier 2", baseCost: 27.3, ahPrice: 80.87, baseYield: 2.0, mcFactor: 1.5, concCost: 0 }
+    ];
+
+    const DEFAULT_DATA = {
+      alchemy: dataAlchemy,
+      jewelcrafting: dataJewelcrafting,
+      enchanting: dataEnchanting,
+      inscription: dataInscription
+    };
+
+    // ── Live state: starts as a copy of defaults, then user edits are merged on top ──
+    let state = {};
+    for (const k in DEFAULT_DATA) {
+      state[k] = JSON.parse(JSON.stringify(DEFAULT_DATA[k]));
+    }
+
+    // ── Persistence: save ONLY user-edited fields (ahPrice, concCost) per item ──
+    // This way, when the code's defaults change (new items, new baseCost), they aren't overwritten.
+    let userEdits = {}; // { alchemy: { 1: { ahPrice: 70.5, concCost: 294 }, ... }, ... }
 
     function loadSavedState() {
       try {
         const raw = localStorage.getItem(STORAGE_KEY);
-        if (!raw) {
-          document.getElementById("resInput").value = 36;
-          document.getElementById("mcInput").value = 37;
-          document.getElementById("ingInput").value = 29;
-          return;
-        }
+        if (!raw) { updateInputsFromState(); return; }
         const saved = JSON.parse(raw);
-        if (saved.resPct !== undefined) document.getElementById("resInput").value = saved.resPct;
-        if (saved.mcPct !== undefined) document.getElementById("mcInput").value = saved.mcPct;
-        if (saved.ingPct !== undefined) document.getElementById("ingInput").value = saved.ingPct;
-        if (Array.isArray(saved.items)) {
-          items.forEach(item => {
-            const found = saved.items.find(s => s.id === item.id);
-            if (found) {
-              if (found.concCost !== undefined) item.concCost = found.concCost;
-              if (found.ahPrice !== undefined) item.ahPrice = found.ahPrice;
-              if (found.baseCost !== undefined) item.baseCost = found.baseCost;
+
+        // Merge profSettings with defaults (so new fields like 'refund' get their default)
+        if (saved.profSettings) {
+          for (const prof in DEFAULT_PROF_SETTINGS) {
+            if (saved.profSettings[prof]) {
+              profSettings[prof] = { ...DEFAULT_PROF_SETTINGS[prof], ...saved.profSettings[prof] };
             }
-          });
+          }
+        }
+
+        // Load user edits and apply them on top of defaults
+        if (saved.userEdits) {
+          userEdits = saved.userEdits;
+          for (const prof in userEdits) {
+            if (!state[prof]) continue;
+            for (const idStr in userEdits[prof]) {
+              const item = state[prof].find(i => i.id === parseInt(idStr));
+              if (!item) continue;
+              const edits = userEdits[prof][idStr];
+              if (edits.ahPrice !== undefined) item.ahPrice = edits.ahPrice;
+              if (edits.concCost !== undefined) item.concCost = edits.concCost;
+            }
+          }
         }
       } catch (e) {
-        document.getElementById("resInput").value = 36;
-        document.getElementById("mcInput").value = 37;
-        document.getElementById("ingInput").value = 29;
+        console.warn("Erro ao carregar:", e);
       }
+      updateInputsFromState();
     }
 
     function saveState() {
       try {
-        const payload = {
-          resPct: parseFloat(document.getElementById("resInput").value) || 0,
-          mcPct: parseFloat(document.getElementById("mcInput").value) || 0,
-          ingPct: parseFloat(document.getElementById("ingInput").value) || 0,
-          items: items.map(i => ({
-            id: i.id,
-            concCost: i.concCost,
-            ahPrice: i.ahPrice,
-            baseCost: i.baseCost
-          }))
-        };
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          profSettings,
+          userEdits
+        }));
       } catch (e) {
-        console.warn("Erro ao salvar localStorage:", e);
+        console.warn("Erro ao salvar:", e);
       }
     }
 
+    // ── Tab switching ──
+    function switchTab(tabKey) {
+      currentTab = tabKey;
+      document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+      document.getElementById("btn-" + tabKey).classList.add("active");
+      const names = { alchemy: "Alchemy Conc", jewelcrafting: "Jewelcrafting Conc", enchanting: "Enchanting Conc", inscription: "Inscription Conc" };
+      document.getElementById("activeProfLabel").textContent = names[tabKey];
+      updateInputsFromState();
+      renderAll();
+    }
+
+    function updateInputsFromState() {
+      const s = profSettings[currentTab];
+      document.getElementById("resInput").value = s.res;
+      document.getElementById("mcInput").value = s.mc;
+      document.getElementById("ingInput").value = s.ing;
+      document.getElementById("refundInput").value = s.refund;
+    }
+
+    function updateProfAttr(attr, val) {
+      profSettings[currentTab][attr] = parseFloat(val) || 0;
+      saveState();
+      updateCalculatedValues();
+    }
+
+    // ── Item field edits: save only what the user changed ──
+    function updateItemField(id, field, val) {
+      const num = parseFloat(val);
+      const item = state[currentTab].find(i => i.id === id);
+      if (!item) return;
+      item[field] = isNaN(num) ? 0 : num;
+
+      // Record this as a user edit
+      if (!userEdits[currentTab]) userEdits[currentTab] = {};
+      if (!userEdits[currentTab][id]) userEdits[currentTab][id] = {};
+      userEdits[currentTab][id][field] = item[field];
+
+      saveState();
+      updateCalculatedValues();
+    }
+
+    // ── Formatting ──
+    function formatNum(val, decimals = 1) {
+      if (isNaN(val) || val === null) return "0,0";
+      return val.toLocaleString("pt-BR", { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+    }
+
+    // ── Reset ──
+    function confirmReset() {
+      document.getElementById("resetDialog").showModal();
+    }
+    function doReset() {
+      document.getElementById("resetDialog").close();
+      profSettings = JSON.parse(JSON.stringify(DEFAULT_PROF_SETTINGS));
+      userEdits = {};
+      for (const k in DEFAULT_DATA) {
+        state[k] = JSON.parse(JSON.stringify(DEFAULT_DATA[k]));
+      }
+      localStorage.removeItem(STORAGE_KEY);
+      updateInputsFromState();
+      renderAll();
+    }
+
+    // ── Export / Import ──
+    function exportData() {
+      const blob = new Blob([JSON.stringify({ profSettings, userEdits }, null, 2)], { type: "application/json" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "kaychak_backup_" + new Date().toISOString().slice(0, 10) + ".json";
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+    function importData(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        try {
+          const data = JSON.parse(e.target.result);
+          if (data.profSettings) {
+            for (const prof in DEFAULT_PROF_SETTINGS) {
+              if (data.profSettings[prof]) {
+                profSettings[prof] = { ...DEFAULT_PROF_SETTINGS[prof], ...data.profSettings[prof] };
+              }
+            }
+          }
+          if (data.userEdits) {
+            userEdits = data.userEdits;
+            // Re-apply edits on top of defaults
+            for (const k in DEFAULT_DATA) {
+              state[k] = JSON.parse(JSON.stringify(DEFAULT_DATA[k]));
+            }
+            for (const prof in userEdits) {
+              if (!state[prof]) continue;
+              for (const idStr in userEdits[prof]) {
+                const item = state[prof].find(i => i.id === parseInt(idStr));
+                if (!item) continue;
+                const edits = userEdits[prof][idStr];
+                if (edits.ahPrice !== undefined) item.ahPrice = edits.ahPrice;
+                if (edits.concCost !== undefined) item.concCost = edits.concCost;
+              }
+            }
+          }
+          saveState();
+          updateInputsFromState();
+          renderAll();
+          alert("Dados importados com sucesso!");
+        } catch (err) {
+          alert("Erro ao importar: " + err.message);
+        }
+      };
+      reader.readAsText(file);
+      event.target.value = "";
+    }
+
+    // ── Google Sheets Sync (real) ──
+    // Reads the active tab's sheet via the public gviz JSON endpoint.
+    // The planilha must be shared as "anyone with the link can view".
     async function syncWithGoogleSheets() {
       const statusEl = document.getElementById("syncStatus");
       statusEl.textContent = "Sincronizando...";
       statusEl.className = "text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full font-medium";
 
+      const sheetName = SHEET_TABS[currentTab];
+      if (!sheetName) {
+        statusEl.textContent = "✗ Aba não configurada";
+        statusEl.className = "text-xs text-red-400 bg-red-400/10 px-2.5 py-1 rounded-full font-medium";
+        return;
+      }
+
+      const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}`;
+
       try {
-        const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=Alchemy%20Conc`;
-        const res = await fetch(url);
-        const text = await res.text();
-        
-        statusEl.textContent = "✓ Sincronizado com Sucesso!";
+        const resp = await fetch(url);
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        let text = await resp.text();
+
+        // Strip JSONP wrapper: "/*O_o*/\ngoogle.visualization.Query.setResponse({...});"
+        const startIdx = text.indexOf("{");
+        const endIdx = text.lastIndexOf("}");
+        if (startIdx === -1 || endIdx === -1) throw new Error("Formato inesperado");
+        const json = JSON.parse(text.substring(startIdx, endIdx + 1));
+
+        if (json.status !== "ok" || !json.table) throw new Error("Planilha retornou erro: " + (json.status || "desconhecido"));
+
+        const cols = json.table.cols;
+        const rows = json.table.rows;
+        let updatedCount = 0;
+
+        // Try to find columns by header labels
+        const colLabels = cols.map(c => (c.label || "").toLowerCase().trim());
+
+        // Look for common column names in the spreadsheet
+        const nameColIdx = colLabels.findIndex(l => l.includes("item") || l.includes("name") || l.includes("receita") || l.includes("recipe"));
+        const ahColIdx = colLabels.findIndex(l => l.includes("ah price") || l.includes("ah") || l.includes("preço") || l.includes("price"));
+        const costColIdx = colLabels.findIndex(l => l.includes("crafting cost") || l.includes("custo") || l.includes("base cost") || l.includes("cost"));
+
+        if (nameColIdx === -1) {
+          // Fallback: just report we couldn't find the right columns
+          statusEl.textContent = "✗ Colunas não reconhecidas";
+          statusEl.className = "text-xs text-red-400 bg-red-400/10 px-2.5 py-1 rounded-full font-medium";
+          console.warn("Colunas da planilha:", colLabels);
+          setTimeout(() => {
+            statusEl.textContent = "Dados locais";
+            statusEl.className = "text-xs text-slate-400 bg-slate-400/10 px-2.5 py-1 rounded-full font-medium";
+          }, 5000);
+          return;
+        }
+
+        const items = state[currentTab];
+
+        rows.forEach(row => {
+          if (!row.c) return;
+          const nameCell = row.c[nameColIdx];
+          const nameVal = nameCell ? (nameCell.v || "").toString().trim() : "";
+          if (!nameVal) return;
+
+          // Find matching item by name (partial match)
+          const nameLower = nameVal.toLowerCase();
+          const item = items.find(i => {
+            const itemLower = i.name.toLowerCase();
+            return itemLower.includes(nameLower) || nameLower.includes(itemLower.replace(" tier 2", "").replace(" tier 1", ""));
+          });
+          if (!item) return;
+
+          // Update ahPrice if found
+          if (ahColIdx !== -1 && row.c[ahColIdx] && typeof row.c[ahColIdx].v === "number") {
+            item.ahPrice = row.c[ahColIdx].v;
+            if (!userEdits[currentTab]) userEdits[currentTab] = {};
+            if (!userEdits[currentTab][item.id]) userEdits[currentTab][item.id] = {};
+            userEdits[currentTab][item.id].ahPrice = item.ahPrice;
+            updatedCount++;
+          }
+
+          // Update baseCost if found
+          if (costColIdx !== -1 && row.c[costColIdx] && typeof row.c[costColIdx].v === "number") {
+            item.baseCost = row.c[costColIdx].v;
+            updatedCount++;
+          }
+        });
+
+        saveState();
+        renderAll();
+
+        statusEl.textContent = `✓ ${updatedCount} valores atualizados`;
         statusEl.className = "text-xs text-emerald-400 bg-emerald-400/10 px-2.5 py-1 rounded-full font-medium";
         setTimeout(() => {
-          statusEl.textContent = "Pronto para Sincronizar ao Vivo";
-          statusEl.className = "text-xs text-sky-400 bg-sky-400/10 px-2.5 py-1 rounded-full font-medium";
-        }, 3000);
+          statusEl.textContent = "Dados locais";
+          statusEl.className = "text-xs text-slate-400 bg-slate-400/10 px-2.5 py-1 rounded-full font-medium";
+        }, 5000);
+
       } catch (err) {
-        console.warn("Aviso de sincronização direta (CORS/Rede):", err);
-        statusEl.textContent = "✓ Dados Atuais Carregados!";
-        statusEl.className = "text-xs text-emerald-400 bg-emerald-400/10 px-2.5 py-1 rounded-full font-medium";
+        console.error("Sync error:", err);
+        statusEl.textContent = "✗ Erro: " + err.message;
+        statusEl.className = "text-xs text-red-400 bg-red-400/10 px-2.5 py-1 rounded-full font-medium";
         setTimeout(() => {
-          statusEl.textContent = "Pronto para Sincronizar ao Vivo";
-          statusEl.className = "text-xs text-sky-400 bg-sky-400/10 px-2.5 py-1 rounded-full font-medium";
-        }, 3000);
+          statusEl.textContent = "Dados locais";
+          statusEl.className = "text-xs text-slate-400 bg-slate-400/10 px-2.5 py-1 rounded-full font-medium";
+        }, 5000);
       }
     }
 
-    function formatNum(val, decimals = 1) {
-      if (isNaN(val) || val === null) return "0,0";
-      return val.toLocaleString("pt-BR", {
-        minimumFractionDigits: decimals,
-        maximumFractionDigits: decimals
-      });
+    // ── Calculations ──
+    function calcItem(item, resDec, mcDec, ingDec, refundDec) {
+      const craftingCost = item.baseCost * (1 - resDec * 0.30);
+      const expectedItems = item.baseYield * (1 + mcDec * item.mcFactor);
+      const avgValueCraft = expectedItems * (item.ahPrice * 0.95);
+      const profitCraft = avgValueCraft - craftingCost;
+      const roiPct = craftingCost > 0 ? (profitCraft / craftingCost) * 100 : 0;
+
+      // Ingenuity: chance (ingDec) to proc a refund of (refundDec) of the conc spent
+      // Expected effective cost = concCost * (1 - ingChance * refundPct)
+      const effectiveConcCost = item.concCost > 0 ? item.concCost * (1 - ingDec * refundDec) : 0;
+      const goldPerConc = effectiveConcCost > 0 ? profitCraft / effectiveConcCost : null;
+      const profitPer1000Conc = effectiveConcCost > 0 ? (1000 / effectiveConcCost) * profitCraft : null;
+      const exactCrafts1000 = effectiveConcCost > 0 ? Math.floor(1000 / effectiveConcCost) : 0;
+
+      return { ...item, craftingCost, avgValueCraft, profitCraft, roiPct, effectiveConcCost, goldPerConc, profitPer1000Conc, exactCrafts1000 };
     }
 
-    function updateItemField(id, field, val) {
-      const num = parseFloat(val);
-      const item = items.find(i => i.id === id);
-      if (item) {
-        item[field] = isNaN(num) ? 0 : num;
-        saveAndRender();
-      }
-    }
+    // ── Smart update: recalculate display values without rebuilding inputs ──
+    // This prevents focus loss when editing.
+    function updateCalculatedValues() {
+      const s = profSettings[currentTab];
+      const resDec = s.res / 100;
+      const mcDec = s.mc / 100;
+      const ingDec = s.ing / 100;
+      const refundDec = (s.refund || 70) / 100;
+      const items = state[currentTab];
 
-    function resetDefaults() {
-      document.getElementById("resInput").value = 36;
-      document.getElementById("mcInput").value = 37;
-      document.getElementById("ingInput").value = 29;
-      items = JSON.parse(JSON.stringify(initialData));
-      saveAndRender();
-    }
+      // Update each row's calculated cells
+      items.forEach(item => {
+        const c = calcItem(item, resDec, mcDec, ingDec, refundDec);
+        const prefix = "calc-" + item.id + "-";
+        const profitClass = c.profitCraft >= 0 ? "positive" : "negative";
 
-    function saveAndRender() {
-      saveState();
-      renderAll();
-    }
+        const ccEl = document.getElementById(prefix + "cc");
+        const avEl = document.getElementById(prefix + "av");
+        const prEl = document.getElementById(prefix + "pr");
+        const roEl = document.getElementById(prefix + "roi");
+        const gcEl = document.getElementById(prefix + "gc");
+        const p1El = document.getElementById(prefix + "p1k");
 
-    function renderAll() {
-      const resPct = parseFloat(document.getElementById("resInput").value) || 0;
-      const mcPct = parseFloat(document.getElementById("mcInput").value) || 0;
-      const ingPct = parseFloat(document.getElementById("ingInput").value) || 0;
-
-      const resDec = resPct / 100;
-      const mcDec = mcPct / 100;
-      const ingDec = ingPct / 100;
-
-      const potYield = 5 * (1 + mcDec * 1.5333333);
-      const phialYield = 4 * (1 + mcDec * 1.5);
-      const flaskYield = 2 * (1 + mcDec * 1.533);
-
-      document.getElementById("potMultLabel").textContent = formatNum(potYield, 2) + "x";
-      document.getElementById("phialMultLabel").textContent = formatNum(phialYield, 2) + "x";
-      document.getElementById("flaskMultLabel").textContent = formatNum(flaskYield, 2) + "x";
-
-      const calculatedItems = items.map(item => {
-        const craftingCost = item.baseCost * (1 - resDec * 0.30);
-        const expectedItems = item.baseYield * (1 + mcDec * item.mcFactor);
-        const avgValueCraft = expectedItems * (item.ahPrice * 0.95);
-        const profitCraft = avgValueCraft - craftingCost;
-        const roiPct = craftingCost > 0 ? (profitCraft / craftingCost) * 100 : 0;
-
-        const effectiveConcCost = item.concCost > 0 ? item.concCost * (1 - ingDec * 0.30) : 0;
-        const goldPerConc = effectiveConcCost > 0 ? profitCraft / effectiveConcCost : null;
-        const profitPer1000Conc = effectiveConcCost > 0 ? (1000 / effectiveConcCost) * profitCraft : null;
-        const exactCrafts1000 = effectiveConcCost > 0 ? Math.floor(1000 / effectiveConcCost) : 0;
-
-        return {
-          ...item,
-          craftingCost,
-          avgValueCraft,
-          profitCraft,
-          roiPct,
-          effectiveConcCost,
-          goldPerConc,
-          profitPer1000Conc,
-          exactCrafts1000
-        };
+        if (ccEl) ccEl.textContent = formatNum(c.craftingCost, 1);
+        if (avEl) avEl.textContent = formatNum(c.avgValueCraft, 1);
+        if (prEl) { prEl.textContent = formatNum(c.profitCraft, 1); prEl.className = "py-2.5 px-2 text-right font-mono " + profitClass; }
+        if (roEl) { roEl.textContent = formatNum(c.roiPct, 1) + "%"; roEl.className = "py-2.5 px-2 text-right font-mono " + profitClass; }
+        if (gcEl) gcEl.textContent = c.goldPerConc !== null && c.goldPerConc > 0 ? formatNum(c.goldPerConc, 2) + " g" : "—";
+        if (p1El) p1El.innerHTML = c.profitPer1000Conc !== null && c.profitPer1000Conc > 0
+          ? `${formatNum(c.profitPer1000Conc, 0)} g <span class="text-[11px] text-slate-400">(~${c.exactCrafts1000}x)</span>` : "—";
       });
 
+      // Update Top 5 ranking
+      renderTop5();
+    }
+
+    function renderTop5() {
+      const s = profSettings[currentTab];
+      const resDec = s.res / 100, mcDec = s.mc / 100, ingDec = s.ing / 100, refundDec = (s.refund || 70) / 100;
+      const items = state[currentTab];
+
+      const calculatedItems = items.map(item => calcItem(item, resDec, mcDec, ingDec, refundDec));
       const topContainer = document.getElementById("topRankingContainer");
+
       const ranked = calculatedItems
         .filter(i => i.concCost > 0 && i.goldPerConc !== null && i.goldPerConc > 0)
         .sort((a, b) => b.goldPerConc - a.goldPerConc)
@@ -336,16 +661,15 @@
       if (ranked.length === 0) {
         topContainer.innerHTML = `
           <div class="col-span-5 text-center py-4 text-sm text-slate-400 bg-slate-900/50 rounded-lg border border-slate-800">
-            Nenhuma receita com preços e concentração definidos. Preencha os campos abaixo!
-          </div>
-        `;
+            Nenhuma receita com concentração definida (preencha o custo de concentração nas caixas abaixo para ver o ranking).
+          </div>`;
       } else {
         topContainer.innerHTML = ranked.map((r, idx) => `
           <div class="bg-slate-900/90 border border-slate-700 p-3 rounded-lg flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
                 <span class="font-bold text-amber-400">#${idx + 1} ${r.category}</span>
-                <span>Base: ${r.concCost} (Efetivo: ${formatNum(r.effectiveConcCost, 1)})</span>
+                <span>Conc: ${formatNum(r.effectiveConcCost, 1)}</span>
               </div>
               <div class="font-semibold text-slate-100 text-sm leading-tight">${r.name}</div>
             </div>
@@ -357,12 +681,21 @@
               <span class="text-slate-400">1000 Conc (~${r.exactCrafts1000}x):</span>
               <span class="font-mono text-emerald-400 font-semibold">${formatNum(r.profitPer1000Conc, 0)}g</span>
             </div>
-          </div>
-        `).join("");
+          </div>`).join("");
       }
+    }
 
-      const categories = ["LIGHT POTIONS", "PHIALS", "VOID POTIONS", "FLASKS"];
-      const container = document.getElementById("tablesContainer");
+    // ── Full render (only on tab switch / reset / import / sync) ──
+    function renderAll() {
+      const s = profSettings[currentTab];
+      const resDec = s.res / 100, mcDec = s.mc / 100, ingDec = s.ing / 100, refundDec = (s.refund || 70) / 100;
+      const items = state[currentTab];
+      const calculatedItems = items.map(item => calcItem(item, resDec, mcDec, ingDec, refundDec));
+
+      renderTop5();
+
+      const categories = [...new Set(calculatedItems.map(i => i.category))];
+      const container = document.getElementById("tabContentContainer");
       container.innerHTML = "";
 
       categories.forEach(cat => {
@@ -373,46 +706,34 @@
           const profitClass = item.profitCraft >= 0 ? "positive" : "negative";
           const goldConcText = item.goldPerConc !== null && item.goldPerConc > 0 ? formatNum(item.goldPerConc, 2) + " g" : "—";
           const profit1000Text = item.profitPer1000Conc !== null && item.profitPer1000Conc > 0
-            ? `${formatNum(item.profitPer1000Conc, 0)} g <span class="text-[11px] text-slate-400">(~${item.exactCrafts1000}x)</span>`
-            : "—";
+            ? `${formatNum(item.profitPer1000Conc, 0)} g <span class="text-[11px] text-slate-400">(~${item.exactCrafts1000}x)</span>` : "—";
 
           rowsHtml += `
             <tr class="hover:bg-slate-800/60 transition">
               <td class="py-2.5 px-3 font-medium text-slate-200">${item.name}</td>
-              <td class="py-2.5 px-2 text-right font-mono text-slate-300">${formatNum(item.craftingCost, 1)}</td>
-              <td class="py-2.5 px-2 text-right font-mono text-slate-300">${formatNum(item.avgValueCraft, 1)}</td>
+              <td id="calc-${item.id}-cc" class="py-2.5 px-2 text-right font-mono text-slate-300">${formatNum(item.craftingCost, 1)}</td>
+              <td id="calc-${item.id}-av" class="py-2.5 px-2 text-right font-mono text-slate-300">${formatNum(item.avgValueCraft, 1)}</td>
               <td class="py-2.5 px-2 text-right">
-                <input
-                  type="number"
-                  step="0.1"
-                  value="${item.ahPrice}"
-                  class="w-24 text-sm font-mono"
-                  onchange="updateItemField(${item.id}, 'ahPrice', this.value)"
-                />
+                <input type="number" step="0.1" value="${item.ahPrice}" class="w-24 text-sm font-mono"
+                  onchange="updateItemField(${item.id}, 'ahPrice', this.value)" />
               </td>
-              <td class="py-2.5 px-2 text-right font-mono ${profitClass}">${formatNum(item.profitCraft, 1)}</td>
-              <td class="py-2.5 px-2 text-right font-mono ${profitClass}">${formatNum(item.roiPct, 1)}%</td>
+              <td id="calc-${item.id}-pr" class="py-2.5 px-2 text-right font-mono ${profitClass}">${formatNum(item.profitCraft, 1)}</td>
+              <td id="calc-${item.id}-roi" class="py-2.5 px-2 text-right font-mono ${profitClass}">${formatNum(item.roiPct, 1)}%</td>
               <td class="py-2.5 px-2 text-right bg-amber-500/5">
-                <input
-                  type="number"
-                  step="1"
-                  min="0"
-                  value="${item.concCost || 0}"
+                <input type="number" step="1" min="0" value="${item.concCost || ''}" placeholder="0"
                   class="w-20 text-sm font-mono conc-input"
-                  onchange="updateItemField(${item.id}, 'concCost', this.value)"
-                />
+                  onchange="updateItemField(${item.id}, 'concCost', this.value)" />
               </td>
-              <td class="py-2.5 px-2 text-right font-mono gold-conc bg-amber-500/5">${goldConcText}</td>
-              <td class="py-2.5 px-3 text-right font-mono text-emerald-400 font-semibold bg-amber-500/5">${profit1000Text}</td>
-            </tr>
-          `;
+              <td id="calc-${item.id}-gc" class="py-2.5 px-2 text-right font-mono gold-conc bg-amber-500/5">${goldConcText}</td>
+              <td id="calc-${item.id}-p1k" class="py-2.5 px-3 text-right font-mono text-emerald-400 font-semibold bg-amber-500/5">${profit1000Text}</td>
+            </tr>`;
         });
 
-        const cardHtml = `
+        container.innerHTML += `
           <div class="card overflow-hidden shadow-lg">
             <div class="table-header px-4 py-3 border-b border-slate-700 flex justify-between items-center">
               <h3 class="font-bold text-amber-400 tracking-wide text-sm uppercase">${cat}</h3>
-              <span class="text-xs text-slate-400">Taxa AH: 5% inclusa | Sincronizado</span>
+              <span class="text-xs text-slate-400">Taxa AH: 5% inclusa</span>
             </div>
             <div class="overflow-x-auto">
               <table class="w-full text-xs md:text-sm text-left border-collapse">
@@ -424,47 +745,19 @@
                     <th class="py-2.5 px-2 text-right">AH Price (Editável)</th>
                     <th class="py-2.5 px-2 text-right">Profit / Craft</th>
                     <th class="py-2.5 px-2 text-right">ROI %</th>
-                    <th class="py-2.5 px-2 text-right text-amber-400 bg-amber-500/10">Conc Cost (Fixado)</th>
+                    <th class="py-2.5 px-2 text-right text-amber-400 bg-amber-500/10">Conc Cost</th>
                     <th class="py-2.5 px-2 text-right text-amber-400 bg-amber-500/10">Gold / Conc</th>
                     <th class="py-2.5 px-3 text-right text-emerald-400 bg-amber-500/10">Lucro (1000 Conc)</th>
                   </tr>
                 </thead>
-                <tbody class="divide-y divide-slate-800">
-                  ${rowsHtml}
-                </tbody>
+                <tbody class="divide-y divide-slate-800">${rowsHtml}</tbody>
               </table>
             </div>
-          </div>
-        `;
-        container.innerHTML += cardHtml;
-      });
-
-      const tier1Body = document.getElementById("tier1Body");
-      tier1Body.innerHTML = "";
-
-      calculatedItems.forEach(item => {
-        const expectedItems = item.baseYield * (1 + mcDec * item.mcFactor);
-        const breakevenT1 = item.craftingCost > 0 && expectedItems > 0 ? item.craftingCost / (expectedItems * 0.95) : 0;
-
-        tier1Body.innerHTML += `
-          <tr class="hover:bg-slate-800/50 transition">
-            <td class="py-2 px-3 text-slate-300 font-medium">${item.t1Name}</td>
-            <td class="py-2 px-3 text-right">
-              <input
-                type="number"
-                step="0.1"
-                value="${item.baseCost || 0}"
-                class="w-24 text-xs font-mono"
-                onchange="updateItemField(${item.id}, 'baseCost', this.value)"
-              />
-            </td>
-            <td class="py-2 px-3 text-right font-mono text-slate-300">${formatNum(item.craftingCost, 1)}</td>
-            <td class="py-2 px-3 text-right font-mono text-amber-300">${formatNum(breakevenT1, 2)}</td>
-          </tr>
-        `;
+          </div>`;
       });
     }
 
+    // ── Init ──
     loadSavedState();
     renderAll();
   </script>
