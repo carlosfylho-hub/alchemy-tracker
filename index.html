@@ -90,7 +90,6 @@
       background: rgba(0, 0, 0, 0.6);
     }
 
-    /* Sorting */
     .sort-header {
       cursor: pointer;
       user-select: none;
@@ -108,7 +107,6 @@
       opacity: 0.8;
     }
 
-    /* Trend Arrows */
     .trend-up {
       color: #4ade80;
       font-size: 11px;
@@ -121,7 +119,6 @@
       font-weight: 700;
     }
 
-    /* Trade Chat Toggle */
     .trade-toggle {
       transition: all 0.2s ease;
     }
@@ -132,7 +129,6 @@
       color: #4ade80;
     }
 
-    /* Wowhead Links */
     .wh-link {
       color: #e2e8f0;
       text-decoration: none;
@@ -273,7 +269,6 @@
     // =================================================================================
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzeSm0A7gN_reEeTnsbBjQ1Ntz-rsS1f_rGhZj0zDgVjhs7W1XXfq9hNxGf9y-VKTgc/exec";
 
-    // ── Version key ──
     const STORAGE_VERSION = "v8_cloud_backup";
     const STORAGE_KEY = "kaychak_conc_complete_" + STORAGE_VERSION;
     const PREV_PRICES_KEY = STORAGE_KEY + "_prev";
@@ -292,7 +287,6 @@
     let sortConfig = { key: null, dir: 'desc' };
     let previousPrices = {};
 
-    // ── Default profession settings ──
     const DEFAULT_PROF_SETTINGS = {
       alchemy: { res: 36, mc: 37, ing: 29, refund: 70 },
       jewelcrafting: { res: 17, mc: 26, ing: 25, refund: 70 },
@@ -302,7 +296,6 @@
 
     let profSettings = JSON.parse(JSON.stringify(DEFAULT_PROF_SETTINGS));
 
-    // ── Default item data per profession ──
     const dataAlchemy = [
       { id: 1, category: "LIGHT POTIONS", name: "Silvermoon Health Potion Tier 2", baseCost: 31.2, ahPrice: 69.9, baseYield: 5, mcFactor: 1.5333, concCost: 294 },
       { id: 2, category: "LIGHT POTIONS", name: "Lightfused Mana Potion Tier 2", baseCost: 35.1, ahPrice: 87.9, baseYield: 5, mcFactor: 1.5333, concCost: 294 },
@@ -431,7 +424,6 @@
       inscription: dataInscription
     };
 
-    // ── Live state ──
     let state = {};
     for (const k in DEFAULT_DATA) {
       state[k] = JSON.parse(JSON.stringify(DEFAULT_DATA[k]));
@@ -439,9 +431,6 @@
 
     let userEdits = {};
 
-    // ==========================================
-    // AUTO BACKUP LOGIC
-    // ==========================================
     function scheduleBackup() {
       if (backupTimeout) clearTimeout(backupTimeout);
       backupTimeout = setTimeout(autoBackup, 5000);
@@ -449,21 +438,12 @@
 
     function autoBackup() {
       if (SCRIPT_URL === "COLE_AQUI_A_URL_DO_WEB_APP_DO_APPS_SCRIPT") return;
-
       const statusEl = document.getElementById("syncStatus");
       statusEl.textContent = "Salvando na nuvem...";
       statusEl.className = "text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full font-medium";
 
-      const payload = {
-        profSettings: profSettings,
-        userEdits: userEdits
-      };
-
-      fetch(SCRIPT_URL, {
-        method: "POST",
-        body: JSON.stringify(payload)
-      }).then(() => {
-        // Salva snapshot de preços atuais como "anteriores" para comparação de tendência
+      const payload = { profSettings, userEdits };
+      fetch(SCRIPT_URL, { method: "POST", body: JSON.stringify(payload) }).then(() => {
         savePreviousPrices();
         statusEl.textContent = "✓ Salvo na Nuvem";
         statusEl.className = "text-xs text-emerald-400 bg-emerald-400/10 px-2.5 py-1 rounded-full font-medium";
@@ -471,37 +451,31 @@
           statusEl.textContent = "Dados locais";
           statusEl.className = "text-xs text-slate-400 bg-slate-400/10 px-2.5 py-1 rounded-full font-medium";
         }, 3000);
-      }).catch(err => console.error("Erro no backup automático:", err));
+      }).catch(err => console.error("Erro no backup:", err));
     }
 
     async function restoreFromCloud() {
       if (SCRIPT_URL === "COLE_AQUI_A_URL_DO_WEB_APP_DO_APPS_SCRIPT") {
-        alert("Por favor, cole a URL do seu Web App no código fonte (variável SCRIPT_URL) primeiro!");
+        alert("Configure o SCRIPT_URL primeiro!");
         return;
       }
-
       const statusEl = document.getElementById("syncStatus");
-      statusEl.textContent = "Restaurando da nuvem...";
+      statusEl.textContent = "Restaurando...";
       statusEl.className = "text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full font-medium";
 
       try {
         const resp = await fetch(SCRIPT_URL);
         const json = await resp.json();
-
         if (json.status === "success" && json.data) {
           const data = json.data;
           if (data.profSettings) {
             for (const prof in DEFAULT_PROF_SETTINGS) {
-              if (data.profSettings[prof]) {
-                profSettings[prof] = { ...DEFAULT_PROF_SETTINGS[prof], ...data.profSettings[prof] };
-              }
+              if (data.profSettings[prof]) profSettings[prof] = { ...DEFAULT_PROF_SETTINGS[prof], ...data.profSettings[prof] };
             }
           }
           if (data.userEdits) {
             userEdits = data.userEdits;
-            for (const k in DEFAULT_DATA) {
-              state[k] = JSON.parse(JSON.stringify(DEFAULT_DATA[k]));
-            }
+            for (const k in DEFAULT_DATA) state[k] = JSON.parse(JSON.stringify(DEFAULT_DATA[k]));
             for (const prof in userEdits) {
               if (!state[prof]) continue;
               for (const idStr in userEdits[prof]) {
@@ -509,6 +483,7 @@
                 if (!item) continue;
                 const edits = userEdits[prof][idStr];
                 if (edits.ahPrice !== undefined) item.ahPrice = edits.ahPrice;
+                if (edits.baseCost !== undefined) item.baseCost = edits.baseCost;
                 if (edits.concCost !== undefined) item.concCost = edits.concCost;
               }
             }
@@ -516,28 +491,20 @@
           localStorage.setItem(STORAGE_KEY, JSON.stringify({ profSettings, userEdits }));
           updateInputsFromState();
           renderAll();
-          alert("Backup restaurado com sucesso!");
-          statusEl.textContent = "✓ Restaurado da Nuvem";
+          alert("Restaurado com sucesso!");
+          statusEl.textContent = "✓ Restaurado";
           statusEl.className = "text-xs text-emerald-400 bg-emerald-400/10 px-2.5 py-1 rounded-full font-medium";
           setTimeout(() => {
             statusEl.textContent = "Dados locais";
             statusEl.className = "text-xs text-slate-400 bg-slate-400/10 px-2.5 py-1 rounded-full font-medium";
           }, 5000);
-        } else if (json.status === "empty") {
-          alert("Nenhum backup encontrado na nuvem.");
-          statusEl.textContent = "Dados locais";
-          statusEl.className = "text-xs text-slate-400 bg-slate-400/10 px-2.5 py-1 rounded-full font-medium";
         }
       } catch (err) {
         alert("Erro ao restaurar: " + err.message);
-        statusEl.textContent = "✗ Erro na Nuvem";
-        statusEl.className = "text-xs text-red-400 bg-red-400/10 px-2.5 py-1 rounded-full font-medium";
+        statusEl.textContent = "✗ Erro";
       }
     }
 
-    // ==========================================
-    // TREND: PREVIOUS PRICES
-    // ==========================================
     function savePreviousPrices() {
       const prices = {};
       for (const prof in state) {
@@ -561,13 +528,10 @@
       if (prev === undefined || prev === null) return '';
       const diff = item.ahPrice - prev;
       if (Math.abs(diff) < 0.1) return '';
-      if (diff > 0) return `<span class="trend-up" title="⬆ Subiu ${formatNum(diff, 1)}g desde o último backup">⬆</span>`;
-      return `<span class="trend-down" title="⬇ Caiu ${formatNum(Math.abs(diff), 1)}g desde o último backup">⬇</span>`;
+      if (diff > 0) return `<span class="trend-up" title="⬆ Subiu ${formatNum(diff, 1)}g">▲</span>`;
+      return `<span class="trend-down" title="⬇ Caiu ${formatNum(Math.abs(diff), 1)}g">▼</span>`;
     }
 
-    // ==========================================
-    // SORTING
-    // ==========================================
     function sortBy(key) {
       if (sortConfig.key === key) {
         sortConfig.dir = sortConfig.dir === 'desc' ? 'asc' : 'desc';
@@ -588,9 +552,6 @@
       renderAll();
     }
 
-    // ==========================================
-    // AH TAX TOGGLE
-    // ==========================================
     function toggleAhTax() {
       ahTaxRate = ahTaxRate > 0 ? 0 : 0.05;
       const btn = document.getElementById('tradeChatToggle');
@@ -604,23 +565,16 @@
       renderAll();
     }
 
-    // ==========================================
-    // PERSISTENCE
-    // ==========================================
     function loadSavedState() {
       try {
         const raw = localStorage.getItem(STORAGE_KEY);
         if (!raw) { updateInputsFromState(); return; }
         const saved = JSON.parse(raw);
-
         if (saved.profSettings) {
           for (const prof in DEFAULT_PROF_SETTINGS) {
-            if (saved.profSettings[prof]) {
-              profSettings[prof] = { ...DEFAULT_PROF_SETTINGS[prof], ...saved.profSettings[prof] };
-            }
+            if (saved.profSettings[prof]) profSettings[prof] = { ...DEFAULT_PROF_SETTINGS[prof], ...saved.profSettings[prof] };
           }
         }
-
         if (saved.userEdits) {
           userEdits = saved.userEdits;
           for (const prof in userEdits) {
@@ -630,26 +584,20 @@
               if (!item) continue;
               const edits = userEdits[prof][idStr];
               if (edits.ahPrice !== undefined) item.ahPrice = edits.ahPrice;
+              if (edits.baseCost !== undefined) item.baseCost = edits.baseCost;
               if (edits.concCost !== undefined) item.concCost = edits.concCost;
             }
           }
         }
-      } catch (e) {
-        console.warn("Erro ao carregar:", e);
-      }
+      } catch (e) { }
       updateInputsFromState();
     }
 
     function saveState() {
       try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify({
-          profSettings,
-          userEdits
-        }));
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ profSettings, userEdits }));
         scheduleBackup();
-      } catch (e) {
-        console.warn("Erro ao salvar:", e);
-      }
+      } catch (e) { }
     }
 
     function switchTab(tabKey) {
@@ -694,17 +642,12 @@
       return val.toLocaleString("pt-BR", { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
     }
 
-    function confirmReset() {
-      document.getElementById("resetDialog").showModal();
-    }
-
+    function confirmReset() { document.getElementById("resetDialog").showModal(); }
     function doReset() {
       document.getElementById("resetDialog").close();
       profSettings = JSON.parse(JSON.stringify(DEFAULT_PROF_SETTINGS));
       userEdits = {};
-      for (const k in DEFAULT_DATA) {
-        state[k] = JSON.parse(JSON.stringify(DEFAULT_DATA[k]));
-      }
+      for (const k in DEFAULT_DATA) state[k] = JSON.parse(JSON.stringify(DEFAULT_DATA[k]));
       localStorage.removeItem(STORAGE_KEY);
       updateInputsFromState();
       renderAll();
@@ -728,16 +671,12 @@
           const data = JSON.parse(e.target.result);
           if (data.profSettings) {
             for (const prof in DEFAULT_PROF_SETTINGS) {
-              if (data.profSettings[prof]) {
-                profSettings[prof] = { ...DEFAULT_PROF_SETTINGS[prof], ...data.profSettings[prof] };
-              }
+              if (data.profSettings[prof]) profSettings[prof] = { ...DEFAULT_PROF_SETTINGS[prof], ...data.profSettings[prof] };
             }
           }
           if (data.userEdits) {
             userEdits = data.userEdits;
-            for (const k in DEFAULT_DATA) {
-              state[k] = JSON.parse(JSON.stringify(DEFAULT_DATA[k]));
-            }
+            for (const k in DEFAULT_DATA) state[k] = JSON.parse(JSON.stringify(DEFAULT_DATA[k]));
             for (const prof in userEdits) {
               if (!state[prof]) continue;
               for (const idStr in userEdits[prof]) {
@@ -745,6 +684,7 @@
                 if (!item) continue;
                 const edits = userEdits[prof][idStr];
                 if (edits.ahPrice !== undefined) item.ahPrice = edits.ahPrice;
+                if (edits.baseCost !== undefined) item.baseCost = edits.baseCost;
                 if (edits.concCost !== undefined) item.concCost = edits.concCost;
               }
             }
@@ -752,108 +692,140 @@
           saveState();
           updateInputsFromState();
           renderAll();
-          alert("Dados importados com sucesso!");
-        } catch (err) {
-          alert("Erro ao importar: " + err.message);
-        }
+          alert("Importado com sucesso!");
+        } catch (err) { alert("Erro ao importar: " + err.message); }
       };
       reader.readAsText(file);
       event.target.value = "";
     }
 
+    // ── LEITOR JSONP / FETCH PARA GOOGLE SHEETS (SEM BLOQUEIO DE CORS) ──
+    function fetchSheetData(sheetName) {
+      return new Promise((resolve, reject) => {
+        const cbName = "__gviz_cb_" + Date.now() + "_" + Math.floor(Math.random() * 10000);
+        const script = document.createElement("script");
+        let timer = setTimeout(() => {
+          cleanup();
+          reject(new Error("Tempo limite excedido ao conectar com a planilha"));
+        }, 12000);
+
+        function cleanup() {
+          clearTimeout(timer);
+          delete window[cbName];
+          if (script.parentNode) script.parentNode.removeChild(script);
+        }
+
+        window[cbName] = function (json) {
+          cleanup();
+          if (json && json.status === "ok" && json.table) {
+            resolve(json);
+          } else {
+            reject(new Error("Resposta inválida da planilha"));
+          }
+        };
+
+        script.onerror = function () {
+          cleanup();
+          // Fallback via fetch caso script tag falhe
+          const fetchUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}&_=${Date.now()}`;
+          fetch(fetchUrl)
+            .then(r => r.text())
+            .then(text => {
+              const s = text.indexOf("{");
+              const e = text.lastIndexOf("}");
+              if (s === -1 || e === -1) throw new Error("Formato inesperado");
+              resolve(JSON.parse(text.substring(s, e + 1)));
+            })
+            .catch(reject);
+        };
+
+        script.src = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=responseHandler:${cbName}&sheet=${encodeURIComponent(sheetName)}&_=${Date.now()}`;
+        document.head.appendChild(script);
+      });
+    }
+
+    // ── SINCRONIZAÇÃO ROBUSTA COM O GOOGLE SHEETS (ATUALIZA CUSTOS E PREÇOS AH) ──
     async function syncWithGoogleSheets() {
       const statusEl = document.getElementById("syncStatus");
-      statusEl.textContent = "Lendo Planilha...";
+      statusEl.textContent = "⏳ Sincronizando com a Planilha...";
       statusEl.className = "text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full font-medium";
 
       const sheetName = SHEET_TABS[currentTab];
       if (!sheetName) return;
 
-      const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}`;
-
       try {
-        const resp = await fetch(url);
-        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-        let text = await resp.text();
+        // Salva snapshot dos preços antes de sincronizar para mostrar as setinhas de tendência (▲/▼)
+        savePreviousPrices();
 
-        const startIdx = text.indexOf("{");
-        const endIdx = text.lastIndexOf("}");
-        if (startIdx === -1 || endIdx === -1) throw new Error("Formato inesperado");
-        const json = JSON.parse(text.substring(startIdx, endIdx + 1));
-
-        if (json.status !== "ok" || !json.table) throw new Error("Planilha retornou erro");
-
-        const cols = json.table.cols;
-        const rows = json.table.rows;
+        const json = await fetchSheetData(sheetName);
+        const rows = json.table.rows || [];
         let updatedCount = 0;
-
-        const colLabels = cols.map(c => (c.label || "").toLowerCase().trim());
-        const nameColIdx = colLabels.findIndex(l => l.includes("item") || l.includes("name") || l.includes("receita") || l.includes("recipe") || l.includes("tier 2"));
-        const ahColIdx = colLabels.findIndex(l => l.includes("ah price") || l.includes("ah") || l.includes("preço") || l.includes("price"));
-        const costColIdx = colLabels.findIndex(l => l.includes("crafting cost") || l.includes("custo") || l.includes("base cost"));
-
-        if (nameColIdx === -1) {
-          statusEl.textContent = "✓ Dados Carregados";
-          statusEl.className = "text-xs text-emerald-400 bg-emerald-400/10 px-2.5 py-1 rounded-full font-medium";
-          setTimeout(() => {
-            statusEl.textContent = "Dados locais";
-            statusEl.className = "text-xs text-slate-400 bg-slate-400/10 px-2.5 py-1 rounded-full font-medium";
-          }, 3000);
-          return;
-        }
-
         const items = state[currentTab];
+        const s = profSettings[currentTab];
+        const resDec = (s.res || 0) / 100;
+        const seenIds = new Set();
 
         rows.forEach(row => {
           if (!row.c) return;
-          const nameCell = row.c[nameColIdx];
-          const nameVal = nameCell ? (nameCell.v || "").toString().trim() : "";
-          if (!nameVal) return;
+          for (let i = 0; i < row.c.length; i++) {
+            const cell = row.c[i];
+            if (!cell || cell.v === null || cell.v === undefined) continue;
+            const valStr = String(cell.v).trim();
+            if (!valStr.includes("Tier 2")) continue;
 
-          const nameLower = nameVal.toLowerCase();
-          const item = items.find(i => {
-            const itemLower = i.name.toLowerCase();
-            return itemLower.includes(nameLower) || nameLower.includes(itemLower.replace(" tier 2", ""));
-          });
-          if (!item) return;
+            // Verifica se as células imediatamente à direita possuem pelo menos 4 colunas numéricas
+            // (Crafting Cost, Avg Value/Breakeven, AH Price, Profit/Craft) -> garante que estamos na tabela principal e não nas tabelas auxiliares do rodapé
+            const c1 = row.c[i + 1], c2 = row.c[i + 2], c3 = row.c[i + 3], c4 = row.c[i + 4];
+            if (!c1 || typeof c1.v !== "number" || !c2 || typeof c2.v !== "number" || !c3 || typeof c3.v !== "number" || !c4 || typeof c4.v !== "number") {
+              continue;
+            }
 
-          if (ahColIdx !== -1 && row.c[ahColIdx] && typeof row.c[ahColIdx].v === "number") {
-            item.ahPrice = row.c[ahColIdx].v;
+            const cleanVal = valStr.toLowerCase().replace(/\s+/g, " ");
+            const item = items.find(it => {
+              const itClean = it.name.toLowerCase().replace(/\s+/g, " ");
+              return itClean === cleanVal || itClean.replace(" tier 2", "") === cleanVal.replace(" tier 2", "");
+            });
+
+            if (!item || seenIds.has(item.id)) continue;
+            seenIds.add(item.id);
+
+            const sheetCraftingCost = c1.v; // Coluna 1 após o nome = Crafting Cost na planilha
+            const sheetAhPrice = c3.v;      // Coluna 3 após o nome = AH Price na planilha
+
+            // Ajusta baseCost para que o Crafting Cost exibido bata exatamente com a planilha sob o Resourcefulness atual
+            const factor = 1 - resDec * 0.30;
+            item.baseCost = factor > 0 ? (sheetCraftingCost / factor) : sheetCraftingCost;
+            item.ahPrice = Math.round(sheetAhPrice * 100) / 100;
+
             if (!userEdits[currentTab]) userEdits[currentTab] = {};
             if (!userEdits[currentTab][item.id]) userEdits[currentTab][item.id] = {};
             userEdits[currentTab][item.id].ahPrice = item.ahPrice;
-            updatedCount++;
-          }
+            userEdits[currentTab][item.id].baseCost = item.baseCost;
 
-          if (costColIdx !== -1 && row.c[costColIdx] && typeof row.c[costColIdx].v === "number") {
-            item.baseCost = row.c[costColIdx].v;
             updatedCount++;
           }
         });
 
+        if (updatedCount === 0) {
+          throw new Error("Nenhum item correspondente encontrado na aba " + sheetName);
+        }
+
         saveState();
         renderAll();
 
-        statusEl.textContent = `✓ Sincronizado (${updatedCount})`;
+        statusEl.textContent = `✓ ${updatedCount} itens sincronizados da planilha!`;
         statusEl.className = "text-xs text-emerald-400 bg-emerald-400/10 px-2.5 py-1 rounded-full font-medium";
         setTimeout(() => {
-          statusEl.textContent = "Dados locais";
+          statusEl.textContent = "Dados locais (Sincronizado)";
           statusEl.className = "text-xs text-slate-400 bg-slate-400/10 px-2.5 py-1 rounded-full font-medium";
         }, 5000);
 
       } catch (err) {
-        statusEl.textContent = "✓ Dados locais ativos";
-        statusEl.className = "text-xs text-emerald-400 bg-emerald-400/10 px-2.5 py-1 rounded-full font-medium";
-        setTimeout(() => {
-          statusEl.textContent = "Dados locais";
-          statusEl.className = "text-xs text-slate-400 bg-slate-400/10 px-2.5 py-1 rounded-full font-medium";
-        }, 5000);
+        console.error("Erro na sincronização:", err);
+        statusEl.textContent = "✗ Erro ao sincronizar: " + err.message;
+        statusEl.className = "text-xs text-red-400 bg-red-400/10 px-2.5 py-1 rounded-full font-medium";
       }
     }
-
-    // ==========================================
-    // CORE CALCULATION
-    // ==========================================
     function calcItem(item, resDec, mcDec, ingDec, refundDec) {
       const craftingCost = item.baseCost * (1 - resDec * 0.30);
       const expectedItems = item.baseYield * (1 + mcDec * item.mcFactor);
@@ -940,9 +912,6 @@
       }
     }
 
-    // ==========================================
-    // MAIN RENDER (with sorting, Wowhead links, trend arrows)
-    // ==========================================
     function renderAll() {
       const s = profSettings[currentTab];
       const resDec = s.res / 100, mcDec = s.mc / 100, ingDec = s.ing / 100, refundDec = (s.refund || 70) / 100;
@@ -960,19 +929,15 @@
       categories.forEach(cat => {
         let catItems = calculatedItems.filter(i => i.category === cat);
 
-        // Apply sorting within each category
         if (sortConfig.key) {
           catItems.sort((a, b) => {
             let va = a[sortConfig.key], vb = b[sortConfig.key];
-            // Handle nulls: push nulls to end
             if (va === null && vb === null) return 0;
             if (va === null) return 1;
             if (vb === null) return -1;
-            // Strings: alphabetical
             if (typeof va === 'string') {
               return sortConfig.dir === 'asc' ? va.localeCompare(vb) : vb.localeCompare(va);
             }
-            // Numbers
             return sortConfig.dir === 'asc' ? va - vb : vb - va;
           });
         }
@@ -985,11 +950,8 @@
           const profit1000Text = item.profitPer1000Conc !== null && item.profitPer1000Conc > 0
             ? `${formatNum(item.profitPer1000Conc, 0)} g <span class="text-[11px] text-slate-400">(~${item.exactCrafts1000}x)</span>` : "—";
 
-          // Wowhead search link
           const searchName = encodeURIComponent(item.name.replace(/ Tier 2$/, ''));
           const whLink = `https://www.wowhead.com/search?q=${searchName}`;
-
-          // Trend arrow
           const trendHtml = getTrendArrow(item);
 
           rowsHtml += `
@@ -1000,10 +962,10 @@
               <td id="calc-${item.id}-cc" class="py-2.5 px-2 text-right font-mono text-slate-300">${formatNum(item.craftingCost, 1)}</td>
               <td id="calc-${item.id}-av" class="py-2.5 px-2 text-right font-mono text-slate-300">${formatNum(item.avgValueCraft, 1)}</td>
               <td class="py-2.5 px-2 text-right">
-                <div class="inline-flex items-center gap-1">
+                <div class="inline-flex items-center gap-1 justify-end">
+                  <span id="trend-${item.id}" class="w-3">${trendHtml}</span>
                   <input type="number" step="0.1" value="${item.ahPrice}" class="w-24 text-sm font-mono"
                     onchange="updateItemField(${item.id}, 'ahPrice', this.value)" />
-                  <span id="trend-${item.id}" class="w-3">${trendHtml}</span>
                 </div>
               </td>
               <td id="calc-${item.id}-pr" class="py-2.5 px-2 text-right font-mono ${profitClass}">${formatNum(item.profitCraft, 1)}</td>
@@ -1048,11 +1010,9 @@
           </div>`;
       });
 
-      // Refresh Wowhead tooltips (if script loaded)
       try { if (typeof $WowheadPower !== 'undefined') $WowheadPower.refreshLinks(); } catch (e) { }
     }
 
-    // ── Init ──
     loadPreviousPrices();
     loadSavedState();
     renderAll();
