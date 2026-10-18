@@ -148,14 +148,6 @@
             <span class="text-slate-400 font-bold">%</span>
           </div>
         </div>
-        <div class="flex flex-col">
-          <label class="text-[11px] font-semibold text-amber-400 uppercase">Refund % (Ing.)</label>
-          <div class="flex items-center gap-1 mt-1">
-            <input id="refundInput" type="number" step="1" min="0" max="100"
-              class="w-16 text-sm text-amber-400 border-amber-500/50" oninput="updateProfAttr('refund', this.value)" />
-            <span class="text-slate-400 font-bold">%</span>
-          </div>
-        </div>
       </div>
       <div class="flex items-center gap-2 flex-wrap">
         <button onclick="restoreFromCloud()"
@@ -536,7 +528,6 @@
       document.getElementById("resInput").value = s.res;
       document.getElementById("mcInput").value = s.mc;
       document.getElementById("ingInput").value = s.ing;
-      document.getElementById("refundInput").value = s.refund;
     }
 
     function updateProfAttr(attr, val) {
