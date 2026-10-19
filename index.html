@@ -169,7 +169,7 @@
   </style>
 </head>
 
-<body class="bg-slate-900 text-slate-100 p-4 md:p-6">
+<body class="p-4 md:p-6">
 
   <div class="max-w-7xl mx-auto space-y-6">
     <!-- Header -->
@@ -334,8 +334,9 @@
           </div>
         </div>
 
-        <!-- Controles de Período e Granularidade -->
+        <!-- Controles de Período (Janela de Tempo) e Agrupamento (Granularidade) -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-2 border-t border-slate-800">
+          <!-- Janela de Período -->
           <div class="flex flex-col gap-1.5">
             <span class="text-[11px] font-bold uppercase text-slate-400">4. Janela de Período (Filtro de Tempo):</span>
             <div class="flex flex-wrap gap-1.5">
@@ -349,6 +350,7 @@
             </div>
           </div>
 
+          <!-- Granularidade de Agrupamento -->
           <div class="flex flex-col gap-1.5">
             <span class="text-[11px] font-bold uppercase text-slate-400">5. Agrupar Dados Por (Granularidade):</span>
             <div class="flex flex-wrap gap-1.5">
@@ -726,20 +728,29 @@
       renderHistoryView();
     }
 
+    // Filtra os pontos pela janela de tempo escolhida
     function filterLogsByRange(logs) {
       if (histTimeRange === "all") return logs;
       const now = Date.now();
-      const daysMap = { "1d": 1, "7d": 7, "30d": 30, "90d": 90, "180d": 180, "365d": 365 };
+      const daysMap = {
+        "1d": 1,
+        "7d": 7,
+        "30d": 30,
+        "90d": 90,
+        "180d": 180,
+        "365d": 365
+      };
       const days = daysMap[histTimeRange] || 365;
       const cutoff = now - days * 24 * 60 * 60 * 1000;
       return logs.filter(l => l.ts >= cutoff);
     }
 
+    // Calcula chave e rótulo do bucket temporal conforme a granularidade escolhida
     function getBucketKeyAndLabel(ts, mode) {
       const d = new Date(ts);
       const pad = n => String(n).padStart(2, "0");
       const year = d.getFullYear();
-      const month = d.getMonth();
+      const month = d.getMonth(); // 0..11
       const day = d.getDate();
       const monthsPt = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
 
@@ -750,8 +761,9 @@
         };
       }
       if (mode === "week") {
+        // Início da semana (Segunda-feira)
         const temp = new Date(d.getFullYear(), d.getMonth(), d.getDate());
-        const dayOfWeek = (temp.getDay() + 6) % 7;
+        const dayOfWeek = (temp.getDay() + 6) % 7; // 0 = Seg, 6 = Dom
         temp.setDate(temp.getDate() - dayOfWeek);
         const wy = temp.getFullYear();
         const wm = temp.getMonth() + 1;
@@ -793,6 +805,7 @@
       };
     }
 
+    // Agrupa os registros de acordo com a granularidade selecionada
     function aggregateLogs(logs, mode) {
       if (mode === "raw") {
         return logs.map(l => ({
