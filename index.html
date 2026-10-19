@@ -266,13 +266,22 @@
 
     <!-- Top 5 Ranking -->
     <div id="topRankingCard" class="card p-5 shadow-lg border-amber-500/40">
-      <div class="flex items-center justify-between mb-3">
+      <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
         <h2 class="text-base font-bold text-amber-400 uppercase tracking-wide flex items-center gap-2">
           🏆 Top 5 Melhores Receitas (Gold / Concentração Efetivo)
         </h2>
-        <span id="activeProfLabel" class="text-xs text-sky-400 font-bold uppercase">Alchemy Conc</span>
+        <div class="flex items-center gap-3">
+          <button id="restoreIgnoredBtn" onclick="resetIgnoredItems()"
+            class="hidden px-2.5 py-1 text-xs font-semibold bg-slate-800 hover:bg-amber-500/20 text-slate-300 hover:text-amber-300 rounded-lg border border-slate-700 transition"
+            title="Restaurar todos os crafts ocultos desta profissão">
+            🔄 Restaurar Ocultos
+          </button>
+          <span id="activeProfLabel" class="text-xs text-sky-400 font-bold uppercase">Alchemy Conc</span>
+        </div>
       </div>
       <div id="topRankingContainer" class="grid grid-cols-1 md:grid-cols-5 gap-3"></div>
+      <!-- Barra de itens ocultos -->
+      <div id="ignoredListBar" class="hidden mt-3 pt-3 border-t border-slate-800/80 flex flex-wrap items-center gap-2 text-xs"></div>
     </div>
 
     <!-- Dynamic Tables (Professions) -->
@@ -429,7 +438,7 @@
 
   <!-- Reset Confirmation Dialog -->
   <dialog id="resetDialog" class="p-6 max-w-sm shadow-xl">
-    <p class="text-sm mb-4">Tem certeza? Isso apaga todos os preços e concentrações editados de <strong>todas as
+    <p class="text-sm mb-4">Tem certeza? Isso apaga todos os preços, itens ocultos e concentrações editados de <strong>todas as
         profissões</strong> e volta aos valores padrão do código.</p>
     <div class="flex gap-3 justify-end">
       <button onclick="document.getElementById('resetDialog').close()"
@@ -465,6 +474,14 @@
     let ahTaxRate = 0.05;
     let sortConfig = { key: null, dir: 'desc' };
     let previousPrices = {};
+
+    // Estado de itens ignorados do Top 5 por profissão
+    let ignoredItems = {
+      alchemy: [],
+      jewelcrafting: [],
+      enchanting: [],
+      inscription: []
+    };
 
     // Estado do Histórico e Granularidade
     let priceHistory = { alchemy: {}, jewelcrafting: {}, enchanting: {}, inscription: {} };
@@ -625,6 +642,28 @@
     let userEdits = {};
 
     // =========================================================
+    // FUNÇÕES DE OCULTAR / RESTAURAR CRAFTS DO TOP 5
+    // =========================================================
+    function toggleIgnoreTop5(prof, itemId) {
+      if (!ignoredItems[prof]) ignoredItems[prof] = [];
+      const idx = ignoredItems[prof].indexOf(itemId);
+      if (idx === -1) {
+        ignoredItems[prof].push(itemId);
+      } else {
+        ignoredItems[prof].splice(idx, 1);
+      }
+      saveState();
+      renderTop5();
+    }
+
+    function resetIgnoredItems() {
+      const prof = currentTab === "history" ? lastProfTab : currentTab;
+      ignoredItems[prof] = [];
+      saveState();
+      renderTop5();
+    }
+
+    // =========================================================
     // SISTEMA DE HISTÓRICO GRANULAR (DIA, SEMANA, MÊS, TRIMESTRE, SEMESTRE, ANO)
     // =========================================================
     function loadPriceHistory() {
@@ -728,7 +767,6 @@
       renderHistoryView();
     }
 
-    // Filtra os pontos pela janela de tempo escolhida
     function filterLogsByRange(logs) {
       if (histTimeRange === "all") return logs;
       const now = Date.now();
@@ -745,12 +783,11 @@
       return logs.filter(l => l.ts >= cutoff);
     }
 
-    // Calcula chave e rótulo do bucket temporal conforme a granularidade escolhida
     function getBucketKeyAndLabel(ts, mode) {
       const d = new Date(ts);
       const pad = n => String(n).padStart(2, "0");
       const year = d.getFullYear();
-      const month = d.getMonth(); // 0..11
+      const month = d.getMonth();
       const day = d.getDate();
       const monthsPt = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
 
@@ -761,9 +798,8 @@
         };
       }
       if (mode === "week") {
-        // Início da semana (Segunda-feira)
         const temp = new Date(d.getFullYear(), d.getMonth(), d.getDate());
-        const dayOfWeek = (temp.getDay() + 6) % 7; // 0 = Seg, 6 = Dom
+        const dayOfWeek = (temp.getDay() + 6) % 7;
         temp.setDate(temp.getDate() - dayOfWeek);
         const wy = temp.getFullYear();
         const wm = temp.getMonth() + 1;
@@ -805,7 +841,6 @@
       };
     }
 
-    // Agrupa os registros de acordo com a granularidade selecionada
     function aggregateLogs(logs, mode) {
       if (mode === "raw") {
         return logs.map(l => ({
@@ -1131,7 +1166,7 @@
       statusEl.textContent = "Salvando na nuvem...";
       statusEl.className = "text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full font-medium";
 
-      const payload = { profSettings, userEdits, priceHistory };
+      const payload = { profSettings, userEdits, ignoredItems, priceHistory };
       fetch(SCRIPT_URL, { method: "POST", body: JSON.stringify(payload) }).then(() => {
         savePreviousPrices();
         statusEl.textContent = "✓ Salvo na Nuvem";
@@ -1177,11 +1212,16 @@
               }
             }
           }
+          if (data.ignoredItems) {
+            for (const p in data.ignoredItems) {
+              if (Array.isArray(data.ignoredItems[p])) ignoredItems[p] = data.ignoredItems[p];
+            }
+          }
           if (data.priceHistory) {
             priceHistory = data.priceHistory;
             savePriceHistory();
           }
-          localStorage.setItem(STORAGE_KEY, JSON.stringify({ profSettings, userEdits }));
+          localStorage.setItem(STORAGE_KEY, JSON.stringify({ profSettings, userEdits, ignoredItems }));
           updateInputsFromState();
           renderAll();
           alert("Restaurado com sucesso!");
@@ -1283,13 +1323,18 @@
             }
           }
         }
+        if (saved.ignoredItems) {
+          for (const p in saved.ignoredItems) {
+            if (Array.isArray(saved.ignoredItems[p])) ignoredItems[p] = saved.ignoredItems[p];
+          }
+        }
       } catch (e) { }
       updateInputsFromState();
     }
 
     function saveState() {
       try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify({ profSettings, userEdits }));
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ profSettings, userEdits, ignoredItems }));
         scheduleBackup();
       } catch (e) { }
     }
@@ -1376,6 +1421,7 @@
       document.getElementById("resetDialog").close();
       profSettings = JSON.parse(JSON.stringify(DEFAULT_PROF_SETTINGS));
       userEdits = {};
+      ignoredItems = { alchemy: [], jewelcrafting: [], enchanting: [], inscription: [] };
       for (const k in DEFAULT_DATA) state[k] = JSON.parse(JSON.stringify(DEFAULT_DATA[k]));
       localStorage.removeItem(STORAGE_KEY);
       updateInputsFromState();
@@ -1383,7 +1429,7 @@
     }
 
     function exportData() {
-      const blob = new Blob([JSON.stringify({ profSettings, userEdits, priceHistory }, null, 2)], { type: "application/json" });
+      const blob = new Blob([JSON.stringify({ profSettings, userEdits, ignoredItems, priceHistory }, null, 2)], { type: "application/json" });
       const a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
       a.download = "tracker_conc_backup_" + new Date().toISOString().slice(0, 10) + ".json";
@@ -1416,6 +1462,11 @@
                 if (edits.baseCost !== undefined) item.baseCost = edits.baseCost;
                 if (edits.concCost !== undefined) item.concCost = edits.concCost;
               }
+            }
+          }
+          if (data.ignoredItems) {
+            for (const p in data.ignoredItems) {
+              if (Array.isArray(data.ignoredItems[p])) ignoredItems[p] = data.ignoredItems[p];
             }
           }
           if (data.priceHistory) {
@@ -1617,27 +1668,62 @@
       const s = profSettings[prof];
       const resDec = s.res / 100, mcDec = s.mc / 100, ingDec = s.ing / 100, refundDec = (s.refund || 70) / 100;
       const items = state[prof];
+      const ignored = ignoredItems[prof] || [];
 
       const calculatedItems = items.map(item => calcItem(item, resDec, mcDec, ingDec, refundDec));
       const topContainer = document.getElementById("topRankingContainer");
+      const restoreBtn = document.getElementById("restoreIgnoredBtn");
+      const ignoredBar = document.getElementById("ignoredListBar");
+
+      // Atualiza botão e barra de itens ocultos
+      if (ignored.length > 0) {
+        restoreBtn.classList.remove("hidden");
+        restoreBtn.textContent = `🔄 Restaurar Ocultos (${ignored.length})`;
+        ignoredBar.classList.remove("hidden");
+
+        const chipsHtml = ignored.map(id => {
+          const it = items.find(x => x.id === id);
+          if (!it) return "";
+          const shortName = it.name.replace(/ Tier 2$/, "");
+          return `
+            <button onclick="toggleIgnoreTop5('${prof}', ${it.id})"
+              class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-slate-800/90 hover:bg-slate-700 text-slate-300 border border-slate-700 transition"
+              title="Clique para devolver ao Top 5">
+              <span>${shortName}</span>
+              <span class="text-emerald-400 font-bold">＋</span>
+            </button>
+          `;
+        }).join("");
+
+        ignoredBar.innerHTML = `<span class="text-slate-400 font-semibold">Ocultos do Top 5 (clique para reativar):</span> ${chipsHtml}`;
+      } else {
+        restoreBtn.classList.add("hidden");
+        ignoredBar.classList.add("hidden");
+        ignoredBar.innerHTML = "";
+      }
 
       const ranked = calculatedItems
-        .filter(i => i.concCost > 0 && i.goldPerConc !== null && i.goldPerConc > 0)
+        .filter(i => i.concCost > 0 && i.goldPerConc !== null && i.goldPerConc > 0 && !ignored.includes(i.id))
         .sort((a, b) => b.goldPerConc - a.goldPerConc)
         .slice(0, 5);
 
       if (ranked.length === 0) {
         topContainer.innerHTML = `
           <div class="col-span-5 text-center py-4 text-sm text-slate-400 bg-slate-900/50 rounded-lg border border-slate-800">
-            Nenhuma receita com concentração definida (preencha o custo de concentração nas caixas abaixo para ver o ranking).
+            Nenhuma receita disponível no ranking (preencha o custo de concentração nas caixas abaixo ou restaure os itens ocultos).
           </div>`;
       } else {
         topContainer.innerHTML = ranked.map((r, idx) => `
-          <div class="bg-slate-900/90 border border-slate-700 p-3 rounded-lg flex flex-col justify-between">
+          <div class="bg-slate-900/90 border border-slate-700 p-3 rounded-lg flex flex-col justify-between relative group">
             <div>
               <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
                 <span class="font-bold text-amber-400">#${idx + 1} ${r.category}</span>
-                <button onclick="openItemHistory('${prof}', ${r.id})" class="text-xs text-sky-400 hover:text-sky-300" title="Ver gráfico de histórico">📊 Gráfico</button>
+                <div class="flex items-center gap-1.5">
+                  <button onclick="openItemHistory('${prof}', ${r.id})" class="text-xs text-sky-400 hover:text-sky-300" title="Ver gráfico de histórico">📊 Gráfico</button>
+                  <button onclick="toggleIgnoreTop5('${prof}', ${r.id})"
+                    class="w-5 h-5 rounded bg-slate-800 hover:bg-red-600/80 text-slate-400 hover:text-white flex items-center justify-center text-xs font-bold border border-slate-700 transition"
+                    title="Retirar da lista dos melhores (não vende na prática)">✕</button>
+                </div>
               </div>
               <div class="font-semibold text-slate-100 text-sm leading-tight">${r.name}</div>
             </div>
@@ -1759,7 +1845,7 @@
           </div>`;
       });
 
-      try { if (typeof $WowheadPower !== 'undefined')$WowheadPower.refreshLinks(); } catch (e) { }
+      try { if (typeof $WowheadPower !== 'undefined') $WowheadPower.refreshLinks(); } catch (e) { }
     }
 
     loadPreviousPrices();
