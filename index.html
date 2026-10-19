@@ -84,6 +84,17 @@
       font-weight: 700;
     }
 
+    .period-btn {
+      transition: all 0.15s ease;
+    }
+
+    .period-btn.active {
+      background-color: #f59e0b;
+      color: #0f172a;
+      border-color: #f59e0b;
+      font-weight: 700;
+    }
+
     dialog {
       background: #1e293b;
       color: #f8fafc;
@@ -175,7 +186,7 @@
         </div>
         <h1 class="text-2xl font-bold text-white mt-2">Simulador de Lucro & Concentração por Profissão</h1>
         <p class="text-sm text-slate-400">
-          Alquimia com concentração fixada. Demais profissões prontas para preenchimento manual + Histórico em Gráfico.
+          Alquimia com concentração fixada. Demais profissões prontas para preenchimento manual + Histórico Granular.
         </p>
       </div>
       <div class="flex flex-wrap gap-2 bg-slate-900/90 p-2 rounded-xl border border-slate-700">
@@ -268,7 +279,7 @@
     <div id="tabContentContainer" class="space-y-6"></div>
 
     <!-- ========================================== -->
-    <!-- ABA DEDICADA: HISTÓRICO & GRÁFICOS (OPÇÃO C) -->
+    <!-- ABA DEDICADA: HISTÓRICO GRANULAR & GRÁFICOS -->
     <!-- ========================================== -->
     <div id="historyTabContainer" class="space-y-6 hidden">
       <!-- Controles do Histórico -->
@@ -276,10 +287,10 @@
         <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-700/80 pb-4">
           <div>
             <h2 class="text-lg font-bold text-amber-400 flex items-center gap-2">
-              📈 Histórico de Preços, Custos & Rentabilidade
+              📈 Histórico Granular de Preços, Custos & Rentabilidade
             </h2>
             <p class="text-xs text-slate-400 mt-0.5">
-              Acompanhe a evolução de cada craft a cada sincronização ou edição manual. Ligue/desligue as métricas abaixo para comparar.
+              Analise por Dia, Semana, Mês, Trimestre, Semestre ou Ano. Ligue ou desligue as séries abaixo do gráfico.
             </p>
           </div>
           <div class="flex flex-wrap items-center gap-2">
@@ -323,10 +334,41 @@
           </div>
         </div>
 
+        <!-- Controles de Período (Janela de Tempo) e Agrupamento (Granularidade) -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-2 border-t border-slate-800">
+          <!-- Janela de Período -->
+          <div class="flex flex-col gap-1.5">
+            <span class="text-[11px] font-bold uppercase text-slate-400">4. Janela de Período (Filtro de Tempo):</span>
+            <div class="flex flex-wrap gap-1.5">
+              <button onclick="setHistRange('1d')" id="range-1d" class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Dia (24h)</button>
+              <button onclick="setHistRange('7d')" id="range-7d" class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Semana (7d)</button>
+              <button onclick="setHistRange('30d')" id="range-30d" class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Mês (30d)</button>
+              <button onclick="setHistRange('90d')" id="range-90d" class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Trimestre (90d)</button>
+              <button onclick="setHistRange('180d')" id="range-180d" class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Semestre (180d)</button>
+              <button onclick="setHistRange('365d')" id="range-365d" class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Ano (365d)</button>
+              <button onclick="setHistRange('all')" id="range-all" class="period-btn active px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Tudo</button>
+            </div>
+          </div>
+
+          <!-- Granularidade de Agrupamento -->
+          <div class="flex flex-col gap-1.5">
+            <span class="text-[11px] font-bold uppercase text-slate-400">5. Agrupar Dados Por (Granularidade):</span>
+            <div class="flex flex-wrap gap-1.5">
+              <button onclick="setHistGrouping('raw')" id="group-raw" class="period-btn active px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Bruto (Cada Leitura)</button>
+              <button onclick="setHistGrouping('day')" id="group-day" class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Dia</button>
+              <button onclick="setHistGrouping('week')" id="group-week" class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Semana</button>
+              <button onclick="setHistGrouping('month')" id="group-month" class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Mês</button>
+              <button onclick="setHistGrouping('quarter')" id="group-quarter" class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Trimestre</button>
+              <button onclick="setHistGrouping('semester')" id="group-semester" class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Semestre</button>
+              <button onclick="setHistGrouping('year')" id="group-year" class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Ano</button>
+            </div>
+          </div>
+        </div>
+
         <!-- Opção C: Botões de Séries Interativas -->
-        <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
+        <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-800">
           <div class="flex flex-wrap items-center gap-2">
-            <span class="text-xs font-bold uppercase text-slate-400 mr-1">Linhas do Gráfico:</span>
+            <span class="text-xs font-bold uppercase text-slate-400 mr-1">Séries do Gráfico:</span>
             <button id="toggle-series-ahPrice" onclick="toggleChartSeries('ahPrice')"
               class="series-btn on px-3 py-1.5 rounded-lg text-xs font-bold bg-sky-500/20 text-sky-300 border border-sky-500/40">
               💰 Preço AH
@@ -353,24 +395,25 @@
 
       <!-- Área do Gráfico -->
       <div class="card p-5 shadow-lg">
-        <div class="h-[360px] w-full relative">
+        <div class="h-[380px] w-full relative">
           <canvas id="historyChartCanvas"></canvas>
         </div>
       </div>
 
-      <!-- Tabela de Log Detalhado do Item -->
+      <!-- Tabela de Log / Períodos Consolidados -->
       <div class="card overflow-hidden shadow-lg">
         <div class="table-header px-4 py-3 border-b border-slate-700 flex justify-between items-center">
-          <h3 class="font-bold text-amber-400 tracking-wide text-sm uppercase">📋 Registro Cronológico de Leituras</h3>
-          <span class="text-xs text-slate-400">Últimos 50 registros salvos automaticamente</span>
+          <h3 id="histTableTitle" class="font-bold text-amber-400 tracking-wide text-sm uppercase">📋 Registro de Leituras / Períodos</h3>
+          <span class="text-xs text-slate-400">Até 500 registros históricos por item</span>
         </div>
-        <div class="overflow-x-auto max-h-80">
+        <div class="overflow-x-auto max-h-96">
           <table class="w-full text-xs md:text-sm text-left border-collapse">
             <thead>
               <tr class="border-b border-slate-700 text-[11px] uppercase text-slate-400 bg-slate-900/40 sticky top-0">
-                <th class="py-2.5 px-3">Data / Hora</th>
-                <th class="py-2.5 px-2">Origem</th>
-                <th class="py-2.5 px-2 text-right">Preço AH</th>
+                <th class="py-2.5 px-3">Período / Data</th>
+                <th class="py-2.5 px-2">Origem / Amostras</th>
+                <th class="py-2.5 px-2 text-right">Preço AH (Méd)</th>
+                <th class="py-2.5 px-2 text-right">Mín / Máx AH</th>
                 <th class="py-2.5 px-2 text-right">Crafting Cost</th>
                 <th class="py-2.5 px-2 text-right">Profit / Craft</th>
                 <th class="py-2.5 px-2 text-right">ROI %</th>
@@ -406,7 +449,7 @@
     const STORAGE_KEY = "kaychak_conc_complete_" + STORAGE_VERSION;
     const PREV_PRICES_KEY = STORAGE_KEY + "_prev";
     const HISTORY_KEY = STORAGE_KEY + "_history";
-    const MAX_HISTORY_POINTS = 50;
+    const MAX_HISTORY_POINTS = 500;
     const SHEET_ID = "1V5Yxez_-nuPsvmtJLstYL61WhXU_sPNnPh8zxrnVE5k";
 
     const SHEET_TABS = {
@@ -423,10 +466,12 @@
     let sortConfig = { key: null, dir: 'desc' };
     let previousPrices = {};
 
-    // Estado do Histórico e Gráfico (Opção C)
+    // Estado do Histórico e Granularidade
     let priceHistory = { alchemy: {}, jewelcrafting: {}, enchanting: {}, inscription: {} };
     let histSelectedProf = "alchemy";
     let histSelectedItemId = 1;
+    let histTimeRange = "all";   // '1d', '7d', '30d', '90d', '180d', '365d', 'all'
+    let histGrouping = "raw";    // 'raw', 'day', 'week', 'month', 'quarter', 'semester', 'year'
     let chartVisibility = {
       ahPrice: true,
       craftingCost: true,
@@ -580,7 +625,7 @@
     let userEdits = {};
 
     // =========================================================
-    // SISTEMA DE HISTÓRICO DE PREÇOS & GRÁFICOS (OPÇÃO C)
+    // SISTEMA DE HISTÓRICO GRANULAR (DIA, SEMANA, MÊS, TRIMESTRE, SEMESTRE, ANO)
     // =========================================================
     function loadPriceHistory() {
       try {
@@ -665,6 +710,146 @@
       return true;
     }
 
+    function setHistRange(rangeKey) {
+      histTimeRange = rangeKey;
+      ["1d", "7d", "30d", "90d", "180d", "365d", "all"].forEach(k => {
+        const el = document.getElementById("range-" + k);
+        if (el) el.classList.toggle("active", k === rangeKey);
+      });
+      renderHistoryView();
+    }
+
+    function setHistGrouping(groupKey) {
+      histGrouping = groupKey;
+      ["raw", "day", "week", "month", "quarter", "semester", "year"].forEach(k => {
+        const el = document.getElementById("group-" + k);
+        if (el) el.classList.toggle("active", k === groupKey);
+      });
+      renderHistoryView();
+    }
+
+    // Filtra os pontos pela janela de tempo escolhida
+    function filterLogsByRange(logs) {
+      if (histTimeRange === "all") return logs;
+      const now = Date.now();
+      const daysMap = {
+        "1d": 1,
+        "7d": 7,
+        "30d": 30,
+        "90d": 90,
+        "180d": 180,
+        "365d": 365
+      };
+      const days = daysMap[histTimeRange] || 365;
+      const cutoff = now - days * 24 * 60 * 60 * 1000;
+      return logs.filter(l => l.ts >= cutoff);
+    }
+
+    // Calcula chave e rótulo do bucket temporal conforme a granularidade escolhida
+    function getBucketKeyAndLabel(ts, mode) {
+      const d = new Date(ts);
+      const pad = n => String(n).padStart(2, "0");
+      const year = d.getFullYear();
+      const month = d.getMonth(); // 0..11
+      const day = d.getDate();
+      const monthsPt = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
+
+      if (mode === "day") {
+        return {
+          key: `${year}-${pad(month + 1)}-${pad(day)}`,
+          label: `${pad(day)}/${pad(month + 1)}/${String(year).slice(-2)}`
+        };
+      }
+      if (mode === "week") {
+        // Início da semana (Segunda-feira)
+        const temp = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+        const dayOfWeek = (temp.getDay() + 6) % 7; // 0 = Seg, 6 = Dom
+        temp.setDate(temp.getDate() - dayOfWeek);
+        const wy = temp.getFullYear();
+        const wm = temp.getMonth() + 1;
+        const wd = temp.getDate();
+        return {
+          key: `${wy}-W-${pad(wm)}-${pad(wd)}`,
+          label: `Sem ${pad(wd)}/${pad(wm)}/${String(wy).slice(-2)}`
+        };
+      }
+      if (mode === "month") {
+        return {
+          key: `${year}-${pad(month + 1)}`,
+          label: `${monthsPt[month]}/${year}`
+        };
+      }
+      if (mode === "quarter") {
+        const q = Math.floor(month / 3) + 1;
+        return {
+          key: `${year}-Q${q}`,
+          label: `${q}º Trim/${year}`
+        };
+      }
+      if (mode === "semester") {
+        const sem = month < 6 ? 1 : 2;
+        return {
+          key: `${year}-S${sem}`,
+          label: `${sem}º Sem/${year}`
+        };
+      }
+      if (mode === "year") {
+        return {
+          key: `${year}`,
+          label: `Ano ${year}`
+        };
+      }
+      return {
+        key: String(ts),
+        label: formatDateTime(ts)
+      };
+    }
+
+    // Agrupa os registros de acordo com a granularidade selecionada
+    function aggregateLogs(logs, mode) {
+      if (mode === "raw") {
+        return logs.map(l => ({
+          label: formatDateTime(l.ts),
+          source: l.source || "Auto",
+          count: 1,
+          ahPrice: l.ahPrice,
+          minAh: l.ahPrice,
+          maxAh: l.ahPrice,
+          craftingCost: l.craftingCost,
+          profitCraft: l.profitCraft,
+          roiPct: l.roiPct,
+          goldPerConc: l.goldPerConc || 0
+        }));
+      }
+
+      const bucketsMap = new Map();
+      logs.forEach(l => {
+        const { key, label } = getBucketKeyAndLabel(l.ts, mode);
+        if (!bucketsMap.has(key)) {
+          bucketsMap.set(key, { key, label, items: [] });
+        }
+        bucketsMap.get(key).items.push(l);
+      });
+
+      const avg = arr => arr.reduce((a, b) => a + b, 0) / (arr.length || 1);
+
+      return Array.from(bucketsMap.values()).map(b => {
+        const ahs = b.items.map(x => x.ahPrice);
+        return {
+          label: b.label,
+          source: `${b.items.length} leituras`,
+          count: b.items.length,
+          ahPrice: round2(avg(ahs)),
+          minAh: round2(Math.min(...ahs)),
+          maxAh: round2(Math.max(...ahs)),
+          craftingCost: round2(avg(b.items.map(x => x.craftingCost))),
+          profitCraft: round2(avg(b.items.map(x => x.profitCraft))),
+          roiPct: round2(avg(b.items.map(x => x.roiPct))),
+          goldPerConc: round2(avg(b.items.map(x => x.goldPerConc || 0)))
+        };
+      });
+    }
+
     function openItemHistory(prof, itemId) {
       histSelectedProf = prof;
       histSelectedItemId = itemId;
@@ -742,10 +927,26 @@
       const item = items.find(i => i.id === Number(histSelectedItemId)) || items[0];
       if (!item) return;
 
-      const logs = (priceHistory[histSelectedProf] && priceHistory[histSelectedProf][item.id]) || [];
-      document.getElementById("histCountBadge").textContent = `${logs.length} leitura${logs.length === 1 ? "" : "s"} registrada${logs.length === 1 ? "" : "s"}`;
+      const rawLogs = (priceHistory[histSelectedProf] && priceHistory[histSelectedProf][item.id]) || [];
+      const filteredLogs = filterLogsByRange(rawLogs);
+      const groupedLogs = aggregateLogs(filteredLogs, histGrouping);
 
-      const ahVals = logs.map(l => l.ahPrice);
+      const groupNames = {
+        raw: "Leituras Brutas",
+        day: "Agrupado por Dia",
+        week: "Agrupado por Semana",
+        month: "Agrupado por Mês",
+        quarter: "Agrupado por Trimestre",
+        semester: "Agrupado por Semestre",
+        year: "Agrupado por Ano"
+      };
+
+      document.getElementById("histCountBadge").textContent =
+        `${groupedLogs.length} período(s) exibido(s) · (${filteredLogs.length} leituras no intervalo)`;
+      document.getElementById("histTableTitle").textContent =
+        `📋 Histórico — ${groupNames[histGrouping] || "Registros"}`;
+
+      const ahVals = filteredLogs.map(l => l.ahPrice);
       const minAh = ahVals.length ? Math.min(...ahVals) : 0;
       const maxAh = ahVals.length ? Math.max(...ahVals) : 0;
       const avgAh = ahVals.length ? ahVals.reduce((a, b) => a + b, 0) / ahVals.length : 0;
@@ -755,7 +956,7 @@
       const deltaColor = deltaPct > 0.05 ? "text-emerald-400" : (deltaPct < -0.05 ? "text-rose-400" : "text-slate-300");
       const deltaSign = deltaPct > 0 ? "+" : "";
 
-      const lastLog = logs[logs.length - 1] || { profitCraft: 0, goldPerConc: 0 };
+      const lastLog = filteredLogs[filteredLogs.length - 1] || { profitCraft: 0, goldPerConc: 0 };
 
       document.getElementById("histSummaryCards").innerHTML = `
         <div class="bg-slate-900/90 border border-slate-700 p-3.5 rounded-lg">
@@ -763,11 +964,11 @@
           <div class="text-xl font-bold text-sky-400 font-mono mt-1">${formatNum(lastAh, 2)} g</div>
         </div>
         <div class="bg-slate-900/90 border border-slate-700 p-3.5 rounded-lg">
-          <div class="text-[11px] uppercase text-slate-400 font-semibold">Mínima / Máxima AH</div>
+          <div class="text-[11px] uppercase text-slate-400 font-semibold">Mínima / Máxima no Período</div>
           <div class="text-sm font-bold text-slate-200 font-mono mt-1.5">${formatNum(minAh, 2)}g <span class="text-slate-500">→</span> ${formatNum(maxAh, 2)}g</div>
         </div>
         <div class="bg-slate-900/90 border border-slate-700 p-3.5 rounded-lg">
-          <div class="text-[11px] uppercase text-slate-400 font-semibold">Preço Médio AH</div>
+          <div class="text-[11px] uppercase text-slate-400 font-semibold">Preço Médio no Período</div>
           <div class="text-xl font-bold text-slate-200 font-mono mt-1">${formatNum(avgAh, 2)} g</div>
         </div>
         <div class="bg-slate-900/90 border border-slate-700 p-3.5 rounded-lg">
@@ -785,13 +986,13 @@
         historyChartInstance.destroy();
       }
 
-      const labels = logs.map(l => formatDateTime(l.ts));
+      const labels = groupedLogs.map(l => l.label);
       const datasets = [];
 
       if (chartVisibility.ahPrice) {
         datasets.push({
-          label: "Preço AH (g)",
-          data: logs.map(l => l.ahPrice),
+          label: histGrouping === "raw" ? "Preço AH (g)" : "Preço AH Médio (g)",
+          data: groupedLogs.map(l => l.ahPrice),
           borderColor: "#38bdf8",
           backgroundColor: "rgba(56, 189, 248, 0.12)",
           borderWidth: 2.5,
@@ -804,7 +1005,7 @@
       if (chartVisibility.craftingCost) {
         datasets.push({
           label: "Custo de Craft (g)",
-          data: logs.map(l => l.craftingCost),
+          data: groupedLogs.map(l => l.craftingCost),
           borderColor: "#fb7185",
           backgroundColor: "rgba(251, 113, 133, 0.1)",
           borderDash: [5, 5],
@@ -818,7 +1019,7 @@
       if (chartVisibility.profitCraft) {
         datasets.push({
           label: "Lucro / Craft (g)",
-          data: logs.map(l => l.profitCraft),
+          data: groupedLogs.map(l => l.profitCraft),
           borderColor: "#4ade80",
           backgroundColor: "rgba(74, 222, 128, 0.1)",
           borderWidth: 2.5,
@@ -831,7 +1032,7 @@
       if (chartVisibility.goldPerConc) {
         datasets.push({
           label: "Gold / Concentração (g/conc)",
-          data: logs.map(l => l.goldPerConc),
+          data: groupedLogs.map(l => l.goldPerConc),
           borderColor: "#fbbf24",
           backgroundColor: "rgba(251, 191, 36, 0.15)",
           borderWidth: 2.5,
@@ -857,7 +1058,17 @@
               borderColor: "#334155",
               borderWidth: 1,
               titleColor: "#f8fafc",
-              bodyColor: "#e2e8f0"
+              bodyColor: "#e2e8f0",
+              callbacks: {
+                afterBody: function(context) {
+                  const idx = context[0]?.dataIndex;
+                  const g = groupedLogs[idx];
+                  if (g && g.count > 1) {
+                    return [`Amostras no período: ${g.count}`, `Mín AH: ${formatNum(g.minAh, 2)}g | Máx AH: ${formatNum(g.maxAh, 2)}g`];
+                  }
+                  return [];
+                }
+              }
             }
           },
           scales: {
@@ -886,15 +1097,17 @@
       });
 
       const tbody = document.getElementById("histLogTableBody");
-      tbody.innerHTML = [...logs].reverse().map(l => {
+      tbody.innerHTML = [...groupedLogs].reverse().map(l => {
         const pClass = l.profitCraft >= 0 ? "positive" : "negative";
+        const minMaxText = l.count > 1 ? `${formatNum(l.minAh, 2)}g / ${formatNum(l.maxAh, 2)}g` : "—";
         return `
           <tr class="hover:bg-slate-800/50 transition">
-            <td class="py-2 px-3 font-mono text-slate-300">${formatDateTime(l.ts)}</td>
+            <td class="py-2 px-3 font-mono text-slate-200 font-semibold">${l.label}</td>
             <td class="py-2 px-2">
-              <span class="px-2 py-0.5 text-[10px] rounded-full bg-slate-800 border border-slate-700 text-slate-300 font-semibold">${l.source || "Auto"}</span>
+              <span class="px-2 py-0.5 text-[10px] rounded-full bg-slate-800 border border-slate-700 text-slate-300 font-semibold">${l.source}</span>
             </td>
             <td class="py-2 px-2 text-right font-mono text-sky-400 font-semibold">${formatNum(l.ahPrice, 2)} g</td>
+            <td class="py-2 px-2 text-right font-mono text-slate-400 text-xs">${minMaxText}</td>
             <td class="py-2 px-2 text-right font-mono text-slate-300">${formatNum(l.craftingCost, 1)} g</td>
             <td class="py-2 px-2 text-right font-mono ${pClass}">${formatNum(l.profitCraft, 1)} g</td>
             <td class="py-2 px-2 text-right font-mono ${pClass}">${formatNum(l.roiPct, 1)}%</td>
