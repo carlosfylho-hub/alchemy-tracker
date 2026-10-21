@@ -119,9 +119,9 @@
       </div>
     </div>
 
-    <!-- Barra de Atributos e Ações Globais -->
+    <!-- Barra de Atributos e Ações Globais (Sem Refund Conc redundante) -->
     <div id="profControlsBar" class="card p-4 shadow-lg flex flex-wrap items-center justify-between gap-4">
-      <div class="flex flex-wrap items-center gap-4">
+      <div class="flex flex-wrap items-center gap-5">
         <div class="flex flex-col">
           <label class="text-[11px] font-semibold text-slate-400 uppercase">Resourcefulness %</label>
           <div class="flex items-center gap-1 mt-1">
@@ -142,14 +142,6 @@
           <label class="text-[11px] font-semibold text-amber-400 uppercase">Engenhosidade %</label>
           <div class="flex items-center gap-1 mt-1">
             <input id="ingInput" type="number" step="0.1" class="w-16 text-sm text-amber-400 border-amber-500/50" oninput="updateProfAttr('ing', this.value)" />
-            <span class="text-slate-400 font-bold">%</span>
-          </div>
-        </div>
-
-        <div class="flex flex-col">
-          <label class="text-[11px] font-semibold text-amber-400 uppercase">Refund Conc %</label>
-          <div class="flex items-center gap-1 mt-1">
-            <input id="refundInput" type="number" step="1" class="w-16 text-sm text-amber-400 border-amber-500/50" oninput="updateProfAttr('refund', this.value)" />
             <span class="text-slate-400 font-bold">%</span>
           </div>
         </div>
@@ -359,23 +351,21 @@
     const STORAGE_KEY = "kaychak_conc_complete_v5";
     const HISTORY_STORAGE_KEY = "kaychak_price_history_v1";
     const SHEET_ID = "1V5Yxez_-nuPsvmtJLstYL61WhXU_sPNnPh8zxrnVE5k";
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz_placeholder/exec";
     const MAX_HISTORY_PER_ITEM = 500;
 
     let currentTab = "alchemy";
     let lastProfTab = "alchemy";
-    let saleChannel = "ah"; // 'ah' (5% fee) ou 'direct' (0% fee)
+    let saleChannel = "ah";
     let smartFilters = { onlyProfitable: false, onlyWithConc: false };
     let sortConfig = { key: null, asc: false };
 
     let profSettings = {
-      alchemy: { res: 36, mc: 37, ing: 29, refund: 70 },
-      jewelcrafting: { res: 17, mc: 26, ing: 25, refund: 70 },
-      enchanting: { res: 25, mc: 20, ing: 25, refund: 70 },
-      inscription: { res: 17.7, mc: 31, ing: 25, refund: 70 }
+      alchemy: { res: 36, mc: 37, ing: 29 },
+      jewelcrafting: { res: 17, mc: 26, ing: 25 },
+      enchanting: { res: 25, mc: 20, ing: 25 },
+      inscription: { res: 17.7, mc: 31, ing: 25 }
     };
 
-    // Estado de itens ignorados do Top 5 por profissão
     let ignoredItems = {
       alchemy: [],
       jewelcrafting: [],
@@ -383,7 +373,6 @@
       inscription: []
     };
 
-    // Base de dados das 4 profissões
     const dataAlchemy = [
       { id: 1, category: "LIGHT POTIONS", name: "Silvermoon Health Potion Tier 2", baseCost: 31.2, ahPrice: 69.9, baseYield: 5, mcFactor: 1.5333, concCost: 294 },
       { id: 2, category: "LIGHT POTIONS", name: "Lightfused Mana Potion Tier 2", baseCost: 35.1, ahPrice: 87.9, baseYield: 5, mcFactor: 1.5333, concCost: 294 },
@@ -512,7 +501,6 @@
       inscription: JSON.parse(JSON.stringify(dataInscription))
     };
 
-    // Estado do Histórico Granular
     let priceHistory = { alchemy: {}, jewelcrafting: {}, enchanting: {}, inscription: {} };
     let histSelectedProf = "alchemy";
     let histSelectedItemId = 1;
@@ -544,8 +532,8 @@
       return `${dd}/${mm} ${hh}:${mi}`;
     }
 
-    // Cálculo central de cada receita
-    function calcItem(item, resDec, mcDec, ingDec, refundDec = 0.70) {
+    // Cálculo central de cada receita usando apenas Resourcefulness, Multicraft e Engenhosidade
+    function calcItem(item, resDec, mcDec, ingDec) {
       const craftingCost = item.baseCost * (1 - resDec * 0.30);
       const expectedItems = item.baseYield * (1 + mcDec * item.mcFactor);
       const feeFactor = saleChannel === "direct" ? 1.0 : 0.95;
@@ -553,7 +541,8 @@
       const profitCraft = avgValueCraft - craftingCost;
       const roiPct = craftingCost > 0 ? (profitCraft / craftingCost) * 100 : 0;
 
-      const effectiveConcCost = item.concCost > 0 ? item.concCost * (1 - ingDec * refundDec) : 0;
+      // Engenhosidade reduz diretamente o custo efetivo de concentração (1 - ingDec * 0.30)
+      const effectiveConcCost = item.concCost > 0 ? item.concCost * (1 - ingDec * 0.30) : 0;
       const goldPerConc = effectiveConcCost > 0 ? profitCraft / effectiveConcCost : null;
       const profitPer1000Conc = effectiveConcCost > 0 ? (1000 / effectiveConcCost) * profitCraft : null;
       const exactCrafts1000 = effectiveConcCost > 0 ? Math.floor(1000 / effectiveConcCost) : 0;
@@ -615,7 +604,6 @@
       document.getElementById("resInput").value = s.res;
       document.getElementById("mcInput").value = s.mc;
       document.getElementById("ingInput").value = s.ing;
-      document.getElementById("refundInput").value = s.refund !== undefined ? s.refund : 70;
       document.getElementById("saleChannelSelect").value = saleChannel;
     }
 
@@ -677,7 +665,11 @@
           const saved = JSON.parse(raw);
           if (saved.profSettings) {
             for (const p in saved.profSettings) {
-              profSettings[p] = { ...profSettings[p], ...saved.profSettings[p] };
+              profSettings[p] = {
+                res: saved.profSettings[p].res ?? profSettings[p].res,
+                mc: saved.profSettings[p].mc ?? profSettings[p].mc,
+                ing: saved.profSettings[p].ing ?? profSettings[p].ing
+              };
             }
           }
           if (saved.saleChannel) saleChannel = saved.saleChannel;
@@ -805,11 +797,10 @@
         priceHistory[profKey][item.id] = [];
       }
 
-      // Evita gravar leituras com preço AH zerado vindas de testes de planilha vazia
       if (!force && Number(item.ahPrice) <= 0) return;
 
       const s = profSettings[profKey];
-      const c = calcItem(item, s.res / 100, s.mc / 100, s.ing / 100, (s.refund || 70) / 100);
+      const c = calcItem(item, s.res / 100, s.mc / 100, s.ing / 100);
       const arr = priceHistory[profKey][item.id];
       const last = arr[arr.length - 1];
 
@@ -1077,7 +1068,7 @@
       document.getElementById("histCountBadge").textContent = `${groupedLogs.length} período(s) exibido(s) · (${filteredLogs.length} leituras no intervalo)`;
 
       const s = profSettings[histSelectedProf];
-      const currentCalc = calcItem(item, s.res / 100, s.mc / 100, s.ing / 100, (s.refund || 70) / 100);
+      const currentCalc = calcItem(item, s.res / 100, s.mc / 100, s.ing / 100);
 
       const ahPrices = filteredLogs.map(l => l.ahPrice);
       const minAh = ahPrices.length ? Math.min(...ahPrices) : currentCalc.ahPrice;
@@ -1098,7 +1089,6 @@
 
       document.getElementById("statCurGoldConc").textContent = currentCalc.goldPerConc !== null ? `${formatNum(currentCalc.goldPerConc, 2)} g` : "—";
 
-      // Renderiza Gráfico Chart.js
       const ctx = document.getElementById("priceHistoryChart").getContext("2d");
       if (historyChartInstance) {
         historyChartInstance.destroy();
@@ -1188,7 +1178,6 @@
         }
       });
 
-      // Renderiza Tabela de Leituras com botão de exclusão manual
       const tbody = document.getElementById("histLogTableBody");
       tbody.innerHTML = [...groupedLogs].reverse().map(l => {
         const pClass = l.profitCraft >= 0 ? "positive" : "negative";
@@ -1234,10 +1223,10 @@
     function resetDefaults() {
       if (!confirm("Restaurar preços e atributos padrão de todas as profissões? (Seu histórico de gráficos será mantido)")) return;
       profSettings = {
-        alchemy: { res: 36, mc: 37, ing: 29, refund: 70 },
-        jewelcrafting: { res: 17, mc: 26, ing: 25, refund: 70 },
-        enchanting: { res: 25, mc: 20, ing: 25, refund: 70 },
-        inscription: { res: 17.7, mc: 31, ing: 25, refund: 70 }
+        alchemy: { res: 36, mc: 37, ing: 29 },
+        jewelcrafting: { res: 17, mc: 26, ing: 25 },
+        enchanting: { res: 25, mc: 20, ing: 25 },
+        inscription: { res: 17.7, mc: 31, ing: 25 }
       };
       state.alchemy = JSON.parse(JSON.stringify(dataAlchemy));
       state.jewelcrafting = JSON.parse(JSON.stringify(dataJewelcrafting));
@@ -1317,7 +1306,6 @@
             const sheetCraftingCost = numsAfter[0];
             const sheetAhPrice = numsAfter[2];
 
-            // Ignora sincronização se o preço AH na planilha estiver zerado (planilha apagada para teste)
             if (sheetAhPrice <= 0) continue;
 
             if (sheetCraftingCost > 0) {
@@ -1440,10 +1428,9 @@
       const resDec = s.res / 100;
       const mcDec = s.mc / 100;
       const ingDec = s.ing / 100;
-      const refundDec = (s.refund !== undefined ? s.refund : 70) / 100;
 
       const items = state[prof];
-      const calculatedItems = items.map(item => calcItem(item, resDec, mcDec, ingDec, refundDec));
+      const calculatedItems = items.map(item => calcItem(item, resDec, mcDec, ingDec));
 
       renderTop5(calculatedItems, prof);
 
