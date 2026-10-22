@@ -276,13 +276,6 @@ Este projeto é pessoal/privado. Use por sua conta e risco.
 
 ---
 
-## 📧 Contato
-
-**Criador:** Carlos
-**Quando quebra:** Chama o Claude 🤖
-
----
-
 ## 🚀 Roadmap
 
 - [ ] Exportar dados em CSV/Excel
@@ -294,5 +287,3 @@ Este projeto é pessoal/privado. Use por sua conta e risco.
 ---
 
 **Última atualização:** 21/10/2026
-
-⭐ Se este projeto te ajuda, considere dar uma star no repositório!
