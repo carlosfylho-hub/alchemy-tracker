@@ -546,7 +546,9 @@
       { id: 16, category: "FLASKS", name: "Flask of the Shattered Sun Tier 2", baseCost: 588.5, ahPrice: 429.0, baseYield: 2, mcFactor: 1.533, concCost: 394 },
       { id: 17, category: "FLASKS", name: "Flask of the Blood Knights Tier 2", baseCost: 391.2, ahPrice: 389.9, baseYield: 2, mcFactor: 1.533, concCost: 394 },
       { id: 18, category: "FLASKS", name: "Flask of the Magisters Tier 2", baseCost: 365.8, ahPrice: 356.4, baseYield: 2, mcFactor: 1.533, concCost: 394 },
-      { id: 19, category: "FLASKS", name: "Flask of Thalassian Resistance Tier 2", baseCost: 524.3, ahPrice: 381.0, baseYield: 2, mcFactor: 1.533, concCost: 394 }
+      { id: 19, category: "FLASKS", name: "Flask of Thalassian Resistance Tier 2", baseCost: 524.3, ahPrice: 381.0, baseYield: 2, mcFactor: 1.533, concCost: 394 },
+      { id: 20, category: "LIGHT POTIONS", name: "Concentrated Silvermoon Health Potion Tier 2", baseCost: 117.0, ahPrice: 128.82, baseYield: 5, mcFactor: 1.5333, concCost: 294 },
+      { id: 21, category: "FLASKS", name: "Vicious Thalassian Flask of Honor", baseCost: 142.8, ahPrice: 29.98, baseYield: 2, mcFactor: 1.533, concCost: 394 }
     ];
 
     const dataJewelcrafting = [
@@ -616,7 +618,8 @@
       { id: 236, category: "WEAPONS", name: "Enchant Weapon - Worldsoul Aegis Tier 2", baseCost: 647.5, ahPrice: 355.14, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
       { id: 237, category: "RINGS", name: "Enchant Ring - Zul'jin's Mastery Tier 2", baseCost: 322.1, ahPrice: 518.99, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
       { id: 238, category: "WEAPONS", name: "Enchant Weapon - Worldsoul Cradle Tier 2", baseCost: 647.5, ahPrice: 1300.62, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
-      { id: 239, category: "WEAPONS", name: "Enchant Weapon - Worldsoul Tenacity Tier 2", baseCost: 647.5, ahPrice: 878.18, baseYield: 1.0, mcFactor: 1.2, concCost: 0 }
+      { id: 239, category: "WEAPONS", name: "Enchant Weapon - Worldsoul Tenacity Tier 2", baseCost: 647.5, ahPrice: 878.18, baseYield: 1.0, mcFactor: 1.2, concCost: 0 },
+      { id: 240, category: "WEAPONS", name: "Enchant Weapon - Rite of the Hash'ey Tier 2", baseCost: 576.3, ahPrice: 921.99, baseYield: 1.0, mcFactor: 1.2, concCost: 0 }
     ];
 
     const dataInscription = [
@@ -645,7 +648,9 @@
       { id: 323, category: "CONTRACTS", name: "Contract: The Silvermoon Court Tier 2", baseCost: 28.9, ahPrice: 70.0, baseYield: 2.0, mcFactor: 1.5, concCost: 0 },
       { id: 324, category: "MISSIVES", name: "Thalassian Missive of the Quickblade Tier 2", baseCost: 53.3, ahPrice: 111.88, baseYield: 2.0, mcFactor: 1.5, concCost: 0 },
       { id: 325, category: "CONTRACTS", name: "Contract: The Hara'ti Tier 2", baseCost: 28.5, ahPrice: 68.0, baseYield: 2.0, mcFactor: 1.5, concCost: 0 },
-      { id: 326, category: "CONTRACTS", name: "Contract: The Singularity Tier 2", baseCost: 27.3, ahPrice: 80.87, baseYield: 2.0, mcFactor: 1.5, concCost: 0 }
+      { id: 326, category: "CONTRACTS", name: "Contract: The Singularity Tier 2", baseCost: 27.3, ahPrice: 80.87, baseYield: 2.0, mcFactor: 1.5, concCost: 0 },
+      { id: 327, category: "CONTRACTS", name: "Contract: Zul'jarra's Forces Tier 2", baseCost: 68.5, ahPrice: 196.99, baseYield: 2.0, mcFactor: 1.5, concCost: 0 },
+      { id: 328, category: "SIGILS & RUNES", name: "Vantus Rune: Tides Tier 2", baseCost: 298.1, ahPrice: 349.99, baseYield: 1.0, mcFactor: 1.5, concCost: 0 }
     ];
 
     const DEFAULT_DATA = {
@@ -1656,7 +1661,7 @@
           const cell = row.c[i];
           if (!cell || cell.v === null || cell.v === undefined) continue;
           const valStr = String(cell.v).trim();
-          if (!valStr.includes("Tier 2")) continue;
+          if (!valStr.includes("Tier 2") && valStr !== "Vicious Thalassian Flask of Honor") continue;
 
           const c1 = row.c[i + 1], c2 = row.c[i + 2], c3 = row.c[i + 3], c4 = row.c[i + 4];
           if (!c1 || typeof c1.v !== "number" || !c2 || typeof c2.v !== "number" || !c3 || typeof c3.v !== "number" || !c4 || typeof c4.v !== "number") {
