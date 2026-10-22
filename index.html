@@ -166,6 +166,12 @@
       opacity: 1;
       box-shadow: 0 0 0 1px rgba(255,255,255,0.2);
     }
+
+    /* Scrollbars para tabelas com sticky header */
+    .custom-scroll::-webkit-scrollbar { width: 8px; height: 8px; }
+    .custom-scroll::-webkit-scrollbar-track { background: #0f172a; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    .custom-scroll::-webkit-scrollbar-thumb:hover { background: #475569; }
   </style>
 </head>
 
@@ -198,6 +204,8 @@
           class="tab-btn px-3 py-2 text-xs font-semibold rounded-lg text-slate-200">✨ Enchanting Conc</button>
         <button onclick="switchTab('inscription')" id="btn-inscription"
           class="tab-btn px-3 py-2 text-xs font-semibold rounded-lg text-slate-200">📜 Inscription Conc</button>
+        <button onclick="switchTab('global')" id="btn-global"
+          class="tab-btn px-3 py-2 text-xs font-semibold rounded-lg text-emerald-300 border border-emerald-500/30">🌐 Visão Global</button>
         <button onclick="switchTab('history')" id="btn-history"
           class="tab-btn px-3 py-2 text-xs font-semibold rounded-lg text-amber-300 border border-amber-500/30">📈 Histórico</button>
       </div>
@@ -268,12 +276,12 @@
     <div id="topRankingCard" class="card p-5 shadow-lg border-amber-500/40">
       <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
         <h2 class="text-base font-bold text-amber-400 uppercase tracking-wide flex items-center gap-2">
-          🏆 Top 5 Melhores Receitas (Gold / Concentração Efetivo)
+          🏆 Melhores Receitas (Gold / Concentração Efetivo)
         </h2>
         <div class="flex items-center gap-3">
           <button id="restoreIgnoredBtn" onclick="resetIgnoredItems()"
             class="hidden px-2.5 py-1 text-xs font-semibold bg-slate-800 hover:bg-amber-500/20 text-slate-300 hover:text-amber-300 rounded-lg border border-slate-700 transition"
-            title="Restaurar todos os crafts ocultos desta profissão">
+            title="Restaurar todos os crafts ocultos">
             🔄 Restaurar Ocultos
           </button>
           <span id="activeProfLabel" class="text-xs text-sky-400 font-bold uppercase">Alchemy Conc</span>
@@ -430,10 +438,10 @@
           <h3 id="histTableTitle" class="font-bold text-amber-400 tracking-wide text-sm uppercase">📋 Registro de Leituras / Períodos</h3>
           <span class="text-xs text-slate-400">Até 500 registros históricos por item</span>
         </div>
-        <div class="overflow-x-auto max-h-96">
+        <div class="overflow-x-auto max-h-[400px] custom-scroll">
           <table class="w-full text-xs md:text-sm text-left border-collapse">
             <thead>
-              <tr class="border-b border-slate-700 text-[11px] uppercase text-slate-400 bg-slate-900/40 sticky top-0">
+              <tr class="border-b border-slate-700 text-[11px] uppercase text-slate-400 bg-slate-900 sticky top-0 z-10 shadow-sm">
                 <th class="py-2.5 px-3">Período / Data</th>
                 <th class="py-2.5 px-2">Origem / Amostras</th>
                 <th class="py-2.5 px-2 text-right">Preço AH (Méd)</th>
@@ -466,7 +474,7 @@
 
   <script>
     // =================================================================================
-    // CONFIGURAÇÃO DO GOOGLE APPS SCRIPT
+    // CONFIGURAÇÃO DO GOOGLE APPS SCRIPT E SHEET ID
     // =================================================================================
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzeSm0A7gN_reEeTnsbBjQ1Ntz-rsS1f_rGhZj0zDgVjhs7W1XXfq9hNxGf9y-VKTgc/exec";
 
@@ -475,6 +483,8 @@
     const PREV_PRICES_KEY = STORAGE_KEY + "_prev";
     const HISTORY_KEY = STORAGE_KEY + "_history";
     const MAX_HISTORY_POINTS = 500;
+    
+    // Seu Sheet ID exato mantido:
     const SHEET_ID = "1vnEgXCF5t2PhOuhrQRC3rnqNo4qPS_OvIP2OCLnDh3Q";
 
     const SHEET_TABS = {
@@ -525,8 +535,18 @@
       inscription: { res: 17.7, mc: 31, ing: 25, refund: 70 }
     };
 
+    // META DE LUCRO POR CONCENTRAÇÃO (FLEXÍVEL POR PROFISSÃO)
+    const TARGET_GOLD_PER_CONC = {
+      alchemy: 1.5,
+      jewelcrafting: 1.5,
+      enchanting: 1.5,
+      inscription: 1.5,
+      global: 1.5
+    };
+
     let profSettings = JSON.parse(JSON.stringify(DEFAULT_PROF_SETTINGS));
 
+    // DADOS MANTIDOS IGUAIS
     const dataAlchemy = [
       { id: 1, category: "LIGHT POTIONS", name: "Silvermoon Health Potion Tier 2", baseCost: 31.2, ahPrice: 69.9, baseYield: 5, mcFactor: 1.5333, concCost: 294 },
       { id: 2, category: "LIGHT POTIONS", name: "Lightfused Mana Potion Tier 2", baseCost: 35.1, ahPrice: 87.9, baseYield: 5, mcFactor: 1.5333, concCost: 294 },
@@ -669,9 +689,6 @@
 
     let userEdits = {};
 
-    // =========================================================
-    // FUNÇÕES DE OCULTAR / RESTAURAR CRAFTS DO TOP 5
-    // =========================================================
     function toggleIgnoreTop5(prof, itemId) {
       if (!ignoredItems[prof]) ignoredItems[prof] = [];
       const idx = ignoredItems[prof].indexOf(itemId);
@@ -681,14 +698,18 @@
         ignoredItems[prof].splice(idx, 1);
       }
       saveState();
-      renderTop5();
+      renderAll();
     }
 
     function resetIgnoredItems() {
-      const prof = currentTab === "history" ? lastProfTab : currentTab;
-      ignoredItems[prof] = [];
+      if (currentTab === 'global') {
+        ignoredItems = { alchemy: [], jewelcrafting: [], enchanting: [], inscription: [] };
+      } else {
+        const prof = currentTab === "history" ? lastProfTab : currentTab;
+        ignoredItems[prof] = [];
+      }
       saveState();
-      renderTop5();
+      renderAll();
     }
 
     // =========================================================
@@ -1355,8 +1376,8 @@
       } catch (e) { }
     }
 
-    function getTrendArrow(item) {
-      const prof = currentTab === "history" ? histSelectedProf : currentTab;
+    function getTrendArrow(item, profKey) {
+      const prof = profKey || (currentTab === "history" ? histSelectedProf : currentTab);
       const profPrev = previousPrices[prof];
       if (!profPrev) return '';
       const prev = profPrev[item.id];
@@ -1441,7 +1462,7 @@
     }
 
     function switchTab(tabKey) {
-      if (tabKey !== "history") {
+      if (tabKey !== "history" && tabKey !== "global") {
         lastProfTab = tabKey;
       }
       currentTab = tabKey;
@@ -1452,27 +1473,37 @@
         alchemy: "Alchemy Conc",
         jewelcrafting: "Jewelcrafting Conc",
         enchanting: "Enchanting Conc",
-        inscription: "Inscription Conc"
+        inscription: "Inscription Conc",
+        global: "Visão Global (Top por Profissão)"
       };
 
       const profControls = document.getElementById("profControlsCard");
       const topRanking = document.getElementById("topRankingCard");
       const tabContent = document.getElementById("tabContentContainer");
       const historyContent = document.getElementById("historyTabContainer");
+      const smartFiltersBar = document.getElementById("smartFiltersBar");
 
       if (tabKey === "history") {
         profControls.classList.add("hidden");
         topRanking.classList.add("hidden");
         tabContent.classList.add("hidden");
-        document.getElementById("smartFiltersBar").classList.add("hidden");
+        if(smartFiltersBar) smartFiltersBar.classList.add("hidden");
         historyContent.classList.remove("hidden");
         populateHistItemSelect();
         renderHistoryView();
+      } else if (tabKey === "global") {
+        profControls.classList.add("hidden");
+        topRanking.classList.remove("hidden");
+        tabContent.classList.remove("hidden");
+        if(smartFiltersBar) smartFiltersBar.classList.remove("hidden");
+        historyContent.classList.add("hidden");
+        document.getElementById("activeProfLabel").textContent = names[tabKey];
+        renderAll();
       } else {
         profControls.classList.remove("hidden");
         topRanking.classList.remove("hidden");
         tabContent.classList.remove("hidden");
-        document.getElementById("smartFiltersBar").classList.remove("hidden");
+        if(smartFiltersBar) smartFiltersBar.classList.remove("hidden");
         historyContent.classList.add("hidden");
         document.getElementById("activeProfLabel").textContent = names[tabKey];
         updateInputsFromState();
@@ -1492,26 +1523,27 @@
       const prof = currentTab === "history" ? lastProfTab : currentTab;
       profSettings[prof][attr] = parseFloat(val) || 0;
       saveState();
-      updateCalculatedValues();
+      renderAll();
     }
 
-    function updateItemField(id, field, val) {
-      const prof = currentTab === "history" ? lastProfTab : currentTab;
+    function updateItemField(profKey, id, field, val) {
       const num = parseFloat(val);
-      const item = state[prof].find(i => i.id === id);
+      const items = state[profKey];
+      if (!items) return;
+      const item = items.find(i => i.id === id);
       if (!item) return;
       item[field] = isNaN(num) ? 0 : num;
 
-      if (!userEdits[prof]) userEdits[prof] = {};
-      if (!userEdits[prof][id]) userEdits[prof][id] = {};
-      userEdits[prof][id][field] = item[field];
+      if (!userEdits[profKey]) userEdits[profKey] = {};
+      if (!userEdits[profKey][id]) userEdits[profKey][id] = {};
+      userEdits[profKey][id][field] = item[field];
 
-      if (recordHistoryEntry(prof, item, "Edição")) {
+      if (recordHistoryEntry(profKey, item, "Edição")) {
         savePriceHistory();
       }
 
       saveState();
-      updateCalculatedValues();
+      renderAll();
     }
 
     function formatNum(val, decimals = 1) {
@@ -1751,40 +1783,14 @@
       const goldPerConc = effectiveConcCost > 0 ? profitCraft / effectiveConcCost : null;
       const profitPer1000Conc = effectiveConcCost > 0 ? (1000 / effectiveConcCost) * profitCraft : null;
       const exactCrafts1000 = effectiveConcCost > 0 ? Math.floor(1000 / effectiveConcCost) : 0;
+      
+      let activeProfTarget = currentTab;
+      if (currentTab === 'history') activeProfTarget = histSelectedProf;
+      const profTargetGoldPerConc = TARGET_GOLD_PER_CONC[activeProfTarget] || 1.5;
+      const targetProfit = profTargetGoldPerConc * effectiveConcCost;
+      const targetAhPrice = expectedItems > 0 && (1 - ahTaxRate) > 0 ? (craftingCost + targetProfit) / (expectedItems * (1 - ahTaxRate)) : 0;
 
-      return { ...item, craftingCost, avgValueCraft, profitCraft, roiPct, effectiveConcCost, goldPerConc, profitPer1000Conc, exactCrafts1000 };
-    }
-
-    function updateCalculatedValues() {
-      const prof = currentTab === "history" ? lastProfTab : currentTab;
-      const s = profSettings[prof];
-      const resDec = s.res / 100, mcDec = s.mc / 100, ingDec = s.ing / 100, refundDec = (s.refund || 70) / 100;
-      const items = state[prof];
-
-      items.forEach(item => {
-        const c = calcItem(item, resDec, mcDec, ingDec, refundDec);
-        const prefix = "calc-" + item.id + "-";
-        const profitClass = c.profitCraft >= 0 ? "positive" : "negative";
-
-        const ccEl = document.getElementById(prefix + "cc");
-        const avEl = document.getElementById(prefix + "av");
-        const prEl = document.getElementById(prefix + "pr");
-        const roEl = document.getElementById(prefix + "roi");
-        const gcEl = document.getElementById(prefix + "gc");
-        const p1El = document.getElementById(prefix + "p1k");
-        const trEl = document.getElementById("trend-" + item.id);
-
-        if (ccEl) ccEl.textContent = formatNum(c.craftingCost, 1);
-        if (avEl) avEl.textContent = formatNum(c.avgValueCraft, 1);
-        if (prEl) { prEl.textContent = formatNum(c.profitCraft, 1); prEl.className = "py-2.5 px-2 text-right font-mono " + profitClass; }
-        if (roEl) { roEl.textContent = formatNum(c.roiPct, 1) + "%"; roEl.className = "py-2.5 px-2 text-right font-mono " + profitClass; }
-        if (gcEl) gcEl.textContent = c.goldPerConc !== null && c.goldPerConc > 0 ? formatNum(c.goldPerConc, 2) + " g" : "—";
-        if (p1El) p1El.innerHTML = c.profitPer1000Conc !== null && c.profitPer1000Conc > 0
-          ? `${formatNum(c.profitPer1000Conc, 0)} g <span class="text-[11px] text-slate-400">(~${c.exactCrafts1000}x)</span>` : "—";
-        if (trEl) trEl.innerHTML = getTrendArrow(item);
-      });
-
-      renderTop5();
+      return { ...item, craftingCost, avgValueCraft, profitCraft, roiPct, effectiveConcCost, goldPerConc, profitPer1000Conc, exactCrafts1000, targetAhPrice };
     }
 
     function toggleSmartFilter(key) {
@@ -1794,198 +1800,244 @@
       renderAll();
     }
 
-    function renderTop5() {
-      const prof = currentTab === "history" ? lastProfTab : currentTab;
-      const s = profSettings[prof];
-      const resDec = s.res / 100, mcDec = s.mc / 100, ingDec = s.ing / 100, refundDec = (s.refund || 70) / 100;
-      const items = state[prof];
-      const ignored = ignoredItems[prof] || [];
-
-      const calculatedItems = items.map(item => calcItem(item, resDec, mcDec, ingDec, refundDec));
-      const topContainer = document.getElementById("topRankingContainer");
-      const restoreBtn = document.getElementById("restoreIgnoredBtn");
-      const ignoredBar = document.getElementById("ignoredListBar");
-
-      // Atualiza botão e barra de itens ocultos
-      if (ignored.length > 0) {
-        restoreBtn.classList.remove("hidden");
-        restoreBtn.textContent = `🔄 Restaurar Ocultos (${ignored.length})`;
-        ignoredBar.classList.remove("hidden");
-
-        const chipsHtml = ignored.map(id => {
-          const it = items.find(x => x.id === id);
-          if (!it) return "";
-          const shortName = it.name.replace(/ Tier 2$/, "");
-          return `
-            <button onclick="toggleIgnoreTop5('${prof}', ${it.id})"
-              class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-slate-800/90 hover:bg-slate-700 text-slate-300 border border-slate-700 transition"
-              title="Clique para devolver ao Top 5">
-              <span>${shortName}</span>
-              <span class="text-emerald-400 font-bold">＋</span>
-            </button>
-          `;
-        }).join("");
-
-        ignoredBar.innerHTML = `<span class="text-slate-400 font-semibold">Ocultos do Top 5 (clique para reativar):</span> ${chipsHtml}`;
-      } else {
-        restoreBtn.classList.add("hidden");
-        ignoredBar.classList.add("hidden");
-        ignoredBar.innerHTML = "";
-      }
-
-      const ranked = calculatedItems
-        .filter(i => i.concCost > 0 && i.goldPerConc !== null && i.goldPerConc > 0 && !ignored.includes(i.id))
-        .sort((a, b) => b.goldPerConc - a.goldPerConc)
-        .slice(0, 5);
-
-      if (ranked.length === 0) {
-        topContainer.innerHTML = `
-          <div class="col-span-5 text-center py-4 text-sm text-slate-400 bg-slate-900/50 rounded-lg border border-slate-800">
-            Nenhuma receita disponível no ranking (preencha o custo de concentração nas caixas abaixo ou restaure os itens ocultos).
-          </div>`;
-      } else {
-        topContainer.innerHTML = ranked.map((r, idx) => `
-          <div class="bg-slate-900/90 border border-slate-700 p-3 rounded-lg flex flex-col justify-between relative group">
-            <div>
-              <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
-                <span class="font-bold text-amber-400">#${idx + 1} ${r.category}</span>
-                <div class="flex items-center gap-1.5">
-                  <button onclick="openItemHistory('${prof}', ${r.id})" class="text-xs text-sky-400 hover:text-sky-300" title="Ver gráfico de histórico">📊 Gráfico</button>
-                  <button onclick="toggleIgnoreTop5('${prof}', ${r.id})"
-                    class="w-5 h-5 rounded bg-slate-800 hover:bg-red-600/80 text-slate-400 hover:text-white flex items-center justify-center text-xs font-bold border border-slate-700 transition"
-                    title="Retirar da lista dos melhores (não vende na prática)">✕</button>
-                </div>
-              </div>
-              <div class="font-semibold text-slate-100 text-sm leading-tight">${r.name}</div>
-            </div>
-            <div class="mt-3 pt-2 border-t border-slate-800 flex justify-between items-baseline">
-              <span class="text-xs text-slate-400">Gold/Conc:</span>
-              <span class="text-base font-mono gold-conc">${formatNum(r.goldPerConc, 2)}g</span>
-            </div>
-            <div class="flex justify-between items-baseline text-xs mt-1">
-              <span class="text-slate-400">1000 Conc (~${r.exactCrafts1000}x):</span>
-              <span class="font-mono text-emerald-400 font-semibold">${formatNum(r.profitPer1000Conc, 0)}g</span>
-            </div>
-          </div>`).join("");
-      }
-    }
-
     function renderAll() {
       if (currentTab === "history") {
         renderHistoryView();
         return;
       }
 
-      const s = profSettings[currentTab];
-      const resDec = s.res / 100, mcDec = s.mc / 100, ingDec = s.ing / 100, refundDec = (s.refund || 70) / 100;
-      const items = state[currentTab];
-      const calculatedItems = items.map(item => calcItem(item, resDec, mcDec, ingDec, refundDec));
+      let visibleItems = [];
+      let profKeys = currentTab === "global" ? ['alchemy', 'jewelcrafting', 'enchanting', 'inscription'] : [currentTab];
 
-      renderTop5();
+      let allCalculated = [];
 
-      const searchQuery = (document.getElementById("searchFilterInput")?.value || "").trim().toLowerCase();
-      const visibleItems = calculatedItems.filter(item => {
-        if (smartFilters.onlyProfitable && item.profitCraft <= 0) return false;
-        if (smartFilters.onlyWithConc && !(item.concCost > 0)) return false;
-        if (searchQuery && !item.name.toLowerCase().includes(searchQuery) && !item.category.toLowerCase().includes(searchQuery)) return false;
-        return true;
+      profKeys.forEach(p => {
+          const s = profSettings[p];
+          const resDec = s.res / 100, mcDec = s.mc / 100, ingDec = s.ing / 100, refundDec = (s.refund || 70) / 100;
+          const items = state[p] || [];
+          const calculated = items.map(item => ({ ...calcItem(item, resDec, mcDec, ingDec, refundDec), profKey: p }));
+          allCalculated = allCalculated.concat(calculated);
       });
 
-      const categories = [...new Set(visibleItems.map(i => i.category))];
+      // Top Ranking
+      const topContainer = document.getElementById("topRankingContainer");
+      const restoreBtn = document.getElementById("restoreIgnoredBtn");
+      const ignoredBar = document.getElementById("ignoredListBar");
+
+      let ignoredGlobal = [];
+      if (currentTab === "global") {
+          profKeys.forEach(p => { ignoredGlobal = ignoredGlobal.concat(ignoredItems[p] || []); });
+      } else {
+          ignoredGlobal = ignoredItems[currentTab] || [];
+      }
+
+      if (ignoredGlobal.length > 0) {
+          restoreBtn.classList.remove("hidden");
+          restoreBtn.textContent = `🔄 Restaurar Ocultos (${ignoredGlobal.length})`;
+          ignoredBar.classList.remove("hidden");
+          
+          const chipsHtml = ignoredGlobal.map(id => {
+              let it = null; let pKey = null;
+              profKeys.forEach(p => {
+                  const found = (state[p] || []).find(x => x.id === id);
+                  if (found) { it = found; pKey = p; }
+              });
+              if (!it) return "";
+              const shortName = it.name.replace(/ Tier 2$/, "");
+              return `<button onclick="toggleIgnoreTop5('${pKey}', ${it.id})" class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-slate-800/90 hover:bg-slate-700 text-slate-300 border border-slate-700 transition" title="Clique para devolver ao Top"><span>${shortName}</span><span class="text-emerald-400 font-bold">＋</span></button>`;
+          }).join("");
+          ignoredBar.innerHTML = `<span class="text-slate-400 font-semibold">Ocultos (clique para reativar):</span> ${chipsHtml}`;
+      } else {
+          restoreBtn.classList.add("hidden");
+          ignoredBar.classList.add("hidden");
+          ignoredBar.innerHTML = "";
+      }
+
+      let ranked = [];
+      if (currentTab === "global") {
+          let availableItems = allCalculated.filter(i => i.concCost > 0 && i.goldPerConc !== null && i.goldPerConc > 0 && !(ignoredItems[i.profKey] || []).includes(i.id));
+          
+          profKeys.forEach(p => {
+              let profItems = availableItems.filter(i => i.profKey === p).sort((a,b) => b.goldPerConc - a.goldPerConc);
+              if (profItems.length > 0) {
+                  ranked.push(profItems[0]);
+                  availableItems = availableItems.filter(i => i.id !== profItems[0].id);
+              }
+          });
+          
+          availableItems.sort((a,b) => b.goldPerConc - a.goldPerConc);
+          const needed = 8 - ranked.length;
+          if (needed > 0) {
+              ranked = ranked.concat(availableItems.slice(0, needed));
+          }
+          ranked.sort((a,b) => b.goldPerConc - a.goldPerConc);
+          topContainer.className = "grid grid-cols-1 md:grid-cols-4 gap-3";
+      } else {
+          ranked = allCalculated
+            .filter(i => i.concCost > 0 && i.goldPerConc !== null && i.goldPerConc > 0 && !ignoredGlobal.includes(i.id))
+            .sort((a, b) => b.goldPerConc - a.goldPerConc)
+            .slice(0, 5);
+          topContainer.className = "grid grid-cols-1 md:grid-cols-5 gap-3";
+      }
+
+      if (ranked.length === 0) {
+          topContainer.innerHTML = `<div class="col-span-5 text-center py-4 text-sm text-slate-400 bg-slate-900/50 rounded-lg border border-slate-800">Nenhuma receita disponível no ranking (preencha a concentração na tabela abaixo).</div>`;
+      } else {
+          topContainer.innerHTML = ranked.map((r, idx) => `
+            <div class="bg-slate-900/90 border border-slate-700 p-3 rounded-lg flex flex-col justify-between relative group">
+              <button onclick="toggleIgnoreTop5('${r.profKey}', ${r.id})" 
+                class="absolute top-2 right-2 w-5 h-5 bg-slate-800 hover:bg-red-900/80 text-slate-400 hover:text-white rounded-full flex items-center justify-center text-[10px] transition opacity-0 group-hover:opacity-100"
+                title="Ocultar este item do ranking">✕</button>
+              <div>
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1 pr-5">
+                  <span class="font-bold text-amber-400">#${idx + 1} ${r.category}</span>
+                  <div class="flex gap-2 items-center">
+                      <span class="text-[10px] font-bold uppercase bg-slate-800 px-1.5 py-0.5 rounded text-slate-300 border border-slate-700">${r.profKey.substring(0,3)}</span>
+                      <button onclick="openItemHistory('${r.profKey}', ${r.id})" class="text-xs text-sky-400 hover:text-sky-300" title="Ver gráfico">📊</button>
+                  </div>
+                </div>
+                <div class="font-semibold text-slate-100 text-sm leading-tight">${r.name}</div>
+              </div>
+              <div class="mt-3 pt-2 border-t border-slate-800 flex justify-between items-baseline">
+                <span class="text-xs text-slate-400">Gold/Conc:</span>
+                <span class="text-base font-mono gold-conc">${formatNum(r.goldPerConc, 2)}g</span>
+              </div>
+              <div class="flex justify-between items-baseline text-xs mt-1">
+                <span class="text-slate-400">1000 Conc (~${r.exactCrafts1000}x):</span>
+                <span class="font-mono text-emerald-400 font-semibold">${formatNum(r.profitPer1000Conc, 0)}g</span>
+              </div>
+            </div>
+          `).join("");
+      }
+
+      // Dynamic Tables
+      const searchQuery = (document.getElementById("searchFilterInput")?.value || "").trim().toLowerCase();
+      visibleItems = allCalculated.filter(item => {
+          if (smartFilters.onlyProfitable && item.profitCraft <= 0) return false;
+          if (smartFilters.onlyWithConc && !(item.concCost > 0)) return false;
+          if (searchQuery && !item.name.toLowerCase().includes(searchQuery) && !item.category.toLowerCase().includes(searchQuery)) return false;
+          return true;
+      });
+
       const container = document.getElementById("tabContentContainer");
       container.innerHTML = "";
 
       const taxLabel = ahTaxRate > 0 ? 'Taxa AH: 5% inclusa' : '🤝 Venda Direta (0% taxa)';
 
-      categories.forEach(cat => {
-        let catItems = visibleItems.filter(i => i.category === cat);
-
-        if (sortConfig.key) {
-          catItems.sort((a, b) => {
-            let va = a[sortConfig.key], vb = b[sortConfig.key];
-            if (va === null && vb === null) return 0;
-            if (va === null) return 1;
-            if (vb === null) return -1;
-            if (typeof va === 'string') {
-              return sortConfig.dir === 'asc' ? va.localeCompare(vb) : vb.localeCompare(va);
-            }
-            return sortConfig.dir === 'asc' ? va - vb : vb - va;
+      let groups = {};
+      if (currentTab === 'global') {
+          visibleItems.forEach(i => {
+              const gNames = { alchemy: "Alquimia", jewelcrafting: "Jewelcrafting", enchanting: "Enchanting", inscription: "Inscription" };
+              const g = gNames[i.profKey] || i.profKey;
+              if (!groups[g]) groups[g] = [];
+              groups[g].push(i);
           });
-        }
+      } else {
+          visibleItems.forEach(i => {
+              const g = i.category;
+              if (!groups[g]) groups[g] = [];
+              groups[g].push(i);
+          });
+      }
 
-        let rowsHtml = "";
+      for (let gName in groups) {
+          let catItems = groups[gName];
+          
+          if (sortConfig.key) {
+              catItems.sort((a, b) => {
+                  let va = a[sortConfig.key], vb = b[sortConfig.key];
+                  if (va === null && vb === null) return 0;
+                  if (va === null) return 1;
+                  if (vb === null) return -1;
+                  if (typeof va === 'string') return sortConfig.dir === 'asc' ? va.localeCompare(vb) : vb.localeCompare(va);
+                  return sortConfig.dir === 'asc' ? va - vb : vb - va;
+              });
+          }
 
-        catItems.forEach(item => {
-          const profitClass = item.profitCraft >= 0 ? "positive" : "negative";
-          const goldConcText = item.goldPerConc !== null && item.goldPerConc > 0 ? formatNum(item.goldPerConc, 2) + " g" : "—";
-          const profit1000Text = item.profitPer1000Conc !== null && item.profitPer1000Conc > 0
-            ? `${formatNum(item.profitPer1000Conc, 0)} g <span class="text-[11px] text-slate-400">(~${item.exactCrafts1000}x)</span>` : "—";
+          let rowsHtml = "";
+          catItems.forEach(item => {
+              const profitClass = item.profitCraft >= 0 ? "positive" : "negative";
+              const goldConcText = item.goldPerConc !== null && item.goldPerConc > 0 ? formatNum(item.goldPerConc, 2) + " g" : "—";
+              const profit1000Text = item.profitPer1000Conc !== null && item.profitPer1000Conc > 0
+                ? `${formatNum(item.profitPer1000Conc, 0)} g <span class="text-[11px] text-slate-400">(~${item.exactCrafts1000}x)</span>`
+                : "—";
 
-          const searchName = encodeURIComponent(item.name.replace(/ Tier 2$/, ''));
-          const whLink = `https://www.wowhead.com/search?q=${searchName}`;
-          const trendHtml = getTrendArrow(item);
+              const searchName = encodeURIComponent(item.name.replace(/ Tier 2$/, ''));
+              const whLink = `https://www.wowhead.com/search?q=${searchName}`;
+              const trendHtml = getTrendArrow(item, item.profKey);
+              
+              let activeProfText = currentTab;
+              if (currentTab === 'history') activeProfText = histSelectedProf;
+              const displayTarget = TARGET_GOLD_PER_CONC[activeProfText] || 1.5;
+              const targetText = item.concCost > 0 ? `<div class="text-[9px] text-slate-400 mt-1 font-semibold tracking-wider" title="Preço de venda na AH necessário para atingir lucro de ${displayTarget}g por Concentração">ALVO (${displayTarget}G/C): <span class="text-emerald-400">${formatNum(item.targetAhPrice, 1)}g</span></div>` : "";
 
-          rowsHtml += `
-            <tr class="hover:bg-slate-800/60 transition">
-              <td class="py-2.5 px-3 font-medium text-slate-200 flex items-center justify-between gap-2">
-                <a href="${whLink}" target="_blank" rel="noopener" class="wh-link" title="Ver no Wowhead">${item.name}</a>
-                <button onclick="openItemHistory('${currentTab}', ${item.id})"
-                  class="px-1.5 py-0.5 text-xs bg-slate-800 hover:bg-slate-700 text-amber-300 rounded border border-slate-700 transition"
-                  title="Abrir gráfico de histórico deste item">📊</button>
-              </td>
-              <td id="calc-${item.id}-cc" class="py-2.5 px-2 text-right font-mono text-slate-300">${formatNum(item.craftingCost, 1)}</td>
-              <td id="calc-${item.id}-av" class="py-2.5 px-2 text-right font-mono text-slate-300">${formatNum(item.avgValueCraft, 1)}</td>
-              <td class="py-2.5 px-2 text-right">
-                <div class="inline-flex items-center gap-1 justify-end">
-                  <span id="trend-${item.id}" class="w-3">${trendHtml}</span>
-                  <input type="number" step="0.1" value="${item.ahPrice}" class="w-24 text-sm font-mono"
-                    onchange="updateItemField(${item.id}, 'ahPrice', this.value)" />
+              rowsHtml += `
+                <tr class="hover:bg-slate-800/60 transition group border-b border-slate-800/50">
+                  <td class="py-2.5 px-3 font-medium text-slate-200 flex items-center justify-between gap-2">
+                    <div class="flex flex-col">
+                        <a href="${whLink}" target="_blank" rel="noopener" class="wh-link" title="Ver no Wowhead">${item.name}</a>
+                        ${currentTab === 'global' ? `<span class="text-[9px] text-slate-500 uppercase mt-0.5 font-bold">${item.category}</span>` : ''}
+                    </div>
+                    <button onclick="openItemHistory('${item.profKey}', ${item.id})"
+                      class="px-1.5 py-0.5 text-xs bg-slate-800 hover:bg-slate-700 text-amber-300 rounded border border-slate-700 transition opacity-0 group-hover:opacity-100"
+                      title="Abrir gráfico de histórico deste item">📊</button>
+                  </td>
+                  <td class="py-2.5 px-2 text-right font-mono text-slate-300">${formatNum(item.craftingCost, 1)}</td>
+                  <td class="py-2.5 px-2 text-right font-mono text-slate-300">${formatNum(item.avgValueCraft, 1)}</td>
+                  <td class="py-2.5 px-2 text-right">
+                    <div class="inline-flex items-center gap-1 justify-end">
+                      <span id="trend-${item.id}" class="w-3">${trendHtml}</span>
+                      <input type="number" step="0.1" value="${item.ahPrice}" class="w-24 text-sm font-mono"
+                        onchange="updateItemField('${item.profKey}', ${item.id}, 'ahPrice', this.value)" />
+                    </div>
+                    ${targetText}
+                  </td>
+                  <td class="py-2.5 px-2 text-right font-mono ${profitClass}">${formatNum(item.profitCraft, 1)}</td>
+                  <td class="py-2.5 px-2 text-right font-mono ${profitClass}">${formatNum(item.roiPct, 1)}%</td>
+                  <td class="py-2.5 px-2 text-right bg-amber-500/5">
+                    <input type="number" step="1" min="0" value="${item.concCost || ''}" placeholder="0"
+                      class="w-20 text-sm font-mono conc-input"
+                      onchange="updateItemField('${item.profKey}', ${item.id}, 'concCost', this.value)" />
+                  </td>
+                  <td class="py-2.5 px-2 text-right font-mono gold-conc bg-amber-500/5">${goldConcText}</td>
+                  <td class="py-2.5 px-3 text-right font-mono text-emerald-400 font-semibold bg-amber-500/5">${profit1000Text}</td>
+                </tr>
+              `;
+          });
+
+          container.innerHTML += `
+            <div class="card overflow-hidden shadow-lg">
+              <div class="table-header px-4 py-3 border-b border-slate-700 flex justify-between items-center">
+                <h3 class="font-bold text-amber-400 tracking-wide text-sm uppercase">${gName}</h3>
+                <div class="flex items-center gap-3">
+                  ${sortConfig.key ? '<button onclick="clearSort()" class="text-[10px] text-slate-500 hover:text-slate-300 transition" title="Limpar ordenação">✕ Limpar ordem</button>' : ''}
+                  <span class="text-xs text-slate-400">${taxLabel}</span>
                 </div>
-              </td>
-              <td id="calc-${item.id}-pr" class="py-2.5 px-2 text-right font-mono ${profitClass}">${formatNum(item.profitCraft, 1)}</td>
-              <td id="calc-${item.id}-roi" class="py-2.5 px-2 text-right font-mono ${profitClass}">${formatNum(item.roiPct, 1)}%</td>
-              <td class="py-2.5 px-2 text-right bg-amber-500/5">
-                <input type="number" step="1" min="0" value="${item.concCost || ''}" placeholder="0"
-                  class="w-20 text-sm font-mono conc-input"
-                  onchange="updateItemField(${item.id}, 'concCost', this.value)" />
-              </td>
-              <td id="calc-${item.id}-gc" class="py-2.5 px-2 text-right font-mono gold-conc bg-amber-500/5">${goldConcText}</td>
-              <td id="calc-${item.id}-p1k" class="py-2.5 px-3 text-right font-mono text-emerald-400 font-semibold bg-amber-500/5">${profit1000Text}</td>
-            </tr>`;
-        });
-
-        container.innerHTML += `
-          <div class="card overflow-hidden shadow-lg">
-            <div class="table-header px-4 py-3 border-b border-slate-700 flex justify-between items-center">
-              <h3 class="font-bold text-amber-400 tracking-wide text-sm uppercase">${cat}</h3>
-              <div class="flex items-center gap-3">
-                ${sortConfig.key ? '<button onclick="clearSort()" class="text-[10px] text-slate-500 hover:text-slate-300 transition" title="Limpar ordenação">✕ Limpar ordem</button>' : ''}
-                <span class="text-xs text-slate-400">${taxLabel}</span>
+              </div>
+              <div class="overflow-x-auto max-h-[600px] custom-scroll">
+                <table class="w-full text-xs md:text-sm text-left border-collapse">
+                  <thead>
+                    <tr class="border-b border-slate-700 text-[11px] uppercase text-slate-400 bg-slate-900 sticky top-0 z-10 shadow-sm">
+                      <th class="py-2.5 px-3 sort-header bg-slate-900" onclick="sortBy('name')">Item (Tier 2)${sortIndicator('name')}</th>
+                      <th class="py-2.5 px-2 text-right sort-header bg-slate-900" onclick="sortBy('craftingCost')">Crafting Cost${sortIndicator('craftingCost')}</th>
+                      <th class="py-2.5 px-2 text-right sort-header bg-slate-900" onclick="sortBy('avgValueCraft')">Avg Value${sortIndicator('avgValueCraft')}</th>
+                      <th class="py-2.5 px-2 text-right sort-header bg-slate-900" onclick="sortBy('ahPrice')">AH Price${sortIndicator('ahPrice')}</th>
+                      <th class="py-2.5 px-2 text-right sort-header bg-slate-900" onclick="sortBy('profitCraft')">Profit / Craft${sortIndicator('profitCraft')}</th>
+                      <th class="py-2.5 px-2 text-right sort-header bg-slate-900" onclick="sortBy('roiPct')">ROI %${sortIndicator('roiPct')}</th>
+                      <th class="py-2.5 px-2 text-right text-amber-400 bg-amber-500/10 sort-header" onclick="sortBy('concCost')">Conc Cost${sortIndicator('concCost')}</th>
+                      <th class="py-2.5 px-2 text-right text-amber-400 bg-amber-500/10 sort-header" onclick="sortBy('goldPerConc')">Gold / Conc${sortIndicator('goldPerConc')}</th>
+                      <th class="py-2.5 px-3 text-right text-emerald-400 bg-amber-500/10 sort-header" onclick="sortBy('profitPer1000Conc')">Lucro (1000 Conc)${sortIndicator('profitPer1000Conc')}</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-800">${rowsHtml}</tbody>
+                </table>
               </div>
             </div>
-            <div class="overflow-x-auto">
-              <table class="w-full text-xs md:text-sm text-left border-collapse">
-                <thead>
-                  <tr class="border-b border-slate-700 text-[11px] uppercase text-slate-400 bg-slate-900/40">
-                    <th class="py-2.5 px-3 sort-header" onclick="sortBy('name')">Item (Tier 2)${sortIndicator('name')}</th>
-                    <th class="py-2.5 px-2 text-right sort-header" onclick="sortBy('craftingCost')">Crafting Cost${sortIndicator('craftingCost')}</th>
-                    <th class="py-2.5 px-2 text-right sort-header" onclick="sortBy('avgValueCraft')">Avg Value${sortIndicator('avgValueCraft')}</th>
-                    <th class="py-2.5 px-2 text-right sort-header" onclick="sortBy('ahPrice')">AH Price${sortIndicator('ahPrice')}</th>
-                    <th class="py-2.5 px-2 text-right sort-header" onclick="sortBy('profitCraft')">Profit / Craft${sortIndicator('profitCraft')}</th>
-                    <th class="py-2.5 px-2 text-right sort-header" onclick="sortBy('roiPct')">ROI %${sortIndicator('roiPct')}</th>
-                    <th class="py-2.5 px-2 text-right text-amber-400 bg-amber-500/10 sort-header" onclick="sortBy('concCost')">Conc Cost${sortIndicator('concCost')}</th>
-                    <th class="py-2.5 px-2 text-right text-amber-400 bg-amber-500/10 sort-header" onclick="sortBy('goldPerConc')">Gold / Conc${sortIndicator('goldPerConc')}</th>
-                    <th class="py-2.5 px-3 text-right text-emerald-400 bg-amber-500/10 sort-header" onclick="sortBy('profitPer1000Conc')">Lucro (1000 Conc)${sortIndicator('profitPer1000Conc')}</th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-800">${rowsHtml}</tbody>
-              </table>
-            </div>
-          </div>`;
-      });
+          `;
+      }
 
-      if (categories.length === 0) {
-        container.innerHTML = `<div class="card p-6 text-center text-sm text-slate-400">Nenhuma receita corresponde aos filtros atuais.</div>`;
+      if (Object.keys(groups).length === 0) {
+          container.innerHTML = `<div class="card p-6 text-center text-sm text-slate-400">Nenhuma receita corresponde aos filtros atuais.</div>`;
       }
 
       try { if (typeof $WowheadPower !== 'undefined') $WowheadPower.refreshLinks(); } catch (e) { }
@@ -1997,5 +2049,4 @@
     renderAll();
   </script>
 </body>
-
 </html>
