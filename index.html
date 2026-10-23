@@ -18,7 +18,8 @@
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
-    input[type="number"], select {
+    input[type="number"],
+    select {
       background-color: #1e293b;
       border: 1px solid #334155;
       color: #38bdf8;
@@ -32,7 +33,8 @@
       text-align: right;
     }
 
-    input[type="number"]:focus, select:focus {
+    input[type="number"]:focus,
+    select:focus {
       outline: none;
       border-color: #38bdf8;
       box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.25);
@@ -164,14 +166,27 @@
 
     .series-btn.on {
       opacity: 1;
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.2);
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2);
     }
 
     /* Scrollbars para tabelas com sticky header */
-    .custom-scroll::-webkit-scrollbar { width: 8px; height: 8px; }
-    .custom-scroll::-webkit-scrollbar-track { background: #0f172a; }
-    .custom-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-    .custom-scroll::-webkit-scrollbar-thumb:hover { background: #475569; }
+    .custom-scroll::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+
+    .custom-scroll::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
   </style>
 </head>
 
@@ -205,9 +220,11 @@
         <button onclick="switchTab('inscription')" id="btn-inscription"
           class="tab-btn px-3 py-2 text-xs font-semibold rounded-lg text-slate-200">📜 Inscription Conc</button>
         <button onclick="switchTab('global')" id="btn-global"
-          class="tab-btn px-3 py-2 text-xs font-semibold rounded-lg text-emerald-300 border border-emerald-500/30">🌐 Visão Global</button>
+          class="tab-btn px-3 py-2 text-xs font-semibold rounded-lg text-emerald-300 border border-emerald-500/30">🌐
+          Visão Global</button>
         <button onclick="switchTab('history')" id="btn-history"
-          class="tab-btn px-3 py-2 text-xs font-semibold rounded-lg text-amber-300 border border-amber-500/30">📈 Histórico</button>
+          class="tab-btn px-3 py-2 text-xs font-semibold rounded-lg text-amber-300 border border-amber-500/30">📈
+          Histórico</button>
       </div>
     </div>
 
@@ -289,17 +306,24 @@
       </div>
       <div id="topRankingContainer" class="grid grid-cols-1 md:grid-cols-5 gap-3"></div>
       <!-- Barra de itens ocultos -->
-      <div id="ignoredListBar" class="hidden mt-3 pt-3 border-t border-slate-800/80 flex flex-wrap items-center gap-2 text-xs"></div>
+      <div id="ignoredListBar"
+        class="hidden mt-3 pt-3 border-t border-slate-800/80 flex flex-wrap items-center gap-2 text-xs"></div>
     </div>
 
     <!-- Filtros Rápidos das Tabelas -->
     <div id="smartFiltersBar" class="card p-3.5 shadow-lg flex flex-wrap items-center justify-between gap-3">
       <div class="flex flex-wrap items-center gap-2">
         <span class="text-xs font-bold uppercase text-slate-400 mr-1">Filtros:</span>
-        <button id="flt-profitable" onclick="toggleSmartFilter('onlyProfitable')" class="period-btn px-3 py-1 text-xs rounded-lg bg-slate-800 border border-slate-700 text-slate-300">🟢 Apenas Lucrativos</button>
-        <button id="flt-withconc" onclick="toggleSmartFilter('onlyWithConc')" class="period-btn px-3 py-1 text-xs rounded-lg bg-slate-800 border border-slate-700 text-slate-300">⚡ Com Concentração</button>
+        <button id="flt-profitable" onclick="toggleSmartFilter('onlyProfitable')"
+          class="period-btn px-3 py-1 text-xs rounded-lg bg-slate-800 border border-slate-700 text-slate-300">🟢 Apenas
+          Lucrativos</button>
+        <button id="flt-withconc" onclick="toggleSmartFilter('onlyWithConc')"
+          class="period-btn px-3 py-1 text-xs rounded-lg bg-slate-800 border border-slate-700 text-slate-300">⚡ Com
+          Concentração</button>
       </div>
-      <input id="searchFilterInput" type="text" placeholder="🔍 Buscar receita..." class="bg-slate-800 border border-slate-700 text-slate-100 rounded-md py-1.5 px-3 text-xs w-56 focus:outline-none focus:border-sky-400" oninput="renderAll()" />
+      <input id="searchFilterInput" type="text" placeholder="🔍 Buscar receita..."
+        class="bg-slate-800 border border-slate-700 text-slate-100 rounded-md py-1.5 px-3 text-xs w-56 focus:outline-none focus:border-sky-400"
+        oninput="renderAll()" />
     </div>
 
     <!-- Dynamic Tables (Professions) -->
@@ -362,7 +386,8 @@
 
           <div class="flex flex-col">
             <label class="text-[11px] font-semibold text-slate-400 uppercase mb-1">3. Selecionar Craft (Tier 2)</label>
-            <select id="histItemSelect" class="text-sm py-2 px-3 w-full" onchange="onHistItemChange(this.value)"></select>
+            <select id="histItemSelect" class="text-sm py-2 px-3 w-full"
+              onchange="onHistItemChange(this.value)"></select>
           </div>
         </div>
 
@@ -372,13 +397,26 @@
           <div class="flex flex-col gap-1.5">
             <span class="text-[11px] font-bold uppercase text-slate-400">4. Janela de Período (Filtro de Tempo):</span>
             <div class="flex flex-wrap gap-1.5">
-              <button onclick="setHistRange('1d')" id="range-1d" class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Dia (24h)</button>
-              <button onclick="setHistRange('7d')" id="range-7d" class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Semana (7d)</button>
-              <button onclick="setHistRange('30d')" id="range-30d" class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Mês (30d)</button>
-              <button onclick="setHistRange('90d')" id="range-90d" class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Trimestre (90d)</button>
-              <button onclick="setHistRange('180d')" id="range-180d" class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Semestre (180d)</button>
-              <button onclick="setHistRange('365d')" id="range-365d" class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Ano (365d)</button>
-              <button onclick="setHistRange('all')" id="range-all" class="period-btn active px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Tudo</button>
+              <button onclick="setHistRange('1d')" id="range-1d"
+                class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Dia
+                (24h)</button>
+              <button onclick="setHistRange('7d')" id="range-7d"
+                class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Semana
+                (7d)</button>
+              <button onclick="setHistRange('30d')" id="range-30d"
+                class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Mês
+                (30d)</button>
+              <button onclick="setHistRange('90d')" id="range-90d"
+                class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Trimestre
+                (90d)</button>
+              <button onclick="setHistRange('180d')" id="range-180d"
+                class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Semestre
+                (180d)</button>
+              <button onclick="setHistRange('365d')" id="range-365d"
+                class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Ano
+                (365d)</button>
+              <button onclick="setHistRange('all')" id="range-all"
+                class="period-btn active px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Tudo</button>
             </div>
           </div>
 
@@ -386,13 +424,21 @@
           <div class="flex flex-col gap-1.5">
             <span class="text-[11px] font-bold uppercase text-slate-400">5. Agrupar Dados Por (Granularidade):</span>
             <div class="flex flex-wrap gap-1.5">
-              <button onclick="setHistGrouping('raw')" id="group-raw" class="period-btn active px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Bruto (Cada Leitura)</button>
-              <button onclick="setHistGrouping('day')" id="group-day" class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Dia</button>
-              <button onclick="setHistGrouping('week')" id="group-week" class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Semana</button>
-              <button onclick="setHistGrouping('month')" id="group-month" class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Mês</button>
-              <button onclick="setHistGrouping('quarter')" id="group-quarter" class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Trimestre</button>
-              <button onclick="setHistGrouping('semester')" id="group-semester" class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Semestre</button>
-              <button onclick="setHistGrouping('year')" id="group-year" class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Ano</button>
+              <button onclick="setHistGrouping('raw')" id="group-raw"
+                class="period-btn active px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Bruto
+                (Cada Leitura)</button>
+              <button onclick="setHistGrouping('day')" id="group-day"
+                class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Dia</button>
+              <button onclick="setHistGrouping('week')" id="group-week"
+                class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Semana</button>
+              <button onclick="setHistGrouping('month')" id="group-month"
+                class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Mês</button>
+              <button onclick="setHistGrouping('quarter')" id="group-quarter"
+                class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Trimestre</button>
+              <button onclick="setHistGrouping('semester')" id="group-semester"
+                class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Semestre</button>
+              <button onclick="setHistGrouping('year')" id="group-year"
+                class="period-btn px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700 text-slate-300">Ano</button>
             </div>
           </div>
         </div>
@@ -435,13 +481,15 @@
       <!-- Tabela de Log / Períodos Consolidados -->
       <div class="card overflow-hidden shadow-lg">
         <div class="table-header px-4 py-3 border-b border-slate-700 flex justify-between items-center">
-          <h3 id="histTableTitle" class="font-bold text-amber-400 tracking-wide text-sm uppercase">📋 Registro de Leituras / Períodos</h3>
+          <h3 id="histTableTitle" class="font-bold text-amber-400 tracking-wide text-sm uppercase">📋 Registro de
+            Leituras / Períodos</h3>
           <span class="text-xs text-slate-400">Até 500 registros históricos por item</span>
         </div>
         <div class="overflow-x-auto max-h-[400px] custom-scroll">
           <table class="w-full text-xs md:text-sm text-left border-collapse">
             <thead>
-              <tr class="border-b border-slate-700 text-[11px] uppercase text-slate-400 bg-slate-900 sticky top-0 z-10 shadow-sm">
+              <tr
+                class="border-b border-slate-700 text-[11px] uppercase text-slate-400 bg-slate-900 sticky top-0 z-10 shadow-sm">
                 <th class="py-2.5 px-3">Período / Data</th>
                 <th class="py-2.5 px-2">Origem / Amostras</th>
                 <th class="py-2.5 px-2 text-right">Preço AH (Méd)</th>
@@ -462,8 +510,10 @@
 
   <!-- Reset Confirmation Dialog -->
   <dialog id="resetDialog" class="p-6 max-w-sm shadow-xl">
-    <p class="text-sm mb-4">Tem certeza? Isso apaga todos os preços, itens ocultos e concentrações editados de <strong>todas as
-        profissões</strong> e volta aos valores padrão do código.</p>
+    <p class="text-sm mb-4">Tem certeza? Isso apaga todos os preços, itens ocultos e concentrações editados de
+      <strong>todas as
+        profissões</strong> e volta aos valores padrão do código.
+    </p>
     <div class="flex gap-3 justify-end">
       <button onclick="document.getElementById('resetDialog').close()"
         class="px-3 py-1.5 text-xs font-semibold bg-slate-700 rounded-lg text-white">Cancelar</button>
@@ -476,16 +526,48 @@
     // =================================================================================
     // CONFIGURAÇÃO DO GOOGLE APPS SCRIPT E SHEET ID
     // =================================================================================
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzeSm0A7gN_reEeTnsbBjQ1Ntz-rsS1f_rGhZj0zDgVjhs7W1XXfq9hNxGf9y-VKTgc/exec";
+    // URL do web app do Apps Script (tracker-backend.gs).
+    //
+    // A URL fixa abaixo e o deploy ANTIGO: ele grava/lê o estado na planilha
+    // velha (id 1vnEgXCF...). Por isso ela nao e mais a unica fonte: a ordem de
+    // precedencia e
+    //   1) ?script=<URL> na barra de enderecos (grava no localStorage e passa a valer)
+    //   2) localStorage (o ultimo ?script= usado)
+    //   3) SCRIPT_URL_DEFAULT (constante abaixo)
+    // Assim, publicar o web app novo nao exige editar este arquivo de novo:
+    // basta abrir uma vez o site com
+    //   https://<seu-pages>/index.html?script=https://script.google.com/macros/s/NOVA/exec
+    const SCRIPT_URL_DEFAULT = "https://script.google.com/macros/s/AKfycbzeSm0A7gN_reEeTnsbBjQ1Ntz-rsS1f_rGhZj0zDgVjhs7W1XXfq9hNxGf9y-VKTgc/exec";
+    const SCRIPT_URL_KEY = "kaychak_script_url";
+
+    function resolveScriptUrl() {
+      try {
+        const fromQuery = new URLSearchParams(window.location.search).get("script");
+        if (fromQuery) {
+          localStorage.setItem(SCRIPT_URL_KEY, fromQuery);
+          console.info("[apps script] SCRIPT_URL definida pela URL:", fromQuery);
+          return fromQuery;
+        }
+        const saved = localStorage.getItem(SCRIPT_URL_KEY);
+        if (saved) {
+          console.info("[apps script] SCRIPT_URL do localStorage:", saved);
+          return saved;
+        }
+      } catch (e) { /* localStorage bloqueado: cai no padrao */ }
+      return SCRIPT_URL_DEFAULT;
+    }
+
+    const SCRIPT_URL = resolveScriptUrl();
 
     const STORAGE_VERSION = "v8_cloud_backup";
     const STORAGE_KEY = "kaychak_conc_complete_" + STORAGE_VERSION;
     const PREV_PRICES_KEY = STORAGE_KEY + "_prev";
     const HISTORY_KEY = STORAGE_KEY + "_history";
     const MAX_HISTORY_POINTS = 500;
-    
-    // Seu Sheet ID exato mantido:
-    const SHEET_ID = "1vnEgXCF5t2PhOuhrQRC3rnqNo4qPS_OvIP2OCLnDh3Q";
+
+    // ATENCAO: o id da planilha mudou em 2026-10-23 (o antigo era 1vnEgXCF5t2...).
+    // Se a planilha mudar de novo, troque aqui E implante um novo web app para o SCRIPT_URL.
+    const SHEET_ID = "1_2N7NWcoPJ6QzYWMXNcJ9OtLNRTHQ0P7deSFEom5-wE";
 
     const SHEET_TABS = {
       alchemy: "Alchemy Conc",
@@ -752,6 +834,67 @@
       return added;
     }
 
+    /**
+     * Mescla histórico que vem do Apps Script agrupado por NOME de item
+     * (a planilha grava um ponto por hora; os ids numéricos só existem aqui).
+     * Converte nome -> id usando o estado local e ignora o que não existir.
+     */
+    function mergeHistoryByName(byName) {
+      let added = 0;
+      if (!byName || typeof byName !== "object") return added;
+
+      for (const prof in byName) {
+        if (!state[prof]) continue;
+        const bucket = byName[prof] || {};
+        for (const rawName in bucket) {
+          const inc = bucket[rawName];
+          if (!Array.isArray(inc) || !inc.length) continue;
+
+          const clean = String(rawName).toLowerCase().replace(/\s+/g, " ");
+          const item = state[prof].find(it => {
+            const itClean = it.name.toLowerCase().replace(/\s+/g, " ");
+            return itClean === clean || itClean.replace(" tier 2", "") === clean.replace(" tier 2", "");
+          });
+          if (!item) continue;
+
+          if (!priceHistory[prof]) priceHistory[prof] = {};
+          const arr = Array.isArray(priceHistory[prof][item.id]) ? priceHistory[prof][item.id] : [];
+          const seen = new Set(arr.map(p => p.ts));
+          inc.forEach(p => {
+            if (p && p.ts && !seen.has(p.ts)) { arr.push(p); seen.add(p.ts); added++; }
+          });
+          arr.sort((a, b) => a.ts - b.ts);
+          if (arr.length > MAX_HISTORY_POINTS) arr.splice(0, arr.length - MAX_HISTORY_POINTS);
+          priceHistory[prof][item.id] = arr;
+        }
+      }
+      if (added > 0) savePriceHistory();
+      return added;
+    }
+
+    /**
+     * Puxa o histórico horário gravado pelo trigger do Apps Script e mescla.
+     * Silencioso: roda ao abrir a página, sem alerta e sem sobrescrever nada.
+     */
+    async function syncHistoryFromCloud(dias) {
+      if (!SCRIPT_URL || SCRIPT_URL === "COLE_AQUI_A_URL_DO_WEB_APP_DO_APPS_SCRIPT") return 0;
+      try {
+        const resp = await fetch(SCRIPT_URL + "?historico=" + (dias || 7));
+        const json = await resp.json();
+        const byName = json && json.data && json.data.historicoPorNome;
+        if (!byName) return 0;
+        const added = mergeHistoryByName(byName);
+        if (added > 0) {
+          console.info("[historico] " + added + " ponto(s) importado(s) do Apps Script");
+          if (currentTab === "history") renderAll();
+        }
+        return added;
+      } catch (err) {
+        console.warn("Historico nao sincronizado:", err);
+        return 0;
+      }
+    }
+
     function migrateGeminiHistory() {
       try {
         const raw = localStorage.getItem(GEMINI_HISTORY_KEY);
@@ -821,9 +964,9 @@
       const last = arr[arr.length - 1];
 
       if (!force && last &&
-          Math.abs(last.ahPrice - newPoint.ahPrice) < 0.01 &&
-          Math.abs(last.craftingCost - newPoint.craftingCost) < 0.05 &&
-          Math.abs((last.goldPerConc || 0) - (newPoint.goldPerConc || 0)) < 0.01) {
+        Math.abs(last.ahPrice - newPoint.ahPrice) < 0.01 &&
+        Math.abs(last.craftingCost - newPoint.craftingCost) < 0.05 &&
+        Math.abs((last.goldPerConc || 0) - (newPoint.goldPerConc || 0)) < 0.01) {
         return false;
       }
 
@@ -1214,7 +1357,7 @@
               titleColor: "#f8fafc",
               bodyColor: "#e2e8f0",
               callbacks: {
-                afterBody: function(context) {
+                afterBody: function (context) {
                   const idx = context[0]?.dataIndex;
                   const g = groupedLogs[idx];
                   if (g && g.count > 1) {
@@ -1267,8 +1410,8 @@
             <td class="py-2 px-2 text-right font-mono ${pClass}">${formatNum(l.roiPct, 1)}%</td>
             <td class="py-2 px-3 text-right font-mono gold-conc">${l.goldPerConc > 0 ? formatNum(l.goldPerConc, 2) + " g" : "—"}</td>
             <td class="py-2 px-3 text-right">${histGrouping === "raw" && l.ts
-              ? `<button onclick="deleteHistoryPoint(${l.ts})" class="px-2 py-0.5 text-[11px] bg-rose-500/15 hover:bg-rose-500/30 text-rose-300 border border-rose-500/30 rounded-md transition font-semibold" title="Excluir este ponto">🗑️</button>`
-              : `<span class="text-[10px] text-slate-500" title="Use 'Bruto (Cada Leitura)' para excluir pontos">—</span>`}</td>
+            ? `<button onclick="deleteHistoryPoint(${l.ts})" class="px-2 py-0.5 text-[11px] bg-rose-500/15 hover:bg-rose-500/30 text-rose-300 border border-rose-500/30 rounded-md transition font-semibold" title="Excluir este ponto">🗑️</button>`
+            : `<span class="text-[10px] text-slate-500" title="Use 'Bruto (Cada Leitura)' para excluir pontos">—</span>`}</td>
           </tr>
         `;
       }).join("");
@@ -1487,7 +1630,7 @@
         profControls.classList.add("hidden");
         topRanking.classList.add("hidden");
         tabContent.classList.add("hidden");
-        if(smartFiltersBar) smartFiltersBar.classList.add("hidden");
+        if (smartFiltersBar) smartFiltersBar.classList.add("hidden");
         historyContent.classList.remove("hidden");
         populateHistItemSelect();
         renderHistoryView();
@@ -1495,7 +1638,7 @@
         profControls.classList.add("hidden");
         topRanking.classList.remove("hidden");
         tabContent.classList.remove("hidden");
-        if(smartFiltersBar) smartFiltersBar.classList.remove("hidden");
+        if (smartFiltersBar) smartFiltersBar.classList.remove("hidden");
         historyContent.classList.add("hidden");
         document.getElementById("activeProfLabel").textContent = names[tabKey];
         renderAll();
@@ -1503,7 +1646,7 @@
         profControls.classList.remove("hidden");
         topRanking.classList.remove("hidden");
         tabContent.classList.remove("hidden");
-        if(smartFiltersBar) smartFiltersBar.classList.remove("hidden");
+        if (smartFiltersBar) smartFiltersBar.classList.remove("hidden");
         historyContent.classList.add("hidden");
         document.getElementById("activeProfLabel").textContent = names[tabKey];
         updateInputsFromState();
@@ -1783,7 +1926,7 @@
       const goldPerConc = effectiveConcCost > 0 ? profitCraft / effectiveConcCost : null;
       const profitPer1000Conc = effectiveConcCost > 0 ? (1000 / effectiveConcCost) * profitCraft : null;
       const exactCrafts1000 = effectiveConcCost > 0 ? Math.floor(1000 / effectiveConcCost) : 0;
-      
+
       let activeProfTarget = currentTab;
       if (currentTab === 'history') activeProfTarget = histSelectedProf;
       const profTargetGoldPerConc = TARGET_GOLD_PER_CONC[activeProfTarget] || 1.5;
@@ -1812,11 +1955,11 @@
       let allCalculated = [];
 
       profKeys.forEach(p => {
-          const s = profSettings[p];
-          const resDec = s.res / 100, mcDec = s.mc / 100, ingDec = s.ing / 100, refundDec = (s.refund || 70) / 100;
-          const items = state[p] || [];
-          const calculated = items.map(item => ({ ...calcItem(item, resDec, mcDec, ingDec, refundDec), profKey: p }));
-          allCalculated = allCalculated.concat(calculated);
+        const s = profSettings[p];
+        const resDec = s.res / 100, mcDec = s.mc / 100, ingDec = s.ing / 100, refundDec = (s.refund || 70) / 100;
+        const items = state[p] || [];
+        const calculated = items.map(item => ({ ...calcItem(item, resDec, mcDec, ingDec, refundDec), profKey: p }));
+        allCalculated = allCalculated.concat(calculated);
       });
 
       // Top Ranking
@@ -1826,73 +1969,73 @@
 
       let ignoredGlobal = [];
       if (currentTab === "global") {
-          profKeys.forEach(p => { ignoredGlobal = ignoredGlobal.concat(ignoredItems[p] || []); });
+        profKeys.forEach(p => { ignoredGlobal = ignoredGlobal.concat(ignoredItems[p] || []); });
       } else {
-          ignoredGlobal = ignoredItems[currentTab] || [];
+        ignoredGlobal = ignoredItems[currentTab] || [];
       }
 
       if (ignoredGlobal.length > 0) {
-          restoreBtn.classList.remove("hidden");
-          restoreBtn.textContent = `🔄 Restaurar Ocultos (${ignoredGlobal.length})`;
-          ignoredBar.classList.remove("hidden");
-          
-          const chipsHtml = ignoredGlobal.map(id => {
-              let it = null; let pKey = null;
-              profKeys.forEach(p => {
-                  const found = (state[p] || []).find(x => x.id === id);
-                  if (found) { it = found; pKey = p; }
-              });
-              if (!it) return "";
-              const shortName = it.name.replace(/ Tier 2$/, "");
-              return `<button onclick="toggleIgnoreTop5('${pKey}', ${it.id})" class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-slate-800/90 hover:bg-slate-700 text-slate-300 border border-slate-700 transition" title="Clique para devolver ao Top"><span>${shortName}</span><span class="text-emerald-400 font-bold">＋</span></button>`;
-          }).join("");
-          ignoredBar.innerHTML = `<span class="text-slate-400 font-semibold">Ocultos (clique para reativar):</span> ${chipsHtml}`;
+        restoreBtn.classList.remove("hidden");
+        restoreBtn.textContent = `🔄 Restaurar Ocultos (${ignoredGlobal.length})`;
+        ignoredBar.classList.remove("hidden");
+
+        const chipsHtml = ignoredGlobal.map(id => {
+          let it = null; let pKey = null;
+          profKeys.forEach(p => {
+            const found = (state[p] || []).find(x => x.id === id);
+            if (found) { it = found; pKey = p; }
+          });
+          if (!it) return "";
+          const shortName = it.name.replace(/ Tier 2$/, "");
+          return `<button onclick="toggleIgnoreTop5('${pKey}', ${it.id})" class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-slate-800/90 hover:bg-slate-700 text-slate-300 border border-slate-700 transition" title="Clique para devolver ao Top"><span>${shortName}</span><span class="text-emerald-400 font-bold">＋</span></button>`;
+        }).join("");
+        ignoredBar.innerHTML = `<span class="text-slate-400 font-semibold">Ocultos (clique para reativar):</span> ${chipsHtml}`;
       } else {
-          restoreBtn.classList.add("hidden");
-          ignoredBar.classList.add("hidden");
-          ignoredBar.innerHTML = "";
+        restoreBtn.classList.add("hidden");
+        ignoredBar.classList.add("hidden");
+        ignoredBar.innerHTML = "";
       }
 
       let ranked = [];
       if (currentTab === "global") {
-          let availableItems = allCalculated.filter(i => i.concCost > 0 && i.goldPerConc !== null && i.goldPerConc > 0 && !(ignoredItems[i.profKey] || []).includes(i.id));
-          
-          profKeys.forEach(p => {
-              let profItems = availableItems.filter(i => i.profKey === p).sort((a,b) => b.goldPerConc - a.goldPerConc);
-              if (profItems.length > 0) {
-                  ranked.push(profItems[0]);
-                  availableItems = availableItems.filter(i => i.id !== profItems[0].id);
-              }
-          });
-          
-          availableItems.sort((a,b) => b.goldPerConc - a.goldPerConc);
-          const needed = 8 - ranked.length;
-          if (needed > 0) {
-              ranked = ranked.concat(availableItems.slice(0, needed));
+        let availableItems = allCalculated.filter(i => i.concCost > 0 && i.goldPerConc !== null && i.goldPerConc > 0 && !(ignoredItems[i.profKey] || []).includes(i.id));
+
+        profKeys.forEach(p => {
+          let profItems = availableItems.filter(i => i.profKey === p).sort((a, b) => b.goldPerConc - a.goldPerConc);
+          if (profItems.length > 0) {
+            ranked.push(profItems[0]);
+            availableItems = availableItems.filter(i => i.id !== profItems[0].id);
           }
-          ranked.sort((a,b) => b.goldPerConc - a.goldPerConc);
-          topContainer.className = "grid grid-cols-1 md:grid-cols-4 gap-3";
+        });
+
+        availableItems.sort((a, b) => b.goldPerConc - a.goldPerConc);
+        const needed = 8 - ranked.length;
+        if (needed > 0) {
+          ranked = ranked.concat(availableItems.slice(0, needed));
+        }
+        ranked.sort((a, b) => b.goldPerConc - a.goldPerConc);
+        topContainer.className = "grid grid-cols-1 md:grid-cols-4 gap-3";
       } else {
-          ranked = allCalculated
-            .filter(i => i.concCost > 0 && i.goldPerConc !== null && i.goldPerConc > 0 && !ignoredGlobal.includes(i.id))
-            .sort((a, b) => b.goldPerConc - a.goldPerConc)
-            .slice(0, 5);
-          topContainer.className = "grid grid-cols-1 md:grid-cols-5 gap-3";
+        ranked = allCalculated
+          .filter(i => i.concCost > 0 && i.goldPerConc !== null && i.goldPerConc > 0 && !ignoredGlobal.includes(i.id))
+          .sort((a, b) => b.goldPerConc - a.goldPerConc)
+          .slice(0, 5);
+        topContainer.className = "grid grid-cols-1 md:grid-cols-5 gap-3";
       }
 
       if (ranked.length === 0) {
-          topContainer.innerHTML = `<div class="col-span-5 text-center py-4 text-sm text-slate-400 bg-slate-900/50 rounded-lg border border-slate-800">Nenhuma receita disponível no ranking (preencha a concentração na tabela abaixo).</div>`;
+        topContainer.innerHTML = `<div class="col-span-5 text-center py-4 text-sm text-slate-400 bg-slate-900/50 rounded-lg border border-slate-800">Nenhuma receita disponível no ranking (preencha a concentração na tabela abaixo).</div>`;
       } else {
-          topContainer.innerHTML = ranked.map((r, idx) => `
+        topContainer.innerHTML = ranked.map((r, idx) => `
             <div class="bg-slate-900/90 border border-slate-700 p-3 rounded-lg flex flex-col justify-between relative group">
-              <button onclick="toggleIgnoreTop5('${r.profKey}', ${r.id})" 
+              <button onclick="toggleIgnoreTop5('${r.profKey}', ${r.id})"
                 class="absolute top-2 right-2 w-5 h-5 bg-slate-800 hover:bg-red-900/80 text-slate-400 hover:text-white rounded-full flex items-center justify-center text-[10px] transition opacity-0 group-hover:opacity-100"
                 title="Ocultar este item do ranking">✕</button>
               <div>
                 <div class="flex items-center justify-between text-xs text-slate-400 mb-1 pr-5">
                   <span class="font-bold text-amber-400">#${idx + 1} ${r.category}</span>
                   <div class="flex gap-2 items-center">
-                      <span class="text-[10px] font-bold uppercase bg-slate-800 px-1.5 py-0.5 rounded text-slate-300 border border-slate-700">${r.profKey.substring(0,3)}</span>
+                      <span class="text-[10px] font-bold uppercase bg-slate-800 px-1.5 py-0.5 rounded text-slate-300 border border-slate-700">${r.profKey.substring(0, 3)}</span>
                       <button onclick="openItemHistory('${r.profKey}', ${r.id})" class="text-xs text-sky-400 hover:text-sky-300" title="Ver gráfico">📊</button>
                   </div>
                 </div>
@@ -1913,10 +2056,10 @@
       // Dynamic Tables
       const searchQuery = (document.getElementById("searchFilterInput")?.value || "").trim().toLowerCase();
       visibleItems = allCalculated.filter(item => {
-          if (smartFilters.onlyProfitable && item.profitCraft <= 0) return false;
-          if (smartFilters.onlyWithConc && !(item.concCost > 0)) return false;
-          if (searchQuery && !item.name.toLowerCase().includes(searchQuery) && !item.category.toLowerCase().includes(searchQuery)) return false;
-          return true;
+        if (smartFilters.onlyProfitable && item.profitCraft <= 0) return false;
+        if (smartFilters.onlyWithConc && !(item.concCost > 0)) return false;
+        if (searchQuery && !item.name.toLowerCase().includes(searchQuery) && !item.category.toLowerCase().includes(searchQuery)) return false;
+        return true;
       });
 
       const container = document.getElementById("tabContentContainer");
@@ -1926,52 +2069,52 @@
 
       let groups = {};
       if (currentTab === 'global') {
-          visibleItems.forEach(i => {
-              const gNames = { alchemy: "Alquimia", jewelcrafting: "Jewelcrafting", enchanting: "Enchanting", inscription: "Inscription" };
-              const g = gNames[i.profKey] || i.profKey;
-              if (!groups[g]) groups[g] = [];
-              groups[g].push(i);
-          });
+        visibleItems.forEach(i => {
+          const gNames = { alchemy: "Alquimia", jewelcrafting: "Jewelcrafting", enchanting: "Enchanting", inscription: "Inscription" };
+          const g = gNames[i.profKey] || i.profKey;
+          if (!groups[g]) groups[g] = [];
+          groups[g].push(i);
+        });
       } else {
-          visibleItems.forEach(i => {
-              const g = i.category;
-              if (!groups[g]) groups[g] = [];
-              groups[g].push(i);
-          });
+        visibleItems.forEach(i => {
+          const g = i.category;
+          if (!groups[g]) groups[g] = [];
+          groups[g].push(i);
+        });
       }
 
       for (let gName in groups) {
-          let catItems = groups[gName];
-          
-          if (sortConfig.key) {
-              catItems.sort((a, b) => {
-                  let va = a[sortConfig.key], vb = b[sortConfig.key];
-                  if (va === null && vb === null) return 0;
-                  if (va === null) return 1;
-                  if (vb === null) return -1;
-                  if (typeof va === 'string') return sortConfig.dir === 'asc' ? va.localeCompare(vb) : vb.localeCompare(va);
-                  return sortConfig.dir === 'asc' ? va - vb : vb - va;
-              });
-          }
+        let catItems = groups[gName];
 
-          let rowsHtml = "";
-          catItems.forEach(item => {
-              const profitClass = item.profitCraft >= 0 ? "positive" : "negative";
-              const goldConcText = item.goldPerConc !== null && item.goldPerConc > 0 ? formatNum(item.goldPerConc, 2) + " g" : "—";
-              const profit1000Text = item.profitPer1000Conc !== null && item.profitPer1000Conc > 0
-                ? `${formatNum(item.profitPer1000Conc, 0)} g <span class="text-[11px] text-slate-400">(~${item.exactCrafts1000}x)</span>`
-                : "—";
+        if (sortConfig.key) {
+          catItems.sort((a, b) => {
+            let va = a[sortConfig.key], vb = b[sortConfig.key];
+            if (va === null && vb === null) return 0;
+            if (va === null) return 1;
+            if (vb === null) return -1;
+            if (typeof va === 'string') return sortConfig.dir === 'asc' ? va.localeCompare(vb) : vb.localeCompare(va);
+            return sortConfig.dir === 'asc' ? va - vb : vb - va;
+          });
+        }
 
-              const searchName = encodeURIComponent(item.name.replace(/ Tier 2$/, ''));
-              const whLink = `https://www.wowhead.com/search?q=${searchName}`;
-              const trendHtml = getTrendArrow(item, item.profKey);
-              
-              let activeProfText = currentTab;
-              if (currentTab === 'history') activeProfText = histSelectedProf;
-              const displayTarget = TARGET_GOLD_PER_CONC[activeProfText] || 1.5;
-              const targetText = item.concCost > 0 ? `<div class="text-[9px] text-slate-400 mt-1 font-semibold tracking-wider" title="Preço de venda na AH necessário para atingir lucro de ${displayTarget}g por Concentração">ALVO (${displayTarget}G/C): <span class="text-emerald-400">${formatNum(item.targetAhPrice, 1)}g</span></div>` : "";
+        let rowsHtml = "";
+        catItems.forEach(item => {
+          const profitClass = item.profitCraft >= 0 ? "positive" : "negative";
+          const goldConcText = item.goldPerConc !== null && item.goldPerConc > 0 ? formatNum(item.goldPerConc, 2) + " g" : "—";
+          const profit1000Text = item.profitPer1000Conc !== null && item.profitPer1000Conc > 0
+            ? `${formatNum(item.profitPer1000Conc, 0)} g <span class="text-[11px] text-slate-400">(~${item.exactCrafts1000}x)</span>`
+            : "—";
 
-              rowsHtml += `
+          const searchName = encodeURIComponent(item.name.replace(/ Tier 2$/, ''));
+          const whLink = `https://www.wowhead.com/search?q=${searchName}`;
+          const trendHtml = getTrendArrow(item, item.profKey);
+
+          let activeProfText = currentTab;
+          if (currentTab === 'history') activeProfText = histSelectedProf;
+          const displayTarget = TARGET_GOLD_PER_CONC[activeProfText] || 1.5;
+          const targetText = item.concCost > 0 ? `<div class="text-[9px] text-slate-400 mt-1 font-semibold tracking-wider" title="Preço de venda na AH necessário para atingir lucro de ${displayTarget}g por Concentração">ALVO (${displayTarget}G/C): <span class="text-emerald-400">${formatNum(item.targetAhPrice, 1)}g</span></div>` : "";
+
+          rowsHtml += `
                 <tr class="hover:bg-slate-800/60 transition group border-b border-slate-800/50">
                   <td class="py-2.5 px-3 font-medium text-slate-200 flex items-center justify-between gap-2">
                     <div class="flex flex-col">
@@ -2003,9 +2146,9 @@
                   <td class="py-2.5 px-3 text-right font-mono text-emerald-400 font-semibold bg-amber-500/5">${profit1000Text}</td>
                 </tr>
               `;
-          });
+        });
 
-          container.innerHTML += `
+        container.innerHTML += `
             <div class="card overflow-hidden shadow-lg">
               <div class="table-header px-4 py-3 border-b border-slate-700 flex justify-between items-center">
                 <h3 class="font-bold text-amber-400 tracking-wide text-sm uppercase">${gName}</h3>
@@ -2037,7 +2180,7 @@
       }
 
       if (Object.keys(groups).length === 0) {
-          container.innerHTML = `<div class="card p-6 text-center text-sm text-slate-400">Nenhuma receita corresponde aos filtros atuais.</div>`;
+        container.innerHTML = `<div class="card p-6 text-center text-sm text-slate-400">Nenhuma receita corresponde aos filtros atuais.</div>`;
       }
 
       try { if (typeof $WowheadPower !== 'undefined') $WowheadPower.refreshLinks(); } catch (e) { }
@@ -2047,6 +2190,9 @@
     loadSavedState();
     loadPriceHistory();
     renderAll();
+    // histórico horário gravado pelo Apps Script (silencioso, não bloqueia a tela)
+    syncHistoryFromCloud(7);
   </script>
 </body>
+
 </html>
