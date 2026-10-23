@@ -286,6 +286,10 @@
           class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white rounded-lg shadow transition flex items-center gap-1.5">
           🔄 Sincronizar Planilha
         </button>
+        <button onclick="toggleAutoRefresh()" id="btnAutoRefresh" title="Liga/desliga a atualização automática"
+          class="px-3 py-2 bg-emerald-900/60 hover:bg-emerald-900 text-xs font-semibold text-emerald-200 rounded-lg border border-emerald-700 transition">
+          ⏱ Auto: 1h
+        </button>
       </div>
     </div>
 
@@ -537,7 +541,9 @@
     // Assim, publicar o web app novo nao exige editar este arquivo de novo:
     // basta abrir uma vez o site com
     //   https://<seu-pages>/index.html?script=https://script.google.com/macros/s/NOVA/exec
-    const SCRIPT_URL_DEFAULT = "https://script.google.com/macros/s/AKfycbzeSm0A7gN_reEeTnsbBjQ1Ntz-rsS1f_rGhZj0zDgVjhs7W1XXfq9hNxGf9y-VKTgc/exec";
+    // Deploy de 2026-10-23 (planilha nova). O deploy antigo (AKfycbze...) aponta
+    // para o arquivo velho e nao deve voltar.
+    const SCRIPT_URL_DEFAULT = "https://script.google.com/macros/s/AKfycbzazeRXF0FWhWRDGGYqqSZKbH3l7srnDSX-SAo1NrDj0HFLWs2smTdSbbQ18j5CMH-c/exec";
     const SCRIPT_URL_KEY = "kaychak_script_url";
 
     function resolveScriptUrl() {
@@ -1876,10 +1882,12 @@
     }
 
     // ── SINCRONIZAÇÃO COM O GOOGLE SHEETS (TODAS AS ABAS) + GRAVAÇÃO AUTOMÁTICA NO HISTÓRICO ──
-    async function syncWithGoogleSheets() {
+    async function syncWithGoogleSheets(silent) {
       const statusEl = document.getElementById("syncStatus");
-      statusEl.textContent = "⏳ Sincronizando com a Planilha...";
-      statusEl.className = "text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full font-medium";
+      if (!silent) {
+        statusEl.textContent = "⏳ Sincronizando com a Planilha...";
+        statusEl.className = "text-xs text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full font-medium";
+      }
 
       savePreviousPrices();
       let totalUpdated = 0, totalRecorded = 0;
@@ -1902,10 +1910,21 @@
       if (currentTab === "history") renderHistoryView(); else renderAll();
 
       if (totalUpdated === 0) {
-        statusEl.textContent = "✗ Nenhum item sincronizado — verifique a planilha";
-        statusEl.className = "text-xs text-red-400 bg-red-400/10 px-2.5 py-1 rounded-full font-medium";
-        return;
+        if (!silent) {
+          statusEl.textContent = "✗ Nenhum item sincronizado — verifique a planilha";
+          statusEl.className = "text-xs text-red-400 bg-red-400/10 px-2.5 py-1 rounded-full font-medium";
+        }
+        return 0;
       }
+
+      if (silent) {
+        // Atualização automática: nada de mensagem grande, só o carimbo da hora.
+        const hh = new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+        statusEl.textContent = `✓ ${totalUpdated} itens · ${hh}`;
+        statusEl.className = "text-xs text-emerald-400 bg-emerald-400/10 px-2.5 py-1 rounded-full font-medium";
+        return totalUpdated;
+      }
+
       statusEl.textContent = `✓ ${totalUpdated} itens sincronizados (${totalRecorded} novos no histórico)` +
         (failed.length ? ` · sem dados: ${failed.join(", ")}` : "");
       statusEl.className = (failed.length ? "text-xs text-amber-400 bg-amber-400/10" : "text-xs text-emerald-400 bg-emerald-400/10") + " px-2.5 py-1 rounded-full font-medium";
@@ -1913,7 +1932,85 @@
         statusEl.textContent = "Dados locais (Sincronizado)";
         statusEl.className = "text-xs text-slate-400 bg-slate-400/10 px-2.5 py-1 rounded-full font-medium";
       }, 6000);
+      return totalUpdated;
     }
+
+    // ── ATUALIZAÇÃO AUTOMÁTICA ────────────────────────────────────────────────
+    // A planilha é atualizada de hora em hora pelo trigger do Apps Script, mas a
+    // página só buscava quando era aberta ou quando se clicava em Sincronizar.
+    // Agora ela busca sozinha:
+    //   • a cada AUTO_REFRESH_MIN minutos (60 = mesmo ritmo do trigger da
+    //     planilha), e só com a aba visível, para não gastar cota do gviz em
+    //     segundo plano
+    //   • ao voltar para a aba, se o último refresh já passou do intervalo
+    //   • ao reconectar a internet
+    // É só leitura (gviz + ?historico=N do web app). Nada é escrito na planilha.
+    const AUTO_REFRESH_MIN = 60;
+    const AUTO_REFRESH_KEY = STORAGE_KEY + "_autorefresh";
+    let autoRefreshTimer = null;
+    let autoRefreshRunning = false;
+    let lastAutoRefreshTs = 0;
+
+    function autoRefreshEnabled() {
+      try { return localStorage.getItem(AUTO_REFRESH_KEY) !== "off"; } catch (e) { return true; }
+    }
+
+    // "60" aparece como "1h" no botão e nas mensagens.
+    function autoRefreshLabel() {
+      return AUTO_REFRESH_MIN >= 60
+        ? (AUTO_REFRESH_MIN / 60) + "h"
+        : AUTO_REFRESH_MIN + " min";
+    }
+
+    function paintAutoRefreshButton() {
+      const btn = document.getElementById("btnAutoRefresh");
+      if (!btn) return;
+      const on = autoRefreshEnabled();
+      btn.textContent = on ? `⏱ Auto: ${autoRefreshLabel()}` : "⏸ Auto: off";
+      btn.title = on
+        ? "A página busca os preços da planilha a cada " + autoRefreshLabel() + " (mesmo ritmo do trigger). Clique para desligar."
+        : "Atualização automática desligada. Clique para ligar.";
+      btn.className = on
+        ? "px-3 py-2 bg-emerald-900/60 hover:bg-emerald-900 text-xs font-semibold text-emerald-200 rounded-lg border border-emerald-700 transition"
+        : "px-3 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 rounded-lg border border-slate-600 transition";
+    }
+
+    function toggleAutoRefresh() {
+      try { localStorage.setItem(AUTO_REFRESH_KEY, autoRefreshEnabled() ? "off" : "on"); } catch (e) { /* storage bloqueado */ }
+      setupAutoRefresh();
+      if (autoRefreshEnabled()) autoRefreshTick(true);
+    }
+
+    function setupAutoRefresh() {
+      if (autoRefreshTimer) { clearInterval(autoRefreshTimer); autoRefreshTimer = null; }
+      paintAutoRefreshButton();
+      if (!autoRefreshEnabled()) return;
+      autoRefreshTimer = setInterval(() => autoRefreshTick(false), AUTO_REFRESH_MIN * 60000);
+    }
+
+    async function autoRefreshTick(force) {
+      if (autoRefreshRunning) return 0;
+      if (!force && document.hidden) return 0;
+      autoRefreshRunning = true;
+      try {
+        const updated = await syncWithGoogleSheets(true);
+        lastAutoRefreshTs = Date.now();
+        return updated;
+      } catch (err) {
+        console.warn("Auto-atualização falhou:", err);
+        return 0;
+      } finally {
+        autoRefreshRunning = false;
+      }
+    }
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden || !autoRefreshEnabled()) return;
+      if (Date.now() - lastAutoRefreshTs < AUTO_REFRESH_MIN * 60000) return;
+      autoRefreshTick(false);
+    });
+
+    window.addEventListener("online", () => { if (autoRefreshEnabled()) autoRefreshTick(false); });
 
     function calcItem(item, resDec, mcDec, ingDec, refundDec) {
       const craftingCost = item.baseCost * (1 - resDec * 0.30);
@@ -2192,6 +2289,9 @@
     renderAll();
     // histórico horário gravado pelo Apps Script (silencioso, não bloqueia a tela)
     syncHistoryFromCloud(7);
+    // atualização automática dos preços (15 min, só com a aba visível)
+    setupAutoRefresh();
+    lastAutoRefreshTs = Date.now();
   </script>
 </body>
 
