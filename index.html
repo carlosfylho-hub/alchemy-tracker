@@ -934,7 +934,7 @@
               craftingCost: round2(c.craftingCost),
               profitCraft: round2(c.profitCraft),
               roiPct: round2(c.roiPct),
-              goldPerConc: c.goldPerConc !== null ? round2(c.goldPerConc) : 0
+              goldPerConc: c.goldPerConc !== null ? round2(c.goldPerConc) : null
             }];
             changed = true;
           }
@@ -963,7 +963,7 @@
         craftingCost: round2(c.craftingCost),
         profitCraft: round2(c.profitCraft),
         roiPct: round2(c.roiPct),
-        goldPerConc: c.goldPerConc !== null ? round2(c.goldPerConc) : 0
+        goldPerConc: c.goldPerConc !== null ? round2(c.goldPerConc) : null
       };
 
       const arr = priceHistory[prof][item.id];
@@ -1088,7 +1088,7 @@
           craftingCost: l.craftingCost,
           profitCraft: l.profitCraft,
           roiPct: l.roiPct,
-          goldPerConc: l.goldPerConc || 0
+          goldPerConc: (l.goldPerConc === null || l.goldPerConc === undefined || l.goldPerConc === 0) ? null : l.goldPerConc
         }));
       }
 
@@ -1115,7 +1115,12 @@
           craftingCost: round2(avg(b.items.map(x => x.craftingCost))),
           profitCraft: round2(avg(b.items.map(x => x.profitCraft))),
           roiPct: round2(avg(b.items.map(x => x.roiPct))),
-          goldPerConc: round2(avg(b.items.map(x => x.goldPerConc || 0)))
+          goldPerConc: (() => {
+            const valid = b.items
+              .map(x => x.goldPerConc)
+              .filter(v => v !== null && v !== undefined && v !== 0);
+            return valid.length ? round2(avg(valid)) : null;
+          })()
         };
       });
     }
@@ -1321,27 +1326,28 @@
 
       if (chartVisibility.profitCraft) {
         datasets.push({
-          label: "Lucro / Craft (g)",
+          label: "Lucro / Craft (g) · eixo direito 1",
           data: groupedLogs.map(l => l.profitCraft),
           borderColor: "#4ade80",
           backgroundColor: "rgba(74, 222, 128, 0.1)",
           borderWidth: 2.5,
           pointRadius: 4,
           tension: 0.25,
-          yAxisID: "y"
+          yAxisID: "y1"
         });
       }
 
       if (chartVisibility.goldPerConc) {
         datasets.push({
-          label: "Gold / Concentração (g/conc)",
+          label: "Gold / Concentração (g/conc) · eixo direito 2",
           data: groupedLogs.map(l => l.goldPerConc),
           borderColor: "#fbbf24",
           backgroundColor: "rgba(251, 191, 36, 0.15)",
           borderWidth: 2.5,
           pointRadius: 4,
           tension: 0.25,
-          yAxisID: "y1"
+          spanGaps: false,
+          yAxisID: "y2"
         });
       }
 
@@ -1383,14 +1389,23 @@
               type: "linear",
               display: true,
               position: "left",
-              title: { display: true, text: "Gold (g)", color: "#94a3b8", font: { size: 11 } },
+              title: { display: true, text: "Preço / Custo (g)", color: "#94a3b8", font: { size: 11 } },
               ticks: { color: "#cbd5e1" },
               grid: { color: "rgba(51, 65, 85, 0.35)" }
             },
             y1: {
               type: "linear",
+              display: chartVisibility.profitCraft,
+              position: "right",
+              title: { display: true, text: "Lucro / Craft (g)", color: "#4ade80", font: { size: 11 } },
+              ticks: { color: "#4ade80" },
+              grid: { drawOnChartArea: false }
+            },
+            y2: {
+              type: "linear",
               display: chartVisibility.goldPerConc,
               position: "right",
+              beginAtZero: true,
               title: { display: true, text: "Gold / Conc", color: "#fbbf24", font: { size: 11 } },
               ticks: { color: "#fbbf24" },
               grid: { drawOnChartArea: false }
