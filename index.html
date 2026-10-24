@@ -2029,11 +2029,16 @@
       const st = it.stats || {};
       const of = invOferta(it);
       const pct = (st.d30 && st.d30.pct !== undefined) ? Number(st.d30.pct) : null;
+      // Cobertura da janela 30d: o percentil so e confiavel com 30+ leituras.
+      // Com menos pontos, `d30.pct` existe (umxStats_ calcula a partir de 2),
+      // mas nao e base de decisao — por isso o selo vira SEM BASE. Alinhado ao
+      // MIN_SERIE_CONFIAVEL=30 do screener (_gen_screener.py).
+      const serieN = (st.d30 && st.d30.n !== undefined) ? Number(st.d30.n) : 0;
 
       if (of !== null && of <= 0) {
         return { txt: "SEM ESTOQUE", cor: "#94a3b8", bg: "#94a3b81a", dica: "preço do último negócio — não há anúncio para comprar" };
       }
-      if (pct === null) {
+      if (pct === null || serieN < 30) {
         return { txt: "SEM BASE", cor: "#94a3b8", bg: "#94a3b81a", dica: "série curta: menos de 30 pontos" };
       }
       if (pct <= 15) return { txt: "COMPRAR", cor: "#34d399", bg: "#34d3991a", dica: "entre os 15% mais baratos do mês" };
