@@ -460,6 +460,11 @@
           <button class="inv-chip" data-janela="30">30d</button>
           <button class="inv-chip" data-janela="90">90d</button>
           <button class="inv-chip" data-janela="180">180d</button>
+          <span class="text-[11px] font-semibold text-slate-400 uppercase ml-2">Tipo</span>
+          <button class="inv-chip" data-tipo="insumo">🌿 Reagentes</button>
+          <button class="inv-chip" data-tipo="produto">📦 Produtos</button>
+          <button class="inv-chip" data-tipo="desconhecido">? Outros</button>
+          <button class="inv-chip" data-tipo="todos">Todos</button>
           <button class="inv-chip" id="invSoFav">★ só favoritos</button>
           <input id="invBusca" placeholder="filtrar por nome…"
             class="text-sm px-2 py-1 rounded-lg bg-slate-900 border border-slate-700 text-slate-200"
@@ -1963,6 +1968,7 @@
     // a planilha nem para o Turso. É intencional: são preferências de tela.
     const INV_FAV_KEY = "kaychak_invest_favs_v1";
     const INV_JANELA_KEY = "kaychak_invest_janela";
+    const INV_TIPO_KEY = "kaychak_invest_tipo";
 
     let invDados = { itens: {}, meta: {} };
     let invJanela = Number(localStorage.getItem(INV_JANELA_KEY) || 90) || 90;
@@ -1971,6 +1977,10 @@
     let invBusca = "";
     let invCarregando = false;
     let invJaCarregou = false;
+    // Abre em reagente: quem procura "o que comprar barato para craftar" nao
+    // quer ver pocao e encantamento na mesma lista.
+    let invTipo = localStorage.getItem(INV_TIPO_KEY) || "insumo";
+    let invSemTipo = false;   // banco ainda sem material_catalog.tipo
 
     function invFavs() {
       try { return JSON.parse(localStorage.getItem(INV_FAV_KEY) || "{}") || {}; }
@@ -1988,6 +1998,14 @@
     function invAlvo(id) {
       const f = invFavs()[String(id)];
       return (f && Number(f.alvo) > 0) ? Number(f.alvo) : null;
+    }
+
+    /** Rotulo curto do tipo, para o painel de detalhe. */
+    function invTipoLabel(it) {
+      const t = it.tipo || "desconhecido";
+      if (t === "insumo") return "REAGENTE";
+      if (t === "produto") return "PRODUTO";
+      return "SEM CLASSIFICAÇÃO";
     }
 
     function invPreco(it) {
@@ -2063,6 +2081,12 @@
           const d = (j && j.data) || {};
           invDados = { itens: d.umx || {}, meta: d.umxMeta || {} };
           invJaCarregou = true;
+          // Se nenhum item trouxe tipo, o banco ainda nao tem material_catalog.tipo
+          // (ou o catalogo-tipo.gs nao foi publicado). O filtro por reagente viraria
+          // uma lista vazia — entao ele e desligado e a tela explica o porquê.
+          invSemTipo = !Object.keys(invDados.itens).some(function (k) {
+            return invDados.itens[k].tipo;
+          });
           const n = Object.keys(invDados.itens).length;
           invStatus(invDados.meta.aviso ? ("aviso: " + invDados.meta.aviso) : (n + " item(ns) · " + invJanela + " dias"));
           renderInvestLista();
@@ -2095,6 +2119,10 @@
           const it = invDados.itens[k];
           if (filtro && String(it.nome || "").toLowerCase().indexOf(filtro) === -1) return false;
           if (invSoFav && !Object.prototype.hasOwnProperty.call(favs, k)) return false;
+          if (!invSemTipo && invTipo !== "todos") {
+            const tp = it.tipo || "desconhecido";
+            if (tp !== invTipo) return false;
+          }
           return true;
         })
         .sort((a, b) => {
@@ -2113,6 +2141,11 @@
       document.querySelectorAll("#investTabContainer .inv-chip[data-janela]").forEach(b => {
         b.classList.toggle("on", Number(b.getAttribute("data-janela")) === invJanela);
       });
+      document.querySelectorAll("#investTabContainer .inv-chip[data-tipo]").forEach(b => {
+        b.classList.toggle("on", invSemTipo ? b.getAttribute("data-tipo") === "todos"
+          : b.getAttribute("data-tipo") === invTipo);
+      });
+
       const sf = document.getElementById("invSoFav");
       if (sf) sf.classList.toggle("on", invSoFav);
 
@@ -2136,7 +2169,13 @@
         return;
       }
 
-      box.innerHTML = fila.map(k => {
+      const avisoTipo = invSemTipo
+        ? '<div class="p-2 text-[11px] text-amber-300 border-b border-slate-800">' +
+        'A classificação de tipo ainda não está no banco: rode <code>tursoMigrarSchema()</code> e ' +
+        '<code>publicarCatalogoMateriais()</code>. Enquanto isso, todos os itens aparecem.</div>'
+        : '';
+
+      box.innerHTML = avisoTipo + fila.map(k => {
         const it = invDados.itens[k];
         const st = it.stats || {};
         const pct = (st.d30 && st.d30.pct !== undefined) ? Number(st.d30.pct) : null;
@@ -2233,6 +2272,8 @@
         '<div>' +
         '<div class="text-lg font-bold text-white">' + invEsc(it.nome) + '</div>' +
         '<div class="text-xs text-slate-400 mt-1">' +
+        '<span class="inv-badge" style="color:#7dd3fc;background:#7dd3fc14">' +
+        invTipoLabel(it) + '</span> ' +
         '<span class="inv-badge" style="color:' + s.cor + ';background:' + s.bg + '">' + s.txt + '</span> ' +
         invEsc(s.dica) +
         '</div>' +
@@ -2369,6 +2410,17 @@
           try { localStorage.setItem(INV_JANELA_KEY, String(invJanela)); } catch (e) { }
           invJaCarregou = false;   // troca de janela exige nova busca
           renderInvest();
+        });
+      });
+
+      document.querySelectorAll("#investTabContainer .inv-chip[data-tipo]").forEach(b => {
+        b.addEventListener("click", () => {
+          invTipo = b.getAttribute("data-tipo");
+          try { localStorage.setItem(INV_TIPO_KEY, invTipo); } catch (e) { }
+          renderInvestLista();
+          document.querySelectorAll("#investTabContainer .inv-chip[data-tipo]").forEach(o => {
+            o.classList.toggle("on", o === b);
+          });
         });
       });
 
