@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Investimento — insumos de Midnight</title>
+    <style>
+        :root {
+            --bg: #14161c;
+            --card: #1c2029;
+            --line: #2b3240;
+            --txt: #e6e9ef;
+            --dim: #98a2b3;
+            --verde: #3fb950;
+            --amarelo: #d29922;
+            --vermelho: #f85149;
+            --azul: #388bfd;
+            --roxo: #a371f7;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--txt);
+            font: 14px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        }
+
+        header {
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            font-size: 16px;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        header .sub {
+            color: var(--dim);
+            font-size: 12px;
+        }
+
+        select,
+        input {
+            background: var(--card);
+            color: var(--txt);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 6px 9px;
+            font: inherit;
+        }
+
+        input {
+            min-width: 220px;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: 330px 1fr;
+            gap: 16px;
+            padding: 16px 20px 40px;
+        }
+
+        @media (max-width: 900px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+        }
+
+        #listaCard {
+            display: flex;
+            flex-direction: column;
+            max-height: 74vh;
+        }
+
+        #listaCard .cab {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #lista {
+            overflow: auto;
+        }
+
+        .item {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2px 8px;
+            padding: 8px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, .04);
+            cursor: pointer;
+        }
+
+        .item:hover {
+            background: rgba(255, 255, 255, .03);
+        }
+
+        .item.on {
+            background: rgba(56, 139, 253, .14);
+            box-shadow: inset 3px 0 0 var(--azul);
+        }
+
+        .item .nome {
+            font-size: 13px;
+        }
+
+        .item .meta {
+            color: var(--dim);
+            font-size: 11px;
+            grid-column: 1 / 2;
+        }
+
+        .item .pct {
+            font-weight: 700;
+            font-size: 13px;
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .barato {
+            color: var(--verde);
+        }
+
+        .medio {
+            color: var(--amarelo);
+        }
+
+        .caro {
+            color: var(--vermelho);
+        }
+
+        #painel {
+            min-height: 74vh;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        #painel h2 {
+            font-size: 15px;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        #kpis {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 8px;
+        }
+
+        .kpi {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 8px 10px;
+        }
+
+        .kpi .r {
+            color: var(--dim);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+        }
+
+        .kpi .v {
+            font-size: 16px;
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .kpi .h {
+            color: var(--dim);
+            font-size: 11px;
+        }
+
+        #graficoWrap {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 8px;
+            position: relative;
+        }
+
+        svg {
+            display: block;
+            width: 100%;
+            height: 380px;
+        }
+
+        .eixo {
+            fill: var(--dim);
+            font-size: 10px;
+        }
+
+        .grid {
+            stroke: rgba(255, 255, 255, .07);
+            stroke-width: 1;
+        }
+
+        .legenda {
+            position: absolute;
+            top: 14px;
+            right: 16px;
+            font-size: 11px;
+            color: var(--dim);
+            text-align: right;
+        }
+
+        .legenda i {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+            margin-right: 4px;
+            vertical-align: -1px;
+        }
+
+        #tip {
+            position: absolute;
+            pointer-events: none;
+            background: #0b0e13;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 6px 8px;
+            font-size: 11px;
+            display: none;
+            white-space: nowrap;
+            z-index: 5;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            text-align: right;
+            padding: 6px 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, .05);
+            font-variant-numeric: tabular-nums;
+        }
+
+        th:first-child,
+        td:first-child {
+            text-align: left;
+        }
+
+        th {
+            color: var(--dim);
+            font-weight: 500;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+        }
+
+        .aviso {
+            color: var(--amarelo);
+            font-size: 12px;
+            padding: 6px 0;
+        }
+
+        .nota {
+            color: var(--dim);
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        a {
+            color: var(--azul);
+        }
+
+        #carregando {
+            color: var(--dim);
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div>
+            <h1>Investimento — insumos de Midnight</h1>
+            <div class="sub" id="sub">carregando…</div>
+        </div>
+        <div style="margin-left:auto; display:flex; gap:8px; align-items:center; flex-wrap:wrap">
+            <input id="busca" type="search" placeholder="filtrar por nome…">
+            <select id="janela">
+                <option value="30">30 dias</option>
+                <option value="90" selected>90 dias</option>
+                <option value="180">180 dias</option>
+                <option value="365">1 ano</option>
+            </select>
+        </div>
+    </header>
+
+    <main>
+        <div class="card" id="listaCard">
+            <div class="cab">
+                <strong style="font-size:12px">itens</strong>
+                <span class="nota" id="contagem"></span>
+            </div>
+            <div id="lista">
+                <div id="carregando" style="padding:12px">carregando…</div>
+            </div>
+        </div>
+
+        <section id="painel">
+            <h2 id="titulo">selecione um item</h2>
+            <div id="kpis"></div>
+
+            <div id="graficoWrap">
+                <div class="legenda">
+                    <div><i style="background:#388bfd"></i>preço (ouro)</div>
+                    <div><i style="background:rgba(163,113,247,.35)"></i>oferta (unidades)</div>
+                </div>
+                <svg id="grafico" viewBox="0 0 900 380" preserveAspectRatio="none"></svg>
+                <div id="tip"></div>
+            </div>
+
+            <div class="card" style="padding:4px 12px 12px">
+                <table id="stats"></table>
+            </div>
+
+            <p class="nota">
+                Preço e oferta vêm do <strong>Undermine Exchange</strong> (região US). O ponto diário é o
+                preço <em>no instante de maior oferta do dia</em>, não a média — use para comparar o item
+                com ele mesmo (percentil, tendência), não como “o preço”. Liquidez de venda é do
+                <strong>TSM Accounting</strong> e aparece no relatório.
+            </p>
+        </section>
+    </main>
+
+    <script>
+        (function () {
+            'use strict';
+
+            // Mesma URL do tracker. Pode ser sobrescrita com ?script=<url> (fica no localStorage).
+            var SCRIPT_URL_PADRAO = 'https://script.google.com/macros/s/' +
+                'AKfycbzazeRXF0FWhWRDGGYqqSZKbH3l7srnDSX-SAo1NrDj0HFLWs2smTdSbbQ18j5CMH-c/exec';
+            var LS_KEY = 'kaychak_script_url';
+
+            var busca = new URLSearchParams(location.search);
+            if (busca.get('script')) {
+                try { localStorage.setItem(LS_KEY, busca.get('script')); } catch (e) { }
+                history.replaceState(null, '', location.pathname);
+            }
+            var SCRIPT_URL = (function () {
+                try { return localStorage.getItem(LS_KEY) || SCRIPT_URL_PADRAO; } catch (e) { return SCRIPT_URL_PADRAO; }
+            })();
+
+            var estado = { dias: 90, itens: {}, ordem: [], selecionado: null, filtro: '', meta: null };
+
+            var $ = function (id) { return document.getElementById(id); };
+
+            // ---------------------------------------------------------------- formato
+            function ouro(v) {
+                if (v === null || v === undefined || isNaN(v)) return '—';
+                if (v >= 1000000) return (v / 1000000).toFixed(2) + 'M g';
+                if (v >= 1000) return (v / 1000).toFixed(1) + 'k g';
+                if (v >= 10) return v.toFixed(1) + ' g';
+                if (v >= 1) return v.toFixed(2) + ' g';
+                return v.toFixed(3) + ' g';
+            }
+            function num(v) {
+                if (v === null || v === undefined || isNaN(v)) return '—';
+                if (v >= 1000000) return (v / 1000000).toFixed(1) + 'M';
+                if (v >= 1000) return (v / 1000).toFixed(1) + 'k';
+                return Math.round(v).toString();
+            }
+            function pctClasse(p) {
+                if (p === null || p === undefined) return 'medio';
+                if (p <= 20) return 'barato';
+                if (p >= 80) return 'caro';
+                return 'medio';
+            }
+            function dataCurta(iso) { return iso ? iso.slice(5) : ''; }
+
+            // ---------------------------------------------------------------- dados
+            function carregar() {
+                $('sub').textContent = 'buscando ' + estado.dias + ' dias…';
+                var url = SCRIPT_URL + '?umx=' + estado.dias + '&_=' + Date.now();
+                fetch(url, { method: 'GET' })
+                    .then(function (r) { return r.json(); })
+                    .then(function (j) {
+                        var d = (j && j.data) || {};
+                        estado.itens = d.umx || {};
+                        estado.meta = d.umxMeta || {};
+                        montarLista();
+                        var aviso = estado.meta.aviso;
+                        $('sub').textContent = aviso
+                            ? ('aviso: ' + aviso)
+                            : (Object.keys(estado.itens).length + ' item(ns) · janela de ' + estado.dias + ' dias');
+                    })
+                    .catch(function (e) {
+                        $('sub').textContent = 'erro ao buscar: ' + e.message;
+                        $('lista').innerHTML = '<div class="aviso" style="padding:12px">' +
+                            'Falha na requisição. Confira se o web app está publicado como ' +
+                            '“qualquer pessoa” e se a rota ?umx funciona no navegador.</div>';
+                    });
+            }
+
+            function ordenar() {
+                estado.ordem = Object.keys(estado.itens)
+                    .filter(function (k) {
+                        if (!estado.filtro) return true;
+                        return (estado.itens[k].nome || '').toLowerCase().indexOf(estado.filtro) !== -1;
+                    })
+                    .sort(function (a, b) {
+                        var pa = (estado.itens[a].stats || {}).d30 ? estado.itens[a].stats.d30.pct : 999;
+                        var pb = (estado.itens[b].stats || {}).d30 ? estado.itens[b].stats.d30.pct : 999;
+                        return pa - pb;   // mais barato primeiro
+                    });
+            }
+
+            function montarLista() {
+                ordenar();
+                var cont = $('contagem');
+                cont.textContent = estado.ordem.length + ' de ' + Object.keys(estado.itens).length;
+
+                if (!estado.ordem.length) {
+                    $('lista').innerHTML = '<div class="aviso" style="padding:12px">' +
+                        'Nenhum item com série ainda.<br>No Apps Script: <code>umxPuxarDiario()</code>.</div>';
+                    return;
+                }
+
+                var html = estado.ordem.map(function (k) {
+                    var it = estado.itens[k];
+                    var st = it.stats || {};
+                    var pct = st.d30 ? st.d30.pct : null;
+                    var agora = it.agora ? it.agora.preco : st.atual;
+                    return '<div class="item' + (k === estado.selecionado ? ' on' : '') + '" data-id="' + k + '">' +
+                        '<div class="nome">' + esc(it.nome) + '</div>' +
+                        '<div class="pct ' + pctClasse(pct) + '">' + (pct === null ? '—' : pct.toFixed(0) + '%') + '</div>' +
+                        '<div class="meta">' + ouro(agora) + ' · oferta ' + num(it.agora ? it.agora.oferta : null) + '</div>' +
+                        '</div>';
+                }).join('');
+
+                $('lista').innerHTML = html;
+                Array.prototype.forEach.call($('lista').querySelectorAll('.item'), function (el) {
+                    el.addEventListener('click', function () { selecionar(el.getAttribute('data-id')); });
+                });
+
+                if (!estado.selecionado && estado.ordem.length) selecionar(estado.ordem[0]);
+            }
+
+            function esc(s) {
+                return String(s || '').replace(/[&<>"]/g, function (c) {
+                    return { '&': '&', '<': '<', '>': '>', '"': '"' }[c];
+                });
+            }
+
+            // ---------------------------------------------------------------- painel
+            function selecionar(id) {
+                estado.selecionado = id;
+                Array.prototype.forEach.call(document.querySelectorAll('.item'), function (el) {
+                    el.classList.toggle('on', el.getAttribute('data-id') === id);
+                });
+                var it = estado.itens[id];
+                if (!it) return;
+
+                var st = it.stats || {};
+                var d30 = st.d30 || {};
+                var agora = it.agora || {};
+
+                $('titulo').textContent = it.nome;
+
+                var kpis = [
+                    ['preço agora', ouro(agora.preco !== undefined ? agora.preco : st.atual), ''],
+                    ['oferta agora', num(agora.oferta), 'unidades na região'],
+                    ['mediana 30d', ouro(d30.mediana),
+                        (d30.n !== undefined && d30.n < 30) ? d30.n + ' de 30 pontos' : ''],
+                    ['percentil 30d', d30.pct === undefined ? '—' : d30.pct.toFixed(0) + '%', '0 = mais barato do mês'],
+                    ['tendência 7/30', st.tend_7_vs_30 === undefined || st.tend_7_vs_30 === null ? '—' : (st.tend_7_vs_30 > 0 ? '+' : '') + st.tend_7_vs_30 + '%', ''],
+                    ['mín / máx (série)', ouro(st.min) + ' / ' + ouro(st.max), st.n + ' ponto(s)']
+                ];
+                $('kpis').innerHTML = kpis.map(function (k) {
+                    return '<div class="kpi"><div class="r">' + k[0] + '</div><div class="v">' + k[1] +
+                        '</div><div class="h">' + k[2] + '</div></div>';
+                }).join('');
+
+                desenhar(it);
+                tabelaStats(it);
+            }
+
+            function desenhar(it) {
+                var svg = $('grafico');
+                var W = 900, H = 380;
+                var m = { l: 62, r: 58, t: 18, b: 28 };
+                var pontos = it.dias || [];
+                if (!pontos.length) { svg.innerHTML = ''; return; }
+
+                var precos = pontos.map(function (p) { return p[1]; }).filter(function (v) { return v > 0; });
+                var ofertas = pontos.map(function (p) { return p[2] || 0; });
+
+                var pMin = Math.min.apply(null, precos), pMax = Math.max.apply(null, precos);
+                var usarLog = pMin > 0 && (pMax / pMin) > 25;
+                var oMax = Math.max.apply(null, ofertas.concat([1]));
+
+                function yPreco(v) {
+                    if (usarLog) {
+                        var lo = Math.log(Math.max(pMin, 0.0001)), hi = Math.log(pMax);
+                        var t = (Math.log(Math.max(v, 0.0001)) - lo) / ((hi - lo) || 1);
+                        return m.t + (1 - t) * (H - m.t - m.b);
+                    }
+                    var t2 = (v - pMin) / ((pMax - pMin) || 1);
+                    return m.t + (1 - t2) * (H - m.t - m.b);
+                }
+                function yOferta(v) {
+                    return m.t + (1 - (v / oMax)) * (H - m.t - m.b);
+                }
+                function x(i) {
+                    return m.l + (i / ((pontos.length - 1) || 1)) * (W - m.l - m.r);
+                }
+
+                var partes = [];
+
+                // grid horizontal + rotulos de preco
+                for (var g = 0; g <= 4; g++) {
+                    var yv = pMin + (pMax - pMin) * (g / 4);
+                    var y = m.t + (1 - g / 4) * (H - m.t - m.b);
+                    partes.push('<line class="grid" x1="' + m.l + '" y1="' + y + '" x2="' + (W - m.r) + '" y2="' + y + '"/>');
+                    partes.push('<text class="eixo" x="' + (m.l - 6) + '" y="' + (y + 3) + '" text-anchor="end">' +
+                        ouro(usarLog ? Math.exp(Math.log(Math.max(pMin, 0.0001)) + (Math.log(pMax) - Math.log(Math.max(pMin, 0.0001))) * (g / 4)) : yv) + '</text>');
+                }
+
+                // area de oferta
+                var area = 'M' + x(0) + ',' + (H - m.b);
+                pontos.forEach(function (p, i) { area += ' L' + x(i) + ',' + yOferta(p[2] || 0); });
+                area += ' L' + x(pontos.length - 1) + ',' + (H - m.b) + ' Z';
+                partes.push('<path d="' + area + '" fill="rgba(163,113,247,.22)" stroke="rgba(163,113,247,.55)" stroke-width="1"/>');
+
+                // linha de preco
+                var linha = '';
+                pontos.forEach(function (p, i) {
+                    if (!(p[1] > 0)) return;
+                    linha += (linha ? ' L' : 'M') + x(i) + ',' + yPreco(p[1]);
+                });
+                partes.push('<path d="' + linha + '" fill="none" stroke="#388bfd" stroke-width="1.8"/>');
+
+                // ultimo ponto
+                var ult = pontos[pontos.length - 1];
+                partes.push('<circle cx="' + x(pontos.length - 1) + '" cy="' + yPreco(ult[1]) + '" r="3.5" fill="#388bfd"/>');
+
+                // eixo x: ~6 marcas
+                var passo = Math.max(1, Math.floor(pontos.length / 6));
+                for (var i2 = 0; i2 < pontos.length; i2 += passo) {
+                    partes.push('<text class="eixo" x="' + x(i2) + '" y="' + (H - m.b + 16) + '" text-anchor="middle">' +
+                        dataCurta(pontos[i2][0]) + '</text>');
+                }
+
+                // rotulo do eixo direito (oferta)
+                partes.push('<text class="eixo" x="' + (W - m.r + 6) + '" y="' + (m.t + 8) + '">oferta</text>');
+                partes.push('<text class="eixo" x="' + (W - m.r + 6) + '" y="' + (H - m.b) + '">0</text>');
+                partes.push('<text class="eixo" x="' + (W - m.r + 6) + '" y="' + (m.t + 22) + '">' + num(oMax) + '</text>');
+
+                svg.innerHTML = partes.join('');
+
+                // crosshair
+                svg.onmousemove = function (ev) {
+                    var rect = svg.getBoundingClientRect();
+                    var escala = W / rect.width;
+                    var px = (ev.clientX - rect.left) * escala;
+                    var i3 = Math.round((px - m.l) / ((W - m.l - m.r) / ((pontos.length - 1) || 1)));
+                    i3 = Math.max(0, Math.min(pontos.length - 1, i3));
+                    var p = pontos[i3];
+                    var tip = $('tip');
+                    tip.style.display = 'block';
+                    tip.style.left = Math.min(rect.width - 170, Math.max(0, (x(i3) / escala) + 12)) + 'px';
+                    tip.style.top = '30px';
+                    tip.innerHTML = '<strong>' + p[0] + '</strong><br>preço ' + ouro(p[1]) +
+                        '<br>oferta ' + num(p[2]);
+                };
+                svg.onmouseleave = function () { $('tip').style.display = 'none'; };
+            }
+
+            function tabelaStats(it) {
+                var st = it.stats || {};
+                var linhas = [
+                    ['série', st.n ? st.n + ' ponto(s), de ' + st.primeiro + ' a ' + st.ultimo : '—'],
+                    ['mínimo', ouro(st.min)], ['máximo', ouro(st.max)],
+                    ['percentil na série', st.pct_serie === undefined ? '—' : st.pct_serie + '%']
+                ];
+                [7, 30, 90].forEach(function (j) {
+                    var d = st['d' + j];
+                    if (!d) return;
+                    // Cobertura: se a serie tem menos pontos que a janela, o rotulo mente.
+                    var cob = (d.n !== undefined && d.n < j) ? '  [' + d.n + ' de ' + j + ' pontos]' : '';
+                    linhas.push(['mediana ' + j + 'd', ouro(d.mediana) + '  (percentil ' + d.pct + '%)' + cob]);
+                });
+                $('stats').innerHTML = '<tbody>' + linhas.map(function (l) {
+                    return '<tr><td>' + l[0] + '</td><td>' + l[1] + '</td></tr>';
+                }).join('') + '</tbody>';
+            }
+
+            // ---------------------------------------------------------------- eventos
+            $('busca').addEventListener('input', function (e) {
+                estado.filtro = e.target.value.trim().toLowerCase();
+                montarLista();
+            });
+            $('janela').addEventListener('change', function (e) {
+                estado.dias = Number(e.target.value) || 90;
+                estado.selecionado = null;
+                carregar();
+            });
+            window.addEventListener('resize', function () {
+                if (estado.selecionado) desenhar(estado.itens[estado.selecionado]);
+            });
+
+            carregar();
+        })();
+    </script>
+</body>
+
+</html>
