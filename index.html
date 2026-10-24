@@ -856,11 +856,7 @@
           const inc = bucket[rawName];
           if (!Array.isArray(inc) || !inc.length) continue;
 
-          const clean = String(rawName).toLowerCase().replace(/\s+/g, " ");
-          const item = state[prof].find(it => {
-            const itClean = it.name.toLowerCase().replace(/\s+/g, " ");
-            return itClean === clean || itClean.replace(" tier 2", "") === clean.replace(" tier 2", "");
-          });
+          const item = findItemByName(state[prof], rawName);
           if (!item) continue;
 
           if (!priceHistory[prof]) priceHistory[prof] = {};
@@ -1002,7 +998,7 @@
         const resDec = (s.res || 0) / 100, mcDec = (s.mc || 0) / 100, ingDec = (s.ing || 0) / 100, refundDec = (s.refund || 70) / 100;
         state[prof].forEach(item => {
           if (!Array.isArray(priceHistory[prof][item.id]) || priceHistory[prof][item.id].length === 0) {
-            const c = calcItem(item, resDec, mcDec, ingDec, refundDec);
+            const c = calcItem(item, resDec, mcDec, ingDec, refundDec, prof);
             priceHistory[prof][item.id] = [{
               ts: Date.now(),
               source: "Inicial",
@@ -1030,7 +1026,7 @@
 
       const s = profSettings[prof];
       const resDec = (s.res || 0) / 100, mcDec = (s.mc || 0) / 100, ingDec = (s.ing || 0) / 100, refundDec = (s.refund || 70) / 100;
-      const c = calcItem(item, resDec, mcDec, ingDec, refundDec);
+      const c = calcItem(item, resDec, mcDec, ingDec, refundDec, prof);
 
       const newPoint = {
         ts: Date.now(),
@@ -1983,10 +1979,7 @@
           }
 
           const cleanVal = valStr.toLowerCase().replace(/\s+/g, " ");
-          const item = items.find(it => {
-            const itClean = it.name.toLowerCase().replace(/\s+/g, " ");
-            return itClean === cleanVal || itClean.replace(" tier 2", "") === cleanVal.replace(" tier 2", "");
-          });
+          const item = findItemByName(items, cleanVal);
 
           if (!item || seenIds.has(item.id)) continue;
           seenIds.add(item.id);
@@ -1995,7 +1988,7 @@
           const sheetAhPrice = c3.v;
           if (!(sheetAhPrice > 0)) continue; // planilha sem preço (vazia / carregando) não sobrescreve nem polui o histórico
 
-          const factor = 1 - resDec * 0.30;
+          const factor = 1 - resDec * resFactorFor(targetProf);
           item.baseCost = factor > 0 ? (sheetCraftingCost / factor) : sheetCraftingCost;
           item.ahPrice = Math.round(sheetAhPrice * 100) / 100;
 
@@ -2143,8 +2136,40 @@
 
     window.addEventListener("online", () => { if (autoRefreshEnabled()) autoRefreshTick(false); });
 
-    function calcItem(item, resDec, mcDec, ingDec, refundDec) {
-      const craftingCost = item.baseCost * (1 - resDec * 0.30);
+    // =========================================================
+    // CONSTANTES DE MODELO (não são dado vivo, não são editáveis na tela)
+    // =========================================================
+    // Fator de devolução do Resourcefulness por profissão: a % da tela é a
+    // chance do evento; a economia é Res% × fator (DOC0 §5.1 / DOC1 §4).
+    // Estava 0,30 fixo para TODAS as profissões, o que inflava o custo de
+    // Encantamento (0,36), Joalheria e Inscrição (0,45) — auditoria 2ª
+    // passagem, item 3.1. Só a Alquimia é 0,30 de verdade.
+    const RES_FACTOR = { alchemy: 0.30, jewelcrafting: 0.45, enchanting: 0.36, inscription: 0.45 };
+
+    function resFactorFor(profKey) {
+      return RES_FACTOR[profKey] || RES_FACTOR.alchemy;
+    }
+
+    /**
+     * Casa um nome de item sem ambiguidade.
+     * Exato (normalizado) primeiro; o fallback que ignora o sufixo de tier só
+     * vale quando existe UM único candidato. Antes, remover " tier 2" podia
+     * atribuir o histórico de um Tier 1 à receita Tier 2 (2ª passagem, 4.2).
+     * @return {object|null}
+     */
+    function findItemByName(lista, nomeBruto) {
+      const alvo = String(nomeBruto || "").toLowerCase().replace(/\s+/g, " ").trim();
+      if (!alvo || !Array.isArray(lista)) return null;
+      const norm = (it) => it.name.toLowerCase().replace(/\s+/g, " ").trim();
+      const exato = lista.find(it => norm(it) === alvo);
+      if (exato) return exato;
+      const semTier = alvo.replace(/\s+tier\s*\d+$/, "");
+      const candidatos = lista.filter(it => norm(it).replace(/\s+tier\s*\d+$/, "") === semTier);
+      return candidatos.length === 1 ? candidatos[0] : null;
+    }
+
+    function calcItem(item, resDec, mcDec, ingDec, refundDec, profKey) {
+      const craftingCost = item.baseCost * (1 - resDec * resFactorFor(profKey));
       const expectedItems = item.baseYield * (1 + mcDec * item.mcFactor);
       const avgValueCraft = expectedItems * (item.ahPrice * (1 - ahTaxRate));
       const profitCraft = avgValueCraft - craftingCost;
@@ -2186,7 +2211,7 @@
         const s = profSettings[p];
         const resDec = s.res / 100, mcDec = s.mc / 100, ingDec = s.ing / 100, refundDec = (s.refund || 70) / 100;
         const items = state[p] || [];
-        const calculated = items.map(item => ({ ...calcItem(item, resDec, mcDec, ingDec, refundDec), profKey: p }));
+        const calculated = items.map(item => ({ ...calcItem(item, resDec, mcDec, ingDec, refundDec, p), profKey: p }));
         allCalculated = allCalculated.concat(calculated);
       });
 
