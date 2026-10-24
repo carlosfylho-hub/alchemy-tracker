@@ -2289,6 +2289,9 @@
         '</div>' +
         alvoHtml +
         '<div>' + invSvg(it) + '</div>';
+
+      // O gráfico acabou de ser recriado por innerHTML: religar o tooltip aqui.
+      invBindChartTip();
     }
 
     function invAlternarFav(id) {
@@ -2354,10 +2357,19 @@
         : ' · nenhum no alvo ainda');
     }
 
-    /** Gráfico SVG: linha de preço (ouro) + área de oferta (azul). Sem dependência externa. */
+    /**
+     * Geometria do último gráfico desenhado, em coordenadas do viewBox.
+     * O tooltip usa isto para saber onde está cada ponto: o SVG escala com
+     * width:100%, então converter pixel de tela para unidade do viewBox é
+     * aritmética simples e não depende do tamanho da janela.
+     */
+    let invChartGeo = null;
+
+    /** Gráfico SVG: linha de preço (ouro) + área de oferta (azul) + tooltip por ponto. */
     function invSvg(it) {
       const dias = (it.dias || []).filter(d => d && Number(d[1]) > 0);
       if (dias.length < 2) {
+        invChartGeo = null;
         return '<div class="text-xs text-slate-500 p-3">Série curta demais para gráfico (' +
           dias.length + ' ponto(s)).</div>';
       }
@@ -2391,14 +2403,122 @@
 
       const ini = dias[0][0], fim = dias[dias.length - 1][0];
 
-      return '<svg viewBox="0 0 ' + W + ' ' + H + '" style="width:100%;height:auto">' +
+      const xs = dias.map((d, i) => X(i));
+      const ys = precos.map(v => YP(v));
+      invChartGeo = {
+        W: W, H: H, PL: PL, PR: PR, PT: PT, PB: PB,
+        xs: xs, ys: ys,
+        datas: dias.map(d => d[0]),
+        precos: precos, ofertas: ofertas
+      };
+
+      // Ponto visível em cada leitura — só quando não vira poeira na tela.
+      const pontos = dias.length <= 45
+        ? dias.map((d, i) => '<circle cx="' + xs[i].toFixed(1) + '" cy="' + ys[i].toFixed(1) +
+            '" r="1.8" fill="#fbbf24" opacity="0.55"/>').join("")
+        : "";
+
+      // Tooltip: um grupo escondido que o mouse move e preenche. Fica depois de
+      // tudo para ser desenhado por cima da linha e da área.
+      const TIPW = 124, TIPH = 52;
+
+      return '<svg class="inv-chart" viewBox="0 0 ' + W + ' ' + H + '" style="width:100%;height:auto">' +
         grades.join("") +
         '<path d="' + area + '" fill="#38bdf81a"/>' +
         '<path d="' + linha + '" fill="none" stroke="#fbbf24" stroke-width="1.8"/>' +
+        pontos +
         '<text x="' + PL + '" y="' + (H - 8) + '" font-size="9" fill="#64748b">' + ini + '</text>' +
         '<text x="' + (W - PR) + '" y="' + (H - 8) + '" font-size="9" fill="#64748b" text-anchor="end">' + fim + '</text>' +
         '<text x="' + (W - PR) + '" y="' + (PT + 8) + '" font-size="9" fill="#38bdf8" text-anchor="end">área = oferta</text>' +
+        '<line id="invTipGuide" x1="0" y1="' + PT + '" x2="0" y2="' + (H - PB) +
+          '" stroke="#94a3b8" stroke-width="1" stroke-dasharray="2 2" opacity="0"/>' +
+        '<circle id="invTipDot" r="3.4" fill="#fff" style="display:none"/>' +
+        '<g id="invTipGrp" style="display:none" pointer-events="none">' +
+        '<rect width="' + TIPW + '" height="' + TIPH + '" rx="4" fill="#0b1220" ' +
+          'stroke="#334155" opacity="0.97"/>' +
+        '<text id="invTipL1" x="7" y="14" font-size="9.5" fill="#e2e8f0"></text>' +
+        '<text id="invTipL2" x="7" y="27" font-size="9.5" fill="#fbbf24"></text>' +
+        '<text id="invTipL3" x="7" y="40" font-size="9.5" fill="#7dd3fc"></text>' +
+        '</g>' +
+        '<rect id="invTipHit" x="' + PL + '" y="' + PT + '" width="' + (W - PL - PR) + '" ' +
+          'height="' + (H - PT - PB) + '" fill="transparent" style="cursor:crosshair"/>' +
         '</svg>';
+    }
+
+    /**
+     * Liga o tooltip do gráfico. Chamado depois de cada render do detalhe,
+     * porque o SVG é recriado por innerHTML e os listeners morrem junto.
+     * Um único tooltip atende todos os pontos: menos nó no DOM e sem o efeito
+     * colateral de um tooltip ficar por cima da faixa do vizinho.
+     */
+    function invBindChartTip() {
+      const geo = invChartGeo;
+      const svg = document.querySelector("#invDetalhe svg.inv-chart");
+      if (!geo || !svg) return;
+
+      const hit = svg.querySelector("#invTipHit");
+      const grp = svg.querySelector("#invTipGrp");
+      const guia = svg.querySelector("#invTipGuide");
+      const ponto = svg.querySelector("#invTipDot");
+      const l1 = svg.querySelector("#invTipL1");
+      const l2 = svg.querySelector("#invTipL2");
+      const l3 = svg.querySelector("#invTipL3");
+      if (!hit || !grp || !guia || !ponto) return;
+
+      const TIPW = 124, TIPH = 52;
+
+      /** Índice do ponto mais próximo da posição X do mouse. */
+      const indiceEm = clientX => {
+        const r = svg.getBoundingClientRect();
+        const x = r.width > 0 ? ((clientX - r.left) / r.width) * geo.W : 0;
+        let melhor = 0, dist = Infinity;
+        for (let i = 0; i < geo.xs.length; i++) {
+          const d = Math.abs(geo.xs[i] - x);
+          if (d < dist) { dist = d; melhor = i; }
+        }
+        return melhor;
+      };
+
+      const mostrar = clientX => {
+        const i = indiceEm(clientX);
+        const cx = geo.xs[i], cy = geo.ys[i];
+        const oferta = geo.ofertas[i];
+
+        if (l1) l1.textContent = geo.datas[i];
+        if (l2) l2.textContent = 'preço ' + invG(geo.precos[i]);
+        if (l3) l3.textContent = 'oferta ' + (oferta > 0 ? invN(oferta) + ' un' : 'sem anúncio');
+
+        // vira para a esquerda quando não cabe à direita; desce quando não cabe em cima
+        const tx = (cx + 10 + TIPW > geo.W - geo.PR) ? cx - 10 - TIPW : cx + 10;
+        const ty = (cy - TIPH - 8 < geo.PT) ? cy + 8 : cy - TIPH - 8;
+        grp.setAttribute("transform", "translate(" + tx.toFixed(1) + "," + ty.toFixed(1) + ")");
+        grp.style.display = "";
+
+        guia.setAttribute("x1", cx.toFixed(1));
+        guia.setAttribute("x2", cx.toFixed(1));
+        guia.setAttribute("opacity", "0.55");
+
+        ponto.setAttribute("cx", cx.toFixed(1));
+        ponto.setAttribute("cy", cy.toFixed(1));
+        ponto.style.display = "";
+      };
+
+      const esconder = () => {
+        grp.style.display = "none";
+        guia.setAttribute("opacity", "0");
+        ponto.style.display = "none";
+      };
+
+      hit.addEventListener("mousemove", ev => mostrar(ev.clientX));
+      hit.addEventListener("mouseleave", esconder);
+      // No celular não existe hover: o toque no gráfico abre o tooltip.
+      hit.addEventListener("touchstart", ev => {
+        if (ev.touches && ev.touches[0]) mostrar(ev.touches[0].clientX);
+      }, { passive: true });
+      hit.addEventListener("touchmove", ev => {
+        if (ev.touches && ev.touches[0]) mostrar(ev.touches[0].clientX);
+      }, { passive: true });
+      hit.addEventListener("touchend", esconder, { passive: true });
     }
 
     // Controles da aba (janela, filtro, busca). O script roda no fim do body,
