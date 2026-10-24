@@ -451,7 +451,8 @@
                     return '<div class="item' + (k === estado.selecionado ? ' on' : '') + '" data-id="' + k + '">' +
                         '<div class="nome">' + esc(it.nome) + '</div>' +
                         '<div class="pct ' + pctClasse(pct) + '">' + (pct === null ? '—' : pct.toFixed(0) + '%') + '</div>' +
-                        '<div class="meta">' + ouro(agora) + ' · oferta ' + num(it.agora ? it.agora.oferta : null) + '</div>' +
+                        '<div class="meta">' + ouro(agora) + ' · oferta ' + num(it.agora ? it.agora.oferta : null) +
+                        (it.agora && Number(it.agora.oferta) === 0 ? ' · SEM ESTOQUE' : '') + '</div>' +
                         '</div>';
                 }).join('');
 
@@ -486,7 +487,10 @@
 
                 var kpis = [
                     ['preço agora', ouro(agora.preco !== undefined ? agora.preco : st.atual), ''],
-                    ['oferta agora', num(agora.oferta), 'unidades na região'],
+                    ['oferta agora', num(agora.oferta),
+                        Number(agora.oferta) === 0
+                            ? 'sem anúncio — o preço é do último negócio, não dá para comprar aqui'
+                            : 'unidades na região'],
                     ['mediana 30d', ouro(d30.mediana),
                         (d30.n !== undefined && d30.n < 30) ? d30.n + ' de 30 pontos' : ''],
                     ['percentil 30d', d30.pct === undefined ? '—' : d30.pct.toFixed(0) + '%', '0 = mais barato do mês'],
