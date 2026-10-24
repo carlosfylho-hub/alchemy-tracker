@@ -187,6 +187,120 @@
     .custom-scroll::-webkit-scrollbar-thumb:hover {
       background: #475569;
     }
+
+    /* ---- ABA INVESTIR ------------------------------------------------------ */
+    #investTabContainer .inv-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      align-items: center;
+    }
+
+    #investTabContainer .inv-chip {
+      font-size: 11px;
+      font-weight: 700;
+      padding: .3rem .6rem;
+      border-radius: .5rem;
+      border: 1px solid #334155;
+      color: #cbd5e1;
+      background: #0f172a;
+      cursor: pointer;
+    }
+
+    #investTabContainer .inv-chip.on {
+      background: #0ea5e9;
+      border-color: #0ea5e9;
+      color: #001018;
+    }
+
+    #investTabContainer .inv-lista {
+      max-height: 62vh;
+      overflow: auto;
+    }
+
+    #investTabContainer .inv-row {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .45rem .6rem;
+      border-bottom: 1px solid #1e293b;
+      cursor: pointer;
+    }
+
+    #investTabContainer .inv-row:hover {
+      background: #1e293b55;
+    }
+
+    #investTabContainer .inv-row.on {
+      background: #0ea5e922;
+      border-left: 3px solid #0ea5e9;
+    }
+
+    #investTabContainer .inv-row .nm {
+      flex: 1;
+      font-size: 12px;
+      color: #e2e8f0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    #investTabContainer .inv-row .pg {
+      font-size: 11px;
+      font-weight: 700;
+      min-width: 44px;
+      text-align: right;
+    }
+
+    #investTabContainer .inv-badge {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      padding: .1rem .35rem;
+      border-radius: .35rem;
+      white-space: nowrap;
+    }
+
+    #investTabContainer .inv-star {
+      background: transparent;
+      border: 0;
+      font-size: 14px;
+      cursor: pointer;
+      color: #475569;
+      line-height: 1;
+      padding: 0 .1rem;
+    }
+
+    #investTabContainer .inv-star.on {
+      color: #fbbf24;
+    }
+
+    #investTabContainer .inv-kpi {
+      background: #0b1220;
+      border: 1px solid #1e293b;
+      border-radius: .6rem;
+      padding: .55rem .7rem;
+    }
+
+    #investTabContainer .inv-kpi .r {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: #64748b;
+    }
+
+    #investTabContainer .inv-kpi .v {
+      font-size: 15px;
+      font-weight: 800;
+      color: #e2e8f0;
+      margin-top: .15rem;
+    }
+
+    #investTabContainer .inv-kpi .h {
+      font-size: 10px;
+      color: #64748b;
+      margin-top: .15rem;
+    }
   </style>
 </head>
 
@@ -225,6 +339,9 @@
         <button onclick="switchTab('history')" id="btn-history"
           class="tab-btn px-3 py-2 text-xs font-semibold rounded-lg text-amber-300 border border-amber-500/30">📈
           Histórico</button>
+        <button onclick="switchTab('invest')" id="btn-invest"
+          class="tab-btn px-3 py-2 text-xs font-semibold rounded-lg text-sky-300 border border-sky-500/30">💹
+          Investir</button>
       </div>
     </div>
 
@@ -332,6 +449,41 @@
 
     <!-- Dynamic Tables (Professions) -->
     <div id="tabContentContainer" class="space-y-6"></div>
+
+    <!-- ========================================== -->
+    <!-- ABA INVESTIR — série de preço/oferta + favoritos -->
+    <!-- ========================================== -->
+    <div id="investTabContainer" class="space-y-6 hidden">
+      <div class="card p-4 shadow-lg space-y-3">
+        <div class="inv-toolbar">
+          <span class="text-[11px] font-semibold text-slate-400 uppercase">Janela</span>
+          <button class="inv-chip" data-janela="30">30d</button>
+          <button class="inv-chip" data-janela="90">90d</button>
+          <button class="inv-chip" data-janela="180">180d</button>
+          <button class="inv-chip" id="invSoFav">★ só favoritos</button>
+          <input id="invBusca" placeholder="filtrar por nome…"
+            class="text-sm px-2 py-1 rounded-lg bg-slate-900 border border-slate-700 text-slate-200"
+            style="min-width:180px" />
+          <button onclick="carregarInvest(true)"
+            class="px-3 py-1.5 text-xs font-bold bg-sky-600 hover:bg-sky-500 text-white rounded-lg">↻
+            Atualizar</button>
+          <span id="invStatus" class="text-xs text-slate-400 ml-auto">—</span>
+        </div>
+        <div id="invAlvoBar" class="text-xs text-amber-300"></div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div class="card overflow-hidden shadow-lg">
+          <div class="table-header px-4 py-2 border-b border-slate-700 text-xs font-bold text-sky-300 uppercase">
+            Insumos <span id="invContagem" class="text-slate-400 font-normal"></span>
+          </div>
+          <div id="invLista" class="inv-lista custom-scroll"></div>
+        </div>
+        <div class="card p-4 shadow-lg lg:col-span-2 space-y-3" id="invDetalhe">
+          <div class="text-xs text-slate-400">Selecione um item na lista.</div>
+        </div>
+      </div>
+    </div>
 
     <!-- ========================================== -->
     <!-- ABA DEDICADA: HISTÓRICO GRANULAR & GRÁFICOS -->
@@ -793,7 +945,7 @@
       if (currentTab === 'global') {
         ignoredItems = { alchemy: [], jewelcrafting: [], enchanting: [], inscription: [] };
       } else {
-        const prof = currentTab === "history" ? lastProfTab : currentTab;
+        const prof = (currentTab === "history" || currentTab === "invest") ? lastProfTab : currentTab;
         ignoredItems[prof] = [];
       }
       saveState();
@@ -1735,7 +1887,9 @@
     }
 
     function switchTab(tabKey) {
-      if (tabKey !== "history" && tabKey !== "global") {
+      // "history" e "invest" nao sao abas de profissao: nao podem virar lastProfTab,
+      // senao updateInputsFromState() procuraria profSettings["invest"] e quebraria.
+      if (tabKey !== "history" && tabKey !== "global" && tabKey !== "invest") {
         lastProfTab = tabKey;
       }
       currentTab = tabKey;
@@ -1754,38 +1908,492 @@
       const topRanking = document.getElementById("topRankingCard");
       const tabContent = document.getElementById("tabContentContainer");
       const historyContent = document.getElementById("historyTabContainer");
+      const investContent = document.getElementById("investTabContainer");
       const smartFiltersBar = document.getElementById("smartFiltersBar");
 
+      // sim = mostra; !sim = esconde. Um helper so, para nao repetir 20 linhas.
+      const mostrar = (el, sim) => { if (el) el.classList[sim ? "remove" : "add"]("hidden"); };
+
+      mostrar(investContent, tabKey === "invest");
+
+      if (tabKey === "invest") {
+        mostrar(profControls, false);
+        mostrar(topRanking, false);
+        mostrar(tabContent, false);
+        mostrar(smartFiltersBar, false);
+        mostrar(historyContent, false);
+        renderInvest();
+        return;
+      }
+
       if (tabKey === "history") {
-        profControls.classList.add("hidden");
-        topRanking.classList.add("hidden");
-        tabContent.classList.add("hidden");
-        if (smartFiltersBar) smartFiltersBar.classList.add("hidden");
-        historyContent.classList.remove("hidden");
+        mostrar(profControls, false);
+        mostrar(topRanking, false);
+        mostrar(tabContent, false);
+        mostrar(smartFiltersBar, false);
+        mostrar(historyContent, true);
         populateHistItemSelect();
         renderHistoryView();
       } else if (tabKey === "global") {
-        profControls.classList.add("hidden");
-        topRanking.classList.remove("hidden");
-        tabContent.classList.remove("hidden");
-        if (smartFiltersBar) smartFiltersBar.classList.remove("hidden");
-        historyContent.classList.add("hidden");
+        mostrar(profControls, false);
+        mostrar(topRanking, true);
+        mostrar(tabContent, true);
+        mostrar(smartFiltersBar, true);
+        mostrar(historyContent, false);
         document.getElementById("activeProfLabel").textContent = names[tabKey];
         renderAll();
       } else {
-        profControls.classList.remove("hidden");
-        topRanking.classList.remove("hidden");
-        tabContent.classList.remove("hidden");
-        if (smartFiltersBar) smartFiltersBar.classList.remove("hidden");
-        historyContent.classList.add("hidden");
+        mostrar(profControls, true);
+        mostrar(topRanking, true);
+        mostrar(tabContent, true);
+        mostrar(smartFiltersBar, true);
+        mostrar(historyContent, false);
         document.getElementById("activeProfLabel").textContent = names[tabKey];
         updateInputsFromState();
         renderAll();
       }
     }
 
+    // =================================================================================
+    // ABA INVESTIR — série de preço/oferta (rota ?umx=N) + favoritos com preço-alvo
+    // =================================================================================
+    // A fonte é a MESMA rota que a página investimento.html usava: o navegador
+    // nunca vê credencial (a chave do Undermine vive na Script Property).
+    // Favoritos e preço-alvo ficam no localStorage DESTE navegador — não vão para
+    // a planilha nem para o Turso. É intencional: são preferências de tela.
+    const INV_FAV_KEY = "kaychak_invest_favs_v1";
+    const INV_JANELA_KEY = "kaychak_invest_janela";
+
+    let invDados = { itens: {}, meta: {} };
+    let invJanela = Number(localStorage.getItem(INV_JANELA_KEY) || 90) || 90;
+    let invSelecionado = null;
+    let invSoFav = false;
+    let invBusca = "";
+    let invCarregando = false;
+    let invJaCarregou = false;
+
+    function invFavs() {
+      try { return JSON.parse(localStorage.getItem(INV_FAV_KEY) || "{}") || {}; }
+      catch (e) { return {}; }
+    }
+
+    function invSalvarFavs(o) {
+      try { localStorage.setItem(INV_FAV_KEY, JSON.stringify(o)); } catch (e) { }
+    }
+
+    function invEhFav(id) {
+      return Object.prototype.hasOwnProperty.call(invFavs(), String(id));
+    }
+
+    function invAlvo(id) {
+      const f = invFavs()[String(id)];
+      return (f && Number(f.alvo) > 0) ? Number(f.alvo) : null;
+    }
+
+    function invPreco(it) {
+      const ag = it.agora || {};
+      if (ag.preco !== undefined && ag.preco !== null) return Number(ag.preco);
+      const st = it.stats || {};
+      return (st.atual !== undefined && st.atual !== null) ? Number(st.atual) : null;
+    }
+
+    function invOferta(it) {
+      const ag = it.agora || {};
+      return (ag.oferta !== undefined && ag.oferta !== null) ? Number(ag.oferta) : null;
+    }
+
+    /**
+     * O sinal responde à única pergunta que importa para comprar barato:
+     * "está barato E dá para comprar?". Barato sem oferta não é oportunidade —
+     * é preço de negócio antigo que ninguém está vendendo.
+     */
+    function invSinal(it) {
+      const st = it.stats || {};
+      const of = invOferta(it);
+      const pct = (st.d30 && st.d30.pct !== undefined) ? Number(st.d30.pct) : null;
+
+      if (of !== null && of <= 0) {
+        return { txt: "SEM ESTOQUE", cor: "#94a3b8", bg: "#94a3b81a", dica: "preço do último negócio — não há anúncio para comprar" };
+      }
+      if (pct === null) {
+        return { txt: "SEM BASE", cor: "#94a3b8", bg: "#94a3b81a", dica: "série curta: menos de 30 pontos" };
+      }
+      if (pct <= 15) return { txt: "COMPRAR", cor: "#34d399", bg: "#34d3991a", dica: "entre os 15% mais baratos do mês" };
+      if (pct <= 35) return { txt: "BARATO", cor: "#a3e635", bg: "#a3e6351a", dica: "abaixo do preço habitual" };
+      if (pct >= 80) return { txt: "CARO", cor: "#fb7185", bg: "#fb71851a", dica: "perto do topo do mês — hora de vender, não comprar" };
+      return { txt: "NEUTRO", cor: "#cbd5e1", bg: "#cbd5e11a", dica: "na faixa habitual" };
+    }
+
+    function invG(v) {
+      if (v === null || v === undefined || !isFinite(v)) return "—";
+      if (v >= 1e6) return (v / 1e6).toFixed(2) + "M g";
+      if (v >= 1e3) return (v / 1e3).toFixed(1) + "k g";
+      if (v >= 10) return v.toFixed(1) + " g";
+      if (v >= 1) return v.toFixed(2) + " g";
+      return v.toFixed(3) + " g";
+    }
+
+    function invN(v) {
+      if (v === null || v === undefined || !isFinite(v)) return "—";
+      if (v >= 1e6) return (v / 1e6).toFixed(1) + "M";
+      if (v >= 1e3) return (v / 1e3).toFixed(1) + "k";
+      return String(Math.round(v));
+    }
+
+    function invEsc(s) {
+      return String(s === null || s === undefined ? "" : s).replace(/[&<>"']/g, function (c) {
+        return "&#" + c.charCodeAt(0) + ";";
+      });
+    }
+
+    function invStatus(txt) {
+      const el = document.getElementById("invStatus");
+      if (el) el.textContent = txt;
+    }
+
+    function carregarInvest(forcar) {
+      if (invCarregando) return;
+      if (invJaCarregou && !forcar) return;
+      invCarregando = true;
+      invStatus("buscando " + invJanela + " dias…");
+
+      fetch(SCRIPT_URL + "?umx=" + invJanela + "&_=" + Date.now())
+        .then(r => r.json())
+        .then(j => {
+          const d = (j && j.data) || {};
+          invDados = { itens: d.umx || {}, meta: d.umxMeta || {} };
+          invJaCarregou = true;
+          const n = Object.keys(invDados.itens).length;
+          invStatus(invDados.meta.aviso ? ("aviso: " + invDados.meta.aviso) : (n + " item(ns) · " + invJanela + " dias"));
+          renderInvestLista();
+          invAtualizarBarraAlvo();
+          if (!invSelecionado && n) {
+            const fila = invOrdenados();
+            if (fila.length) selecionarInvest(fila[0]);
+          } else {
+            renderInvestDetalhe();
+          }
+        })
+        .catch(e => {
+          invStatus("falha na requisição: " + e.message);
+          const box = document.getElementById("invLista");
+          if (box) {
+            box.innerHTML = '<div class="p-3 text-xs text-rose-300">Não foi possível ler a série. ' +
+              'Confira se <code>?umx=90</code> abre no navegador.</div>';
+          }
+        })
+        .then(() => { invCarregando = false; });
+    }
+
+    /** Favoritos primeiro; dentro de cada grupo, do mais barato (percentil 30d) ao mais caro. */
+    function invOrdenados() {
+      const favs = invFavs();
+      const filtro = invBusca.trim().toLowerCase();
+
+      return Object.keys(invDados.itens)
+        .filter(k => {
+          const it = invDados.itens[k];
+          if (filtro && String(it.nome || "").toLowerCase().indexOf(filtro) === -1) return false;
+          if (invSoFav && !Object.prototype.hasOwnProperty.call(favs, k)) return false;
+          return true;
+        })
+        .sort((a, b) => {
+          const fa = Object.prototype.hasOwnProperty.call(favs, a) ? 0 : 1;
+          const fb = Object.prototype.hasOwnProperty.call(favs, b) ? 0 : 1;
+          if (fa !== fb) return fa - fb;
+          const sa = invDados.itens[a].stats || {};
+          const sb = invDados.itens[b].stats || {};
+          const pa = sa.d30 ? sa.d30.pct : 999;
+          const pb = sb.d30 ? sb.d30.pct : 999;
+          return pa - pb;
+        });
+    }
+
+    function renderInvest() {
+      document.querySelectorAll("#investTabContainer .inv-chip[data-janela]").forEach(b => {
+        b.classList.toggle("on", Number(b.getAttribute("data-janela")) === invJanela);
+      });
+      const sf = document.getElementById("invSoFav");
+      if (sf) sf.classList.toggle("on", invSoFav);
+
+      invAtualizarBarraAlvo();
+      renderInvestLista();
+      renderInvestDetalhe();
+      carregarInvest(false);
+    }
+
+    function renderInvestLista() {
+      const box = document.getElementById("invLista");
+      if (!box) return;
+
+      const fila = invOrdenados();
+      const cont = document.getElementById("invContagem");
+      if (cont) cont.textContent = "· " + fila.length + " de " + Object.keys(invDados.itens).length;
+
+      if (!fila.length) {
+        box.innerHTML = '<div class="p-3 text-xs text-slate-400">Nenhum item para mostrar. ' +
+          'Ajuste o filtro ou rode <code>umxPuxarDiario()</code> no Apps Script.</div>';
+        return;
+      }
+
+      box.innerHTML = fila.map(k => {
+        const it = invDados.itens[k];
+        const st = it.stats || {};
+        const pct = (st.d30 && st.d30.pct !== undefined) ? Number(st.d30.pct) : null;
+        const s = invSinal(it);
+        const fav = invEhFav(k);
+        const alvo = invAlvo(k);
+        const preco = invPreco(it);
+        const noAlvo = alvo !== null && preco !== null && preco <= alvo;
+        const corPct = pct === null ? "#64748b" : (pct <= 20 ? "#34d399" : (pct >= 80 ? "#fb7185" : "#e2e8f0"));
+
+        return '<div class="inv-row' + (k === invSelecionado ? " on" : "") + '" data-id="' + k + '">' +
+          '<button class="inv-star' + (fav ? " on" : "") + '" data-fav="' + k + '" title="favoritar">' +
+          (fav ? "★" : "☆") + '</button>' +
+          '<span class="nm">' + invEsc(it.nome) +
+          (noAlvo ? ' <span class="inv-badge" style="color:#34d399;background:#34d3991a">NO ALVO</span>' : '') +
+          '</span>' +
+          '<span class="inv-badge" style="color:' + s.cor + ';background:' + s.bg + '">' + s.txt + '</span>' +
+          '<span class="pg" style="color:' + corPct + '">' + (pct === null ? "—" : pct.toFixed(0) + "%") + '</span>' +
+          '</div>';
+      }).join("");
+
+      box.querySelectorAll(".inv-row").forEach(row => {
+        row.addEventListener("click", ev => {
+          if (ev.target && ev.target.getAttribute && ev.target.getAttribute("data-fav")) return;
+          selecionarInvest(row.getAttribute("data-id"));
+        });
+      });
+
+      box.querySelectorAll("[data-fav]").forEach(btn => {
+        btn.addEventListener("click", ev => {
+          ev.stopPropagation();
+          invAlternarFav(btn.getAttribute("data-fav"));
+        });
+      });
+    }
+
+    function selecionarInvest(id) {
+      invSelecionado = String(id);
+      renderInvestLista();
+      renderInvestDetalhe();
+    }
+
+    function renderInvestDetalhe() {
+      const box = document.getElementById("invDetalhe");
+      if (!box) return;
+
+      const it = invSelecionado ? invDados.itens[invSelecionado] : null;
+      if (!it) {
+        box.innerHTML = '<div class="text-xs text-slate-400">Selecione um item na lista.</div>';
+        return;
+      }
+
+      const st = it.stats || {};
+      const d30 = st.d30 || {};
+      const s = invSinal(it);
+      const fav = invEhFav(invSelecionado);
+      const alvo = invAlvo(invSelecionado);
+      const preco = invPreco(it);
+      const oferta = invOferta(it);
+      const gap = (alvo !== null && preco !== null && alvo > 0) ? (preco / alvo - 1) * 100 : null;
+
+      const kpis = [
+        ["preço agora", invG(preco), ""],
+        ["oferta agora", invN(oferta), oferta === 0 ? "sem anúncio — preço do último negócio" : "unidades na região"],
+        ["mediana 30d", invG(d30.mediana), (d30.n !== undefined && d30.n < 30) ? d30.n + " de 30 pontos" : ""],
+        ["percentil 30d", d30.pct === undefined ? "—" : d30.pct.toFixed(0) + "%", "0 = mais barato do mês"],
+        ["tendência 7/30",
+          (st.tend_7_vs_30 === undefined || st.tend_7_vs_30 === null) ? "—" : ((st.tend_7_vs_30 > 0 ? "+" : "") + st.tend_7_vs_30 + "%"), ""],
+        ["mín / máx", invG(st.min) + " / " + invG(st.max), st.n + " ponto(s)"]
+      ];
+
+      let alvoHtml;
+      if (fav) {
+        alvoHtml = '<div class="flex flex-wrap items-center gap-2 text-xs text-slate-300">' +
+          '<label class="text-[11px] font-semibold text-slate-400 uppercase">preço-alvo</label>' +
+          '<input id="invAlvoInput" type="number" step="0.01" min="0" placeholder="ex: 12.5" value="' +
+          (alvo !== null ? alvo : "") + '" ' +
+          'class="w-24 text-sm px-2 py-1 rounded-lg bg-slate-900 border border-slate-700 text-slate-200" />' +
+          '<span class="text-slate-500">g</span>' +
+          '<button onclick="invSalvarAlvo()" class="px-2.5 py-1 text-xs font-bold bg-emerald-600 text-white rounded-lg">salvar</button>' +
+          '<button onclick="invLimparAlvo()" class="px-2.5 py-1 text-xs font-semibold bg-slate-700 text-slate-200 rounded-lg">limpar</button>' +
+          (gap === null ? '' :
+            '<span class="ml-2">' + (gap <= 0
+              ? '<b class="text-emerald-300">no alvo ou abaixo</b> (' + gap.toFixed(1) + '%)'
+              : 'falta cair <b class="text-amber-300">' + Math.abs(gap).toFixed(1) + '%</b>') + '</span>') +
+          '</div>';
+      } else {
+        alvoHtml = '<div class="text-[11px] text-slate-500">Favoritar libera o campo de preço-alvo: ' +
+          'você define quanto quer pagar e o item passa a mostrar <b>NO ALVO</b> quando chegar lá.</div>';
+      }
+
+      box.innerHTML =
+        '<div class="flex items-start justify-between gap-3 flex-wrap">' +
+        '<div>' +
+        '<div class="text-lg font-bold text-white">' + invEsc(it.nome) + '</div>' +
+        '<div class="text-xs text-slate-400 mt-1">' +
+        '<span class="inv-badge" style="color:' + s.cor + ';background:' + s.bg + '">' + s.txt + '</span> ' +
+        invEsc(s.dica) +
+        '</div>' +
+        '</div>' +
+        '<button onclick="invAlternarFav(\'' + invSelecionado + '\')" ' +
+        'class="px-3 py-1.5 text-xs font-bold rounded-lg border ' +
+        (fav ? 'border-amber-400 text-amber-300 bg-amber-400/10' : 'border-slate-600 text-slate-300') + '">' +
+        (fav ? '★ nos favoritos' : '☆ favoritar') + '</button>' +
+        '</div>' +
+        '<div class="grid grid-cols-2 md:grid-cols-3 gap-2">' +
+        kpis.map(k => '<div class="inv-kpi"><div class="r">' + k[0] + '</div>' +
+          '<div class="v">' + k[1] + '</div><div class="h">' + k[2] + '</div></div>').join("") +
+        '</div>' +
+        alvoHtml +
+        '<div>' + invSvg(it) + '</div>';
+    }
+
+    function invAlternarFav(id) {
+      const f = invFavs();
+      id = String(id);
+      if (f[id]) delete f[id];
+      else f[id] = { alvo: null };
+      invSalvarFavs(f);
+      renderInvestLista();
+      renderInvestDetalhe();
+      invAtualizarBarraAlvo();
+    }
+
+    function invSalvarAlvo() {
+      const inp = document.getElementById("invAlvoInput");
+      if (!inp || !invSelecionado) return;
+      const v = Number(String(inp.value).replace(",", "."));
+      const f = invFavs();
+      if (!f[invSelecionado]) f[invSelecionado] = {};
+      f[invSelecionado].alvo = v > 0 ? v : null;
+      invSalvarFavs(f);
+      renderInvestLista();
+      renderInvestDetalhe();
+      invAtualizarBarraAlvo();
+    }
+
+    function invLimparAlvo() {
+      const f = invFavs();
+      if (invSelecionado && f[invSelecionado]) {
+        f[invSelecionado].alvo = null;
+        invSalvarFavs(f);
+      }
+      renderInvestLista();
+      renderInvestDetalhe();
+      invAtualizarBarraAlvo();
+    }
+
+    /** Faixa de cima: quantos favoritos já chegaram no preço-alvo. */
+    function invAtualizarBarraAlvo() {
+      const bar = document.getElementById("invAlvoBar");
+      if (!bar) return;
+
+      const f = invFavs();
+      const ids = Object.keys(f);
+      if (!ids.length) {
+        bar.innerHTML = 'Clique na ☆ de qualquer item para acompanhar. ' +
+          'Favoritos ficam salvos neste navegador.';
+        return;
+      }
+
+      const noAlvo = ids.filter(id => {
+        const it = invDados.itens[id];
+        if (!it) return false;
+        const alvo = Number(f[id].alvo);
+        if (!(alvo > 0)) return false;
+        const p = invPreco(it);
+        return p !== null && p <= alvo;
+      });
+
+      bar.innerHTML = '★ ' + ids.length + ' favorito(s)' + (noAlvo.length
+        ? ' · <b class="text-emerald-300">' + noAlvo.length + ' no alvo: ' +
+        noAlvo.map(id => invEsc((invDados.itens[id] || {}).nome || id)).join(", ") + '</b>'
+        : ' · nenhum no alvo ainda');
+    }
+
+    /** Gráfico SVG: linha de preço (ouro) + área de oferta (azul). Sem dependência externa. */
+    function invSvg(it) {
+      const dias = (it.dias || []).filter(d => d && Number(d[1]) > 0);
+      if (dias.length < 2) {
+        return '<div class="text-xs text-slate-500 p-3">Série curta demais para gráfico (' +
+          dias.length + ' ponto(s)).</div>';
+      }
+
+      const W = 680, H = 230, PL = 50, PR = 14, PT = 14, PB = 26;
+      const precos = dias.map(d => Number(d[1]));
+      const ofertas = dias.map(d => Number(d[2]) || 0);
+      const pMin = Math.min.apply(null, precos);
+      const pMax = Math.max.apply(null, precos);
+      const oMax = Math.max.apply(null, ofertas) || 1;
+      const span = (pMax - pMin) || 1;
+
+      const X = i => PL + (W - PL - PR) * (i / (dias.length - 1));
+      const YP = v => PT + (H - PT - PB) * (1 - (v - pMin) / span);
+      const YO = v => PT + (H - PT - PB) * (1 - v / oMax);
+
+      const linha = dias.map((d, i) => (i ? "L" : "M") + X(i).toFixed(1) + " " + YP(precos[i]).toFixed(1)).join(" ");
+      const area = "M" + X(0).toFixed(1) + " " + (H - PB) + " " +
+        dias.map((d, i) => "L" + X(i).toFixed(1) + " " + YO(ofertas[i]).toFixed(1)).join(" ") +
+        " L" + X(dias.length - 1).toFixed(1) + " " + (H - PB) + " Z";
+
+      const grades = [];
+      for (let k = 0; k <= 3; k++) {
+        const v = pMin + span * (k / 3);
+        const y = YP(v);
+        grades.push('<line x1="' + PL + '" y1="' + y.toFixed(1) + '" x2="' + (W - PR) +
+          '" y2="' + y.toFixed(1) + '" stroke="#1e293b" stroke-width="1"/>');
+        grades.push('<text x="' + (PL - 6) + '" y="' + (y + 3).toFixed(1) +
+          '" text-anchor="end" font-size="9" fill="#64748b">' + invG(v) + '</text>');
+      }
+
+      const ini = dias[0][0], fim = dias[dias.length - 1][0];
+
+      return '<svg viewBox="0 0 ' + W + ' ' + H + '" style="width:100%;height:auto">' +
+        grades.join("") +
+        '<path d="' + area + '" fill="#38bdf81a"/>' +
+        '<path d="' + linha + '" fill="none" stroke="#fbbf24" stroke-width="1.8"/>' +
+        '<text x="' + PL + '" y="' + (H - 8) + '" font-size="9" fill="#64748b">' + ini + '</text>' +
+        '<text x="' + (W - PR) + '" y="' + (H - 8) + '" font-size="9" fill="#64748b" text-anchor="end">' + fim + '</text>' +
+        '<text x="' + (W - PR) + '" y="' + (PT + 8) + '" font-size="9" fill="#38bdf8" text-anchor="end">área = oferta</text>' +
+        '</svg>';
+    }
+
+    // Controles da aba (janela, filtro, busca). O script roda no fim do body,
+    // então os elementos já existem neste ponto.
+    (function invBind() {
+      document.querySelectorAll("#investTabContainer .inv-chip[data-janela]").forEach(b => {
+        b.addEventListener("click", () => {
+          invJanela = Number(b.getAttribute("data-janela"));
+          try { localStorage.setItem(INV_JANELA_KEY, String(invJanela)); } catch (e) { }
+          invJaCarregou = false;   // troca de janela exige nova busca
+          renderInvest();
+        });
+      });
+
+      const sf = document.getElementById("invSoFav");
+      if (sf) {
+        sf.addEventListener("click", () => {
+          invSoFav = !invSoFav;
+          sf.classList.toggle("on", invSoFav);
+          renderInvestLista();
+        });
+      }
+
+      const busca = document.getElementById("invBusca");
+      if (busca) {
+        busca.addEventListener("input", () => {
+          invBusca = busca.value || "";
+          renderInvestLista();
+        });
+      }
+    })();
+
     function updateInputsFromState() {
-      const prof = currentTab === "history" ? lastProfTab : currentTab;
+      // "invest" nao e profissao: usa a ultima aba de profissao para nao
+      // indexar profSettings["invest"] (undefined).
+      const prof = (currentTab === "history" || currentTab === "invest") ? lastProfTab : currentTab;
       const s = profSettings[prof];
       document.getElementById("resInput").value = s.res;
       document.getElementById("mcInput").value = s.mc;
@@ -1793,7 +2401,7 @@
     }
 
     function updateProfAttr(attr, val) {
-      const prof = currentTab === "history" ? lastProfTab : currentTab;
+      const prof = (currentTab === "history" || currentTab === "invest") ? lastProfTab : currentTab;
       profSettings[prof][attr] = parseFloat(val) || 0;
       saveState();
       renderAll();
@@ -2199,6 +2807,13 @@
     function renderAll() {
       if (currentTab === "history") {
         renderHistoryView();
+        return;
+      }
+
+      // A aba Investir nao usa as tabelas de craft; sem esta guarda, um refresh
+      // automatico com ela aberta cairia em profSettings["invest"] (undefined).
+      if (currentTab === "invest") {
+        renderInvestLista();
         return;
       }
 
