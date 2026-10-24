@@ -2161,11 +2161,33 @@
 
       const fila = invOrdenados();
       const cont = document.getElementById("invContagem");
-      if (cont) cont.textContent = "· " + fila.length + " de " + Object.keys(invDados.itens).length;
+
+      // Item que TEM dado mas caiu em outro filtro precisa ser anunciado: antes ele
+      // simplesmente "sumia" da aba (foi assim que Cursebound Globe e Neutralized
+      // Venom Clot desapareceram — estavam como `desconhecido`, e o filtro padrão
+      // é "Reagentes").
+      const totalItens = Object.keys(invDados.itens).length;
+      let ocultos = 0;
+      const porTipo = { insumo: 0, produto: 0, desconhecido: 0 };
+      if (!invSemTipo) {
+        Object.keys(invDados.itens).forEach(k => {
+          const it = invDados.itens[k];
+          const tp = it.tipo || "desconhecido";
+          if (porTipo[tp] !== undefined) porTipo[tp]++;
+          if (invTipo !== "todos" && tp !== invTipo && invPreco(it) !== null) ocultos++;
+        });
+      }
+
+      if (cont) {
+        cont.textContent = "· " + fila.length + " de " + totalItens +
+          (ocultos ? " · " + ocultos + " com dado em outro filtro" : "");
+      }
 
       if (!fila.length) {
         box.innerHTML = '<div class="p-3 text-xs text-slate-400">Nenhum item para mostrar. ' +
-          'Ajuste o filtro ou rode <code>umxPuxarDiario()</code> no Apps Script.</div>';
+          (ocultos ? 'Há <b>' + ocultos + ' item(ns)</b> com preço fora deste filtro — ' +
+            'clique em <b>Todos</b>. ' : '') +
+          'Se não houver nada em Todos, rode <code>umxPuxarDiario()</code> no Apps Script.</div>';
         return;
       }
 
@@ -2173,7 +2195,13 @@
         ? '<div class="p-2 text-[11px] text-amber-300 border-b border-slate-800">' +
         'A classificação de tipo ainda não está no banco: rode <code>tursoMigrarSchema()</code> e ' +
         '<code>publicarCatalogoMateriais()</code>. Enquanto isso, todos os itens aparecem.</div>'
-        : '';
+        : (ocultos
+          ? '<div class="p-2 text-[11px] text-slate-400 border-b border-slate-800">' +
+          'Fora deste filtro: <b>' + ocultos + '</b> item(ns) com preço · ' +
+          'reagentes ' + porTipo.insumo + ' · produtos ' + porTipo.produto +
+          ' · outros ' + porTipo.desconhecido + '. ' +
+          '<button class="underline text-sky-300" onclick="invFiltrarTodos()">ver todos</button></div>'
+          : '');
 
       box.innerHTML = avisoTipo + fila.map(k => {
         const it = invDados.itens[k];
@@ -2292,6 +2320,20 @@
 
       // O gráfico acabou de ser recriado por innerHTML: religar o tooltip aqui.
       invBindChartTip();
+    }
+
+    /**
+     * Atalho do rodapé de contagem: tira o filtro de tipo e mostra tudo.
+     * Existe porque item classificado como "outros" some do filtro padrão
+     * ("Reagentes") sem aviso — o usuário via "item faltando na aba".
+     */
+    function invFiltrarTodos() {
+      invTipo = "todos";
+      try { localStorage.setItem(INV_TIPO_KEY, invTipo); } catch (e) { }
+      document.querySelectorAll("#investTabContainer .inv-chip[data-tipo]").forEach(o => {
+        o.classList.toggle("on", o.getAttribute("data-tipo") === "todos");
+      });
+      renderInvestLista();
     }
 
     function invAlternarFav(id) {
@@ -2415,7 +2457,7 @@
       // Ponto visível em cada leitura — só quando não vira poeira na tela.
       const pontos = dias.length <= 45
         ? dias.map((d, i) => '<circle cx="' + xs[i].toFixed(1) + '" cy="' + ys[i].toFixed(1) +
-            '" r="1.8" fill="#fbbf24" opacity="0.55"/>').join("")
+          '" r="1.8" fill="#fbbf24" opacity="0.55"/>').join("")
         : "";
 
       // Tooltip: um grupo escondido que o mouse move e preenche. Fica depois de
@@ -2431,17 +2473,17 @@
         '<text x="' + (W - PR) + '" y="' + (H - 8) + '" font-size="9" fill="#64748b" text-anchor="end">' + fim + '</text>' +
         '<text x="' + (W - PR) + '" y="' + (PT + 8) + '" font-size="9" fill="#38bdf8" text-anchor="end">área = oferta</text>' +
         '<line id="invTipGuide" x1="0" y1="' + PT + '" x2="0" y2="' + (H - PB) +
-          '" stroke="#94a3b8" stroke-width="1" stroke-dasharray="2 2" opacity="0"/>' +
+        '" stroke="#94a3b8" stroke-width="1" stroke-dasharray="2 2" opacity="0"/>' +
         '<circle id="invTipDot" r="3.4" fill="#fff" style="display:none"/>' +
         '<g id="invTipGrp" style="display:none" pointer-events="none">' +
         '<rect width="' + TIPW + '" height="' + TIPH + '" rx="4" fill="#0b1220" ' +
-          'stroke="#334155" opacity="0.97"/>' +
+        'stroke="#334155" opacity="0.97"/>' +
         '<text id="invTipL1" x="7" y="14" font-size="9.5" fill="#e2e8f0"></text>' +
         '<text id="invTipL2" x="7" y="27" font-size="9.5" fill="#fbbf24"></text>' +
         '<text id="invTipL3" x="7" y="40" font-size="9.5" fill="#7dd3fc"></text>' +
         '</g>' +
         '<rect id="invTipHit" x="' + PL + '" y="' + PT + '" width="' + (W - PL - PR) + '" ' +
-          'height="' + (H - PT - PB) + '" fill="transparent" style="cursor:crosshair"/>' +
+        'height="' + (H - PT - PB) + '" fill="transparent" style="cursor:crosshair"/>' +
         '</svg>';
     }
 
