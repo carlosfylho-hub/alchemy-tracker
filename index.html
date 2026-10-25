@@ -480,7 +480,7 @@
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <div class="card overflow-hidden shadow-lg">
           <div class="table-header px-4 py-2 border-b border-slate-700 text-xs font-bold text-sky-300 uppercase">
-            Insumos <span id="invContagem" class="text-slate-400 font-normal"></span>
+            <span id="invListaTitulo">Insumos</span> <span id="invContagem" class="text-slate-400 font-normal"></span>
           </div>
           <div id="invLista" class="inv-lista custom-scroll"></div>
         </div>
@@ -2317,6 +2317,15 @@
 
       const fila = invOrdenados();
       const cont = document.getElementById("invContagem");
+
+      // O titulo do painel era "Insumos" fixo: com o filtro em Produtos ele mentia.
+      const titulo = document.getElementById("invListaTitulo");
+      if (titulo) {
+        titulo.textContent = invSoFav ? "Favoritos"
+          : (invSemTipo || invTipo === "todos") ? "Todos os itens"
+            : invTipo === "insumo" ? "Insumos"
+              : invTipo === "produto" ? "Produtos" : "Sem classificação";
+      }
 
       // Item que TEM dado mas caiu em outro filtro precisa ser anunciado: antes ele
       // simplesmente "sumia" da aba (foi assim que Cursebound Globe e Neutralized
