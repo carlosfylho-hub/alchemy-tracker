@@ -773,41 +773,48 @@
     };
     let historyChartInstance = null;
 
-    // TABELA CANONICA (DOC0 §5.1) — res/mc sao os numeros da planilha, nao os que o
-    // dashboard herdou. Antes daqui: Res 36/17/25/17,7 e MC 37/26/20/31. Para receita
-    // sincronizada o efeito do numero errado era nulo (o sync grava
+    // TABELA CANONICA (DOC0 §5.1) — res/mc/ing sao os numeros da planilha e da
+    // build padrao dos personagens (rev. de 25/10/2026). refund continua 70 nas
+    // quatro profissoes (F_restituicao padrao do dashboard/planilha).
+    // Historico: ate 24/10 era Res 36/17/25/17,7 e MC 37/26/20/31; em 25/10 os
+    // valores da build mudaram para os de baixo (Encantamento passou a registrar
+    // os 38,5 de Engenhosidade da pocao, ativa em todos os personagens).
+    // Para receita sincronizada o efeito de um valor errado era nulo (o sync grava
     // baseCost = custoCraftadoPlanilha / factor e o calcItem multiplica pelo MESMO
     // factor), mas receita que so existe no DEFAULT_DATA era calculada com o valor
     // antigo. Ver RELATORIO_SESSAO_2026-10-24 §23.2 e DOC0 §5.1.
     const DEFAULT_PROF_SETTINGS = {
-      alchemy: { res: 15.0, mc: 36.4, ing: 29, refund: 70 },
-      jewelcrafting: { res: 17.7, mc: 32.8, ing: 25, refund: 70 },
-      enchanting: { res: 37.7, mc: 0, ing: 25, refund: 70 },
-      inscription: { res: 17.7, mc: 31.0, ing: 25, refund: 70 }
+      alchemy: { res: 15.0, mc: 36.4, ing: 28.9, refund: 70 },
+      jewelcrafting: { res: 17.8, mc: 33.4, ing: 21.6, refund: 70 },
+      enchanting: { res: 14.7, mc: 0, ing: 38.5, refund: 70 },
+      inscription: { res: 12.2, mc: 22.7, ing: 11.6, refund: 70 }
     };
 
     const CANON_PROF_SETTINGS = {
-      alchemy: { res: 15.0, mc: 36.4 },
-      jewelcrafting: { res: 17.7, mc: 32.8 },
-      enchanting: { res: 37.7, mc: 0 },
-      inscription: { res: 17.7, mc: 31.0 }
+      alchemy: { res: 15.0, mc: 36.4, ing: 28.9 },
+      jewelcrafting: { res: 17.8, mc: 33.4, ing: 21.6 },
+      enchanting: { res: 14.7, mc: 0, ing: 38.5 },
+      inscription: { res: 12.2, mc: 22.7, ing: 11.6 }
     };
 
-    // Valores que o dashboard e o servidor ja gravaram e que NAO sao canonicos.
-    // A migracao so reescreve o que estiver exatamente nesta lista: qualquer outro
-    // numero e tratado como override do operador e fica intocado.
+    // Valores que o dashboard, o servidor (`?status=1`) e a planilha ja gravaram e
+    // que NAO sao canonicos. A migracao so reescreve o que estiver exatamente
+    // nesta lista: qualquer outro numero e tratado como override do operador e
+    // fica intocado.
     const LEGACY_PROF_VALUES = {
-      alchemy: { res: [36], mc: [37] },
-      jewelcrafting: { res: [17, 38], mc: [26, 34] },
-      enchanting: { res: [25, 30], mc: [20] },
-      inscription: { res: [17.7, 32], mc: [30] }
+      alchemy: { res: [36], mc: [37], ing: [29] },
+      jewelcrafting: { res: [17, 38, 17.7], mc: [26, 34, 32.8], ing: [25, 22] },
+      enchanting: { res: [25, 30, 37.7], mc: [20], ing: [25, 22, 0] },
+      inscription: { res: [17.7, 32], mc: [30, 31.0], ing: [25, 19] }
     };
 
     const PROF_CANONICO_KEY = STORAGE_KEY + "_prof_canonico_v1";
 
     /**
-     * Alinha res/mc de profSettings a tabela canonica do DOC0 §5.1.
+     * Alinha res/mc/ing de profSettings a tabela canonica do DOC0 §5.1.
      * Idempotente: depois da primeira passada nada mais casa com LEGACY_PROF_VALUES.
+     * `refund` fica de fora de proposito: e configuracao do operador, nao atributo
+     * da build.
      * @returns {number} quantos campos foram corrigidos
      */
     function alinharProfSettingsCanonico(ps) {
@@ -816,7 +823,7 @@
         if (!ps || !ps[prof]) continue;
         const alvo = CANON_PROF_SETTINGS[prof];
         const legado = LEGACY_PROF_VALUES[prof] || {};
-        ["res", "mc"].forEach(function (attr) {
+        ["res", "mc", "ing"].forEach(function (attr) {
           const atual = Number(ps[prof][attr]);
           if (!isFinite(atual)) return;
           if (Math.abs(alvo[attr] - atual) < 1e-9) return;   // ja canonico
