@@ -2056,7 +2056,10 @@
     // servido pelo mesmo GitHub Pages do index.html. Se o arquivo nao existir (ou o
     // JSON estiver velho), a aba segue funcionando com a serie do ?umx=N: o join e
     // aditivo, nunca pre-requisito.
-    const INV_SCREENER_URL = "02_Notebook_Mercado/screener_aba.json";
+    // Dois caminhos de proposito: a raiz e o que o operador publica sem criar pasta,
+    // e `02_Notebook_Mercado/` e onde o gerador mantem a copia de trabalho. O gerador
+    // escreve nos dois na mesma execucao (`SAIDA_ABA` + `SAIDA_ABA_ESPELHO`).
+    const INV_SCREENER_URLS = ["screener_aba.json", "02_Notebook_Mercado/screener_aba.json"];
     let invScreener = { receitas: {}, insumos: {}, meta: {}, erro: null };
     let invScreenerCarregando = false;
 
@@ -2088,15 +2091,35 @@
     function carregarInvScreener() {
       if (invScreenerCarregando) return;
       invScreenerCarregando = true;
-      fetch(INV_SCREENER_URL + "?v=" + Date.now())
-        .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
-        .then(j => {
+
+      // Tenta os caminhos em ordem: o primeiro que responder 200 vence. Erro de um
+      // caminho nao e erro da aba — e o mesmo comportamento que fez o 404 de hoje
+      // cair em "screener indisponivel" em vez de mostrar custo inventado.
+      const tentar = function (i) {
+        if (i >= INV_SCREENER_URLS.length) {
+          return Promise.reject(new Error("404 em " + INV_SCREENER_URLS.join(" e ")));
+        }
+        const caminho = INV_SCREENER_URLS[i];
+        return fetch(caminho + "?v=" + Date.now())
+          .then(r => {
+            if (!r.ok) throw new Error("HTTP " + r.status);
+            return r.json();
+          })
+          .then(j => ({ json: j, caminho: caminho }))
+          .catch(() => tentar(i + 1));
+      };
+
+      tentar(0)
+        .then(res => {
           invScreener = {
-            receitas: (j && j.receitas) || {},
-            insumos: (j && j.insumos) || {},
-            meta: (j && j.meta) || {},
+            receitas: (res.json && res.json.receitas) || {},
+            insumos: (res.json && res.json.insumos) || {},
+            meta: (res.json && res.json.meta) || {},
             erro: null
           };
+          console.info("[invest] screener carregado de " + res.caminho + ": " +
+            Object.keys(invScreener.receitas).length + " receitas, " +
+            Object.keys(invScreener.insumos).length + " insumos");
           renderInvestLista();
           renderInvestDetalhe();
         })
