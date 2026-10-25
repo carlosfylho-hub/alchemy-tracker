@@ -1,6 +1,6 @@
 {
  "meta": {
-  "geradoEm": "2026-10-25T01:28:00Z",
+  "geradoEm": "2026-10-25T15:33:27Z",
   "receitas": 115,
   "insumos": 55,
   "fonte": "02_Notebook_Mercado/screener_investimento.json",
@@ -11,19 +11,18 @@
    "receita": "Flask of the Blood Knights Tier 2",
    "profissao": "alchemy",
    "custo_g": 285.61,
-   "preco_venda_g": 384.0,
+   "preco_venda_g": 373.94,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 851.11,
+   "lucro_g": 821.33,
    "unidades_esperadas": 3.116,
-   "g_por_conc": 2.7104,
+   "g_por_conc": 2.6156,
    "concentracao": 394,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Sanguithorn Tier 1",
@@ -67,20 +66,19 @@
   "liquid-luster-tier-2": {
    "receita": "Liquid Luster Tier 2",
    "profissao": "alchemy",
-   "custo_g": 58.18,
-   "preco_venda_g": 173.88,
+   "custo_g": 57.8,
+   "preco_venda_g": 170.92,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 1228.72,
+   "lucro_g": 1207.2,
    "unidades_esperadas": 7.7906,
-   "g_por_conc": 5.2438,
+   "g_por_conc": 5.152,
    "concentracao": 294,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 75,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Sanguithorn Tier 1"
@@ -105,7 +103,7 @@
     {
      "nome": "Sunglass Vial Tier 1",
      "qtd": 5,
-     "preco_g": 2.99,
+     "preco_g": 2.91,
      "fonte": "umx.atual",
      "percentil_30d": null,
      "insumo_barato": null
@@ -131,20 +129,19 @@
   "flask-of-the-magisters-tier-2": {
    "receita": "Flask of the Magisters Tier 2",
    "profissao": "alchemy",
-   "custo_g": 361.94,
-   "preco_venda_g": 335.58,
+   "custo_g": 361.59,
+   "preco_venda_g": 376.98,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 631.46,
+   "lucro_g": 754.35,
    "unidades_esperadas": 3.116,
-   "g_por_conc": 2.0109,
+   "g_por_conc": 2.4023,
    "concentracao": 394,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Sanguithorn Tier 1",
@@ -162,7 +159,7 @@
     {
      "nome": "Mote of Pure Void",
      "qtd": 2,
-     "preco_g": 0.57,
+     "preco_g": 0.39,
      "fonte": "umx.atual",
      "percentil_30d": null,
      "insumo_barato": null
@@ -189,19 +186,18 @@
    "receita": "Concentrated Silvermoon Health Potion Tier 2",
    "profissao": "alchemy",
    "custo_g": 102.67,
-   "preco_venda_g": 127.75,
+   "preco_venda_g": 162.07,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 842.82,
+   "lucro_g": 1096.82,
    "unidades_esperadas": 7.7906,
-   "g_por_conc": 3.5969,
+   "g_por_conc": 4.6809,
    "concentracao": 294,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 75,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [],
    "ingredientes": [
@@ -227,19 +223,18 @@
    "receita": "Haranir Phial of Perception Tier 2",
    "profissao": "alchemy",
    "custo_g": 219.42,
-   "preco_venda_g": 159.99,
+   "preco_venda_g": 159.0,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 720.49,
+   "lucro_g": 714.67,
    "unidades_esperadas": 6.184,
-   "g_por_conc": 2.2944,
+   "g_por_conc": 2.2759,
    "concentracao": 394,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Argentleaf Tier 1"
@@ -282,21 +277,20 @@
   "void-shrouded-tincture-tier-2": {
    "receita": "Void-Shrouded Tincture Tier 2",
    "profissao": "alchemy",
-   "custo_g": 34.01,
+   "custo_g": 33.66,
    "preco_venda_g": 65.59,
    "fonte_preco_venda": "tsm.commodity.minBuyout",
-   "lucro_g": 451.43,
+   "lucro_g": 451.77,
    "unidades_esperadas": 7.7906,
-   "g_por_conc": 1.9266,
+   "g_por_conc": 1.928,
    "concentracao": 294,
    "demanda_unid_dia": 4.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 4.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
     "demanda_so_propria",
-    "liquidez_parada",
-    "serie_curta"
+    "liquidez_parada"
    ],
    "insumos_baratos": [
     "Sanguithorn Tier 1"
@@ -305,7 +299,7 @@
     {
      "nome": "Mote of Pure Void",
      "qtd": 2,
-     "preco_g": 0.57,
+     "preco_g": 0.39,
      "fonte": "umx.atual",
      "percentil_30d": null,
      "insumo_barato": null
@@ -332,19 +326,18 @@
    "receita": "Flask of the Shattered Sun Tier 2",
    "profissao": "alchemy",
    "custo_g": 515.59,
-   "preco_venda_g": 398.0,
+   "preco_venda_g": 392.95,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 662.57,
+   "lucro_g": 647.62,
    "unidades_esperadas": 3.116,
-   "g_por_conc": 2.11,
+   "g_por_conc": 2.0624,
    "concentracao": 394,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Argentleaf Tier 1"
@@ -387,17 +380,17 @@
   "alluring-nostrum-tier-2": {
    "receita": "Alluring Nostrum Tier 2",
    "profissao": "alchemy",
-   "custo_g": 107.63,
-   "preco_venda_g": 103.76,
+   "custo_g": 107.25,
+   "preco_venda_g": 102.0,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 660.31,
+   "lucro_g": 647.66,
    "unidades_esperadas": 7.7906,
-   "g_por_conc": 2.818,
+   "g_por_conc": 2.764,
    "concentracao": 294,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 71,
+   "serie_pontos_90d": 72,
    "flags": [
     "sem_demanda_regional"
    ],
@@ -425,7 +418,7 @@
     {
      "nome": "Sunglass Vial Tier 1",
      "qtd": 5,
-     "preco_g": 2.99,
+     "preco_g": 2.91,
      "fonte": "umx.atual",
      "percentil_30d": null,
      "insumo_barato": null
@@ -460,19 +453,18 @@
    "receita": "Flask of Thalassian Resistance Tier 2",
    "profissao": "alchemy",
    "custo_g": 572.02,
-   "preco_venda_g": 355.01,
+   "preco_venda_g": 375.89,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 478.89,
+   "lucro_g": 540.7,
    "unidades_esperadas": 3.116,
-   "g_por_conc": 1.525,
+   "g_por_conc": 1.7219,
    "concentracao": 394,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Mana Lily Tier 1"
@@ -515,20 +507,19 @@
   "haranir-phial-of-ingenuity-tier-2": {
    "receita": "Haranir Phial of Ingenuity Tier 2",
    "profissao": "alchemy",
-   "custo_g": 83.51,
+   "custo_g": 83.16,
    "preco_venda_g": 118.0,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 609.72,
+   "lucro_g": 610.07,
    "unidades_esperadas": 6.184,
-   "g_por_conc": 1.9417,
+   "g_por_conc": 1.9428,
    "concentracao": 394,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Sanguithorn Tier 1",
@@ -538,7 +529,7 @@
     {
      "nome": "Mote of Pure Void",
      "qtd": 2,
-     "preco_g": 0.57,
+     "preco_g": 0.39,
      "fonte": "umx.atual",
      "percentil_30d": null,
      "insumo_barato": null
@@ -582,10 +573,9 @@
    "demanda_unid_dia": 8.73,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 8.7,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "demanda_so_propria",
-    "serie_curta"
+    "demanda_so_propria"
    ],
    "insumos_baratos": [
     "Mana Lily Tier 1"
@@ -638,10 +628,9 @@
    "demanda_unid_dia": 1.83,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 1.8,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "demanda_so_propria",
-    "serie_curta"
+    "demanda_so_propria"
    ],
    "insumos_baratos": [
     "Mana Lily Tier 1"
@@ -678,10 +667,9 @@
    "demanda_unid_dia": 111.81,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 111.8,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "demanda_so_propria",
-    "serie_curta"
+    "demanda_so_propria"
    ],
    "insumos_baratos": [
     "Argentleaf Tier 1"
@@ -725,19 +713,18 @@
    "receita": "Light's Preservation Tier 2",
    "profissao": "alchemy",
    "custo_g": 113.35,
-   "preco_venda_g": 94.98,
+   "preco_venda_g": 95.0,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 589.61,
+   "lucro_g": 589.75,
    "unidades_esperadas": 7.7906,
-   "g_por_conc": 2.5163,
+   "g_por_conc": 2.5169,
    "concentracao": 294,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [],
    "ingredientes": [
@@ -780,11 +767,10 @@
    "demanda_unid_dia": 9.62,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 9.6,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
     "demanda_so_propria",
-    "liquidez_parada",
-    "serie_curta"
+    "liquidez_parada"
    ],
    "insumos_baratos": [
     "Sanguithorn Tier 1",
@@ -876,11 +862,10 @@
    "demanda_unid_dia": 538.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 538.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
     "demanda_so_propria",
-    "liquidez_parada",
-    "serie_curta"
+    "liquidez_parada"
    ],
    "insumos_baratos": [
     "Mana Lily Tier 1"
@@ -925,11 +910,10 @@
    "demanda_unid_dia": 8.41,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 8.4,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
     "demanda_so_propria",
-    "liquidez_parada",
-    "serie_curta"
+    "liquidez_parada"
    ],
    "insumos_baratos": [],
    "ingredientes": [
@@ -956,10 +940,9 @@
    "demanda_unid_dia": 189.52,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 189.5,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "demanda_so_propria",
-    "serie_curta"
+    "demanda_so_propria"
    ],
    "insumos_baratos": [],
    "ingredientes": [
@@ -1002,10 +985,9 @@
    "demanda_unid_dia": 0.72,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.7,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "demanda_so_propria",
-    "serie_curta"
+    "demanda_so_propria"
    ],
    "insumos_baratos": [
     "Sanguithorn Tier 1"
@@ -1033,19 +1015,18 @@
    "receita": "Enlightenment Tonic Tier 2",
    "profissao": "alchemy",
    "custo_g": 19.75,
-   "preco_venda_g": 20.0,
+   "preco_venda_g": 19.6,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 128.27,
+   "lucro_g": 125.31,
    "unidades_esperadas": 7.7906,
-   "g_por_conc": 1.2476,
+   "g_por_conc": 1.2188,
    "concentracao": 129,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [],
    "ingredientes": [
@@ -1072,11 +1053,10 @@
    "demanda_unid_dia": 8.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 8.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
     "demanda_so_propria",
-    "liquidez_parada",
-    "serie_curta"
+    "liquidez_parada"
    ],
    "insumos_baratos": [],
    "ingredientes": [
@@ -1109,21 +1089,20 @@
   "powerful-eversong-diamond-tier-2": {
    "receita": "Powerful Eversong Diamond Tier 2",
    "profissao": "jewelcrafting",
-   "custo_g": 161.76,
-   "preco_venda_g": 750.11,
+   "custo_g": 156.63,
+   "preco_venda_g": 749.7,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 901.45,
+   "lucro_g": 906.0,
    "unidades_esperadas": 1.492,
-   "g_por_conc": 2.6375,
+   "g_por_conc": 2.6508,
    "concentracao": 404,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
     "custo_modelo_divergente",
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root"
@@ -1140,7 +1119,7 @@
     {
      "nome": "Eversong Diamond Tier 1",
      "qtd": 1,
-     "preco_g": 34.38,
+     "preco_g": 28.8,
      "fonte": "umx.atual",
      "percentil_30d": null,
      "insumo_barato": null
@@ -1150,27 +1129,26 @@
   "stabilizing-gemstone-bandolier-tier-2": {
    "receita": "Stabilizing Gemstone Bandolier Tier 2",
    "profissao": "jewelcrafting",
-   "custo_g": 578.98,
-   "preco_venda_g": 19.21,
+   "custo_g": 574.79,
+   "preco_venda_g": 10.0,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -551.75,
+   "lucro_g": -560.61,
    "unidades_esperadas": 1.492,
-   "g_por_conc": -1.6143,
+   "g_por_conc": -1.6403,
    "concentracao": 404,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [],
    "ingredientes": [
     {
      "nome": "Amani Lapis Tier 1",
      "qtd": 1,
-     "preco_g": 26.0,
+     "preco_g": 25.97,
      "fonte": "umx.atual",
      "percentil_30d": 90.0,
      "insumo_barato": false
@@ -1186,7 +1164,7 @@
     {
      "nome": "Harandar Peridot Tier 1",
      "qtd": 1,
-     "preco_g": 30.9,
+     "preco_g": 26.37,
      "fonte": "umx.atual",
      "percentil_30d": 100.0,
      "insumo_barato": false
@@ -1212,27 +1190,26 @@
   "kaleidoscopic-prism-tier-2": {
    "receita": "Kaleidoscopic Prism Tier 2",
    "profissao": "jewelcrafting",
-   "custo_g": 1330.62,
+   "custo_g": 1321.5,
    "preco_venda_g": 678.92,
    "fonte_preco_venda": "tsm.commodity.minBuyout",
-   "lucro_g": -368.32,
+   "lucro_g": -359.2,
    "unidades_esperadas": 1.492,
-   "g_por_conc": -1.3437,
+   "g_por_conc": -1.3105,
    "concentracao": 324,
    "demanda_unid_dia": 21.3,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 21.3,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "demanda_so_propria",
-    "serie_curta"
+    "demanda_so_propria"
    ],
    "insumos_baratos": [],
    "ingredientes": [
     {
      "nome": "Flawless Amani Lapis Tier 1",
      "qtd": 1,
-     "preco_g": 48.98,
+     "preco_g": 39.12,
      "fonte": "umx.atual",
      "percentil_30d": 96.7,
      "insumo_barato": false
@@ -1240,7 +1217,7 @@
     {
      "nome": "Flawless Harandar Peridot Tier 1",
      "qtd": 1,
-     "preco_g": 27.67,
+     "preco_g": 27.64,
      "fonte": "umx.atual",
      "percentil_30d": 90.0,
      "insumo_barato": false
@@ -1256,7 +1233,7 @@
     {
      "nome": "Flawless Tenebrous Amethyst Tier 1",
      "qtd": 1,
-     "preco_g": 30.14,
+     "preco_g": 30.12,
      "fonte": "umx.atual",
      "percentil_30d": 96.7,
      "insumo_barato": false
@@ -1274,21 +1251,20 @@
   "indecipherable-eversong-diamond-tier-2": {
    "receita": "Indecipherable Eversong Diamond Tier 2",
    "profissao": "jewelcrafting",
-   "custo_g": 161.76,
+   "custo_g": 156.63,
    "preco_venda_g": 570.0,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 646.16,
+   "lucro_g": 651.29,
    "unidades_esperadas": 1.492,
-   "g_por_conc": 1.8905,
+   "g_por_conc": 1.9056,
    "concentracao": 404,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
     "custo_modelo_divergente",
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root"
@@ -1305,7 +1281,7 @@
     {
      "nome": "Eversong Diamond Tier 1",
      "qtd": 1,
-     "preco_g": 34.38,
+     "preco_g": 28.8,
      "fonte": "umx.atual",
      "percentil_30d": null,
      "insumo_barato": null
@@ -1316,19 +1292,18 @@
    "receita": "Flawless Versatile Garnet Tier 2",
    "profissao": "jewelcrafting",
    "custo_g": 729.37,
-   "preco_venda_g": 425.09,
+   "preco_venda_g": 424.99,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -126.85,
+   "lucro_g": -126.99,
    "unidades_esperadas": 1.492,
-   "g_por_conc": -0.3711,
+   "g_por_conc": -0.3715,
    "concentracao": 404,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root"
@@ -1371,20 +1346,19 @@
   "flawless-deadly-peridot-tier-2": {
    "receita": "Flawless Deadly Peridot Tier 2",
    "profissao": "jewelcrafting",
-   "custo_g": 662.04,
-   "preco_venda_g": 470.5,
+   "custo_g": 662.01,
+   "preco_venda_g": 465.97,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 4.85,
+   "lucro_g": -1.54,
    "unidades_esperadas": 1.492,
-   "g_por_conc": 0.0142,
+   "g_por_conc": -0.0045,
    "concentracao": 404,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root"
@@ -1409,7 +1383,7 @@
     {
      "nome": "Flawless Harandar Peridot Tier 1",
      "qtd": 1,
-     "preco_g": 27.67,
+     "preco_g": 27.64,
      "fonte": "umx.atual",
      "percentil_30d": 90.0,
      "insumo_barato": false
@@ -1428,19 +1402,18 @@
    "receita": "Flawless Masterful Garnet Tier 2",
    "profissao": "jewelcrafting",
    "custo_g": 729.37,
-   "preco_venda_g": 475.4,
+   "preco_venda_g": 475.28,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -55.54,
+   "lucro_g": -55.71,
    "unidades_esperadas": 1.492,
-   "g_por_conc": -0.1625,
+   "g_por_conc": -0.163,
    "concentracao": 404,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root"
@@ -1483,20 +1456,19 @@
   "flawless-versatile-peridot-tier-2": {
    "receita": "Flawless Versatile Peridot Tier 2",
    "profissao": "jewelcrafting",
-   "custo_g": 662.04,
-   "preco_venda_g": 488.8,
+   "custo_g": 662.01,
+   "preco_venda_g": 487.79,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 30.79,
+   "lucro_g": 29.39,
    "unidades_esperadas": 1.492,
-   "g_por_conc": 0.0901,
+   "g_por_conc": 0.086,
    "concentracao": 404,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root"
@@ -1521,7 +1493,7 @@
     {
      "nome": "Flawless Harandar Peridot Tier 1",
      "qtd": 1,
-     "preco_g": 27.67,
+     "preco_g": 27.64,
      "fonte": "umx.atual",
      "percentil_30d": 90.0,
      "insumo_barato": false
@@ -1539,21 +1511,20 @@
   "flawless-deadly-amethyst-tier-2": {
    "receita": "Flawless Deadly Amethyst Tier 2",
    "profissao": "jewelcrafting",
-   "custo_g": 664.39,
+   "custo_g": 663.88,
    "preco_venda_g": 543.13,
    "fonte_preco_venda": "tsm.commodity.minBuyout",
-   "lucro_g": 105.44,
+   "lucro_g": 105.96,
    "unidades_esperadas": 1.492,
-   "g_por_conc": 0.3085,
+   "g_por_conc": 0.31,
    "concentracao": 404,
    "demanda_unid_dia": 10.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 10.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
     "demanda_so_propria",
-    "liquidez_parada",
-    "serie_curta"
+    "liquidez_parada"
    ],
    "insumos_baratos": [
     "Petrified Root"
@@ -1562,7 +1533,7 @@
     {
      "nome": "Mote of Pure Void",
      "qtd": 3,
-     "preco_g": 0.57,
+     "preco_g": 0.39,
      "fonte": "umx.atual",
      "percentil_30d": null,
      "insumo_barato": null
@@ -1578,7 +1549,7 @@
     {
      "nome": "Flawless Tenebrous Amethyst Tier 1",
      "qtd": 1,
-     "preco_g": 30.14,
+     "preco_g": 30.12,
      "fonte": "umx.atual",
      "percentil_30d": 96.7,
      "insumo_barato": false
@@ -1596,20 +1567,19 @@
   "flawless-quick-peridot-tier-2": {
    "receita": "Flawless Quick Peridot Tier 2",
    "profissao": "jewelcrafting",
-   "custo_g": 662.04,
-   "preco_venda_g": 455.99,
+   "custo_g": 662.01,
+   "preco_venda_g": 450.85,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -15.72,
+   "lucro_g": -22.97,
    "unidades_esperadas": 1.492,
-   "g_por_conc": -0.046,
+   "g_por_conc": -0.0672,
    "concentracao": 404,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root"
@@ -1634,7 +1604,7 @@
     {
      "nome": "Flawless Harandar Peridot Tier 1",
      "qtd": 1,
-     "preco_g": 27.67,
+     "preco_g": 27.64,
      "fonte": "umx.atual",
      "percentil_30d": 90.0,
      "insumo_barato": false
@@ -1662,11 +1632,10 @@
    "demanda_unid_dia": 2.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 2.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
     "demanda_so_propria",
-    "liquidez_parada",
-    "serie_curta"
+    "liquidez_parada"
    ],
    "insumos_baratos": [
     "Petrified Root"
@@ -1709,21 +1678,20 @@
   "flawless-quick-lapis-tier-2": {
    "receita": "Flawless Quick Lapis Tier 2",
    "profissao": "jewelcrafting",
-   "custo_g": 681.9,
+   "custo_g": 672.82,
    "preco_venda_g": 469.98,
    "fonte_preco_venda": "tsm.commodity.minBuyout",
-   "lucro_g": -15.75,
+   "lucro_g": -6.67,
    "unidades_esperadas": 1.492,
-   "g_por_conc": -0.0461,
+   "g_por_conc": -0.0195,
    "concentracao": 404,
    "demanda_unid_dia": 2.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 2.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
     "demanda_so_propria",
-    "liquidez_parada",
-    "serie_curta"
+    "liquidez_parada"
    ],
    "insumos_baratos": [
     "Petrified Root"
@@ -1748,7 +1716,7 @@
     {
      "nome": "Flawless Amani Lapis Tier 1",
      "qtd": 1,
-     "preco_g": 48.98,
+     "preco_g": 39.12,
      "fonte": "umx.atual",
      "percentil_30d": 96.7,
      "insumo_barato": false
@@ -1766,20 +1734,19 @@
   "flawless-versatile-amethyst-tier-2": {
    "receita": "Flawless Versatile Amethyst Tier 2",
    "profissao": "jewelcrafting",
-   "custo_g": 664.39,
-   "preco_venda_g": 474.2,
+   "custo_g": 663.88,
+   "preco_venda_g": 465.5,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 7.74,
+   "lucro_g": -4.08,
    "unidades_esperadas": 1.492,
-   "g_por_conc": 0.0226,
+   "g_por_conc": -0.0119,
    "concentracao": 404,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root"
@@ -1788,7 +1755,7 @@
     {
      "nome": "Mote of Pure Void",
      "qtd": 3,
-     "preco_g": 0.57,
+     "preco_g": 0.39,
      "fonte": "umx.atual",
      "percentil_30d": null,
      "insumo_barato": null
@@ -1804,7 +1771,7 @@
     {
      "nome": "Flawless Tenebrous Amethyst Tier 1",
      "qtd": 1,
-     "preco_g": 30.14,
+     "preco_g": 30.12,
      "fonte": "umx.atual",
      "percentil_30d": 96.7,
      "insumo_barato": false
@@ -1832,10 +1799,9 @@
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root"
@@ -1878,20 +1844,19 @@
   "flawless-quick-amethyst-tier-2": {
    "receita": "Flawless Quick Amethyst Tier 2",
    "profissao": "jewelcrafting",
-   "custo_g": 664.39,
-   "preco_venda_g": 470.08,
+   "custo_g": 663.88,
+   "preco_venda_g": 450.03,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 1.9,
+   "lucro_g": -26.0,
    "unidades_esperadas": 1.492,
-   "g_por_conc": 0.0056,
+   "g_por_conc": -0.0761,
    "concentracao": 404,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root"
@@ -1900,7 +1865,7 @@
     {
      "nome": "Mote of Pure Void",
      "qtd": 3,
-     "preco_g": 0.57,
+     "preco_g": 0.39,
      "fonte": "umx.atual",
      "percentil_30d": null,
      "insumo_barato": null
@@ -1916,7 +1881,7 @@
     {
      "nome": "Flawless Tenebrous Amethyst Tier 1",
      "qtd": 1,
-     "preco_g": 30.14,
+     "preco_g": 30.12,
      "fonte": "umx.atual",
      "percentil_30d": 96.7,
      "insumo_barato": false
@@ -1934,21 +1899,20 @@
   "telluric-eversong-diamond-tier-2": {
    "receita": "Telluric Eversong Diamond Tier 2",
    "profissao": "jewelcrafting",
-   "custo_g": 161.76,
-   "preco_venda_g": 530.49,
+   "custo_g": 156.63,
+   "preco_venda_g": 580.6,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 590.16,
+   "lucro_g": 666.32,
    "unidades_esperadas": 1.492,
-   "g_por_conc": 1.7267,
+   "g_por_conc": 1.9495,
    "concentracao": 404,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
     "custo_modelo_divergente",
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root"
@@ -1965,7 +1929,7 @@
     {
      "nome": "Eversong Diamond Tier 1",
      "qtd": 1,
-     "preco_g": 34.38,
+     "preco_g": 28.8,
      "fonte": "umx.atual",
      "percentil_30d": null,
      "insumo_barato": null
@@ -1975,20 +1939,19 @@
   "flawless-masterful-peridot-tier-2": {
    "receita": "Flawless Masterful Peridot Tier 2",
    "profissao": "jewelcrafting",
-   "custo_g": 662.04,
-   "preco_venda_g": 516.01,
+   "custo_g": 662.01,
+   "preco_venda_g": 490.6,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 69.36,
+   "lucro_g": 33.37,
    "unidades_esperadas": 1.492,
-   "g_por_conc": 0.2029,
+   "g_por_conc": 0.0976,
    "concentracao": 404,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root"
@@ -2013,7 +1976,7 @@
     {
      "nome": "Flawless Harandar Peridot Tier 1",
      "qtd": 1,
-     "preco_g": 27.67,
+     "preco_g": 27.64,
      "fonte": "umx.atual",
      "percentil_30d": 90.0,
      "insumo_barato": false
@@ -2031,20 +1994,19 @@
   "flawless-deadly-lapis-tier-2": {
    "receita": "Flawless Deadly Lapis Tier 2",
    "profissao": "jewelcrafting",
-   "custo_g": 681.9,
-   "preco_venda_g": 462.98,
+   "custo_g": 672.82,
+   "preco_venda_g": 461.4,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -25.67,
+   "lucro_g": -18.83,
    "unidades_esperadas": 1.492,
-   "g_por_conc": -0.0751,
+   "g_por_conc": -0.0551,
    "concentracao": 404,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root"
@@ -2069,7 +2031,7 @@
     {
      "nome": "Flawless Amani Lapis Tier 1",
      "qtd": 1,
-     "preco_g": 48.98,
+     "preco_g": 39.12,
      "fonte": "umx.atual",
      "percentil_30d": 96.7,
      "insumo_barato": false
@@ -2087,20 +2049,19 @@
   "flawless-masterful-amethyst-tier-2": {
    "receita": "Flawless Masterful Amethyst Tier 2",
    "profissao": "jewelcrafting",
-   "custo_g": 664.39,
-   "preco_venda_g": 440.0,
+   "custo_g": 663.88,
+   "preco_venda_g": 420.0,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -40.74,
+   "lucro_g": -68.57,
    "unidades_esperadas": 1.492,
-   "g_por_conc": -0.1192,
+   "g_por_conc": -0.2006,
    "concentracao": 404,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root"
@@ -2109,7 +2070,7 @@
     {
      "nome": "Mote of Pure Void",
      "qtd": 3,
-     "preco_g": 0.57,
+     "preco_g": 0.39,
      "fonte": "umx.atual",
      "percentil_30d": null,
      "insumo_barato": null
@@ -2125,7 +2086,7 @@
     {
      "nome": "Flawless Tenebrous Amethyst Tier 1",
      "qtd": 1,
-     "preco_g": 30.14,
+     "preco_g": 30.12,
      "fonte": "umx.atual",
      "percentil_30d": 96.7,
      "insumo_barato": false
@@ -2143,28 +2104,27 @@
   "sunglass-vial-tier-2": {
    "receita": "Sunglass Vial Tier 2",
    "profissao": "jewelcrafting",
-   "custo_g": 54.71,
+   "custo_g": 52.68,
    "preco_venda_g": 268.32,
    "fonte_preco_venda": "tsm.commodity.minBuyout",
-   "lucro_g": 325.61,
+   "lucro_g": 327.64,
    "unidades_esperadas": 1.492,
-   "g_por_conc": 1.1879,
+   "g_por_conc": 1.1953,
    "concentracao": 324,
    "demanda_unid_dia": 22.36,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 22.4,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "demanda_so_propria",
-    "serie_curta"
+    "demanda_so_propria"
    ],
    "insumos_baratos": [],
    "ingredientes": [
     {
      "nome": "Crystalline Glass Tier 1",
      "qtd": 5,
-     "preco_g": 11.44,
-     "fonte": "planilha.Materials",
+     "preco_g": 11.0,
+     "fonte": "umx.atual",
      "percentil_30d": 80.0,
      "insumo_barato": false
     },
@@ -2181,21 +2141,20 @@
   "stoic-eversong-diamond-tier-2": {
    "receita": "Stoic Eversong Diamond Tier 2",
    "profissao": "jewelcrafting",
-   "custo_g": 161.76,
+   "custo_g": 156.63,
    "preco_venda_g": 450.99,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 477.47,
+   "lucro_g": 482.61,
    "unidades_esperadas": 1.492,
-   "g_por_conc": 1.397,
+   "g_por_conc": 1.412,
    "concentracao": 404,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
     "custo_modelo_divergente",
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root"
@@ -2212,7 +2171,7 @@
     {
      "nome": "Eversong Diamond Tier 1",
      "qtd": 1,
-     "preco_g": 34.38,
+     "preco_g": 28.8,
      "fonte": "umx.atual",
      "percentil_30d": null,
      "insumo_barato": null
@@ -2223,20 +2182,19 @@
    "receita": "Prismatic Focusing Iris Tier 2",
    "profissao": "jewelcrafting",
    "custo_g": 228.01,
-   "preco_venda_g": 278.77,
+   "preco_venda_g": 599.98,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 167.12,
+   "lucro_g": 622.4,
    "unidades_esperadas": 1.492,
-   "g_por_conc": 0.489,
+   "g_por_conc": 1.821,
    "concentracao": 404,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
     "custo_modelo_divergente",
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [],
    "ingredientes": [
@@ -2253,20 +2211,19 @@
   "flawless-masterful-lapis-tier-2": {
    "receita": "Flawless Masterful Lapis Tier 2",
    "profissao": "jewelcrafting",
-   "custo_g": 681.9,
-   "preco_venda_g": 447.77,
+   "custo_g": 672.82,
+   "preco_venda_g": 447.5,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -47.23,
+   "lucro_g": -38.54,
    "unidades_esperadas": 1.492,
-   "g_por_conc": -0.1382,
+   "g_por_conc": -0.1127,
    "concentracao": 404,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root"
@@ -2291,7 +2248,7 @@
     {
      "nome": "Flawless Amani Lapis Tier 1",
      "qtd": 1,
-     "preco_g": 48.98,
+     "preco_g": 39.12,
      "fonte": "umx.atual",
      "percentil_30d": 96.7,
      "insumo_barato": false
@@ -2309,20 +2266,19 @@
   "sin-dorei-lens-tier-2": {
    "receita": "Sin'dorei Lens Tier 2",
    "profissao": "jewelcrafting",
-   "custo_g": 145.59,
+   "custo_g": 144.38,
    "preco_venda_g": 215.75,
    "fonte_preco_venda": "tsm.commodity.minBuyout",
-   "lucro_g": 160.21,
+   "lucro_g": 161.43,
    "unidades_esperadas": 1.492,
-   "g_por_conc": 0.5845,
+   "g_por_conc": 0.5889,
    "concentracao": 324,
    "demanda_unid_dia": 1.5,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 1.5,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "demanda_so_propria",
-    "serie_curta"
+    "demanda_so_propria"
    ],
    "insumos_baratos": [],
    "ingredientes": [
@@ -2337,8 +2293,8 @@
     {
      "nome": "Crystalline Glass Tier 1",
      "qtd": 3,
-     "preco_g": 11.44,
-     "fonte": "planilha.Materials",
+     "preco_g": 11.0,
+     "fonte": "umx.atual",
      "percentil_30d": 80.0,
      "insumo_barato": false
     }
@@ -2347,20 +2303,19 @@
   "flawless-versatile-lapis-tier-2": {
    "receita": "Flawless Versatile Lapis Tier 2",
    "profissao": "jewelcrafting",
-   "custo_g": 681.9,
+   "custo_g": 672.82,
    "preco_venda_g": 370.0,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -157.46,
+   "lucro_g": -148.38,
    "unidades_esperadas": 1.492,
-   "g_por_conc": -0.4607,
+   "g_por_conc": -0.4341,
    "concentracao": 404,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root"
@@ -2385,7 +2340,7 @@
     {
      "nome": "Flawless Amani Lapis Tier 1",
      "qtd": 1,
-     "preco_g": 48.98,
+     "preco_g": 39.12,
      "fonte": "umx.atual",
      "percentil_30d": 96.7,
      "insumo_barato": false
@@ -2403,21 +2358,20 @@
   "enchant-tool-haranir-multicrafting-tier-2": {
    "receita": "Enchant Tool - Haranir Multicrafting Tier 2",
    "profissao": "enchanting",
-   "custo_g": 652.61,
+   "custo_g": 633.12,
    "preco_venda_g": 986.69,
    "fonte_preco_venda": "tsm.commodity.minBuyout",
-   "lucro_g": 284.75,
+   "lucro_g": 304.24,
    "unidades_esperadas": 1.0,
-   "g_por_conc": 0.9349,
+   "g_por_conc": 0.9989,
    "concentracao": 360,
    "demanda_unid_dia": 1.5,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 1.5,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
     "demanda_so_propria",
-    "liquidez_parada",
-    "serie_curta"
+    "liquidez_parada"
    ],
    "insumos_baratos": [
     "Eversinging Dust Tier 1",
@@ -2435,7 +2389,7 @@
     {
      "nome": "Sterling Alloy Tier 1",
      "qtd": 5,
-     "preco_g": 73.95,
+     "preco_g": 70.54,
      "fonte": "umx.atual",
      "percentil_30d": 100.0,
      "insumo_barato": false
@@ -2451,7 +2405,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 10,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -2469,20 +2423,19 @@
   "enchant-weapon-worldsoul-cradle-tier-2": {
    "receita": "Enchant Weapon - Worldsoul Cradle Tier 2",
    "profissao": "enchanting",
-   "custo_g": 594.34,
-   "preco_venda_g": 663.25,
+   "custo_g": 589.56,
+   "preco_venda_g": 663.23,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 35.75,
+   "lucro_g": 40.51,
    "unidades_esperadas": 1.0,
-   "g_por_conc": 0.1174,
+   "g_por_conc": 0.133,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root",
@@ -2501,7 +2454,7 @@
     {
      "nome": "Flawless Harandar Peridot Tier 1",
      "qtd": 1,
-     "preco_g": 27.67,
+     "preco_g": 27.64,
      "fonte": "umx.atual",
      "percentil_30d": 90.0,
      "insumo_barato": false
@@ -2525,7 +2478,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 10,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -2543,20 +2496,19 @@
   "enchant-boots-shaladrassil-s-roots-tier-2": {
    "receita": "Enchant Boots - Shaladrassil's Roots Tier 2",
    "profissao": "enchanting",
-   "custo_g": 831.83,
-   "preco_venda_g": 877.98,
+   "custo_g": 829.45,
+   "preco_venda_g": 950.97,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 2.25,
+   "lucro_g": 73.97,
    "unidades_esperadas": 1.0,
-   "g_por_conc": 0.0074,
+   "g_por_conc": 0.2429,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root",
@@ -2599,7 +2551,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 5,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -2617,20 +2569,19 @@
   "enchant-weapon-acuity-of-the-ren-dorei-tier-2": {
    "receita": "Enchant Weapon - Acuity of the Ren'dorei Tier 2",
    "profissao": "enchanting",
-   "custo_g": 738.32,
+   "custo_g": 732.77,
    "preco_venda_g": 744.38,
    "fonte_preco_venda": "tsm.commodity.minBuyout",
-   "lucro_g": -31.16,
+   "lucro_g": -25.61,
    "unidades_esperadas": 1.0,
-   "g_por_conc": -0.1023,
+   "g_por_conc": -0.0841,
    "concentracao": 360,
    "demanda_unid_dia": 6.24,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 6.2,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "demanda_so_propria",
-    "serie_curta"
+    "demanda_so_propria"
    ],
    "insumos_baratos": [
     "Petrified Root",
@@ -2641,7 +2592,7 @@
     {
      "nome": "Mote of Pure Void",
      "qtd": 5,
-     "preco_g": 0.57,
+     "preco_g": 0.39,
      "fonte": "umx.atual",
      "percentil_30d": null,
      "insumo_barato": null
@@ -2649,7 +2600,7 @@
     {
      "nome": "Flawless Tenebrous Amethyst Tier 1",
      "qtd": 1,
-     "preco_g": 30.14,
+     "preco_g": 30.12,
      "fonte": "umx.atual",
      "percentil_30d": 96.7,
      "insumo_barato": false
@@ -2673,7 +2624,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 10,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -2691,20 +2642,19 @@
   "enchant-weapon-rite-of-the-hash-ey-tier-2": {
    "receita": "Enchant Weapon - Rite of the Hash'ey Tier 2",
    "profissao": "enchanting",
-   "custo_g": 658.52,
-   "preco_venda_g": 799.5,
+   "custo_g": 645.25,
+   "preco_venda_g": 700.5,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 101.0,
+   "lucro_g": 20.23,
    "unidades_esperadas": 1.0,
-   "g_por_conc": 0.3316,
+   "g_por_conc": 0.0664,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 75,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root",
@@ -2731,7 +2681,7 @@
     {
      "nome": "Flawless Amani Lapis Tier 1",
      "qtd": 1,
-     "preco_g": 48.98,
+     "preco_g": 39.12,
      "fonte": "umx.atual",
      "percentil_30d": 96.7,
      "insumo_barato": false
@@ -2747,7 +2697,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 10,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -2765,21 +2715,20 @@
   "enchant-shoulders-silvermoon-s-mending-tier-2": {
    "receita": "Enchant Shoulders - Silvermoon's Mending Tier 2",
    "profissao": "enchanting",
-   "custo_g": 336.15,
+   "custo_g": 331.4,
    "preco_venda_g": 380.85,
    "fonte_preco_venda": "tsm.commodity.minBuyout",
-   "lucro_g": 25.65,
+   "lucro_g": 30.41,
    "unidades_esperadas": 1.0,
-   "g_por_conc": 0.0842,
+   "g_por_conc": 0.0998,
    "concentracao": 360,
    "demanda_unid_dia": 0.46,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.5,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
     "demanda_so_propria",
-    "liquidez_parada",
-    "serie_curta"
+    "liquidez_parada"
    ],
    "insumos_baratos": [
     "Eversinging Dust Tier 1",
@@ -2805,7 +2754,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 10,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -2823,20 +2772,19 @@
   "enchant-chest-mark-of-nalorakk-tier-2": {
    "receita": "Enchant Chest - Mark of Nalorakk Tier 2",
    "profissao": "enchanting",
-   "custo_g": 483.15,
+   "custo_g": 478.4,
    "preco_venda_g": 554.98,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 44.08,
+   "lucro_g": 48.83,
    "unidades_esperadas": 1.0,
-   "g_por_conc": 0.1447,
+   "g_por_conc": 0.1603,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root",
@@ -2879,7 +2827,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 10,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -2897,20 +2845,19 @@
   "enchant-weapon-berserker-s-rage-tier-2": {
    "receita": "Enchant Weapon - Berserker's Rage Tier 2",
    "profissao": "enchanting",
-   "custo_g": 613.15,
+   "custo_g": 599.87,
    "preco_venda_g": 747.89,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 97.35,
+   "lucro_g": 110.62,
    "unidades_esperadas": 1.0,
-   "g_por_conc": 0.3196,
+   "g_por_conc": 0.3632,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root",
@@ -2929,7 +2876,7 @@
     {
      "nome": "Flawless Amani Lapis Tier 1",
      "qtd": 1,
-     "preco_g": 48.98,
+     "preco_g": 39.12,
      "fonte": "umx.atual",
      "percentil_30d": 96.7,
      "insumo_barato": false
@@ -2953,7 +2900,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 10,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -2971,21 +2918,20 @@
   "enchant-tool-amani-perception-tier-2": {
    "receita": "Enchant Tool - Amani Perception Tier 2",
    "profissao": "enchanting",
-   "custo_g": 567.74,
+   "custo_g": 562.98,
    "preco_venda_g": 499.98,
    "fonte_preco_venda": "tsm.commodity.minBuyout",
-   "lucro_g": -92.76,
+   "lucro_g": -88.0,
    "unidades_esperadas": 1.0,
-   "g_por_conc": -0.3046,
+   "g_por_conc": -0.2889,
    "concentracao": 360,
    "demanda_unid_dia": 0.62,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.6,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
     "demanda_so_propria",
-    "liquidez_parada",
-    "serie_curta"
+    "liquidez_parada"
    ],
    "insumos_baratos": [
     "Eversinging Dust Tier 1",
@@ -3019,7 +2965,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 10,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -3037,20 +2983,19 @@
   "enchant-tool-amani-resourcefulness-tier-2": {
    "receita": "Enchant Tool - Amani Resourcefulness Tier 2",
    "profissao": "enchanting",
-   "custo_g": 567.74,
-   "preco_venda_g": 522.87,
+   "custo_g": 562.98,
+   "preco_venda_g": 870.0,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -71.01,
+   "lucro_g": 263.52,
    "unidades_esperadas": 1.0,
-   "g_por_conc": -0.2332,
+   "g_por_conc": 0.8652,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Eversinging Dust Tier 1",
@@ -3084,7 +3029,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 10,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -3102,20 +3047,19 @@
   "enchant-weapon-jan-alai-s-precision-tier-2": {
    "receita": "Enchant Weapon - Jan'alai's Precision Tier 2",
    "profissao": "enchanting",
-   "custo_g": 773.75,
-   "preco_venda_g": 680.0,
+   "custo_g": 771.37,
+   "preco_venda_g": 678.0,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -127.75,
+   "lucro_g": -127.27,
    "unidades_esperadas": 1.0,
-   "g_por_conc": -0.4194,
+   "g_por_conc": -0.4179,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Majestic Fin",
@@ -3159,7 +3103,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 5,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -3177,20 +3121,19 @@
   "enchant-weapon-arcane-mastery-tier-2": {
    "receita": "Enchant Weapon - Arcane Mastery Tier 2",
    "profissao": "enchanting",
-   "custo_g": 656.92,
-   "preco_venda_g": 618.75,
+   "custo_g": 649.79,
+   "preco_venda_g": 618.0,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -69.11,
+   "lucro_g": -62.69,
    "unidades_esperadas": 1.0,
-   "g_por_conc": -0.2269,
+   "g_por_conc": -0.2058,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Arcanoweave Bolt Tier 1",
@@ -3234,7 +3177,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 15,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -3252,21 +3195,20 @@
   "enchant-helm-empowered-blessing-of-speed-tier-2": {
    "receita": "Enchant Helm - Empowered Blessing of Speed Tier 2",
    "profissao": "enchanting",
-   "custo_g": 455.23,
+   "custo_g": 450.48,
    "preco_venda_g": 719.09,
    "fonte_preco_venda": "tsm.commodity.minBuyout",
-   "lucro_g": 227.9,
+   "lucro_g": 232.66,
    "unidades_esperadas": 1.0,
-   "g_por_conc": 0.7483,
+   "g_por_conc": 0.7639,
    "concentracao": 360,
    "demanda_unid_dia": 4.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 4.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
     "demanda_so_propria",
-    "liquidez_parada",
-    "serie_curta"
+    "liquidez_parada"
    ],
    "insumos_baratos": [
     "Petrified Root",
@@ -3301,7 +3243,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 10,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -3319,20 +3261,19 @@
   "enchant-chest-mark-of-the-magister-tier-2": {
    "receita": "Enchant Chest - Mark of the Magister Tier 2",
    "profissao": "enchanting",
-   "custo_g": 518.09,
-   "preco_venda_g": 622.0,
+   "custo_g": 513.34,
+   "preco_venda_g": 621.99,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 72.81,
+   "lucro_g": 77.55,
    "unidades_esperadas": 1.0,
-   "g_por_conc": 0.2391,
+   "g_por_conc": 0.2546,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Arcanoweave Bolt Tier 1",
@@ -3376,7 +3317,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 10,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -3394,20 +3335,19 @@
   "enchant-shoulders-akil-zon-s-swiftness-tier-2": {
    "receita": "Enchant Shoulders - Akil'zon's Swiftness Tier 2",
    "profissao": "enchanting",
-   "custo_g": 334.6,
-   "preco_venda_g": 600.93,
+   "custo_g": 329.84,
+   "preco_venda_g": 455.0,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 236.29,
+   "lucro_g": 102.41,
    "unidades_esperadas": 1.0,
-   "g_por_conc": 0.7758,
+   "g_por_conc": 0.3362,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Eversinging Dust Tier 1",
@@ -3433,7 +3373,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 10,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -3451,20 +3391,19 @@
   "enchant-chest-mark-of-the-worldsoul-tier-2": {
    "receita": "Enchant Chest - Mark of the Worldsoul Tier 2",
    "profissao": "enchanting",
-   "custo_g": 1821.51,
-   "preco_venda_g": 1997.01,
+   "custo_g": 1816.76,
+   "preco_venda_g": 1978.37,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 75.65,
+   "lucro_g": 62.69,
    "unidades_esperadas": 1.0,
-   "g_por_conc": 0.2484,
+   "g_por_conc": 0.2058,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Majestic Hide",
@@ -3508,7 +3447,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 10,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -3526,20 +3465,19 @@
   "enchant-helm-empowered-rune-of-avoidance-tier-2": {
    "receita": "Enchant Helm - Empowered Rune of Avoidance Tier 2",
    "profissao": "enchanting",
-   "custo_g": 458.34,
-   "preco_venda_g": 611.0,
+   "custo_g": 453.59,
+   "preco_venda_g": 788.84,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 122.11,
+   "lucro_g": 295.81,
    "unidades_esperadas": 1.0,
-   "g_por_conc": 0.4009,
+   "g_por_conc": 0.9713,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root",
@@ -3574,7 +3512,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 10,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -3592,20 +3530,19 @@
   "enchant-helm-empowered-hex-of-leeching-tier-2": {
    "receita": "Enchant Helm - Empowered Hex of Leeching Tier 2",
    "profissao": "enchanting",
-   "custo_g": 456.79,
-   "preco_venda_g": 588.0,
+   "custo_g": 452.04,
+   "preco_venda_g": 522.0,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 101.81,
+   "lucro_g": 43.86,
    "unidades_esperadas": 1.0,
-   "g_por_conc": 0.3343,
+   "g_por_conc": 0.144,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root",
@@ -3640,7 +3577,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 10,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -3658,20 +3595,19 @@
   "enchant-shoulders-amirdrassil-s-grace-tier-2": {
    "receita": "Enchant Shoulders - Amirdrassil's Grace Tier 2",
    "profissao": "enchanting",
-   "custo_g": 455.23,
-   "preco_venda_g": 799.0,
+   "custo_g": 450.48,
+   "preco_venda_g": 588.0,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 303.82,
+   "lucro_g": 108.12,
    "unidades_esperadas": 1.0,
-   "g_por_conc": 0.9976,
+   "g_por_conc": 0.355,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root",
@@ -3706,7 +3642,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 10,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -3724,20 +3660,19 @@
   "enchant-tool-haranir-finesse-tier-2": {
    "receita": "Enchant Tool - Haranir Finesse Tier 2",
    "profissao": "enchanting",
-   "custo_g": 566.18,
-   "preco_venda_g": 472.12,
+   "custo_g": 561.43,
+   "preco_venda_g": 881.96,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -117.67,
+   "lucro_g": 276.43,
    "unidades_esperadas": 1.0,
-   "g_por_conc": -0.3864,
+   "g_por_conc": 0.9077,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Eversinging Dust Tier 1",
@@ -3771,7 +3706,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 10,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -3789,20 +3724,19 @@
   "enchant-tool-ren-dorei-ingenuity-tier-2": {
    "receita": "Enchant Tool - Ren'dorei Ingenuity Tier 2",
    "profissao": "enchanting",
-   "custo_g": 630.22,
-   "preco_venda_g": 719.0,
+   "custo_g": 671.36,
+   "preco_venda_g": 690.98,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 52.83,
+   "lucro_g": -14.93,
    "unidades_esperadas": 1.0,
-   "g_por_conc": 0.1734,
+   "g_por_conc": -0.049,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Eversinging Dust Tier 1",
@@ -3812,7 +3746,7 @@
     {
      "nome": "Mote of Pure Void",
      "qtd": 20,
-     "preco_g": 0.57,
+     "preco_g": 0.39,
      "fonte": "umx.atual",
      "percentil_30d": null,
      "insumo_barato": null
@@ -3820,7 +3754,7 @@
     {
      "nome": "Gloaming Alloy Tier 1",
      "qtd": 5,
-     "preco_g": 68.65,
+     "preco_g": 79.99,
      "fonte": "umx.atual",
      "percentil_30d": 93.3,
      "insumo_barato": false
@@ -3836,7 +3770,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 10,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -3854,20 +3788,19 @@
   "enchant-weapon-worldsoul-tenacity-tier-2": {
    "receita": "Enchant Weapon - Worldsoul Tenacity Tier 2",
    "profissao": "enchanting",
-   "custo_g": 594.34,
-   "preco_venda_g": 635.67,
+   "custo_g": 589.56,
+   "preco_venda_g": 634.37,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 9.55,
+   "lucro_g": 13.09,
    "unidades_esperadas": 1.0,
-   "g_por_conc": 0.0313,
+   "g_por_conc": 0.043,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root",
@@ -3886,7 +3819,7 @@
     {
      "nome": "Flawless Harandar Peridot Tier 1",
      "qtd": 1,
-     "preco_g": 27.67,
+     "preco_g": 27.64,
      "fonte": "umx.atual",
      "percentil_30d": 90.0,
      "insumo_barato": false
@@ -3910,7 +3843,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 10,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -3928,20 +3861,19 @@
   "enchant-boots-farstrider-s-hunt-tier-2": {
    "receita": "Enchant Boots - Farstrider's Hunt Tier 2",
    "profissao": "enchanting",
-   "custo_g": 366.07,
-   "preco_venda_g": 461.34,
+   "custo_g": 364.65,
+   "preco_venda_g": 466.0,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 72.2,
+   "lucro_g": 78.05,
    "unidades_esperadas": 1.0,
-   "g_por_conc": 0.2371,
+   "g_por_conc": 0.2563,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Fantastic Fur",
@@ -3985,7 +3917,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 3,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -4003,20 +3935,19 @@
   "enchant-ring-silvermoon-s-tenacity-tier-2": {
    "receita": "Enchant Ring - Silvermoon's Tenacity Tier 2",
    "profissao": "enchanting",
-   "custo_g": 291.63,
-   "preco_venda_g": 399.0,
+   "custo_g": 290.2,
+   "preco_venda_g": 313.0,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 87.42,
+   "lucro_g": 7.15,
    "unidades_esperadas": 1.0,
-   "g_por_conc": 0.2871,
+   "g_por_conc": 0.0235,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root",
@@ -4051,7 +3982,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 3,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -4069,20 +4000,19 @@
   "enchant-boots-lynx-s-dexterity-tier-2": {
    "receita": "Enchant Boots - Lynx's Dexterity Tier 2",
    "profissao": "enchanting",
-   "custo_g": 288.27,
-   "preco_venda_g": 488.88,
+   "custo_g": 286.85,
+   "preco_venda_g": 366.0,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 176.16,
+   "lucro_g": 60.85,
    "unidades_esperadas": 1.0,
-   "g_por_conc": 0.5784,
+   "g_por_conc": 0.1998,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Carving Canine",
@@ -4126,7 +4056,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 3,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -4144,20 +4074,19 @@
   "enchant-ring-eyes-of-the-eagle-tier-2": {
    "receita": "Enchant Ring - Eyes of the Eagle Tier 2",
    "profissao": "enchanting",
-   "custo_g": 407.88,
-   "preco_venda_g": 477.55,
+   "custo_g": 406.45,
+   "preco_venda_g": 464.0,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 45.79,
+   "lucro_g": 34.35,
    "unidades_esperadas": 1.0,
-   "g_por_conc": 0.1504,
+   "g_por_conc": 0.1128,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root",
@@ -4200,7 +4129,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 3,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -4218,20 +4147,19 @@
   "enchant-ring-nature-s-fury-tier-2": {
    "receita": "Enchant Ring - Nature's Fury Tier 2",
    "profissao": "enchanting",
-   "custo_g": 289.29,
-   "preco_venda_g": 399.0,
+   "custo_g": 287.87,
+   "preco_venda_g": 312.0,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 89.76,
+   "lucro_g": 8.53,
    "unidades_esperadas": 1.0,
-   "g_por_conc": 0.2947,
+   "g_por_conc": 0.028,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root",
@@ -4266,7 +4194,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 3,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -4284,20 +4212,19 @@
   "enchant-ring-silvermoon-s-alacrity-tier-2": {
    "receita": "Enchant Ring - Silvermoon's Alacrity Tier 2",
    "profissao": "enchanting",
-   "custo_g": 291.63,
-   "preco_venda_g": 398.99,
+   "custo_g": 290.2,
+   "preco_venda_g": 329.0,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 87.42,
+   "lucro_g": 22.35,
    "unidades_esperadas": 1.0,
-   "g_por_conc": 0.287,
+   "g_por_conc": 0.0734,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root",
@@ -4332,7 +4259,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 3,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -4350,20 +4277,19 @@
   "enchant-chest-mark-of-the-rootwarden-tier-2": {
    "receita": "Enchant Chest - Mark of the Rootwarden Tier 2",
    "profissao": "enchanting",
-   "custo_g": 660.8,
-   "preco_venda_g": 600.0,
+   "custo_g": 656.05,
+   "preco_venda_g": 700.0,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -90.8,
+   "lucro_g": 8.95,
    "unidades_esperadas": 1.0,
-   "g_por_conc": -0.2981,
+   "g_por_conc": 0.0294,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Majestic Fin",
@@ -4407,7 +4333,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 10,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -4425,20 +4351,19 @@
   "enchant-ring-zul-jin-s-mastery-tier-2": {
    "receita": "Enchant Ring - Zul'jin's Mastery Tier 2",
    "profissao": "enchanting",
-   "custo_g": 290.46,
-   "preco_venda_g": 411.0,
+   "custo_g": 289.03,
+   "preco_venda_g": 355.0,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 99.99,
+   "lucro_g": 48.22,
    "unidades_esperadas": 1.0,
-   "g_por_conc": 0.3283,
+   "g_por_conc": 0.1583,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root",
@@ -4473,7 +4398,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 3,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -4491,20 +4416,19 @@
   "enchant-tool-sin-dorei-deftness-tier-2": {
    "receita": "Enchant Tool - Sin'dorei Deftness Tier 2",
    "profissao": "enchanting",
-   "custo_g": 655.72,
+   "custo_g": 636.23,
    "preco_venda_g": 599.72,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -85.99,
+   "lucro_g": -66.5,
    "unidades_esperadas": 1.0,
-   "g_por_conc": -0.2823,
+   "g_por_conc": -0.2183,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Eversinging Dust Tier 1",
@@ -4522,7 +4446,7 @@
     {
      "nome": "Sterling Alloy Tier 1",
      "qtd": 5,
-     "preco_g": 73.95,
+     "preco_g": 70.54,
      "fonte": "umx.atual",
      "percentil_30d": 100.0,
      "insumo_barato": false
@@ -4538,7 +4462,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 10,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -4556,20 +4480,19 @@
   "enchant-weapon-flames-of-the-sin-dorei-tier-2": {
    "receita": "Enchant Weapon - Flames of the Sin'Dorei Tier 2",
    "profissao": "enchanting",
-   "custo_g": 784.52,
+   "custo_g": 777.39,
    "preco_venda_g": 690.18,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -128.84,
+   "lucro_g": -121.71,
    "unidades_esperadas": 1.0,
-   "g_por_conc": -0.4231,
+   "g_por_conc": -0.3996,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Sunfire Silk Bolt Tier 1",
@@ -4613,7 +4536,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 15,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -4631,20 +4554,19 @@
   "enchant-weapon-strength-of-halazzi-tier-2": {
    "receita": "Enchant Weapon - Strength of Halazzi Tier 2",
    "profissao": "enchanting",
-   "custo_g": 595.7,
-   "preco_venda_g": 601.74,
+   "custo_g": 593.33,
+   "preco_venda_g": 590.74,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -24.05,
+   "lucro_g": -32.13,
    "unidades_esperadas": 1.0,
-   "g_por_conc": -0.079,
+   "g_por_conc": -0.1055,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root",
@@ -4687,7 +4609,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 5,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -4705,20 +4627,19 @@
   "enchant-helm-blessing-of-speed-tier-2": {
    "receita": "Enchant Helm - Blessing of Speed Tier 2",
    "profissao": "enchanting",
-   "custo_g": 18.38,
-   "preco_venda_g": 31.95,
+   "custo_g": 16.96,
+   "preco_venda_g": 31.92,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 11.97,
+   "lucro_g": 13.37,
    "unidades_esperadas": 1.0,
-   "g_por_conc": 0.0393,
+   "g_por_conc": 0.0439,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Eversinging Dust Tier 1"
@@ -4735,7 +4656,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 3,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -4745,20 +4666,19 @@
   "enchant-shoulders-thalassian-recovery-tier-2": {
    "receita": "Enchant Shoulders - Thalassian Recovery Tier 2",
    "profissao": "enchanting",
-   "custo_g": 18.38,
+   "custo_g": 16.96,
    "preco_venda_g": 18.42,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -0.88,
+   "lucro_g": 0.54,
    "unidades_esperadas": 1.0,
-   "g_por_conc": -0.0029,
+   "g_por_conc": 0.0018,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Eversinging Dust Tier 1"
@@ -4775,7 +4695,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 3,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -4785,20 +4705,19 @@
   "enchant-shoulders-flight-of-the-eagle-tier-2": {
    "receita": "Enchant Shoulders - Flight of the Eagle Tier 2",
    "profissao": "enchanting",
-   "custo_g": 18.38,
+   "custo_g": 16.96,
    "preco_venda_g": 20.42,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 1.02,
+   "lucro_g": 2.44,
    "unidades_esperadas": 1.0,
-   "g_por_conc": 0.0033,
+   "g_por_conc": 0.008,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Eversinging Dust Tier 1"
@@ -4815,7 +4734,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 3,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -4825,22 +4744,21 @@
   "enchant-helm-hex-of-leeching-tier-2": {
    "receita": "Enchant Helm - Hex of Leeching Tier 2",
    "profissao": "enchanting",
-   "custo_g": 18.38,
+   "custo_g": 16.96,
    "preco_venda_g": 15.99,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -3.19,
+   "lucro_g": -1.77,
    "unidades_esperadas": 1.0,
-   "g_por_conc": -0.0105,
+   "g_por_conc": -0.0058,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
     "ah_corrompido",
     "fora_do_ranking",
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Eversinging Dust Tier 1"
@@ -4857,7 +4775,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 3,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -4867,20 +4785,19 @@
   "enchant-helm-rune-of-avoidance-tier-2": {
    "receita": "Enchant Helm - Rune of Avoidance Tier 2",
    "profissao": "enchanting",
-   "custo_g": 18.38,
-   "preco_venda_g": 19.0,
+   "custo_g": 16.96,
+   "preco_venda_g": 18.0,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -0.33,
+   "lucro_g": 0.14,
    "unidades_esperadas": 1.0,
-   "g_por_conc": -0.0011,
+   "g_por_conc": 0.0005,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Eversinging Dust Tier 1"
@@ -4897,7 +4814,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 3,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -4907,20 +4824,19 @@
   "enchant-shoulders-nature-s-grace-tier-2": {
    "receita": "Enchant Shoulders - Nature's Grace Tier 2",
    "profissao": "enchanting",
-   "custo_g": 18.38,
+   "custo_g": 16.96,
    "preco_venda_g": 14.0,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -5.08,
+   "lucro_g": -3.66,
    "unidades_esperadas": 1.0,
-   "g_por_conc": -0.0167,
+   "g_por_conc": -0.012,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Eversinging Dust Tier 1"
@@ -4937,7 +4853,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 3,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -4947,20 +4863,19 @@
   "enchant-weapon-worldsoul-aegis-tier-2": {
    "receita": "Enchant Weapon - Worldsoul Aegis Tier 2",
    "profissao": "enchanting",
-   "custo_g": 594.34,
+   "custo_g": 589.56,
    "preco_venda_g": 284.0,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -324.54,
+   "lucro_g": -319.76,
    "unidades_esperadas": 1.0,
-   "g_por_conc": -1.0656,
+   "g_por_conc": -1.0499,
    "concentracao": 360,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root",
@@ -4979,7 +4894,7 @@
     {
      "nome": "Flawless Harandar Peridot Tier 1",
      "qtd": 1,
-     "preco_g": 27.67,
+     "preco_g": 27.64,
      "fonte": "umx.atual",
      "percentil_30d": 90.0,
      "insumo_barato": false
@@ -5003,7 +4918,7 @@
     {
      "nome": "Radiant Shard Tier 1",
      "qtd": 10,
-     "preco_g": 3.04,
+     "preco_g": 2.49,
      "fonte": "umx.atual",
      "percentil_30d": 36.7,
      "insumo_barato": false
@@ -5031,13 +4946,12 @@
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
     "ah_corrompido",
     "custo_modelo_divergente",
     "fora_do_ranking",
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [],
    "ingredientes": [
@@ -5078,21 +4992,20 @@
   "thalassian-missive-of-the-aurora-tier-2": {
    "receita": "Thalassian Missive of the Aurora Tier 2",
    "profissao": "inscription",
-   "custo_g": 181.36,
+   "custo_g": 180.62,
    "preco_venda_g": 30.93,
    "fonte_preco_venda": "tsm.commodity.minBuyout",
-   "lucro_g": -95.27,
+   "lucro_g": -94.53,
    "unidades_esperadas": 2.93,
-   "g_por_conc": -0.3391,
+   "g_por_conc": -0.3365,
    "concentracao": 324,
    "demanda_unid_dia": 3.25,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 3.2,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
     "demanda_so_propria",
-    "liquidez_parada",
-    "serie_curta"
+    "liquidez_parada"
    ],
    "insumos_baratos": [],
    "ingredientes": [
@@ -5115,7 +5028,7 @@
     {
      "nome": "Munsell Ink Tier 1",
      "qtd": 2,
-     "preco_g": 13.9,
+     "preco_g": 13.5,
      "fonte": "umx.atual",
      "percentil_30d": 90.0,
      "insumo_barato": false
@@ -5133,21 +5046,20 @@
   "thalassian-missive-of-the-feverflare-tier-2": {
    "receita": "Thalassian Missive of the Feverflare Tier 2",
    "profissao": "inscription",
-   "custo_g": 181.36,
+   "custo_g": 180.62,
    "preco_venda_g": 95.04,
    "fonte_preco_venda": "tsm.commodity.minBuyout",
-   "lucro_g": 83.18,
+   "lucro_g": 83.92,
    "unidades_esperadas": 2.93,
-   "g_por_conc": 0.2961,
+   "g_por_conc": 0.2987,
    "concentracao": 324,
    "demanda_unid_dia": 1.6,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 1.6,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
     "demanda_so_propria",
-    "liquidez_parada",
-    "serie_curta"
+    "liquidez_parada"
    ],
    "insumos_baratos": [],
    "ingredientes": [
@@ -5170,7 +5082,7 @@
     {
      "nome": "Munsell Ink Tier 1",
      "qtd": 2,
-     "preco_g": 13.9,
+     "preco_g": 13.5,
      "fonte": "umx.atual",
      "percentil_30d": 90.0,
      "insumo_barato": false
@@ -5188,20 +5100,19 @@
   "thalassian-missive-of-the-quickblade-tier-2": {
    "receita": "Thalassian Missive of the Quickblade Tier 2",
    "profissao": "inscription",
-   "custo_g": 181.39,
-   "preco_venda_g": 175.99,
+   "custo_g": 180.49,
+   "preco_venda_g": 175.0,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 308.48,
+   "lucro_g": 306.63,
    "unidades_esperadas": 2.93,
-   "g_por_conc": 1.0982,
+   "g_por_conc": 1.0916,
    "concentracao": 324,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [],
    "ingredientes": [
@@ -5216,7 +5127,7 @@
     {
      "nome": "Mote of Pure Void",
      "qtd": 1,
-     "preco_g": 0.57,
+     "preco_g": 0.39,
      "fonte": "umx.atual",
      "percentil_30d": null,
      "insumo_barato": null
@@ -5224,7 +5135,7 @@
     {
      "nome": "Munsell Ink Tier 1",
      "qtd": 2,
-     "preco_g": 13.9,
+     "preco_g": 13.5,
      "fonte": "umx.atual",
      "percentil_30d": 90.0,
      "insumo_barato": false
@@ -5242,21 +5153,20 @@
   "thalassian-missive-of-the-fireflash-tier-2": {
    "receita": "Thalassian Missive of the Fireflash Tier 2",
    "profissao": "inscription",
-   "custo_g": 181.36,
+   "custo_g": 180.62,
    "preco_venda_g": 193.92,
    "fonte_preco_venda": "tsm.commodity.minBuyout",
-   "lucro_g": 358.42,
+   "lucro_g": 359.15,
    "unidades_esperadas": 2.93,
-   "g_por_conc": 1.2759,
+   "g_por_conc": 1.2785,
    "concentracao": 324,
    "demanda_unid_dia": 6.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 6.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
     "demanda_so_propria",
-    "liquidez_parada",
-    "serie_curta"
+    "liquidez_parada"
    ],
    "insumos_baratos": [],
    "ingredientes": [
@@ -5279,7 +5189,7 @@
     {
      "nome": "Munsell Ink Tier 1",
      "qtd": 2,
-     "preco_g": 13.9,
+     "preco_g": 13.5,
      "fonte": "umx.atual",
      "percentil_30d": 90.0,
      "insumo_barato": false
@@ -5298,19 +5208,18 @@
    "receita": "Vantus Rune: Tides Tier 2",
    "profissao": "inscription",
    "custo_g": 237.37,
-   "preco_venda_g": 145.13,
+   "preco_venda_g": 140.0,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -35.39,
+   "lucro_g": -42.53,
    "unidades_esperadas": 1.465,
-   "g_por_conc": -0.0449,
+   "g_por_conc": -0.054,
    "concentracao": 909,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 75,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root",
@@ -5370,23 +5279,22 @@
   "darkmoon-sigil-void-tier-2": {
    "receita": "Darkmoon Sigil: Void Tier 2",
    "profissao": "inscription",
-   "custo_g": 448.7,
-   "preco_venda_g": 299.0,
+   "custo_g": 447.04,
+   "preco_venda_g": 375.84,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -32.56,
+   "lucro_g": 76.03,
    "unidades_esperadas": 1.465,
-   "g_por_conc": -0.1095,
+   "g_por_conc": 0.2557,
    "concentracao": 343,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
     "ah_corrompido",
     "custo_modelo_divergente",
     "fora_do_ranking",
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [],
    "ingredientes": [
@@ -5401,7 +5309,7 @@
     {
      "nome": "Mote of Pure Void",
      "qtd": 10,
-     "preco_g": 0.57,
+     "preco_g": 0.39,
      "fonte": "umx.atual",
      "percentil_30d": null,
      "insumo_barato": null
@@ -5427,20 +5335,19 @@
   "thalassian-missive-of-finesse-tier-2": {
    "receita": "Thalassian Missive of Finesse Tier 2",
    "profissao": "inscription",
-   "custo_g": 181.44,
+   "custo_g": 180.71,
    "preco_venda_g": 165.99,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 280.59,
+   "lucro_g": 281.33,
    "unidades_esperadas": 2.93,
-   "g_por_conc": 0.9989,
+   "g_por_conc": 1.0015,
    "concentracao": 324,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [],
    "ingredientes": [
@@ -5463,7 +5370,7 @@
     {
      "nome": "Munsell Ink Tier 1",
      "qtd": 2,
-     "preco_g": 13.9,
+     "preco_g": 13.5,
      "fonte": "umx.atual",
      "percentil_30d": 90.0,
      "insumo_barato": false
@@ -5481,20 +5388,19 @@
   "contract-zul-jarra-s-forces-tier-2": {
    "receita": "Contract: Zul'jarra's Forces Tier 2",
    "profissao": "inscription",
-   "custo_g": 126.42,
-   "preco_venda_g": 20.0,
+   "custo_g": 126.06,
+   "preco_venda_g": 19.98,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -70.75,
+   "lucro_g": -70.44,
    "unidades_esperadas": 2.93,
-   "g_por_conc": -0.1889,
+   "g_por_conc": -0.1881,
    "concentracao": 432,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 75,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [],
    "ingredientes": [
@@ -5517,7 +5423,7 @@
     {
      "nome": "Munsell Ink Tier 1",
      "qtd": 1,
-     "preco_g": 13.9,
+     "preco_g": 13.5,
      "fonte": "umx.atual",
      "percentil_30d": 90.0,
      "insumo_barato": false
@@ -5535,20 +5441,19 @@
   "thalassian-missive-of-perception-tier-2": {
    "receita": "Thalassian Missive of Perception Tier 2",
    "profissao": "inscription",
-   "custo_g": 181.53,
-   "preco_venda_g": 156.19,
+   "custo_g": 180.79,
+   "preco_venda_g": 157.76,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 253.23,
+   "lucro_g": 258.34,
    "unidades_esperadas": 2.93,
-   "g_por_conc": 0.9015,
+   "g_por_conc": 0.9196,
    "concentracao": 324,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [],
    "ingredientes": [
@@ -5571,7 +5476,7 @@
     {
      "nome": "Munsell Ink Tier 1",
      "qtd": 2,
-     "preco_g": 13.9,
+     "preco_g": 13.5,
      "fonte": "umx.atual",
      "percentil_30d": 90.0,
      "insumo_barato": false
@@ -5589,20 +5494,19 @@
   "thalassian-missive-of-ingenuity-tier-2": {
    "receita": "Thalassian Missive of Ingenuity Tier 2",
    "profissao": "inscription",
-   "custo_g": 181.53,
-   "preco_venda_g": 42.75,
+   "custo_g": 180.79,
+   "preco_venda_g": 42.73,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -62.53,
+   "lucro_g": -61.85,
    "unidades_esperadas": 2.93,
-   "g_por_conc": -0.2226,
+   "g_por_conc": -0.2202,
    "concentracao": 324,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [],
    "ingredientes": [
@@ -5625,7 +5529,7 @@
     {
      "nome": "Munsell Ink Tier 1",
      "qtd": 2,
-     "preco_g": 13.9,
+     "preco_g": 13.5,
      "fonte": "umx.atual",
      "percentil_30d": 90.0,
      "insumo_barato": false
@@ -5643,21 +5547,20 @@
   "thalassian-missive-of-the-peerless-tier-2": {
    "receita": "Thalassian Missive of the Peerless Tier 2",
    "profissao": "inscription",
-   "custo_g": 181.39,
+   "custo_g": 180.49,
    "preco_venda_g": 43.22,
    "fonte_preco_venda": "tsm.commodity.minBuyout",
-   "lucro_g": -61.08,
+   "lucro_g": -60.18,
    "unidades_esperadas": 2.93,
-   "g_por_conc": -0.2175,
+   "g_por_conc": -0.2142,
    "concentracao": 324,
    "demanda_unid_dia": 6.5,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 6.5,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
     "demanda_so_propria",
-    "liquidez_parada",
-    "serie_curta"
+    "liquidez_parada"
    ],
    "insumos_baratos": [],
    "ingredientes": [
@@ -5672,7 +5575,7 @@
     {
      "nome": "Mote of Pure Void",
      "qtd": 1,
-     "preco_g": 0.57,
+     "preco_g": 0.39,
      "fonte": "umx.atual",
      "percentil_30d": null,
      "insumo_barato": null
@@ -5680,7 +5583,7 @@
     {
      "nome": "Munsell Ink Tier 1",
      "qtd": 2,
-     "preco_g": 13.9,
+     "preco_g": 13.5,
      "fonte": "umx.atual",
      "percentil_30d": 90.0,
      "insumo_barato": false
@@ -5698,20 +5601,19 @@
   "thalassian-missive-of-resourcefulness-tier-2": {
    "receita": "Thalassian Missive of Resourcefulness Tier 2",
    "profissao": "inscription",
-   "custo_g": 181.53,
-   "preco_venda_g": 47.75,
+   "custo_g": 180.79,
+   "preco_venda_g": 47.74,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -48.61,
+   "lucro_g": -47.9,
    "unidades_esperadas": 2.93,
-   "g_por_conc": -0.1731,
+   "g_por_conc": -0.1705,
    "concentracao": 324,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [],
    "ingredientes": [
@@ -5734,7 +5636,7 @@
     {
      "nome": "Munsell Ink Tier 1",
      "qtd": 2,
-     "preco_g": 13.9,
+     "preco_g": 13.5,
      "fonte": "umx.atual",
      "percentil_30d": 90.0,
      "insumo_barato": false
@@ -5752,20 +5654,19 @@
   "thalassian-missive-of-deftness-tier-2": {
    "receita": "Thalassian Missive of Deftness Tier 2",
    "profissao": "inscription",
-   "custo_g": 181.44,
+   "custo_g": 180.71,
    "preco_venda_g": 33.0,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -89.59,
+   "lucro_g": -88.85,
    "unidades_esperadas": 2.93,
-   "g_por_conc": -0.3189,
+   "g_por_conc": -0.3163,
    "concentracao": 324,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [],
    "ingredientes": [
@@ -5788,7 +5689,7 @@
     {
      "nome": "Munsell Ink Tier 1",
      "qtd": 2,
-     "preco_g": 13.9,
+     "preco_g": 13.5,
      "fonte": "umx.atual",
      "percentil_30d": 90.0,
      "insumo_barato": false
@@ -5807,19 +5708,18 @@
    "receita": "Sienna Ink Tier 2",
    "profissao": "inscription",
    "custo_g": 353.69,
-   "preco_venda_g": 19.05,
+   "preco_venda_g": 19.23,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -221.13,
+   "lucro_g": -219.87,
    "unidades_esperadas": 7.325,
-   "g_por_conc": -0.7729,
+   "g_por_conc": -0.7685,
    "concentracao": 330,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Mana Lily Pigment Tier 1"
@@ -5864,10 +5764,9 @@
    "demanda_unid_dia": 0.8,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.8,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "demanda_so_propria",
-    "serie_curta"
+    "demanda_so_propria"
    ],
    "insumos_baratos": [
     "Mana Lily Pigment Tier 1"
@@ -5902,20 +5801,19 @@
   "thalassian-missive-of-multicraft-tier-2": {
    "receita": "Thalassian Missive of Multicraft Tier 2",
    "profissao": "inscription",
-   "custo_g": 181.53,
+   "custo_g": 180.79,
    "preco_venda_g": 166.13,
    "fonte_preco_venda": "tsm.commodity.minBuyout",
-   "lucro_g": 280.9,
+   "lucro_g": 281.63,
    "unidades_esperadas": 2.93,
-   "g_por_conc": 1.0,
+   "g_por_conc": 1.0026,
    "concentracao": 324,
    "demanda_unid_dia": 0.02,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "demanda_so_propria",
-    "serie_curta"
+    "demanda_so_propria"
    ],
    "insumos_baratos": [],
    "ingredientes": [
@@ -5938,7 +5836,7 @@
     {
      "nome": "Munsell Ink Tier 1",
      "qtd": 2,
-     "preco_g": 13.9,
+     "preco_g": 13.5,
      "fonte": "umx.atual",
      "percentil_30d": 90.0,
      "insumo_barato": false
@@ -5956,21 +5854,20 @@
   "thalassian-missive-of-the-harmonious-tier-2": {
    "receita": "Thalassian Missive of the Harmonious Tier 2",
    "profissao": "inscription",
-   "custo_g": 181.39,
+   "custo_g": 180.49,
    "preco_venda_g": 53.51,
    "fonte_preco_venda": "tsm.commodity.minBuyout",
-   "lucro_g": -32.44,
+   "lucro_g": -31.54,
    "unidades_esperadas": 2.93,
-   "g_por_conc": -0.1155,
+   "g_por_conc": -0.1123,
    "concentracao": 324,
    "demanda_unid_dia": 2.75,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 2.8,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
     "demanda_so_propria",
-    "liquidez_parada",
-    "serie_curta"
+    "liquidez_parada"
    ],
    "insumos_baratos": [],
    "ingredientes": [
@@ -5985,7 +5882,7 @@
     {
      "nome": "Mote of Pure Void",
      "qtd": 1,
-     "preco_g": 0.57,
+     "preco_g": 0.39,
      "fonte": "umx.atual",
      "percentil_30d": null,
      "insumo_barato": null
@@ -5993,7 +5890,7 @@
     {
      "nome": "Munsell Ink Tier 1",
      "qtd": 2,
-     "preco_g": 13.9,
+     "preco_g": 13.5,
      "fonte": "umx.atual",
      "percentil_30d": 90.0,
      "insumo_barato": false
@@ -6011,20 +5908,19 @@
   "contract-the-amani-tribe-tier-2": {
    "receita": "Contract: The Amani Tribe Tier 2",
    "profissao": "inscription",
-   "custo_g": 92.52,
+   "custo_g": 92.15,
    "preco_venda_g": 11.0,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -61.9,
+   "lucro_g": -61.53,
    "unidades_esperadas": 2.93,
-   "g_por_conc": -0.1653,
+   "g_por_conc": -0.1643,
    "concentracao": 432,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [],
    "ingredientes": [
@@ -6047,7 +5943,7 @@
     {
      "nome": "Munsell Ink Tier 1",
      "qtd": 1,
-     "preco_g": 13.9,
+     "preco_g": 13.5,
      "fonte": "umx.atual",
      "percentil_30d": 90.0,
      "insumo_barato": false
@@ -6065,27 +5961,26 @@
   "soul-cipher-tier-2": {
    "receita": "Soul Cipher Tier 2",
    "profissao": "inscription",
-   "custo_g": 93.58,
+   "custo_g": 93.05,
    "preco_venda_g": 15.0,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 10.8,
+   "lucro_g": 11.33,
    "unidades_esperadas": 7.325,
-   "g_por_conc": 0.0384,
+   "g_por_conc": 0.0403,
    "concentracao": 324,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [],
    "ingredientes": [
     {
      "nome": "Mote of Pure Void",
      "qtd": 1,
-     "preco_g": 0.57,
+     "preco_g": 0.39,
      "fonte": "umx.atual",
      "percentil_30d": null,
      "insumo_barato": null
@@ -6109,7 +6004,7 @@
     {
      "nome": "Munsell Ink Tier 1",
      "qtd": 1,
-     "preco_g": 13.9,
+     "preco_g": 13.5,
      "fonte": "umx.atual",
      "percentil_30d": 90.0,
      "insumo_barato": false
@@ -6181,20 +6076,19 @@
   "thalassian-missive-of-crafting-speed-tier-2": {
    "receita": "Thalassian Missive of Crafting Speed Tier 2",
    "profissao": "inscription",
-   "custo_g": 181.44,
+   "custo_g": 180.71,
    "preco_venda_g": 32.29,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -91.56,
+   "lucro_g": -90.83,
    "unidades_esperadas": 2.93,
-   "g_por_conc": -0.326,
+   "g_por_conc": -0.3233,
    "concentracao": 324,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [],
    "ingredientes": [
@@ -6217,7 +6111,7 @@
     {
      "nome": "Munsell Ink Tier 1",
      "qtd": 2,
-     "preco_g": 13.9,
+     "preco_g": 13.5,
      "fonte": "umx.atual",
      "percentil_30d": 90.0,
      "insumo_barato": false
@@ -6236,20 +6130,19 @@
    "receita": "Darkmoon Sigil: Blood Tier 2",
    "profissao": "inscription",
    "custo_g": 450.08,
-   "preco_venda_g": 160.25,
+   "preco_venda_g": 164.25,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -227.05,
+   "lucro_g": -221.48,
    "unidades_esperadas": 1.465,
-   "g_por_conc": -0.7635,
+   "g_por_conc": -0.7448,
    "concentracao": 343,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
     "custo_modelo_divergente",
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [],
    "ingredientes": [
@@ -6290,23 +6183,22 @@
   "contract-the-singularity-tier-2": {
    "receita": "Contract: The Singularity Tier 2",
    "profissao": "inscription",
-   "custo_g": 92.1,
+   "custo_g": 91.24,
    "preco_venda_g": 10.98,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -61.54,
+   "lucro_g": -60.68,
    "unidades_esperadas": 2.93,
-   "g_por_conc": -0.1643,
+   "g_por_conc": -0.162,
    "concentracao": 432,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
     "ah_corrompido",
     "fora_do_ranking",
     "sem_demanda_regional",
-    "sem_estoque_agora",
-    "serie_curta"
+    "sem_estoque_agora"
    ],
    "insumos_baratos": [],
    "ingredientes": [
@@ -6321,7 +6213,7 @@
     {
      "nome": "Mote of Pure Void",
      "qtd": 3,
-     "preco_g": 0.57,
+     "preco_g": 0.39,
      "fonte": "umx.atual",
      "percentil_30d": null,
      "insumo_barato": null
@@ -6329,7 +6221,7 @@
     {
      "nome": "Munsell Ink Tier 1",
      "qtd": 1,
-     "preco_g": 13.9,
+     "preco_g": 13.5,
      "fonte": "umx.atual",
      "percentil_30d": 90.0,
      "insumo_barato": false
@@ -6348,20 +6240,19 @@
    "receita": "Darkmoon Sigil: Rot Tier 2",
    "profissao": "inscription",
    "custo_g": 448.42,
-   "preco_venda_g": 132.54,
+   "preco_venda_g": 132.32,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -263.96,
+   "lucro_g": -264.27,
    "unidades_esperadas": 1.465,
-   "g_por_conc": -0.8876,
+   "g_por_conc": -0.8886,
    "concentracao": 343,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
     "custo_modelo_divergente",
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [],
    "ingredientes": [
@@ -6403,19 +6294,18 @@
    "receita": "Vantus Rune: Radiant Tier 2",
    "profissao": "inscription",
    "custo_g": 193.88,
-   "preco_venda_g": 183.0,
+   "preco_venda_g": 178.99,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 60.81,
+   "lucro_g": 55.23,
    "unidades_esperadas": 1.465,
-   "g_por_conc": 0.0772,
+   "g_por_conc": 0.0701,
    "concentracao": 909,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [
     "Petrified Root"
@@ -6458,20 +6348,19 @@
   "contract-the-hara-ti-tier-2": {
    "receita": "Contract: The Hara'ti Tier 2",
    "profissao": "inscription",
-   "custo_g": 92.02,
+   "custo_g": 91.65,
    "preco_venda_g": 52.2,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": 53.28,
+   "lucro_g": 53.65,
    "unidades_esperadas": 2.93,
-   "g_por_conc": 0.1422,
+   "g_por_conc": 0.1432,
    "concentracao": 432,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [],
    "ingredientes": [
@@ -6494,7 +6383,7 @@
     {
      "nome": "Munsell Ink Tier 1",
      "qtd": 1,
-     "preco_g": 13.9,
+     "preco_g": 13.5,
      "fonte": "umx.atual",
      "percentil_30d": 90.0,
      "insumo_barato": false
@@ -6512,22 +6401,21 @@
   "contract-the-silvermoon-court-tier-2": {
    "receita": "Contract: The Silvermoon Court Tier 2",
    "profissao": "inscription",
-   "custo_g": 92.27,
+   "custo_g": 91.9,
    "preco_venda_g": 13.45,
    "fonte_preco_venda": "umx.atual",
-   "lucro_g": -54.83,
+   "lucro_g": -54.46,
    "unidades_esperadas": 2.93,
-   "g_por_conc": -0.1464,
+   "g_por_conc": -0.1454,
    "concentracao": 432,
    "demanda_unid_dia": 0.0,
    "sold_per_day_regional": 0.0,
    "liquidez_unid_dia": 0.0,
-   "serie_pontos_90d": 4,
+   "serie_pontos_90d": 90,
    "flags": [
     "ah_corrompido",
     "fora_do_ranking",
-    "sem_demanda_regional",
-    "serie_curta"
+    "sem_demanda_regional"
    ],
    "insumos_baratos": [],
    "ingredientes": [
@@ -6550,7 +6438,7 @@
     {
      "nome": "Munsell Ink Tier 1",
      "qtd": 1,
-     "preco_g": 13.9,
+     "preco_g": 13.5,
      "fonte": "umx.atual",
      "percentil_30d": 90.0,
      "insumo_barato": false
@@ -6687,7 +6575,7 @@
   },
   "sunglass-vial-tier-1": {
    "nome": "Sunglass Vial Tier 1",
-   "preco_g": 2.99,
+   "preco_g": 2.91,
    "fonte": "umx.atual",
    "percentil_30d": null,
    "insumo_barato": false,
@@ -6721,7 +6609,7 @@
   },
   "mote-of-pure-void": {
    "nome": "Mote of Pure Void",
-   "preco_g": 0.57,
+   "preco_g": 0.39,
    "fonte": "umx.atual",
    "percentil_30d": null,
    "insumo_barato": false,
@@ -6872,7 +6760,7 @@
   },
   "eversong-diamond-tier-1": {
    "nome": "Eversong Diamond Tier 1",
-   "preco_g": 34.38,
+   "preco_g": 28.8,
    "fonte": "umx.atual",
    "percentil_30d": null,
    "insumo_barato": false,
@@ -6888,7 +6776,7 @@
   },
   "amani-lapis-tier-1": {
    "nome": "Amani Lapis Tier 1",
-   "preco_g": 26.0,
+   "preco_g": 25.97,
    "fonte": "umx.atual",
    "percentil_30d": 90.0,
    "insumo_barato": false,
@@ -6914,7 +6802,7 @@
   },
   "harandar-peridot-tier-1": {
    "nome": "Harandar Peridot Tier 1",
-   "preco_g": 30.9,
+   "preco_g": 26.37,
    "fonte": "umx.atual",
    "percentil_30d": 100.0,
    "insumo_barato": false,
@@ -6960,7 +6848,7 @@
   },
   "flawless-amani-lapis-tier-1": {
    "nome": "Flawless Amani Lapis Tier 1",
-   "preco_g": 48.98,
+   "preco_g": 39.12,
    "fonte": "umx.atual",
    "percentil_30d": 96.7,
    "insumo_barato": false,
@@ -6979,7 +6867,7 @@
   },
   "flawless-harandar-peridot-tier-1": {
    "nome": "Flawless Harandar Peridot Tier 1",
-   "preco_g": 27.67,
+   "preco_g": 27.64,
    "fonte": "umx.atual",
    "percentil_30d": 90.0,
    "insumo_barato": false,
@@ -7016,7 +6904,7 @@
   },
   "flawless-tenebrous-amethyst-tier-1": {
    "nome": "Flawless Tenebrous Amethyst Tier 1",
-   "preco_g": 30.14,
+   "preco_g": 30.12,
    "fonte": "umx.atual",
    "percentil_30d": 96.7,
    "insumo_barato": false,
@@ -7034,8 +6922,8 @@
   },
   "crystalline-glass-tier-1": {
    "nome": "Crystalline Glass Tier 1",
-   "preco_g": 11.44,
-   "fonte": "planilha.Materials",
+   "preco_g": 11.0,
+   "fonte": "umx.atual",
    "percentil_30d": 80.0,
    "insumo_barato": false,
    "n_receitas": 2,
@@ -7062,7 +6950,7 @@
   },
   "sterling-alloy-tier-1": {
    "nome": "Sterling Alloy Tier 1",
-   "preco_g": 73.95,
+   "preco_g": 70.54,
    "fonte": "umx.atual",
    "percentil_30d": 100.0,
    "insumo_barato": false,
@@ -7105,7 +6993,7 @@
   },
   "radiant-shard-tier-1": {
    "nome": "Radiant Shard Tier 1",
-   "preco_g": 3.04,
+   "preco_g": 2.49,
    "fonte": "umx.atual",
    "percentil_30d": 36.7,
    "insumo_barato": false,
@@ -7232,7 +7120,7 @@
   },
   "gloaming-alloy-tier-1": {
    "nome": "Gloaming Alloy Tier 1",
-   "preco_g": 68.65,
+   "preco_g": 79.99,
    "fonte": "umx.atual",
    "percentil_30d": 93.3,
    "insumo_barato": false,
@@ -7373,7 +7261,7 @@
   },
   "munsell-ink-tier-1": {
    "nome": "Munsell Ink Tier 1",
-   "preco_g": 13.9,
+   "preco_g": 13.5,
    "fonte": "umx.atual",
    "percentil_30d": 90.0,
    "insumo_barato": false,
