@@ -773,12 +773,65 @@
     };
     let historyChartInstance = null;
 
+    // TABELA CANONICA (DOC0 §5.1) — res/mc sao os numeros da planilha, nao os que o
+    // dashboard herdou. Antes daqui: Res 36/17/25/17,7 e MC 37/26/20/31. Para receita
+    // sincronizada o efeito do numero errado era nulo (o sync grava
+    // baseCost = custoCraftadoPlanilha / factor e o calcItem multiplica pelo MESMO
+    // factor), mas receita que so existe no DEFAULT_DATA era calculada com o valor
+    // antigo. Ver RELATORIO_SESSAO_2026-10-24 §23.2 e DOC0 §5.1.
     const DEFAULT_PROF_SETTINGS = {
-      alchemy: { res: 36, mc: 37, ing: 29, refund: 70 },
-      jewelcrafting: { res: 17, mc: 26, ing: 25, refund: 70 },
-      enchanting: { res: 25, mc: 20, ing: 25, refund: 70 },
-      inscription: { res: 17.7, mc: 31, ing: 25, refund: 70 }
+      alchemy: { res: 15.0, mc: 36.4, ing: 29, refund: 70 },
+      jewelcrafting: { res: 17.7, mc: 32.8, ing: 25, refund: 70 },
+      enchanting: { res: 37.7, mc: 0, ing: 25, refund: 70 },
+      inscription: { res: 17.7, mc: 31.0, ing: 25, refund: 70 }
     };
+
+    const CANON_PROF_SETTINGS = {
+      alchemy: { res: 15.0, mc: 36.4 },
+      jewelcrafting: { res: 17.7, mc: 32.8 },
+      enchanting: { res: 37.7, mc: 0 },
+      inscription: { res: 17.7, mc: 31.0 }
+    };
+
+    // Valores que o dashboard e o servidor ja gravaram e que NAO sao canonicos.
+    // A migracao so reescreve o que estiver exatamente nesta lista: qualquer outro
+    // numero e tratado como override do operador e fica intocado.
+    const LEGACY_PROF_VALUES = {
+      alchemy: { res: [36], mc: [37] },
+      jewelcrafting: { res: [17, 38], mc: [26, 34] },
+      enchanting: { res: [25, 30], mc: [20] },
+      inscription: { res: [17.7, 32], mc: [30] }
+    };
+
+    const PROF_CANONICO_KEY = STORAGE_KEY + "_prof_canonico_v1";
+
+    /**
+     * Alinha res/mc de profSettings a tabela canonica do DOC0 §5.1.
+     * Idempotente: depois da primeira passada nada mais casa com LEGACY_PROF_VALUES.
+     * @returns {number} quantos campos foram corrigidos
+     */
+    function alinharProfSettingsCanonico(ps) {
+      let corrigidos = 0;
+      for (const prof in CANON_PROF_SETTINGS) {
+        if (!ps || !ps[prof]) continue;
+        const alvo = CANON_PROF_SETTINGS[prof];
+        const legado = LEGACY_PROF_VALUES[prof] || {};
+        ["res", "mc"].forEach(function (attr) {
+          const atual = Number(ps[prof][attr]);
+          if (!isFinite(atual)) return;
+          if (Math.abs(alvo[attr] - atual) < 1e-9) return;   // ja canonico
+          const lista = legado[attr] || [];
+          const ehLegado = lista.some(function (v) { return Math.abs(v - atual) < 1e-9; });
+          if (!ehLegado) return;                             // override do operador
+          ps[prof][attr] = alvo[attr];
+          corrigidos++;
+        });
+      }
+      if (corrigidos) {
+        try { localStorage.setItem(PROF_CANONICO_KEY, new Date().toISOString()); } catch (e) { }
+      }
+      return corrigidos;
+    }
 
     // META DE LUCRO POR CONCENTRAÇÃO (FLEXÍVEL POR PROFISSÃO)
     const TARGET_GOLD_PER_CONC = {
@@ -1755,6 +1808,14 @@
               if (data.profSettings[prof]) profSettings[prof] = { ...DEFAULT_PROF_SETTINGS[prof], ...data.profSettings[prof] };
             }
           }
+          // O servidor (Turso) tambem guarda os valores antigos. Corrigir aqui e
+          // devolver a correcao no proximo autoBackup evita que a proxima
+          // restauracao reintroduza Res 36/38/30/32.
+          const alinhadosServidor = alinharProfSettingsCanonico(profSettings);
+          if (alinhadosServidor) {
+            console.info("[profSettings] " + alinhadosServidor + " campo(s) vindos do servidor alinhados ao canonico (DOC0 §5.1)");
+            autoBackup();
+          }
           if (data.userEdits) {
             userEdits = data.userEdits;
             for (const k in DEFAULT_DATA) state[k] = JSON.parse(JSON.stringify(DEFAULT_DATA[k]));
@@ -1863,6 +1924,14 @@
           for (const prof in DEFAULT_PROF_SETTINGS) {
             if (saved.profSettings[prof]) profSettings[prof] = { ...DEFAULT_PROF_SETTINGS[prof], ...saved.profSettings[prof] };
           }
+        }
+        // Migracao ponte-v1: o localStorage deste navegador carrega os valores
+        // legados. Sem isto o painel continua calculando receita fora do sync com
+        // o numero antigo, mesmo com DEFAULT_PROF_SETTINGS ja corrigido.
+        const alinhadosLocal = alinharProfSettingsCanonico(profSettings);
+        if (alinhadosLocal) {
+          console.info("[profSettings] " + alinhadosLocal + " campo(s) do localStorage alinhados ao canonico (DOC0 §5.1)");
+          saveState();
         }
         if (saved.userEdits) {
           userEdits = saved.userEdits;
@@ -2685,6 +2754,12 @@
             for (const prof in DEFAULT_PROF_SETTINGS) {
               if (data.profSettings[prof]) profSettings[prof] = { ...DEFAULT_PROF_SETTINGS[prof], ...data.profSettings[prof] };
             }
+          }
+          // Backup exportado antes da correcao traz os valores antigos: migra na
+          // importacao para o arquivo nao ressuscitar o problema.
+          const alinhadosImport = alinharProfSettingsCanonico(profSettings);
+          if (alinhadosImport) {
+            console.info("[profSettings] " + alinhadosImport + " campo(s) do backup importado alinhados ao canonico (DOC0 §5.1)");
           }
           if (data.userEdits) {
             userEdits = data.userEdits;
