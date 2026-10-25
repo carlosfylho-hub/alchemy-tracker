@@ -2051,6 +2051,62 @@
     let invTipo = localStorage.getItem(INV_TIPO_KEY) || "insumo";
     let invSemTipo = false;   // banco ainda sem material_catalog.tipo
 
+    // ---- P2.4: camada analitica do screener (custo, g/conc, demanda) ----------
+    // Gerado por _ferramentas/_gen_screener.py -> 02_Notebook_Mercado/screener_aba.json,
+    // servido pelo mesmo GitHub Pages do index.html. Se o arquivo nao existir (ou o
+    // JSON estiver velho), a aba segue funcionando com a serie do ?umx=N: o join e
+    // aditivo, nunca pre-requisito.
+    const INV_SCREENER_URL = "02_Notebook_Mercado/screener_aba.json";
+    let invScreener = { receitas: {}, insumos: {}, meta: {}, erro: null };
+    let invScreenerCarregando = false;
+
+    /**
+     * MESMA transformacao de `slug()` em _ferramentas/_gen_screener.py.
+     * Divergir daqui faz o join falhar em silencio — foi o padrao que escondeu
+     * item na tela no §11 do relatorio.
+     */
+    function invSlug(txt) {
+      return String(txt === null || txt === undefined ? "" : txt)
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+    }
+
+    /** Nome que nao e nome: o UND devolve `item 244603` para id fora do catalogo. */
+    function invNomePlaceholder(nome) {
+      return /^item [0-9]+$/.test(String(nome || "").trim().toLowerCase());
+    }
+
+    /** Dados do screener deste item: receita (produto) ou insumo (reagente). */
+    function invScreenerDe(it) {
+      if (!it || !it.nome) return null;
+      const k = invSlug(it.nome);
+      if (invScreener.receitas[k]) return { tipo: "receita", d: invScreener.receitas[k] };
+      if (invScreener.insumos[k]) return { tipo: "insumo", d: invScreener.insumos[k] };
+      return null;
+    }
+
+    function carregarInvScreener() {
+      if (invScreenerCarregando) return;
+      invScreenerCarregando = true;
+      fetch(INV_SCREENER_URL + "?v=" + Date.now())
+        .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+        .then(j => {
+          invScreener = {
+            receitas: (j && j.receitas) || {},
+            insumos: (j && j.insumos) || {},
+            meta: (j && j.meta) || {},
+            erro: null
+          };
+          renderInvestLista();
+          renderInvestDetalhe();
+        })
+        .catch(e => {
+          invScreener.erro = e.message;
+          console.info("[invest] screener sem join (" + e.message + "): aba segue so com ?umx");
+          renderInvestLista();
+        });
+    }
+
     function invFavs() {
       try { return JSON.parse(localStorage.getItem(INV_FAV_KEY) || "{}") || {}; }
       catch (e) { return {}; }
@@ -2163,6 +2219,7 @@
           });
           const n = Object.keys(invDados.itens).length;
           invStatus(invDados.meta.aviso ? ("aviso: " + invDados.meta.aviso) : (n + " item(ns) · " + invJanela + " dias"));
+          carregarInvScreener();
           renderInvestLista();
           invAtualizarBarraAlvo();
           if (!invSelecionado && n) {
@@ -2191,6 +2248,8 @@
       return Object.keys(invDados.itens)
         .filter(k => {
           const it = invDados.itens[k];
+          // Id fora do catalogo vira "item 244603" na rota: nao e item, e ruido.
+          if (invNomePlaceholder(it.nome)) return false;
           if (filtro && String(it.nome || "").toLowerCase().indexOf(filtro) === -1) return false;
           if (invSoFav && !Object.prototype.hasOwnProperty.call(favs, k)) return false;
           if (!invSemTipo && invTipo !== "todos") {
@@ -2253,8 +2312,11 @@
       }
 
       if (cont) {
+        const scrInfo = (invScreener.meta && invScreener.meta.geradoEm)
+          ? " · screener " + String(invScreener.meta.geradoEm).slice(11, 16)
+          : (invScreener.erro ? " · screener indisponível" : "");
         cont.textContent = "· " + fila.length + " de " + totalItens +
-          (ocultos ? " · " + ocultos + " com dado em outro filtro" : "");
+          (ocultos ? " · " + ocultos + " com dado em outro filtro" : "") + scrInfo;
       }
 
       if (!fila.length) {
@@ -2287,6 +2349,17 @@
         const preco = invPreco(it);
         const noAlvo = alvo !== null && preco !== null && preco <= alvo;
         const corPct = pct === null ? "#64748b" : (pct <= 20 ? "#34d399" : (pct >= 80 ? "#fb7185" : "#e2e8f0"));
+        // Coluna do screener: g/conc para receita; contagem de receitas para as
+        // quais o insumo esta barato. Sem o arquivo, a coluna simplesmente nao aparece.
+        const scr = invScreenerDe(it);
+        let scrBadge = "";
+        if (scr && scr.tipo === "receita") {
+          const g = Number(scr.d.g_por_conc);
+          scrBadge = '<span class="pg" style="color:' + (isFinite(g) ? "#a5b4fc" : "#64748b") + '">' +
+            (isFinite(g) ? g.toFixed(2) + " g/c" : "—") + '</span>';
+        } else if (scr && scr.tipo === "insumo" && Number(scr.d.n_barato) > 0) {
+          scrBadge = '<span class="pg" style="color:#34d399">barato em ' + scr.d.n_barato + '</span>';
+        }
 
         return '<div class="inv-row' + (k === invSelecionado ? " on" : "") + '" data-id="' + k + '">' +
           '<button class="inv-star' + (fav ? " on" : "") + '" data-fav="' + k + '" title="favoritar">' +
@@ -2295,6 +2368,7 @@
           (noAlvo ? ' <span class="inv-badge" style="color:#34d399;background:#34d3991a">NO ALVO</span>' : '') +
           '</span>' +
           '<span class="inv-badge" style="color:' + s.cor + ';background:' + s.bg + '">' + s.txt + '</span>' +
+          scrBadge +
           '<span class="pg" style="color:' + corPct + '">' + (pct === null ? "—" : pct.toFixed(0) + "%") + '</span>' +
           '</div>';
       }).join("");
@@ -2338,6 +2412,9 @@
       const preco = invPreco(it);
       const oferta = invOferta(it);
       const gap = (alvo !== null && preco !== null && alvo > 0) ? (preco / alvo - 1) * 100 : null;
+      // P2.4: receita (custo/venda/g-por-concentracao/demanda) ou insumo
+      // (quantas receitas usam e para quantas ele esta barato).
+      const scr = invScreenerDe(it);
 
       const kpis = [
         ["preço agora", invG(preco), ""],
@@ -2348,6 +2425,33 @@
           (st.tend_7_vs_30 === undefined || st.tend_7_vs_30 === null) ? "—" : ((st.tend_7_vs_30 > 0 ? "+" : "") + st.tend_7_vs_30 + "%"), ""],
         ["mín / máx", invG(st.min) + " / " + invG(st.max), st.n + " ponto(s)"]
       ];
+
+      if (scr && scr.tipo === "receita") {
+        const d = scr.d;
+        const g = Number(d.g_por_conc);
+        kpis.push(["custo do craft", invG(Number(d.custo_g)), "composição × preço do insumo"]);
+        kpis.push(["venda estimada", invG(Number(d.preco_venda_g)), d.fonte_preco_venda || ""]);
+        kpis.push(["lucro por craft", invG(Number(d.lucro_g)), "já com taxa e multicraft"]);
+        kpis.push(["g / concentração", isFinite(g) ? g.toFixed(2) : "—",
+          d.concentracao ? d.concentracao + " ponto(s)" : ""]);
+        kpis.push(["demanda / dia",
+          (d.demanda_unid_dia === null || d.demanda_unid_dia === undefined) ? "—" : Number(d.demanda_unid_dia).toFixed(1),
+          Number(d.sold_per_day_regional) > 0
+            ? Number(d.sold_per_day_regional).toFixed(1) + "/dia regional"
+            : "sem linha regional"]);
+        if ((d.insumos_baratos || []).length) {
+          kpis.push(["insumos baratos", (d.insumos_baratos || []).length + " de " + (d.ingredientes || []).length,
+            (d.insumos_baratos || []).slice(0, 2).join(", ")]);
+        }
+      } else if (scr && scr.tipo === "insumo") {
+        const d = scr.d;
+        const pc30 = Number(d.percentil_30d);
+        kpis.push(["usado em", (d.n_receitas || 0) + " receita(s)", (d.usado_em || []).slice(0, 3).join(", ")]);
+        kpis.push(["barato para", (d.n_barato || 0) + " receita(s)",
+          Number(d.n_barato) > 0 ? "abaixo do preço habitual deste insumo" : "acima da mediana de 30d"]);
+        kpis.push(["perc. 30d (insumo)", isFinite(pc30) ? pc30.toFixed(0) + "%" : "—",
+          "série de 30 dias do backfill"]);
+      }
 
       let alvoHtml;
       if (fav) {
@@ -2369,6 +2473,23 @@
           'você define quanto quer pagar e o item passa a mostrar <b>NO ALVO</b> quando chegar lá.</div>';
       }
 
+      // Flags do screener traduzidas: o codigo cru nao ajuda em nada na tela.
+      const FLAGS_TXT = {
+        serie_curta: "série curta",
+        sem_demanda_regional: "sem demanda regional",
+        demanda_so_propria: "demanda só própria",
+        liquidez_parada: "liquidez parada",
+        custo_modelo_divergente: "custo fora do modelo",
+        ah_corrompido: "AH corrompido",
+        sem_estoque_agora: "sem estoque agora"
+      };
+      const flags = (scr && scr.d && scr.d.flags) ? scr.d.flags : [];
+      const flagsHtml = flags.length
+        ? '<div class="flex flex-wrap items-center gap-1.5">' + flags.map(f =>
+          '<span class="inv-badge" style="color:#cbd5e1;background:#33415580">' +
+          invEsc(FLAGS_TXT[f] || f) + '</span>').join("") + '</div>'
+        : '';
+
       box.innerHTML =
         '<div class="flex items-start justify-between gap-3 flex-wrap">' +
         '<div>' +
@@ -2385,6 +2506,7 @@
         (fav ? 'border-amber-400 text-amber-300 bg-amber-400/10' : 'border-slate-600 text-slate-300') + '">' +
         (fav ? '★ nos favoritos' : '☆ favoritar') + '</button>' +
         '</div>' +
+        flagsHtml +
         '<div class="grid grid-cols-2 md:grid-cols-3 gap-2">' +
         kpis.map(k => '<div class="inv-kpi"><div class="r">' + k[0] + '</div>' +
           '<div class="v">' + k[1] + '</div><div class="h">' + k[2] + '</div></div>').join("") +
