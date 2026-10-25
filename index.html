@@ -2454,7 +2454,13 @@
         const g = Number(d.g_por_conc);
         kpis.push(["custo do craft", invG(Number(d.custo_g)), "composição × preço do insumo"]);
         kpis.push(["venda estimada", invG(Number(d.preco_venda_g)), d.fonte_preco_venda || ""]);
-        kpis.push(["lucro por craft", invG(Number(d.lucro_g)), "já com taxa e multicraft"]);
+        // Sem as unidades do multicraft o número confunde: "lucro 842 g" com "venda
+        // 127 g" parece erro. Com o multiplicador na dica, a conta fecha na tela.
+        const un = Number(d.unidades_esperadas);
+        kpis.push(["lucro por craft", invG(Number(d.lucro_g)),
+          isFinite(un) && un > 0
+            ? un.toFixed(1).replace(".", ",") + " un × venda − custo (com taxa)"
+            : "já com taxa e multicraft"]);
         kpis.push(["g / concentração", isFinite(g) ? g.toFixed(2) : "—",
           d.concentracao ? d.concentracao + " ponto(s)" : ""]);
         kpis.push(["demanda / dia",
