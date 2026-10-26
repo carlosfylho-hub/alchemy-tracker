@@ -774,8 +774,14 @@
     let historyChartInstance = null;
 
     // TABELA CANONICA (DOC0 §5.1) — res/mc/ing sao os numeros da planilha e da
-    // build padrao dos personagens (rev. de 25/10/2026). refund continua 70 nas
-    // quatro profissoes (F_restituicao padrao do dashboard/planilha).
+    // build padrao dos personagens (rev. de 25/10/2026).
+    //
+    // `refund` NAO e atributo de build: e o nó da arvore de KP, e a engine de
+    // Midnight 12.1.5 so tem duas taxas — 50% (base) e 100% (no culminante).
+    // A heuristica de 70% usada ate 25/10 nao existe no jogo e foi substituida em
+    // 26/10 pela matriz real da warband: Encantamento 100% (Spellbound Shatterer
+    // maximizado nos 25 personagens) e 50% nas demais (sem no de 100%).
+    //
     // Historico: ate 24/10 era Res 36/17/25/17,7 e MC 37/26/20/31; em 25/10 os
     // valores da build mudaram para os de baixo (Encantamento passou a registrar
     // os 38,5 de Engenhosidade da pocao, ativa em todos os personagens).
@@ -784,60 +790,95 @@
     // factor), mas receita que so existe no DEFAULT_DATA era calculada com o valor
     // antigo. Ver RELATORIO_SESSAO_2026-10-24 §23.2 e DOC0 §5.1.
     const DEFAULT_PROF_SETTINGS = {
-      alchemy: { res: 15.0, mc: 36.4, ing: 28.9, refund: 70 },
-      jewelcrafting: { res: 17.8, mc: 33.4, ing: 21.6, refund: 70 },
-      enchanting: { res: 14.7, mc: 0, ing: 38.5, refund: 70 },
-      inscription: { res: 12.2, mc: 22.7, ing: 11.6, refund: 70 }
+      alchemy: { res: 15.0, mc: 36.4, ing: 28.9, refund: 50 },
+      jewelcrafting: { res: 17.8, mc: 33.4, ing: 21.6, refund: 50 },
+      enchanting: { res: 14.7, mc: 0, ing: 38.5, refund: 100 },
+      inscription: { res: 12.2, mc: 22.7, ing: 11.6, refund: 50 }
     };
 
     const CANON_PROF_SETTINGS = {
-      alchemy: { res: 15.0, mc: 36.4, ing: 28.9 },
-      jewelcrafting: { res: 17.8, mc: 33.4, ing: 21.6 },
-      enchanting: { res: 14.7, mc: 0, ing: 38.5 },
-      inscription: { res: 12.2, mc: 22.7, ing: 11.6 }
+      alchemy: { res: 15.0, mc: 36.4, ing: 28.9, refund: 50 },
+      jewelcrafting: { res: 17.8, mc: 33.4, ing: 21.6, refund: 50 },
+      enchanting: { res: 14.7, mc: 0, ing: 38.5, refund: 100 },
+      inscription: { res: 12.2, mc: 22.7, ing: 11.6, refund: 50 }
     };
+
+    // Atributos que a migracao canonica cobre. `refund` entrou em 26/10: antes
+    // era tratado como configuracao do operador e por isso o 70% sobreviveu em
+    // todos os navegadores (e no Tracker State) mesmo depois da correcao.
+    const PROF_ATTRS_CANONICOS = ["res", "mc", "ing", "refund"];
 
     // Valores que o dashboard, o servidor (`?status=1`) e a planilha ja gravaram e
     // que NAO sao canonicos. A migracao so reescreve o que estiver exatamente
     // nesta lista: qualquer outro numero e tratado como override do operador e
     // fica intocado.
     const LEGACY_PROF_VALUES = {
-      alchemy: { res: [36], mc: [37], ing: [29] },
-      jewelcrafting: { res: [17, 38, 17.7], mc: [26, 34, 32.8], ing: [25, 22] },
-      enchanting: { res: [25, 30, 37.7], mc: [20], ing: [25, 22, 0] },
-      inscription: { res: [17.7, 32], mc: [30, 31.0], ing: [25, 19] }
+      alchemy: { res: [36], mc: [37], ing: [29], refund: [70] },
+      jewelcrafting: { res: [17, 38, 17.7], mc: [26, 34, 32.8], ing: [25, 22], refund: [70] },
+      enchanting: { res: [25, 30, 37.7], mc: [20], ing: [25, 22, 0], refund: [70] },
+      inscription: { res: [17.7, 32], mc: [30, 31.0], ing: [25, 19], refund: [70] }
     };
 
     const PROF_CANONICO_KEY = STORAGE_KEY + "_prof_canonico_v1";
 
     /**
-     * Alinha res/mc/ing de profSettings a tabela canonica do DOC0 §5.1.
+     * Alinha res/mc/ing/refund de profSettings a tabela canonica do DOC0 §5.1.
      * Idempotente: depois da primeira passada nada mais casa com LEGACY_PROF_VALUES.
-     * `refund` fica de fora de proposito: e configuracao do operador, nao atributo
-     * da build.
+     * `refund` so e migrado quando o valor gravado e o 70 da heuristica antiga (ou
+     * quando esta ausente) — refund escolhido manualmente nao e sobrescrito, para
+     * nao apagar override legitimo de quem tenha um personagem fora da matriz.
      * @returns {number} quantos campos foram corrigidos
      */
     function alinharProfSettingsCanonico(ps) {
       let corrigidos = 0;
+      const refundsMigrados = [];
       for (const prof in CANON_PROF_SETTINGS) {
         if (!ps || !ps[prof]) continue;
         const alvo = CANON_PROF_SETTINGS[prof];
         const legado = LEGACY_PROF_VALUES[prof] || {};
-        ["res", "mc", "ing"].forEach(function (attr) {
+        PROF_ATTRS_CANONICOS.forEach(function (attr) {
           const atual = Number(ps[prof][attr]);
-          if (!isFinite(atual)) return;
+          if (!isFinite(atual)) {
+            // refund ausente e estado legado: nasce com o valor canonico.
+            if (attr === "refund") {
+              ps[prof][attr] = alvo[attr];
+              refundsMigrados.push(prof + " -> " + alvo[attr] + "%");
+              corrigidos++;
+            }
+            return;
+          }
           if (Math.abs(alvo[attr] - atual) < 1e-9) return;   // ja canonico
           const lista = legado[attr] || [];
           const ehLegado = lista.some(function (v) { return Math.abs(v - atual) < 1e-9; });
           if (!ehLegado) return;                             // override do operador
           ps[prof][attr] = alvo[attr];
+          if (attr === "refund") refundsMigrados.push(prof + " " + atual + "% -> " + alvo[attr] + "%");
           corrigidos++;
         });
+      }
+      if (refundsMigrados.length) {
+        console.info("[profSettings] refund migrado para a engine real (DOC0 §5.1): " +
+          refundsMigrados.join(" · "));
       }
       if (corrigidos) {
         try { localStorage.setItem(PROF_CANONICO_KEY, new Date().toISOString()); } catch (e) { }
       }
       return corrigidos;
+    }
+
+    /**
+     * Refund em decimal para o calculo de concentracao efetiva.
+     * Vive fora da UI de proposito: nao varia com equipamento, encantamento de
+     * ferramenta nem pocao — ou o personagem tem o no culminante (100%), ou opera
+     * na base da engine (50%). O fallback NUNCA pode voltar a ser a heuristica de
+     * 70% que existia ate 25/10.
+     */
+    function refundDecFor(prof) {
+      const s = profSettings[prof] || {};
+      const v = Number(s.refund);
+      if (isFinite(v) && v > 0) return v / 100;
+      const def = DEFAULT_PROF_SETTINGS[prof] || { refund: 50 };
+      return Number(def.refund) / 100;
     }
 
     // META DE LUCRO POR CONCENTRAÇÃO (FLEXÍVEL POR PROFISSÃO)
@@ -1212,7 +1253,7 @@
       for (const prof in state) {
         if (!priceHistory[prof]) priceHistory[prof] = {};
         const s = profSettings[prof];
-        const resDec = (s.res || 0) / 100, mcDec = (s.mc || 0) / 100, ingDec = (s.ing || 0) / 100, refundDec = (s.refund || 70) / 100;
+        const resDec = (s.res || 0) / 100, mcDec = (s.mc || 0) / 100, ingDec = (s.ing || 0) / 100, refundDec = refundDecFor(prof);
         state[prof].forEach(item => {
           if (!Array.isArray(priceHistory[prof][item.id]) || priceHistory[prof][item.id].length === 0) {
             const c = calcItem(item, resDec, mcDec, ingDec, refundDec, prof);
@@ -1242,7 +1283,7 @@
       if (!force && !(Number(item.ahPrice) > 0)) return false;
 
       const s = profSettings[prof];
-      const resDec = (s.res || 0) / 100, mcDec = (s.mc || 0) / 100, ingDec = (s.ing || 0) / 100, refundDec = (s.refund || 70) / 100;
+      const resDec = (s.res || 0) / 100, mcDec = (s.mc || 0) / 100, ingDec = (s.ing || 0) / 100, refundDec = refundDecFor(prof);
       const c = calcItem(item, resDec, mcDec, ingDec, refundDec, prof);
 
       const newPoint = {
@@ -3285,7 +3326,7 @@
 
       profKeys.forEach(p => {
         const s = profSettings[p];
-        const resDec = s.res / 100, mcDec = s.mc / 100, ingDec = s.ing / 100, refundDec = (s.refund || 70) / 100;
+        const resDec = s.res / 100, mcDec = s.mc / 100, ingDec = s.ing / 100, refundDec = refundDecFor(p);
         const items = state[p] || [];
         const calculated = items.map(item => ({ ...calcItem(item, resDec, mcDec, ingDec, refundDec, p), profKey: p }));
         allCalculated = allCalculated.concat(calculated);
