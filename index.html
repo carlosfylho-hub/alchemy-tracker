@@ -2466,12 +2466,15 @@
       const prof = document.getElementById("patProfSelect").value;
       const items = (state[prof] || []).slice();
 
-      // monta stats por item
+      // monta stats por item, separando os ocultos (ignoredItems, a mesma lista do resto do app)
+      const ocultos = (ignoredItems[prof] || []);
       const rows = [];
+      const rowsOcultos = [];
       let totalWeeks = 0, totalPts = 0;
       for (const it of items) {
         const s = patStats(patSeries(prof, it.id));
         if (!s) continue;
+        if (ocultos.indexOf(it.id) !== -1) { rowsOcultos.push({ it, s }); continue; }
         rows.push({ it, s });
         totalWeeks = Math.max(totalWeeks, s.weeks);
         totalPts += s.n;
@@ -2495,8 +2498,10 @@
         <span class="text-slate-500">${rows.length} crafts com histórico · ${totalPts.toLocaleString("pt-BR")} leituras</span>
       </span>`;
 
-      // Tabela de volatilidade (ordenada por amplitude %)
+      // Tabela de volatilidade (ordenada por amplitude %). Linha clicável seleciona
+      // o craft no detalhe; o ✕ oculta (vai pra ignoredItems, a mesma lista do app).
       rows.sort((a, b) => b.s.ampPct - a.s.ampPct);
+      const selId = Number(document.getElementById("patItemSelect").value) || (rows[0] && rows[0].it.id);
       let html = `<table class="w-full text-xs"><thead><tr class="text-slate-400 border-b border-slate-800">
         <th class="text-left py-2 px-2">Craft</th>
         <th class="text-right px-2">Vale</th>
@@ -2504,30 +2509,70 @@
         <th class="text-right px-2">Amplitude</th>
         <th class="text-right px-2">Agora</th>
         <th class="text-right px-2">Tendência</th>
+        <th class="text-center px-2 w-8"></th>
       </tr></thead><tbody class="divide-y divide-slate-800/60">`;
       for (const { it, s } of rows) {
         const volColor = s.ampPct >= 40 ? "text-rose-300" : s.ampPct >= 15 ? "text-amber-300" : "text-slate-400";
         const trendColor = s.trendPct > 3 ? "text-emerald-400" : s.trendPct < -3 ? "text-rose-400" : "text-slate-400";
         const trendArrow = s.trendPct > 3 ? "▲" : s.trendPct < -3 ? "▼" : "—";
-        html += `<tr class="hover:bg-slate-800/40">
-          <td class="py-2 px-2 text-slate-200">${it.name}</td>
+        const selCls = it.id === selId ? "bg-fuchsia-500/10 ring-1 ring-fuchsia-500/30" : "hover:bg-slate-800/40";
+        html += `<tr class="${selCls} cursor-pointer" onclick="patSelectItem(${it.id})">
+          <td class="py-2 px-2 text-slate-200">${it.id === selId ? "▸ " : ""}${it.name}</td>
           <td class="px-2 text-right font-mono text-slate-400">${formatNum(s.min.ah,0)}g</td>
           <td class="px-2 text-right font-mono text-slate-300">${formatNum(s.max.ah,0)}g</td>
           <td class="px-2 text-right font-mono ${volColor} font-semibold">${formatNum(s.ampPct,0)}%</td>
           <td class="px-2 text-right font-mono text-sky-300">${formatNum(s.last,0)}g</td>
           <td class="px-2 text-right font-mono ${trendColor}">${trendArrow} ${formatNum(Math.abs(s.trendPct),0)}%</td>
+          <td class="px-2 text-center">
+            <button onclick="event.stopPropagation(); patToggleIgnore(${it.id})"
+              title="Ocultar este craft (sem liquidez / não interessa)"
+              class="text-slate-500 hover:text-rose-400 font-bold leading-none">✕</button>
+          </td>
         </tr>`;
       }
       html += `</tbody></table>`;
+      // Barra dos ocultos: deixa revisar e reativar sem resetar tudo.
+      if (rowsOcultos.length) {
+        html += `<div class="mt-3 pt-3 border-t border-slate-800/60">
+          <div class="text-[11px] text-slate-500 mb-1.5">Ocultos (${rowsOcultos.length}) — clique para voltar à tabela:</div>
+          <div class="flex flex-wrap gap-1.5">`;
+        for (const { it } of rowsOcultos) {
+          html += `<button onclick="patToggleIgnore(${it.id})"
+            class="text-[11px] px-2 py-0.5 rounded bg-slate-800/60 text-slate-400 border border-slate-700/50 hover:text-emerald-300 hover:border-emerald-500/40">
+            ↩ ${it.name}</button>`;
+        }
+        html += `</div></div>`;
+      }
       document.getElementById("patVolatilityTable").innerHTML = html;
 
-      // popular o select de detalhe (default = o mais volátil)
+      // select de detalhe (fallback / acessibilidade) — só os visíveis
       const sel = document.getElementById("patItemSelect");
+      const prevVal = sel.value;
       sel.innerHTML = rows.map(r => `<option value="${r.it.id}">[${r.it.category}] ${r.it.name}</option>`).join("");
+      if (rows.some(r => String(r.it.id) === prevVal)) sel.value = prevVal;
       renderPatternDetail();
 
-      // heatmap da profissão inteira (agrega todos os crafts, normalizado por craft)
+      // heatmap só dos visíveis
       renderPatHeatmap(prof, rows.map(r => r.it));
+    }
+
+    // Clique numa linha da tabela -> seleciona o craft no detalhe e rola até ele.
+    function patSelectItem(id) {
+      const sel = document.getElementById("patItemSelect");
+      sel.value = String(id);
+      renderPatterns();
+      const det = document.getElementById("patItemDetail");
+      if (det && det.scrollIntoView) det.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    // Oculta/reativa um craft na aba Padrões, usando a MESMA lista ignoredItems do app.
+    function patToggleIgnore(id) {
+      const prof = document.getElementById("patProfSelect").value;
+      if (!ignoredItems[prof]) ignoredItems[prof] = [];
+      const i = ignoredItems[prof].indexOf(id);
+      if (i === -1) ignoredItems[prof].push(id); else ignoredItems[prof].splice(i, 1);
+      saveState();
+      renderPatterns();
     }
 
     function renderPatternDetail() {
