@@ -342,6 +342,9 @@
         <button onclick="switchTab('invest')" id="btn-invest"
           class="tab-btn px-3 py-2 text-xs font-semibold rounded-lg text-sky-300 border border-sky-500/30">💹
           Investir</button>
+        <button onclick="switchTab('patterns')" id="btn-patterns"
+          class="tab-btn px-3 py-2 text-xs font-semibold rounded-lg text-fuchsia-300 border border-fuchsia-500/30">🕒
+          Padrões</button>
       </div>
     </div>
 
@@ -665,6 +668,51 @@
             <tbody id="histLogTableBody" class="divide-y divide-slate-800"></tbody>
           </table>
         </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- ABA DEDICADA: PADRÕES DE MERCADO (picos, vales, janelas) -->
+    <!-- ========================================== -->
+    <div id="patternsTabContainer" class="space-y-6 hidden">
+      <div class="bg-slate-900/60 rounded-2xl border border-slate-800 p-5">
+        <div class="flex items-center justify-between flex-wrap gap-3">
+          <div>
+            <h2 class="text-lg font-bold text-fuchsia-300">🕒 Padrões de Mercado — dados reais do seu Azralon</h2>
+            <p class="text-xs text-slate-400 mt-1">Picos, vales, volatilidade e janelas de venda calculados do histórico horário que o tracker coleta. Nada de média genérica: é o que o SEU servidor registrou.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <label class="text-xs text-slate-400">Profissão:</label>
+            <select id="patProfSelect" onchange="renderPatterns()"
+              class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-slate-200">
+              <option value="alchemy">🧪 Alchemy Conc</option>
+              <option value="jewelcrafting">💎 Jewelcrafting Conc</option>
+              <option value="enchanting">✨ Enchanting Conc</option>
+              <option value="inscription">📜 Inscription Conc</option>
+            </select>
+          </div>
+        </div>
+        <div id="patSampleBadge" class="mt-3 text-xs"></div>
+      </div>
+
+      <div class="bg-slate-900/60 rounded-2xl border border-slate-800 p-5">
+        <h3 class="text-sm font-bold text-slate-200 mb-3">📊 Volatilidade por craft <span class="text-slate-500 font-normal">(amplitude do preço na janela — quanto maior, mais vale cronometrar a venda)</span></h3>
+        <div id="patVolatilityTable" class="overflow-x-auto"></div>
+      </div>
+
+      <div class="bg-slate-900/60 rounded-2xl border border-slate-800 p-5">
+        <div class="flex items-center justify-between flex-wrap gap-3 mb-3">
+          <h3 class="text-sm font-bold text-slate-200">🔎 Detalhe do craft</h3>
+          <select id="patItemSelect" onchange="renderPatternDetail()"
+            class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-slate-200 min-w-[260px]"></select>
+        </div>
+        <div id="patItemDetail"></div>
+      </div>
+
+      <div class="bg-slate-900/60 rounded-2xl border border-slate-800 p-5">
+        <h3 class="text-sm font-bold text-slate-200 mb-1">🗓️ Quando o preço fica mais alto <span class="text-slate-500 font-normal">(dia da semana × hora, horário de Brasília)</span></h3>
+        <p id="patHeatmapNote" class="text-xs text-slate-400 mb-3"></p>
+        <div id="patHeatmap" class="overflow-x-auto"></div>
       </div>
     </div>
   </div>
@@ -2031,12 +2079,14 @@
       const tabContent = document.getElementById("tabContentContainer");
       const historyContent = document.getElementById("historyTabContainer");
       const investContent = document.getElementById("investTabContainer");
+      const patternsContent = document.getElementById("patternsTabContainer");
       const smartFiltersBar = document.getElementById("smartFiltersBar");
 
       // sim = mostra; !sim = esconde. Um helper so, para nao repetir 20 linhas.
       const mostrar = (el, sim) => { if (el) el.classList[sim ? "remove" : "add"]("hidden"); };
 
       mostrar(investContent, tabKey === "invest");
+      mostrar(patternsContent, tabKey === "patterns");
 
       if (tabKey === "invest") {
         mostrar(profControls, false);
@@ -2045,6 +2095,16 @@
         mostrar(smartFiltersBar, false);
         mostrar(historyContent, false);
         renderInvest();
+        return;
+      }
+
+      if (tabKey === "patterns") {
+        mostrar(profControls, false);
+        mostrar(topRanking, false);
+        mostrar(tabContent, false);
+        mostrar(smartFiltersBar, false);
+        mostrar(historyContent, false);
+        renderPatterns();
         return;
       }
 
@@ -2339,6 +2399,237 @@
           const pb = sb.d30 ? sb.d30.pct : 999;
           return pa - pb;
         });
+    }
+
+    // ============================================================
+    // ABA PADRÕES — análise de picos/vales/volatilidade e janelas
+    // Lê o priceHistory já carregado (mesma fonte do gráfico de Histórico).
+    // Honesto sobre amostra: toda célula de dia×hora mostra quantas semanas
+    // a sustentam; com poucas semanas, avisa que ainda é tendência, não padrão.
+    // ============================================================
+    const PAT_DOW = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+
+    // Converte um ts (ms, UTC) para componentes no fuso de Brasília (UTC-3),
+    // sem depender do fuso da máquina que abre a página.
+    function patBRT(ts) {
+      const d = new Date(Number(ts) - 3 * 3600 * 1000); // desloca pra BRT e lê em UTC
+      return {
+        dow: d.getUTCDay(),
+        hour: d.getUTCHours(),
+        // chave ISO de semana (ano-Wnn) pra contar semanas distintas
+        week: patIsoWeek(d)
+      };
+    }
+    function patIsoWeek(d) {
+      const t = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
+      const day = (t.getUTCDay() + 6) % 7;
+      t.setUTCDate(t.getUTCDate() - day + 3);
+      const firstThu = new Date(Date.UTC(t.getUTCFullYear(), 0, 4));
+      const w = 1 + Math.round(((t - firstThu) / 86400000 - 3 + ((firstThu.getUTCDay() + 6) % 7)) / 7);
+      return t.getUTCFullYear() + "-W" + String(w).padStart(2, "0");
+    }
+
+    // Pontos de preço válidos de um item (ahPrice > 0), ordenados por ts.
+    function patSeries(prof, id) {
+      const arr = (priceHistory[prof] && priceHistory[prof][id]) || [];
+      return arr
+        .filter(p => p && p.ts && Number(p.ahPrice) > 0 && p.source !== "Inicial" && p.source !== "Reset")
+        .map(p => ({ ts: Number(p.ts), ah: Number(p.ahPrice), gpc: p.goldPerConc == null ? null : Number(p.goldPerConc) }))
+        .sort((a, b) => a.ts - b.ts);
+    }
+
+    // Estatísticas de pico/vale/volatilidade de uma série.
+    function patStats(series) {
+      if (series.length < 2) return null;
+      let min = series[0], max = series[0], sum = 0;
+      for (const p of series) {
+        if (p.ah < min.ah) min = p;
+        if (p.ah > max.ah) max = p;
+        sum += p.ah;
+      }
+      const avg = sum / series.length;
+      const amp = max.ah - min.ah;
+      const ampPct = avg > 0 ? (amp / avg) * 100 : 0;
+      const first = series[0].ah, last = series[series.length - 1].ah;
+      const trendPct = first > 0 ? ((last - first) / first) * 100 : 0;
+      const weeks = new Set(series.map(p => patBRT(p.ts).week)).size;
+      return { n: series.length, min, max, avg, amp, ampPct, last, trendPct, weeks };
+    }
+
+    function patFmtWhen(ts) {
+      const b = patBRT(ts);
+      const d = new Date(Number(ts) - 3 * 3600 * 1000);
+      return `${PAT_DOW[b.dow]} ${String(d.getUTCDate()).padStart(2,"0")}/${String(d.getUTCMonth()+1).padStart(2,"0")} ${String(b.hour).padStart(2,"0")}h`;
+    }
+
+    function renderPatterns() {
+      const prof = document.getElementById("patProfSelect").value;
+      const items = (state[prof] || []).slice();
+
+      // monta stats por item
+      const rows = [];
+      let totalWeeks = 0, totalPts = 0;
+      for (const it of items) {
+        const s = patStats(patSeries(prof, it.id));
+        if (!s) continue;
+        rows.push({ it, s });
+        totalWeeks = Math.max(totalWeeks, s.weeks);
+        totalPts += s.n;
+      }
+
+      // Selo de amostra
+      const badge = document.getElementById("patSampleBadge");
+      if (rows.length === 0) {
+        badge.innerHTML = `<span class="text-amber-300">⚠️ Ainda não há histórico suficiente nesta profissão. Deixe o tracker coletar (ele grava de hora em hora) e volte aqui.</span>`;
+        document.getElementById("patVolatilityTable").innerHTML = "";
+        document.getElementById("patItemDetail").innerHTML = "";
+        document.getElementById("patHeatmap").innerHTML = "";
+        document.getElementById("patItemSelect").innerHTML = "";
+        return;
+      }
+      const conf = totalWeeks >= 4 ? ["emerald", "padrão confiável"] :
+                   totalWeeks >= 2 ? ["amber", "tendência — ainda juntando semanas"] :
+                                     ["rose", "amostra curta — leia como indício, não padrão"];
+      badge.innerHTML = `<span class="inline-flex items-center gap-2">
+        <span class="px-2 py-0.5 rounded bg-${conf[0]}-500/15 text-${conf[0]}-300 border border-${conf[0]}-500/30 font-semibold">${totalWeeks} semana(s) de dados · ${conf[1]}</span>
+        <span class="text-slate-500">${rows.length} crafts com histórico · ${totalPts.toLocaleString("pt-BR")} leituras</span>
+      </span>`;
+
+      // Tabela de volatilidade (ordenada por amplitude %)
+      rows.sort((a, b) => b.s.ampPct - a.s.ampPct);
+      let html = `<table class="w-full text-xs"><thead><tr class="text-slate-400 border-b border-slate-800">
+        <th class="text-left py-2 px-2">Craft</th>
+        <th class="text-right px-2">Vale</th>
+        <th class="text-right px-2">Pico</th>
+        <th class="text-right px-2">Amplitude</th>
+        <th class="text-right px-2">Agora</th>
+        <th class="text-right px-2">Tendência</th>
+      </tr></thead><tbody class="divide-y divide-slate-800/60">`;
+      for (const { it, s } of rows) {
+        const volColor = s.ampPct >= 40 ? "text-rose-300" : s.ampPct >= 15 ? "text-amber-300" : "text-slate-400";
+        const trendColor = s.trendPct > 3 ? "text-emerald-400" : s.trendPct < -3 ? "text-rose-400" : "text-slate-400";
+        const trendArrow = s.trendPct > 3 ? "▲" : s.trendPct < -3 ? "▼" : "—";
+        html += `<tr class="hover:bg-slate-800/40">
+          <td class="py-2 px-2 text-slate-200">${it.name}</td>
+          <td class="px-2 text-right font-mono text-slate-400">${formatNum(s.min.ah,0)}g</td>
+          <td class="px-2 text-right font-mono text-slate-300">${formatNum(s.max.ah,0)}g</td>
+          <td class="px-2 text-right font-mono ${volColor} font-semibold">${formatNum(s.ampPct,0)}%</td>
+          <td class="px-2 text-right font-mono text-sky-300">${formatNum(s.last,0)}g</td>
+          <td class="px-2 text-right font-mono ${trendColor}">${trendArrow} ${formatNum(Math.abs(s.trendPct),0)}%</td>
+        </tr>`;
+      }
+      html += `</tbody></table>`;
+      document.getElementById("patVolatilityTable").innerHTML = html;
+
+      // popular o select de detalhe (default = o mais volátil)
+      const sel = document.getElementById("patItemSelect");
+      sel.innerHTML = rows.map(r => `<option value="${r.it.id}">[${r.it.category}] ${r.it.name}</option>`).join("");
+      renderPatternDetail();
+
+      // heatmap da profissão inteira (agrega todos os crafts, normalizado por craft)
+      renderPatHeatmap(prof, rows.map(r => r.it));
+    }
+
+    function renderPatternDetail() {
+      const prof = document.getElementById("patProfSelect").value;
+      const id = Number(document.getElementById("patItemSelect").value);
+      const it = (state[prof] || []).find(i => i.id === id);
+      const box = document.getElementById("patItemDetail");
+      if (!it) { box.innerHTML = ""; return; }
+      const series = patSeries(prof, id);
+      const s = patStats(series);
+      if (!s) { box.innerHTML = `<p class="text-xs text-slate-400">Sem histórico suficiente para este craft.</p>`; return; }
+
+      // melhor janela: média de preço por (dia da semana) — só com >=2 semanas é "padrão"
+      const byDow = {}; // dow -> {sum,n,weeks:Set}
+      for (const p of series) {
+        const b = patBRT(p.ts);
+        (byDow[b.dow] = byDow[b.dow] || { sum: 0, n: 0, weeks: new Set() });
+        byDow[b.dow].sum += p.ah; byDow[b.dow].n++; byDow[b.dow].weeks.add(b.week);
+      }
+      let bestDow = null;
+      for (const dw in byDow) {
+        const a = byDow[dw]; a.avg = a.sum / a.n;
+        if (!bestDow || a.avg > bestDow.avg) bestDow = { dow: Number(dw), avg: a.avg, weeks: a.weeks.size };
+      }
+
+      const cards = [
+        ["Pico", `${formatNum(s.max.ah,0)}g`, patFmtWhen(s.max.ts), "emerald"],
+        ["Vale", `${formatNum(s.min.ah,0)}g`, patFmtWhen(s.min.ts), "rose"],
+        ["Amplitude", `${formatNum(s.ampPct,0)}%`, `${formatNum(s.min.ah,0)}–${formatNum(s.max.ah,0)}g`, "amber"],
+        ["Preço médio", `${formatNum(s.avg,0)}g`, `${s.n} leituras`, "sky"],
+      ];
+      let html = `<div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">`;
+      for (const [lab, val, sub, col] of cards) {
+        html += `<div class="bg-slate-800/50 rounded-xl p-3 border border-slate-700/50">
+          <div class="text-[10px] uppercase tracking-wide text-${col}-300/80">${lab}</div>
+          <div class="text-lg font-bold text-${col}-300 font-mono">${val}</div>
+          <div class="text-[10px] text-slate-500">${sub}</div>
+        </div>`;
+      }
+      html += `</div>`;
+      if (bestDow) {
+        const seloConf = bestDow.weeks >= 3 ? "text-emerald-300" : bestDow.weeks >= 2 ? "text-amber-300" : "text-rose-300";
+        const txtConf = bestDow.weeks >= 3 ? "padrão observado" : bestDow.weeks >= 2 ? "indício (2 semanas)" : "só 1 semana — ainda não é padrão";
+        html += `<div class="text-xs text-slate-300 bg-slate-800/30 rounded-lg p-3 border border-slate-700/40">
+          💡 Nos dados atuais, o preço mais alto deste craft caiu em <b class="text-fuchsia-300">${PAT_DOW[bestDow.dow]}</b>
+          (média ${formatNum(bestDow.avg,0)}g) — <span class="${seloConf}">${txtConf}</span>.
+        </div>`;
+      }
+      box.innerHTML = html;
+    }
+
+    // Heatmap dia×hora: cor = preço médio relativo (normalizado por craft e agregado).
+    function renderPatHeatmap(prof, items) {
+      // célula[dow][hour] = { sum, n, weeks:Set } sobre o z-score de cada craft
+      const cell = {};
+      let weeksGlobal = new Set();
+      for (const it of items) {
+        const series = patSeries(prof, it.id);
+        if (series.length < 3) continue;
+        const avg = series.reduce((a, p) => a + p.ah, 0) / series.length;
+        if (avg <= 0) continue;
+        for (const p of series) {
+          const b = patBRT(p.ts);
+          const rel = (p.ah - avg) / avg * 100; // % acima/abaixo da média do próprio craft
+          const k = b.dow + "_" + b.hour;
+          (cell[k] = cell[k] || { sum: 0, n: 0, weeks: new Set() });
+          cell[k].sum += rel; cell[k].n++; cell[k].weeks.add(b.week);
+          weeksGlobal.add(b.week);
+        }
+      }
+      const note = document.getElementById("patHeatmapNote");
+      const nWeeks = weeksGlobal.size;
+      note.innerHTML = nWeeks >= 4
+        ? `Verde = preço tende a ficar <b>acima</b> da média; vermelho = <b>abaixo</b>. ${nWeeks} semanas de dados — já dá pra ler como padrão.`
+        : `Verde = acima da média do próprio craft; vermelho = abaixo. <span class="text-amber-300">Só ${nWeeks} semana(s) — cada célula ainda tem poucas repetições; leia como indício, não padrão. Vai ficando confiável conforme o tracker acumula.</span>`;
+
+      // escala de cor
+      function colorFor(v, n) {
+        if (!n) return "background:transparent;color:#475569";
+        const clamped = Math.max(-25, Math.min(25, v));
+        const alpha = Math.min(0.85, 0.15 + Math.abs(clamped) / 25 * 0.7);
+        if (clamped >= 0) return `background:rgba(16,185,129,${alpha});color:#e2e8f0`;
+        return `background:rgba(244,63,94,${alpha});color:#e2e8f0`;
+      }
+
+      let html = `<table class="text-[10px] border-collapse"><thead><tr>
+        <th class="sticky left-0 bg-slate-900 px-1 py-1 text-slate-500 text-right">dia \\ h</th>`;
+      for (let h = 0; h < 24; h++) html += `<th class="px-0.5 py-1 text-slate-500 font-normal">${h}</th>`;
+      html += `</tr></thead><tbody>`;
+      for (let d = 0; d < 7; d++) {
+        html += `<tr><td class="sticky left-0 bg-slate-900 px-1 py-1 text-slate-400 text-right font-semibold">${PAT_DOW[d]}</td>`;
+        for (let h = 0; h < 24; h++) {
+          const c = cell[d + "_" + h];
+          const v = c ? c.sum / c.n : 0;
+          const title = c ? `${PAT_DOW[d]} ${h}h · ${v>=0?"+":""}${v.toFixed(0)}% vs média · ${c.n} leituras / ${c.weeks.size} sem.` : `${PAT_DOW[d]} ${h}h · sem dado`;
+          const label = c ? (v >= 0 ? "+" : "") + v.toFixed(0) : "·";
+          html += `<td class="text-center font-mono" style="${colorFor(v, c ? c.n : 0)};min-width:22px;padding:3px 1px" title="${title}">${label}</td>`;
+        }
+        html += `</tr>`;
+      }
+      html += `</tbody></table>`;
+      document.getElementById("patHeatmap").innerHTML = html;
     }
 
     function renderInvest() {
