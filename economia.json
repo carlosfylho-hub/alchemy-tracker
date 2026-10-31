@@ -1,0 +1,762 @@
+{
+ "meta": {
+  "geradoEm": "2026-10-31T14:30",
+  "rev": 94,
+  "unidade": "gold",
+  "moedaRef": 55,
+  "tokenGold": 280000.0,
+  "fonteMercado": "ao vivo (Apps Script, série de 7 dias)",
+  "config": "MIDNIGHT_Economia_Config.json"
+ },
+ "janela": {
+  "de": "13/10",
+  "ate": "27/04",
+  "deMes": "out/26",
+  "ateMes": "abr/27"
+ },
+ "kpis": {
+  "saldoAgora": 2209345.0,
+  "saldoBase": 2800000.0,
+  "saldoRealJogo": 2209345.0,
+  "fechamento": 42649345.0,
+  "menorSaldo": 1398180.0,
+  "menorSaldoData": "13/10",
+  "piso": 1000000.0,
+  "semanasAbaixoPiso": 0,
+  "ritmo": 108210.66666666667,
+  "estimativa": 8810195.666666668,
+  "temReal": true,
+  "semanasReais": 3,
+  "reancorada": true,
+  "ganhosJanela": 6546272.0,
+  "gastosJanela": 6221640.0,
+  "ganhosTotal": 50680550.0,
+  "gastosTotal": 36517808.0,
+  "ultimaSemana": "Ter 27/10 → Seg 02/11",
+  "saldoRealUltima": 2209345.0,
+  "planoNaUltima": 2780000.0,
+  "farmBaixa": 100000.0,
+  "farmPico": 150000.0,
+  "s3Inicio": "01/02/2027",
+  "farmTotal": 61600000.0,
+  "gastosTotalPlano": 21180000.0,
+  "semanas": 64,
+  "inicio": "Ter 13/10 → Seg 19/10",
+  "fim": "Ter 28/12 → Seg 03/01"
+ },
+ "compras": [
+  {
+   "mes": "out/26",
+   "label": "Boost IO 3600 (S2)",
+   "custo": 2120000.0,
+   "feito": true,
+   "falta": 0.0,
+   "cobre": "Ter 13/10 → Seg 19/10"
+  },
+  {
+   "mes": "fev/27",
+   "label": "Montaria 7M",
+   "custo": 7000000.0,
+   "feito": false,
+   "falta": 4790655.0,
+   "cobre": "Ter 29/12 → Seg 04/01"
+  },
+  {
+   "mes": "jun/27",
+   "label": "Boost IO 3600 (S3)",
+   "custo": 2500000.0,
+   "feito": false,
+   "falta": 290655.0,
+   "cobre": "Ter 20/10 → Seg 26/10"
+  },
+  {
+   "mes": "jun/27",
+   "label": "Montaria Raide (S3)",
+   "custo": 2000000.0,
+   "feito": false,
+   "falta": 0.0,
+   "cobre": "Ter 20/10 → Seg 26/10"
+  }
+ ],
+ "token": {
+  "preco": 280000.0,
+  "alvo": 270000.0,
+  "noAlvo": false,
+  "gap": 10000.0
+ },
+ "oportunidades": [
+  {
+   "receita": "Potion of Devoured Dreams Tier 2",
+   "profissao": "alchemy",
+   "g_conc": 4.5881,
+   "lucro": 1153.98,
+   "custo": 100.06,
+   "venda": 169.44,
+   "demanda": 538.0,
+   "sold_regional": 0.0,
+   "flags": [
+    "demanda_so_propria",
+    "liquidez_parada"
+   ]
+  },
+  {
+   "receita": "Liquid Luster Tier 2",
+   "profissao": "alchemy",
+   "g_conc": 4.1535,
+   "lucro": 1044.68,
+   "custo": 58.08,
+   "venda": 149.0,
+   "demanda": 455.0,
+   "sold_regional": 0.0,
+   "flags": [
+    "demanda_so_propria"
+   ]
+  },
+  {
+   "receita": "Potion of Recklessness Tier 2",
+   "profissao": "alchemy",
+   "g_conc": 3.6574,
+   "lucro": 491.24,
+   "custo": 151.84,
+   "venda": 86.89,
+   "demanda": 189.52,
+   "sold_regional": 0.0,
+   "flags": [
+    "demanda_so_propria"
+   ]
+  },
+  {
+   "receita": "Light's Preservation Tier 2",
+   "profissao": "alchemy",
+   "g_conc": 3.5021,
+   "lucro": 880.84,
+   "custo": 113.35,
+   "venda": 134.33,
+   "demanda": 8.05,
+   "sold_regional": 0.0,
+   "flags": [
+    "demanda_so_propria"
+   ]
+  },
+  {
+   "receita": "Concentrated Silvermoon Health Potion Tier 2",
+   "profissao": "alchemy",
+   "g_conc": 3.1488,
+   "lucro": 791.97,
+   "custo": 102.67,
+   "venda": 120.88,
+   "demanda": 547.89,
+   "sold_regional": 0.0,
+   "flags": [
+    "demanda_so_propria"
+   ]
+  },
+  {
+   "receita": "Lightfused Mana Potion Tier 2",
+   "profissao": "alchemy",
+   "g_conc": 2.586,
+   "lucro": 650.43,
+   "custo": 81.83,
+   "venda": 98.94,
+   "demanda": 1.83,
+   "sold_regional": 0.0,
+   "flags": [
+    "demanda_so_propria"
+   ]
+  },
+  {
+   "receita": "Light's Potential Tier 2",
+   "profissao": "alchemy",
+   "g_conc": 2.4335,
+   "lucro": 612.07,
+   "custo": 131.51,
+   "venda": 100.47,
+   "demanda": 111.81,
+   "sold_regional": 0.0,
+   "flags": [
+    "demanda_so_propria"
+   ]
+  },
+  {
+   "receita": "Refreshing Serum Tier 2",
+   "profissao": "alchemy",
+   "g_conc": 2.3576,
+   "lucro": 260.18,
+   "custo": 32.38,
+   "venda": 39.53,
+   "demanda": 0.72,
+   "sold_regional": 0.0,
+   "flags": [
+    "demanda_so_propria"
+   ]
+  },
+  {
+   "receita": "Flask of the Blood Knights Tier 2",
+   "profissao": "alchemy",
+   "g_conc": 2.3309,
+   "lucro": 785.66,
+   "custo": 285.61,
+   "venda": 361.89,
+   "demanda": 0.0,
+   "sold_regional": 0.0,
+   "flags": [
+    "sem_demanda_regional"
+   ]
+  },
+  {
+   "receita": "Haranir Phial of Ingenuity Tier 2",
+   "profissao": "alchemy",
+   "g_conc": 2.2814,
+   "lucro": 768.97,
+   "custo": 82.87,
+   "venda": 145.0,
+   "demanda": 0.0,
+   "sold_regional": 0.0,
+   "flags": [
+    "sem_demanda_regional"
+   ]
+  },
+  {
+   "receita": "Draught of Rampant Abandon Tier 2",
+   "profissao": "alchemy",
+   "g_conc": 2.1915,
+   "lucro": 551.21,
+   "custo": 84.99,
+   "venda": 85.96,
+   "demanda": 9.62,
+   "sold_regional": 0.0,
+   "flags": [
+    "demanda_so_propria",
+    "liquidez_parada"
+   ]
+  },
+  {
+   "receita": "Amani Extract Tier 2",
+   "profissao": "alchemy",
+   "g_conc": 2.1386,
+   "lucro": 537.9,
+   "custo": 120.8,
+   "venda": 89.0,
+   "demanda": 10.0,
+   "sold_regional": 0.0,
+   "flags": [
+    "demanda_so_propria",
+    "liquidez_parada"
+   ]
+  }
+ ],
+ "screener": {
+  "geradoEm": "2026-10-31T15:46:09Z",
+  "receitas": 115,
+  "insumos": 55
+ },
+ "serie": [
+  {
+   "i": 0,
+   "label": "13/10",
+   "semana": "Ter 13/10 → Seg 19/10",
+   "y": 2026,
+   "mo": 10,
+   "mes": "out",
+   "proj": 1398180.0,
+   "plan": 1380000.0,
+   "real": 1398180.0,
+   "estimativa": null,
+   "renda": 700000.0,
+   "gasto": 2120000.0,
+   "compras": [
+    {
+     "label": "Boost IO 3600 (S2)",
+     "gold": 2120000.0,
+     "feito": true
+    }
+   ]
+  },
+  {
+   "i": 1,
+   "label": "20/10",
+   "semana": "Ter 20/10 → Seg 26/10",
+   "y": 2026,
+   "mo": 10,
+   "mes": "out",
+   "proj": 3074478.0,
+   "plan": 2080000.0,
+   "real": 3074478.0,
+   "estimativa": null,
+   "renda": 700000.0,
+   "gasto": 0,
+   "compras": []
+  },
+  {
+   "i": 2,
+   "label": "27/10",
+   "semana": "Ter 27/10 → Seg 02/11",
+   "y": 2026,
+   "mo": 10,
+   "mes": "out",
+   "proj": 2209345.0,
+   "plan": 2780000.0,
+   "real": 2209345.0,
+   "estimativa": 2209345.0,
+   "renda": 700000.0,
+   "gasto": 0,
+   "compras": []
+  },
+  {
+   "i": 3,
+   "label": "03/11",
+   "semana": "Ter 03/11 → Seg 09/11",
+   "y": 2026,
+   "mo": 11,
+   "mes": "nov",
+   "proj": 2629345.0,
+   "plan": 3200000.0,
+   "real": null,
+   "estimativa": 2317555.67,
+   "renda": 700000.0,
+   "gasto": 280000.0,
+   "compras": [
+    {
+     "label": "Tempo de Jogo (2ª conta)",
+     "gold": 280000.0,
+     "feito": false
+    }
+   ]
+  },
+  {
+   "i": 4,
+   "label": "10/11",
+   "semana": "Ter 10/11 → Seg 16/11",
+   "y": 2026,
+   "mo": 11,
+   "mes": "nov",
+   "proj": 3329345.0,
+   "plan": 3900000.0,
+   "real": null,
+   "estimativa": 2425766.33,
+   "renda": 700000.0,
+   "gasto": 0,
+   "compras": []
+  },
+  {
+   "i": 5,
+   "label": "17/11",
+   "semana": "Ter 17/11 → Seg 23/11",
+   "y": 2026,
+   "mo": 11,
+   "mes": "nov",
+   "proj": 4029345.0,
+   "plan": 4600000.0,
+   "real": null,
+   "estimativa": 2533977.0,
+   "renda": 700000.0,
+   "gasto": 0,
+   "compras": []
+  },
+  {
+   "i": 6,
+   "label": "24/11",
+   "semana": "Ter 24/11 → Seg 30/11",
+   "y": 2026,
+   "mo": 11,
+   "mes": "nov",
+   "proj": 4729345.0,
+   "plan": 5300000.0,
+   "real": null,
+   "estimativa": 2642187.67,
+   "renda": 700000.0,
+   "gasto": 0,
+   "compras": []
+  },
+  {
+   "i": 7,
+   "label": "01/12",
+   "semana": "Ter 01/12 → Seg 07/12",
+   "y": 2026,
+   "mo": 12,
+   "mes": "dez",
+   "proj": 4869345.0,
+   "plan": 5440000.0,
+   "real": null,
+   "estimativa": 2750398.33,
+   "renda": 700000.0,
+   "gasto": 560000.0,
+   "compras": [
+    {
+     "label": "Tempo de Jogo (2ª conta)",
+     "gold": 280000.0,
+     "feito": false
+    },
+    {
+     "label": "Tempo de Jogo (principal)",
+     "gold": 280000.0,
+     "feito": false
+    }
+   ]
+  },
+  {
+   "i": 8,
+   "label": "08/12",
+   "semana": "Ter 08/12 → Seg 14/12",
+   "y": 2026,
+   "mo": 12,
+   "mes": "dez",
+   "proj": 5569345.0,
+   "plan": 6140000.0,
+   "real": null,
+   "estimativa": 2858609.0,
+   "renda": 700000.0,
+   "gasto": 0,
+   "compras": []
+  },
+  {
+   "i": 9,
+   "label": "15/12",
+   "semana": "Ter 15/12 → Seg 21/12",
+   "y": 2026,
+   "mo": 12,
+   "mes": "dez",
+   "proj": 6269345.0,
+   "plan": 6840000.0,
+   "real": null,
+   "estimativa": 2966819.67,
+   "renda": 700000.0,
+   "gasto": 0,
+   "compras": []
+  },
+  {
+   "i": 10,
+   "label": "22/12",
+   "semana": "Ter 22/12 → Seg 28/12",
+   "y": 2026,
+   "mo": 12,
+   "mes": "dez",
+   "proj": 6969345.0,
+   "plan": 7540000.0,
+   "real": null,
+   "estimativa": 3075030.33,
+   "renda": 700000.0,
+   "gasto": 0,
+   "compras": []
+  },
+  {
+   "i": 11,
+   "label": "29/12",
+   "semana": "Ter 29/12 → Seg 04/01",
+   "y": 2026,
+   "mo": 12,
+   "mes": "dez",
+   "proj": 7669345.0,
+   "plan": 8240000.0,
+   "real": null,
+   "estimativa": 3183241.0,
+   "renda": 700000.0,
+   "gasto": 0,
+   "compras": []
+  },
+  {
+   "i": 12,
+   "label": "05/01",
+   "semana": "Ter 05/01 → Seg 11/01",
+   "y": 2027,
+   "mo": 1,
+   "mes": "jan",
+   "proj": 7809345.0,
+   "plan": 8380000.0,
+   "real": null,
+   "estimativa": 3291451.67,
+   "renda": 700000.0,
+   "gasto": 560000.0,
+   "compras": [
+    {
+     "label": "Tempo de Jogo (2ª conta)",
+     "gold": 280000.0,
+     "feito": false
+    },
+    {
+     "label": "Tempo de Jogo (principal)",
+     "gold": 280000.0,
+     "feito": false
+    }
+   ]
+  },
+  {
+   "i": 13,
+   "label": "12/01",
+   "semana": "Ter 12/01 → Seg 18/01",
+   "y": 2027,
+   "mo": 1,
+   "mes": "jan",
+   "proj": 8509345.0,
+   "plan": 9080000.0,
+   "real": null,
+   "estimativa": 3399662.33,
+   "renda": 700000.0,
+   "gasto": 0,
+   "compras": []
+  },
+  {
+   "i": 14,
+   "label": "19/01",
+   "semana": "Ter 19/01 → Seg 25/01",
+   "y": 2027,
+   "mo": 1,
+   "mes": "jan",
+   "proj": 9209345.0,
+   "plan": 9780000.0,
+   "real": null,
+   "estimativa": 3507873.0,
+   "renda": 700000.0,
+   "gasto": 0,
+   "compras": []
+  },
+  {
+   "i": 15,
+   "label": "26/01",
+   "semana": "Ter 26/01 → Seg 01/02",
+   "y": 2027,
+   "mo": 1,
+   "mes": "jan",
+   "proj": 9909345.0,
+   "plan": 10480000.0,
+   "real": null,
+   "estimativa": 3616083.67,
+   "renda": 700000.0,
+   "gasto": 0,
+   "compras": []
+  },
+  {
+   "i": 16,
+   "label": "02/02",
+   "semana": "Ter 02/02 → Seg 08/02",
+   "y": 2027,
+   "mo": 2,
+   "mes": "fev",
+   "proj": 3399345.0,
+   "plan": 3970000.0,
+   "real": null,
+   "estimativa": 3724294.33,
+   "renda": 1050000.0,
+   "gasto": 7560000.0,
+   "compras": [
+    {
+     "label": "Montaria 7M",
+     "gold": 7000000.0,
+     "feito": false
+    },
+    {
+     "label": "Tempo de Jogo (2ª conta)",
+     "gold": 280000.0,
+     "feito": false
+    },
+    {
+     "label": "Tempo de Jogo (principal)",
+     "gold": 280000.0,
+     "feito": false
+    }
+   ]
+  },
+  {
+   "i": 17,
+   "label": "09/02",
+   "semana": "Ter 09/02 → Seg 15/02",
+   "y": 2027,
+   "mo": 2,
+   "mes": "fev",
+   "proj": 4449345.0,
+   "plan": 5020000.0,
+   "real": null,
+   "estimativa": 3832505.0,
+   "renda": 1050000.0,
+   "gasto": 0,
+   "compras": []
+  },
+  {
+   "i": 18,
+   "label": "16/02",
+   "semana": "Ter 16/02 → Seg 22/02",
+   "y": 2027,
+   "mo": 2,
+   "mes": "fev",
+   "proj": 5499345.0,
+   "plan": 6070000.0,
+   "real": null,
+   "estimativa": 3940715.67,
+   "renda": 1050000.0,
+   "gasto": 0,
+   "compras": []
+  },
+  {
+   "i": 19,
+   "label": "23/02",
+   "semana": "Ter 23/02 → Seg 01/03",
+   "y": 2027,
+   "mo": 2,
+   "mes": "fev",
+   "proj": 6549345.0,
+   "plan": 7120000.0,
+   "real": null,
+   "estimativa": 4048926.33,
+   "renda": 1050000.0,
+   "gasto": 0,
+   "compras": []
+  },
+  {
+   "i": 20,
+   "label": "02/03",
+   "semana": "Ter 02/03 → Seg 08/03",
+   "y": 2027,
+   "mo": 3,
+   "mes": "mar",
+   "proj": 7039345.0,
+   "plan": 7610000.0,
+   "real": null,
+   "estimativa": 4157137.0,
+   "renda": 1050000.0,
+   "gasto": 560000.0,
+   "compras": [
+    {
+     "label": "Tempo de Jogo (2ª conta)",
+     "gold": 280000.0,
+     "feito": false
+    },
+    {
+     "label": "Tempo de Jogo (principal)",
+     "gold": 280000.0,
+     "feito": false
+    }
+   ]
+  },
+  {
+   "i": 21,
+   "label": "09/03",
+   "semana": "Ter 09/03 → Seg 15/03",
+   "y": 2027,
+   "mo": 3,
+   "mes": "mar",
+   "proj": 8089345.0,
+   "plan": 8660000.0,
+   "real": null,
+   "estimativa": 4265347.67,
+   "renda": 1050000.0,
+   "gasto": 0,
+   "compras": []
+  },
+  {
+   "i": 22,
+   "label": "16/03",
+   "semana": "Ter 16/03 → Seg 22/03",
+   "y": 2027,
+   "mo": 3,
+   "mes": "mar",
+   "proj": 9139345.0,
+   "plan": 9710000.0,
+   "real": null,
+   "estimativa": 4373558.33,
+   "renda": 1050000.0,
+   "gasto": 0,
+   "compras": []
+  },
+  {
+   "i": 23,
+   "label": "23/03",
+   "semana": "Ter 23/03 → Seg 29/03",
+   "y": 2027,
+   "mo": 3,
+   "mes": "mar",
+   "proj": 10189345.0,
+   "plan": 10760000.0,
+   "real": null,
+   "estimativa": 4481769.0,
+   "renda": 1050000.0,
+   "gasto": 0,
+   "compras": []
+  },
+  {
+   "i": 24,
+   "label": "30/03",
+   "semana": "Ter 30/03 → Seg 05/04",
+   "y": 2027,
+   "mo": 3,
+   "mes": "mar",
+   "proj": 11239345.0,
+   "plan": 11810000.0,
+   "real": null,
+   "estimativa": 4589979.67,
+   "renda": 1050000.0,
+   "gasto": 0,
+   "compras": []
+  },
+  {
+   "i": 25,
+   "label": "06/04",
+   "semana": "Ter 06/04 → Seg 12/04",
+   "y": 2027,
+   "mo": 4,
+   "mes": "abr",
+   "proj": 11729345.0,
+   "plan": 12300000.0,
+   "real": null,
+   "estimativa": 4698190.33,
+   "renda": 1050000.0,
+   "gasto": 560000.0,
+   "compras": [
+    {
+     "label": "Tempo de Jogo (2ª conta)",
+     "gold": 280000.0,
+     "feito": false
+    },
+    {
+     "label": "Tempo de Jogo (principal)",
+     "gold": 280000.0,
+     "feito": false
+    }
+   ]
+  },
+  {
+   "i": 26,
+   "label": "13/04",
+   "semana": "Ter 13/04 → Seg 19/04",
+   "y": 2027,
+   "mo": 4,
+   "mes": "abr",
+   "proj": 12779345.0,
+   "plan": 13350000.0,
+   "real": null,
+   "estimativa": 4806401.0,
+   "renda": 1050000.0,
+   "gasto": 0,
+   "compras": []
+  },
+  {
+   "i": 27,
+   "label": "20/04",
+   "semana": "Ter 20/04 → Seg 26/04",
+   "y": 2027,
+   "mo": 4,
+   "mes": "abr",
+   "proj": 13829345.0,
+   "plan": 14400000.0,
+   "real": null,
+   "estimativa": 4914611.67,
+   "renda": 1050000.0,
+   "gasto": 0,
+   "compras": []
+  },
+  {
+   "i": 28,
+   "label": "27/04",
+   "semana": "Ter 27/04 → Seg 03/05",
+   "y": 2027,
+   "mo": 4,
+   "mes": "abr",
+   "proj": 14879345.0,
+   "plan": 15450000.0,
+   "real": null,
+   "estimativa": 5022822.33,
+   "renda": 1050000.0,
+   "gasto": 0,
+   "compras": []
+  }
+ ]
+}

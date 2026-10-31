@@ -188,6 +188,64 @@
       background: #475569;
     }
 
+    /* ---- ABA ECONOMIA ------------------------------------------------------ */
+    #economiaTabContainer .eco-kpi {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: .75rem;
+      padding: .8rem .9rem;
+    }
+
+    #economiaTabContainer .eco-kpi .l {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #94a3b8;
+      font-weight: 700;
+    }
+
+    #economiaTabContainer .eco-kpi .v {
+      font-size: 20px;
+      font-weight: 700;
+      margin-top: .25rem;
+      line-height: 1.15;
+    }
+
+    #economiaTabContainer .eco-kpi .n {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-top: .2rem;
+    }
+
+    .eco-tip {
+      position: absolute;
+      z-index: 40;
+      pointer-events: none;
+      background: #0b1220;
+      border: 1px solid #38bdf8;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 11.5px;
+      line-height: 1.5;
+      color: #e2e8f0;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .5);
+      opacity: 0;
+      transition: opacity .1s;
+      max-width: 260px;
+    }
+
+    .eco-tip.show {
+      opacity: 1;
+    }
+
+    .eco-tip b {
+      color: #7dd3fc;
+    }
+
+    #ecoChart {
+      cursor: crosshair;
+    }
+
     /* ---- ABA INVESTIR ------------------------------------------------------ */
     #investTabContainer .inv-toolbar {
       display: flex;
@@ -345,12 +403,11 @@
         <button onclick="switchTab('patterns')" id="btn-patterns"
           class="tab-btn px-3 py-2 text-xs font-semibold rounded-lg text-fuchsia-300 border border-fuchsia-500/30">🕒
           Padrões</button>
-        <!-- Aba externa: abre economia.html (painel do caixa) em nova aba do navegador.
-             Gerado por _ferramentas/_publicar_economia.py a cada rodada do RODAR_DIARIO.bat. -->
-        <a href="economia.html" target="_blank" rel="noopener"
-          class="tab-btn px-3 py-2 text-xs font-semibold rounded-lg text-cyan-300 border border-cyan-500/30 inline-block"
-          title="Abre o painel de economia (caixa e mercado) em uma nova aba">💰
-          Economia ↗</a>
+        <!-- Aba Economia: lê economia.json (gerado por _ferramentas/_publicar_economia.py) -->
+        <button onclick="switchTab('economia')" id="btn-economia"
+          class="tab-btn px-3 py-2 text-xs font-semibold rounded-lg text-cyan-300 border border-cyan-500/30"
+          title="Caixa, projeção e oportunidades (economia.json)">💰
+          Economia</button>
       </div>
     </div>
 
@@ -674,6 +731,73 @@
             <tbody id="histLogTableBody" class="divide-y divide-slate-800"></tbody>
           </table>
         </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- ABA ECONOMIA — lê economia.json (gerado por _ferramentas/_publicar_economia.py) -->
+    <!-- ========================================== -->
+    <div id="economiaTabContainer" class="space-y-6 hidden">
+      <div class="card p-4 shadow-lg flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h2 class="text-lg font-bold text-amber-300">💰 Economia — caixa e mercado</h2>
+          <div id="ecoMeta" class="text-[11px] text-slate-400 mt-1">carregando economia.json…</div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="carregarEconomia(true)"
+            class="px-3 py-1.5 text-xs font-bold bg-sky-600 hover:bg-sky-500 text-white rounded-lg">↻
+            Atualizar</button>
+          <span id="ecoStatus" class="text-xs text-slate-400">—</span>
+        </div>
+      </div>
+
+      <div id="ecoKpis" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3"></div>
+
+      <div class="card p-4 shadow-lg">
+        <div class="flex items-center justify-between gap-3 flex-wrap mb-2">
+          <div class="text-xs font-bold uppercase text-sky-300">Projeção do caixa</div>
+          <div id="ecoJanela" class="text-[11px] text-slate-400"></div>
+        </div>
+        <div class="relative">
+          <canvas id="ecoChart" height="300" onmousemove="ecoHoverMove(event)" onmouseleave="ecoHoverOut()"></canvas>
+          <div id="ecoTip" class="eco-tip"></div>
+        </div>
+        <div class="flex flex-wrap gap-4 text-[11px] text-slate-400 mt-2">
+          <span class="flex items-center gap-1.5"><i class="inline-block w-3.5 h-2.5 rounded-sm"
+              style="background:#fbbf24"></i>Projeção</span>
+          <span class="flex items-center gap-1.5"><i class="inline-block w-3.5 h-2.5 rounded-sm"
+              style="background:#4ade80"></i>Real</span>
+          <span class="flex items-center gap-1.5"><i class="inline-block w-3.5 h-2.5 rounded-sm"
+              style="background:#38bdf8"></i>Estimativa pelo real</span>
+          <span class="flex items-center gap-1.5"><i class="inline-block w-3.5 h-2.5 rounded-sm"
+              style="background:#fb923c"></i>Piso</span>
+          <span class="flex items-center gap-1.5"><i class="inline-block w-3.5 h-2.5 rounded-sm"
+              style="background:#a371f7"></i>Compra planejada</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div class="card overflow-hidden shadow-lg">
+          <div class="table-header px-4 py-2 border-b border-slate-700 text-xs font-bold text-sky-300 uppercase">
+            Real × plano</div>
+          <div id="ecoRealPlano" class="p-2"></div>
+        </div>
+        <div class="card overflow-hidden shadow-lg">
+          <div class="table-header px-4 py-2 border-b border-slate-700 text-xs font-bold text-sky-300 uppercase">
+            Compras planejadas</div>
+          <div id="ecoCompras" class="overflow-x-auto"></div>
+        </div>
+      </div>
+
+      <div class="card p-4 shadow-lg">
+        <div class="text-xs font-bold uppercase text-sky-300 mb-2">Token</div>
+        <div id="ecoToken" class="text-slate-300"></div>
+      </div>
+
+      <div class="card overflow-hidden shadow-lg">
+        <div class="table-header px-4 py-2 border-b border-slate-700 text-xs font-bold text-sky-300 uppercase">
+          Oportunidades · top por g/conc</div>
+        <div id="ecoOportunidades" class="overflow-x-auto"></div>
       </div>
     </div>
 
@@ -2066,10 +2190,284 @@
       } catch (e) { }
     }
 
+    /* ======================================================================
+       ABA ECONOMIA — lê economia.json (gerado por _ferramentas/_publicar_economia.py)
+       Nada é digitado aqui: o arquivo é reescrito pelo RODAR_DIARIO.bat e a aba
+       atualiza sozinha no próximo "Atualizar" (fetch com cache-busting).
+       ====================================================================== */
+    let ecoDados = null, ecoCarregando = false, ecoHover = -1, ecoGeom = null;
+
+    const ecoNum = (n, dec) => (n == null || isNaN(n)) ? '—' :
+      Number(n).toLocaleString('pt-BR', { minimumFractionDigits: dec || 0, maximumFractionDigits: dec || 0 });
+
+    const ecoK = n => {
+      if (n == null || isNaN(n)) return '—';
+      const a = Math.abs(n);
+      if (a >= 1e6) return (n / 1e6).toLocaleString('pt-BR', { maximumFractionDigits: 2 }) + 'M';
+      if (a >= 1e3) return (n / 1e3).toLocaleString('pt-BR', { maximumFractionDigits: 0 }) + 'k';
+      return ecoNum(n, 0);
+    };
+
+    const ecoBRL = g => {
+      if (!ecoDados) return '';
+      const tk = ecoDados.meta.tokenGold || 1, bn = ecoDados.meta.moedaRef || 55;
+      const r = (g || 0) * bn / tk;
+      return 'R$ ' + (Math.abs(r) >= 1000
+        ? (r / 1000).toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + 'k'
+        : ecoNum(r, 0));
+    };
+
+    async function carregarEconomia(forcar) {
+      const st = document.getElementById('ecoStatus');
+      if (ecoCarregando) return;
+      ecoCarregando = true;
+      if (st) st.textContent = 'carregando…';
+      try {
+        const r = await fetch('economia.json?v=' + Date.now(), { cache: 'no-store' });
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        ecoDados = await r.json();
+        renderEconomia();
+        if (st) st.textContent = '✓ atualizado';
+      } catch (e) {
+        if (st) st.textContent = '⚠️ economia.json não encontrado — rode PUBLICAR_ECONOMIA.bat';
+        console.warn('[economia]', e);
+      } finally { ecoCarregando = false; }
+    }
+
+    function ecoTabela(linhas) {
+      return '<table class="w-full text-xs"><tbody>' + linhas.map(l =>
+        '<tr class="border-b border-slate-800/60"><td class="py-1.5 px-2 text-slate-400">' + l[0] +
+        '</td><td class="px-2 text-right">' + (l[1] == null ? '—' : l[1]) + '</td></tr>').join('') +
+        '</tbody></table>';
+    }
+
+    function renderEconomia() {
+      if (!ecoDados) return;
+      const d = ecoDados, k = d.kpis || {};
+
+      const meta = document.getElementById('ecoMeta');
+      if (meta) meta.textContent = 'Gerado em ' + String(d.meta.geradoEm || '?').replace('T', ' ') +
+        ' · config rev ' + (d.meta.rev || '?') + ' · mercado: ' + (d.meta.fonteMercado || '—');
+      const jw = document.getElementById('ecoJanela');
+      if (jw) jw.textContent = 'janela ' + (d.janela.deMes || '') + ' → ' + (d.janela.ateMes || '') +
+        ' (' + (k.semanas || '') + ' semanas)';
+
+      const cards = [
+        ['Saldo agora', ecoNum(k.saldoAgora, 0) + ' g', ecoBRL(k.saldoAgora) + ' · base ' + ecoK(k.saldoBase), 'text-amber-300'],
+        ['Fechamento Dez/27', ecoK(k.fechamento) + ' g', ecoBRL(k.fechamento), 'text-amber-300'],
+        ['Menor saldo', ecoK(k.menorSaldo) + ' g', 'em ' + (k.menorSaldoData || '—'), 'text-orange-300'],
+        ['Piso', ecoK(k.piso) + ' g', (k.semanasAbaixoPiso ? k.semanasAbaixoPiso + ' semana(s) abaixo' : 'nenhuma semana abaixo'), k.semanasAbaixoPiso ? 'text-red-400' : 'text-emerald-400']
+      ];
+      if (k.temReal) {
+        cards.push(['Ritmo real', ecoK(k.ritmo) + ' g/sem', k.semanasReais + ' semana(s) lançada(s)', 'text-sky-300']);
+        cards.push(['Estimativa pelo real', ecoK(k.estimativa) + ' g', 'no fim do plano (Dez/27)', 'text-sky-300']);
+      }
+      const box = document.getElementById('ecoKpis');
+      if (box) box.innerHTML = cards.map(c =>
+        '<div class="eco-kpi"><div class="l">' + c[0] + '</div><div class="v ' + c[3] + '">' + c[1] +
+        '</div><div class="n">' + c[2] + '</div></div>').join('');
+
+      const rp = document.getElementById('ecoRealPlano');
+      if (rp) {
+        if (k.temReal) {
+          const dif = (k.saldoRealUltima || 0) - (k.planoNaUltima || 0);
+          const pct = k.planoNaUltima ? dif / Math.abs(k.planoNaUltima) * 100 : 0;
+          rp.innerHTML = ecoTabela([
+            ['Última semana lançada', k.ultimaSemana],
+            ['Saldo real', '<b class="text-emerald-400">' + ecoNum(k.saldoRealUltima, 0) + ' g</b>'],
+            ['Plano na mesma semana', ecoNum(k.planoNaUltima, 0) + ' g'],
+            ['Desvio', '<b class="' + (dif >= 0 ? 'text-emerald-400' : 'text-red-400') + '">' +
+              (dif >= 0 ? '+' : '−') + ecoNum(Math.abs(dif), 0) + ' g (' +
+              (pct >= 0 ? '+' : '−') + ecoNum(Math.abs(pct), 1) + '%)</b>'],
+            ['Ganhos reais (janela)', '<span class="text-emerald-400">+' + ecoNum(k.ganhosJanela, 0) + ' g</span>'],
+            ['Gastos reais (janela)', '<span class="text-red-400">−' + ecoNum(k.gastosJanela, 0) + ' g</span>'],
+            ['Histórico completo', '+' + ecoK(k.ganhosTotal) + ' / −' + ecoK(k.gastosTotal)],
+            ['Farm previsto × gastos do plano', ecoK(k.farmTotal) + ' / ' + ecoK(k.gastosTotalPlano)]
+          ]);
+        } else {
+          rp.innerHTML = '<div class="text-slate-400 text-xs p-2">Sem lançamentos reais: a projeção é a do plano.</div>';
+        }
+      }
+
+      const cp = document.getElementById('ecoCompras');
+      if (cp) {
+        cp.innerHTML = '<table class="w-full text-xs"><thead><tr class="text-slate-400 border-b border-slate-700">' +
+          '<th class="text-left py-1.5 px-2">Mês</th><th class="text-left px-2">Item</th>' +
+          '<th class="text-right px-2">Custo</th><th class="text-center px-2">Status</th>' +
+          '<th class="text-right px-2">Falta</th><th class="text-right px-2">Cobre em</th></tr></thead><tbody>' +
+          (d.compras || []).map(c => '<tr class="border-b border-slate-800/60"><td class="py-1.5 px-2">' + c.mes +
+            '</td><td class="px-2">' + c.label + '</td><td class="px-2 text-right text-amber-300">' + ecoK(c.custo) + ' g</td>' +
+            '<td class="px-2 text-center">' + (c.feito ? '<span class="text-emerald-400">✓ feito</span>' : '<span class="text-sky-300">⏳ pendente</span>') + '</td>' +
+            '<td class="px-2 text-right">' + (c.falta > 0 ? ecoK(c.falta) + ' g' : '—') + '</td>' +
+            '<td class="px-2 text-right">' + (c.cobre || '—') + '</td></tr>').join('') +
+          '</tbody></table>';
+      }
+
+      const tk = document.getElementById('ecoToken');
+      if (tk) {
+        const t = d.token || {};
+        tk.innerHTML = '<div class="flex items-baseline gap-3 flex-wrap"><span class="text-2xl font-bold text-amber-300">' +
+          ecoK(t.preco) + ' g</span>' + (t.alvo > 0 ? (t.noAlvo
+            ? '<span class="text-emerald-400 font-semibold">🟢 no alvo (≤ ' + ecoK(t.alvo) + ' g) — bom para comprar</span>'
+            : '<span class="text-orange-300">⏳ ' + ecoK(t.gap) + ' g acima do alvo de ' + ecoK(t.alvo) + ' g</span>') : '') + '</div>';
+      }
+
+      const op = document.getElementById('ecoOportunidades');
+      if (op) {
+        op.innerHTML = '<table class="w-full text-xs"><thead><tr class="text-slate-400 border-b border-slate-700">' +
+          '<th class="text-left py-1.5 px-2">#</th><th class="text-left px-2">Receita</th>' +
+          '<th class="text-left px-2">Prof</th><th class="text-right px-2">g/conc</th>' +
+          '<th class="text-right px-2">lucro/craft</th><th class="text-right px-2">custo</th>' +
+          '<th class="text-right px-2">venda</th><th class="text-left px-2">flags</th></tr></thead><tbody>' +
+          (d.oportunidades || []).map((r, i) => '<tr class="border-b border-slate-800/60"><td class="py-1.5 px-2 text-slate-500">' + (i + 1) +
+            '</td><td class="px-2">' + (r.receita || '') + '</td><td class="px-2 text-slate-400">' + (r.profissao || '') + '</td>' +
+            '<td class="px-2 text-right font-bold text-amber-300">' + ecoNum(r.g_conc, 2) + '</td>' +
+            '<td class="px-2 text-right text-emerald-400">' + ecoK(r.lucro) + ' g</td>' +
+            '<td class="px-2 text-right">' + ecoK(r.custo) + ' g</td>' +
+            '<td class="px-2 text-right">' + ecoK(r.venda) + ' g</td>' +
+            '<td class="px-2 text-[10px] text-slate-500">' + ((r.flags || []).join(', ') || '—') + '</td></tr>').join('') +
+          '</tbody></table>';
+      }
+
+      desenharEconomia();
+    }
+
+    function desenharEconomia() {
+      const cv = document.getElementById('ecoChart');
+      if (!cv || !ecoDados || !ecoDados.serie || ecoDados.serie.length < 2) return;
+      const wrap = cv.parentElement;
+      const W = wrap.clientWidth || 900, H = 300;
+      const dpr = window.devicePixelRatio || 1;
+      cv.width = W * dpr; cv.height = H * dpr;
+      cv.style.width = W + 'px'; cv.style.height = H + 'px';
+      const ctx = cv.getContext('2d');
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, W, H);
+      const s = ecoDados.serie, k = ecoDados.kpis;
+      const padL = 62, padR = 14, padT = 16, padB = 26;
+      const pw = W - padL - padR, ph = H - padT - padB;
+
+      let vals = [];
+      s.forEach(r => {
+        vals.push(r.proj, r.plan, r.renda - r.gasto);
+        if (r.real != null) vals.push(r.real);
+        if (r.estimativa != null) vals.push(r.estimativa);
+      });
+      vals.push(0, k.piso || 0);
+      let ymin = Math.min.apply(null, vals), ymax = Math.max.apply(null, vals);
+      if (ymax === ymin) ymax = ymin + 1;
+      const pd = (ymax - ymin) * 0.08; ymin -= pd; ymax += pd;
+      const X = i => padL + (i / (s.length - 1)) * pw;
+      const Y = v => padT + ph * (1 - (v - ymin) / (ymax - ymin));
+      ecoGeom = { X: X, Y: Y, padL: padL, padT: padT, pw: pw, ph: ph, n: s.length, W: W, H: H };
+
+      ctx.font = '10px system-ui, sans-serif';
+      for (let g = 0; g <= 5; g++) {
+        const v = ymin + (ymax - ymin) * g / 5, y = Y(v);
+        ctx.strokeStyle = '#1e293b'; ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(W - padR, y); ctx.stroke();
+        ctx.fillStyle = '#64748b'; ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+        ctx.fillText(ecoK(v), padL - 8, y);
+      }
+      if (k.piso > 0) {
+        const y = Y(k.piso);
+        ctx.save(); ctx.setLineDash([6, 4]); ctx.strokeStyle = 'rgba(251,146,60,.6)';
+        ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(W - padR, y); ctx.stroke(); ctx.restore();
+        ctx.fillStyle = '#fb923c'; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+        ctx.fillText('piso ' + ecoK(k.piso), padL + 4, y - 7);
+      }
+      s.forEach((r, i) => {
+        if (r.compras && r.compras.length) {
+          const x = X(i);
+          ctx.save(); ctx.setLineDash([4, 4]); ctx.strokeStyle = 'rgba(163,113,247,.55)';
+          ctx.beginPath(); ctx.moveTo(x, padT); ctx.lineTo(x, padT + ph); ctx.stroke(); ctx.restore();
+          ctx.fillStyle = '#c4b5fd'; ctx.textAlign = 'center';
+          ctx.fillText(r.compras.length > 1 ? r.compras.length + '×' : String(r.compras[0].label || '').slice(0, 14), x, padT - 5);
+        }
+      });
+
+      const trace = (get) => {
+        ctx.beginPath();
+        let started = false;
+        for (let i = 0; i < s.length; i++) {
+          const v = get(s[i]);
+          if (v == null) { started = false; continue; }
+          const x = X(i), y = Y(v);
+          if (!started) { ctx.moveTo(x, y); started = true; } else { ctx.lineTo(x, y); }
+        }
+      };
+
+      ctx.beginPath();
+      s.forEach((r, i) => { const x = X(i), y = Y(r.proj); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); });
+      ctx.lineTo(X(s.length - 1), padT + ph); ctx.lineTo(X(0), padT + ph); ctx.closePath();
+      const grad = ctx.createLinearGradient(0, padT, 0, padT + ph);
+      grad.addColorStop(0, 'rgba(251,191,36,.22)'); grad.addColorStop(1, 'rgba(251,191,36,0)');
+      ctx.fillStyle = grad; ctx.fill();
+
+      if (k.reancorada) {
+        ctx.save(); ctx.setLineDash([4, 4]); ctx.strokeStyle = 'rgba(148,163,184,.75)'; ctx.lineWidth = 1.3;
+        trace(r => r.plan); ctx.stroke(); ctx.restore();
+      }
+      ctx.strokeStyle = '#fbbf24'; ctx.lineWidth = 2; trace(r => r.proj); ctx.stroke();
+      if (k.temReal) { ctx.strokeStyle = '#4ade80'; ctx.lineWidth = 2.6; trace(r => r.real); ctx.stroke(); }
+      ctx.save(); ctx.setLineDash([7, 5]); ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 2;
+      trace(r => r.estimativa); ctx.stroke(); ctx.restore();
+
+      let lastMo = -1;
+      ctx.fillStyle = '#64748b'; ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+      s.forEach((r, i) => { if (r.mo !== lastMo) { lastMo = r.mo; ctx.fillText(r.mes, X(i), H - 8); } });
+
+      if (ecoHover >= 0 && ecoHover < s.length) {
+        const x = X(ecoHover);
+        ctx.save(); ctx.setLineDash([3, 3]); ctx.strokeStyle = 'rgba(56,189,248,.5)';
+        ctx.beginPath(); ctx.moveTo(x, padT); ctx.lineTo(x, padT + ph); ctx.stroke(); ctx.restore();
+        const y = Y(s[ecoHover].proj);
+        ctx.beginPath(); ctx.arc(x, y, 4.5, 0, 7); ctx.fillStyle = '#fff'; ctx.fill();
+        ctx.strokeStyle = '#fbbf24'; ctx.lineWidth = 2; ctx.stroke();
+      }
+    }
+
+    function ecoHoverMove(ev) {
+      if (!ecoDados || !ecoGeom) return;
+      const cv = ev.currentTarget, rect = cv.getBoundingClientRect();
+      const x = ev.clientX - rect.left;
+      let bi = 0, bd = 1e9;
+      for (let i = 0; i < ecoGeom.n; i++) {
+        const d = Math.abs(ecoGeom.X(i) - x);
+        if (d < bd) { bd = d; bi = i; }
+      }
+      if (bi !== ecoHover) { ecoHover = bi; desenharEconomia(); }
+      const r = ecoDados.serie[bi], tip = document.getElementById('ecoTip');
+      if (!tip) return;
+      const linhas = ['<b>' + r.semana + '</b>', 'Projeção: <b>' + ecoNum(r.proj, 0) + ' g</b>'];
+      if (r.real != null) linhas.push('Real: <b style="color:#4ade80">' + ecoNum(r.real, 0) + ' g</b>');
+      if (r.estimativa != null) linhas.push('Estimativa: <b style="color:#38bdf8">' + ecoNum(r.estimativa, 0) + ' g</b>');
+      linhas.push('Farm: +' + ecoK(r.renda) + ' g · Gastos: −' + ecoK(r.gasto) + ' g');
+      if (r.compras && r.compras.length) {
+        linhas.push('Compras: ' + r.compras.map(c => c.label + ' (' + ecoK(c.gold) + ' g)').join(', '));
+      }
+      tip.innerHTML = linhas.join('<br>');
+      tip.classList.add('show');
+      const px = ecoGeom.X(bi);
+      tip.style.left = Math.min(Math.max(px + 14, 8), Math.max(8, ecoGeom.W - tip.offsetWidth - 8)) + 'px';
+      tip.style.top = Math.max(6, ecoGeom.Y(r.proj) - tip.offsetHeight - 10) + 'px';
+    }
+
+    function ecoHoverOut() {
+      ecoHover = -1;
+      const tip = document.getElementById('ecoTip');
+      if (tip) tip.classList.remove('show');
+      desenharEconomia();
+    }
+
+    window.addEventListener('resize', function () {
+      const c = document.getElementById('economiaTabContainer');
+      if (c && !c.classList.contains('hidden')) desenharEconomia();
+    });
+
     function switchTab(tabKey) {
       // "history" e "invest" nao sao abas de profissao: nao podem virar lastProfTab,
       // senao updateInputsFromState() procuraria profSettings["invest"] e quebraria.
-      if (tabKey !== "history" && tabKey !== "global" && tabKey !== "invest") {
+      if (tabKey !== "history" && tabKey !== "global" && tabKey !== "invest" && tabKey !== "economia" && tabKey !== "patterns") {
         lastProfTab = tabKey;
       }
       currentTab = tabKey;
@@ -2090,6 +2488,7 @@
       const historyContent = document.getElementById("historyTabContainer");
       const investContent = document.getElementById("investTabContainer");
       const patternsContent = document.getElementById("patternsTabContainer");
+      const economiaContent = document.getElementById("economiaTabContainer");
       const smartFiltersBar = document.getElementById("smartFiltersBar");
 
       // sim = mostra; !sim = esconde. Um helper so, para nao repetir 20 linhas.
@@ -2097,6 +2496,17 @@
 
       mostrar(investContent, tabKey === "invest");
       mostrar(patternsContent, tabKey === "patterns");
+      mostrar(economiaContent, tabKey === "economia");
+
+      if (tabKey === "economia") {
+        mostrar(profControls, false);
+        mostrar(topRanking, false);
+        mostrar(tabContent, false);
+        mostrar(smartFiltersBar, false);
+        mostrar(historyContent, false);
+        carregarEconomia();
+        return;
+      }
 
       if (tabKey === "invest") {
         mostrar(profControls, false);
