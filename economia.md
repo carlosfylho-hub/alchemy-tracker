@@ -1,6 +1,6 @@
 # MIDNIGHT · Economia e Mercado — painel do dia
 
-> **Gerado em:** 31/10/2026 13:52 · **Config:** rev 92 · **Unidade:** gold (g)
+> **Gerado em:** 31/10/2026 14:04 · **Config:** rev 92 · **Unidade:** gold (g)
 > **Fonte:** `MIDNIGHT_Economia_Config.json` (cofre Obsidian) + screener + TSM Accounting.
 > **Este arquivo é reescrito no mesmo caminho.** No NotebookLM use *atualizar fonte* — não suba arquivo novo.
 
@@ -72,11 +72,11 @@ Screener gerado em **2026-10-31T15:46:09Z** · 115 receitas · 55 insumos.
 
 Origem do bloco de mercado: **ao vivo (Apps Script, série de 7 dias)**.
 
-<!-- MERCADO:INICIO -->
 ```text
+<!-- MERCADO:INICIO -->
 ================================================================================
 SNAPSHOT DO MERCADO - WoW Midnight - Azralon
-Gerado em: 2026-10-31 16:52 UTC | Serie: ultimos 7 dias
+Gerado em: 2026-10-31 17:04 UTC | Serie: ultimos 7 dias
 g/ponto: Alquimia usa valor oficial da planilha; demais = lucro/craft / concCost
 ================================================================================
 
@@ -554,8 +554,8 @@ ESTOQUE E PLANO DE VENDA (Syndicator + TSM + UMX)
 Cole este arquivo no Notebook Gemini como 'SNAPSHOT ATUAL - [data]'.
 Lembre-se: preco anunciado != preco vendido; dados sao de Azralon.
 --------------------------------------------------------------------------------
-```
 <!-- MERCADO:FIM -->
+```
 
 ---
 

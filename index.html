@@ -345,6 +345,12 @@
         <button onclick="switchTab('patterns')" id="btn-patterns"
           class="tab-btn px-3 py-2 text-xs font-semibold rounded-lg text-fuchsia-300 border border-fuchsia-500/30">🕒
           Padrões</button>
+        <!-- Aba externa: abre economia.html (painel do caixa) em nova aba do navegador.
+             Gerado por _ferramentas/_publicar_economia.py a cada rodada do RODAR_DIARIO.bat. -->
+        <a href="economia.html" target="_blank" rel="noopener"
+          class="tab-btn px-3 py-2 text-xs font-semibold rounded-lg text-cyan-300 border border-cyan-500/30 inline-block"
+          title="Abre o painel de economia (caixa e mercado) em uma nova aba">💰
+          Economia ↗</a>
       </div>
     </div>
 
@@ -679,7 +685,8 @@
         <div class="flex items-center justify-between flex-wrap gap-3">
           <div>
             <h2 class="text-lg font-bold text-fuchsia-300">🕒 Padrões de Mercado — dados reais do seu Azralon</h2>
-            <p class="text-xs text-slate-400 mt-1">Picos, vales, volatilidade e janelas de venda calculados do histórico horário que o tracker coleta. Nada de média genérica: é o que o SEU servidor registrou.</p>
+            <p class="text-xs text-slate-400 mt-1">Picos, vales, volatilidade e janelas de venda calculados do histórico
+              horário que o tracker coleta. Nada de média genérica: é o que o SEU servidor registrou.</p>
           </div>
           <div class="flex items-center gap-2">
             <label class="text-xs text-slate-400">Profissão:</label>
@@ -696,7 +703,9 @@
       </div>
 
       <div class="bg-slate-900/60 rounded-2xl border border-slate-800 p-5">
-        <h3 class="text-sm font-bold text-slate-200 mb-3">📊 Volatilidade por craft <span class="text-slate-500 font-normal">(amplitude do preço na janela — quanto maior, mais vale cronometrar a venda)</span></h3>
+        <h3 class="text-sm font-bold text-slate-200 mb-3">📊 Volatilidade por craft <span
+            class="text-slate-500 font-normal">(amplitude do preço na janela — quanto maior, mais vale cronometrar a
+            venda)</span></h3>
         <div id="patVolatilityTable" class="overflow-x-auto"></div>
       </div>
 
@@ -710,7 +719,8 @@
       </div>
 
       <div class="bg-slate-900/60 rounded-2xl border border-slate-800 p-5">
-        <h3 class="text-sm font-bold text-slate-200 mb-1">🗓️ Quando o preço fica mais alto <span class="text-slate-500 font-normal">(dia da semana × hora, horário de Brasília)</span></h3>
+        <h3 class="text-sm font-bold text-slate-200 mb-1">🗓️ Quando o preço fica mais alto <span
+            class="text-slate-500 font-normal">(dia da semana × hora, horário de Brasília)</span></h3>
         <p id="patHeatmapNote" class="text-xs text-slate-400 mb-3"></p>
         <div id="patHeatmap" class="overflow-x-auto"></div>
       </div>
@@ -2459,7 +2469,7 @@
     function patFmtWhen(ts) {
       const b = patBRT(ts);
       const d = new Date(Number(ts) - 3 * 3600 * 1000);
-      return `${PAT_DOW[b.dow]} ${String(d.getUTCDate()).padStart(2,"0")}/${String(d.getUTCMonth()+1).padStart(2,"0")} ${String(b.hour).padStart(2,"0")}h`;
+      return `${PAT_DOW[b.dow]} ${String(d.getUTCDate()).padStart(2, "0")}/${String(d.getUTCMonth() + 1).padStart(2, "0")} ${String(b.hour).padStart(2, "0")}h`;
     }
 
     function renderPatterns() {
@@ -2491,8 +2501,8 @@
         return;
       }
       const conf = totalWeeks >= 4 ? ["emerald", "padrão confiável"] :
-                   totalWeeks >= 2 ? ["amber", "tendência — ainda juntando semanas"] :
-                                     ["rose", "amostra curta — leia como indício, não padrão"];
+        totalWeeks >= 2 ? ["amber", "tendência — ainda juntando semanas"] :
+          ["rose", "amostra curta — leia como indício, não padrão"];
       badge.innerHTML = `<span class="inline-flex items-center gap-2">
         <span class="px-2 py-0.5 rounded bg-${conf[0]}-500/15 text-${conf[0]}-300 border border-${conf[0]}-500/30 font-semibold">${totalWeeks} semana(s) de dados · ${conf[1]}</span>
         <span class="text-slate-500">${rows.length} crafts com histórico · ${totalPts.toLocaleString("pt-BR")} leituras</span>
@@ -2518,11 +2528,11 @@
         const selCls = it.id === selId ? "bg-fuchsia-500/10 ring-1 ring-fuchsia-500/30" : "hover:bg-slate-800/40";
         html += `<tr class="${selCls} cursor-pointer" onclick="patSelectItem(${it.id})">
           <td class="py-2 px-2 text-slate-200">${it.id === selId ? "▸ " : ""}${it.name}</td>
-          <td class="px-2 text-right font-mono text-slate-400">${formatNum(s.min.ah,0)}g</td>
-          <td class="px-2 text-right font-mono text-slate-300">${formatNum(s.max.ah,0)}g</td>
-          <td class="px-2 text-right font-mono ${volColor} font-semibold">${formatNum(s.ampPct,0)}%</td>
-          <td class="px-2 text-right font-mono text-sky-300">${formatNum(s.last,0)}g</td>
-          <td class="px-2 text-right font-mono ${trendColor}">${trendArrow} ${formatNum(Math.abs(s.trendPct),0)}%</td>
+          <td class="px-2 text-right font-mono text-slate-400">${formatNum(s.min.ah, 0)}g</td>
+          <td class="px-2 text-right font-mono text-slate-300">${formatNum(s.max.ah, 0)}g</td>
+          <td class="px-2 text-right font-mono ${volColor} font-semibold">${formatNum(s.ampPct, 0)}%</td>
+          <td class="px-2 text-right font-mono text-sky-300">${formatNum(s.last, 0)}g</td>
+          <td class="px-2 text-right font-mono ${trendColor}">${trendArrow} ${formatNum(Math.abs(s.trendPct), 0)}%</td>
           <td class="px-2 text-center">
             <button onclick="event.stopPropagation(); patToggleIgnore(${it.id})"
               title="Ocultar este craft (sem liquidez / não interessa)"
@@ -2580,7 +2590,7 @@
     // média, com confiança honesta pelo nº de semanas que sustentam o corte.
     function patConfianca(weeks) {
       if (weeks >= 4) return { cls: "emerald", rotulo: "padrão confiável", peso: "forte" };
-      if (weeks >= 2) return { cls: "amber",   rotulo: "tendência (poucas semanas)", peso: "média" };
+      if (weeks >= 2) return { cls: "amber", rotulo: "tendência (poucas semanas)", peso: "média" };
       return { cls: "rose", rotulo: "indício de 1 semana — ainda não é padrão", peso: "fraca" };
     }
 
@@ -2601,12 +2611,12 @@
       }
       // semanas = duração real coberta (em semanas), arredondada pra cima — é o
       // que o usuário entende por "semanas de dados", sem off-by-one de ISO week.
-      const spanDays = (series[series.length-1].ts - series[0].ts) / 86400000;
+      const spanDays = (series[series.length - 1].ts - series[0].ts) / 86400000;
       const nWeeks = Math.max(1, Math.round(spanDays / 7 * 10) / 10 >= 1 ? Math.ceil(spanDays / 7) : 1);
 
       // melhor e pior dia (só dias com dado)
       const dias = dow.map((d, i) => ({ i, avg: d.n ? d.sum / d.n : null, n: d.n, weeks: d.weeks.size }))
-                      .filter(d => d.avg !== null);
+        .filter(d => d.avg !== null);
       dias.sort((a, b) => b.avg - a.avg);
       const melhorDia = dias[0], piorDia = dias[dias.length - 1];
 
@@ -2646,7 +2656,7 @@
       let janelaTxt = "";
       if (r.janela) {
         const fimH = (r.janela.fim + 1) % 24; // fim exclusivo pra ler como "até"
-        janelaTxt = `, das <b class="text-fuchsia-300">${String(r.janela.ini).padStart(2,"0")}h às ${String(fimH).padStart(2,"0")}h</b> (horário de Brasília), quando fica ~<b>${r.janela.media.toFixed(0)}%</b> acima da média`;
+        janelaTxt = `, das <b class="text-fuchsia-300">${String(r.janela.ini).padStart(2, "0")}h às ${String(fimH).padStart(2, "0")}h</b> (horário de Brasília), quando fica ~<b>${r.janela.media.toFixed(0)}%</b> acima da média`;
       }
       const verbo = conf.peso === "forte" ? "Venda" : conf.peso === "média" ? "Prefira vender" : "Pelos dados de agora, tende a valer mais vender";
       const avisoFim = conf.peso === "forte"
@@ -2663,9 +2673,9 @@
         </div>
         <p class="text-xs text-slate-200 leading-relaxed">
           ${verbo} na <b class="text-fuchsia-300">${dia}</b>${janelaTxt}.
-          Nesse dia o preço médio é <b>${formatNum(r.melhorDia.avg,0)}g</b> — cerca de
-          <b class="text-emerald-300">${r.ganhoDiaPct>=0?"+":""}${r.ganhoDiaPct.toFixed(0)}%</b> acima da média geral (${formatNum(r.avg,0)}g).
-          Evite <b class="text-rose-300">${pior}</b> (média ${formatNum(r.piorDia.avg,0)}g), o pior dia da janela.
+          Nesse dia o preço médio é <b>${formatNum(r.melhorDia.avg, 0)}g</b> — cerca de
+          <b class="text-emerald-300">${r.ganhoDiaPct >= 0 ? "+" : ""}${r.ganhoDiaPct.toFixed(0)}%</b> acima da média geral (${formatNum(r.avg, 0)}g).
+          Evite <b class="text-rose-300">${pior}</b> (média ${formatNum(r.piorDia.avg, 0)}g), o pior dia da janela.
         </p>
         <p class="text-[11px] text-slate-400 mt-2">${avisoFim}</p>
       </div>`;
@@ -2684,10 +2694,10 @@
       const reco = patRecomendacao(series);
 
       const cards = [
-        ["Pico", `${formatNum(s.max.ah,0)}g`, patFmtWhen(s.max.ts), "emerald"],
-        ["Vale", `${formatNum(s.min.ah,0)}g`, patFmtWhen(s.min.ts), "rose"],
-        ["Amplitude", `${formatNum(s.ampPct,0)}%`, `${formatNum(s.min.ah,0)}–${formatNum(s.max.ah,0)}g`, "amber"],
-        ["Preço médio", `${formatNum(s.avg,0)}g`, `${s.n} leituras`, "sky"],
+        ["Pico", `${formatNum(s.max.ah, 0)}g`, patFmtWhen(s.max.ts), "emerald"],
+        ["Vale", `${formatNum(s.min.ah, 0)}g`, patFmtWhen(s.min.ts), "rose"],
+        ["Amplitude", `${formatNum(s.ampPct, 0)}%`, `${formatNum(s.min.ah, 0)}–${formatNum(s.max.ah, 0)}g`, "amber"],
+        ["Preço médio", `${formatNum(s.avg, 0)}g`, `${s.n} leituras`, "sky"],
       ];
       let html = `<div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">`;
       for (const [lab, val, sub, col] of cards) {
@@ -2745,7 +2755,7 @@
         for (let h = 0; h < 24; h++) {
           const c = cell[d + "_" + h];
           const v = c ? c.sum / c.n : 0;
-          const title = c ? `${PAT_DOW[d]} ${h}h · ${v>=0?"+":""}${v.toFixed(0)}% vs média · ${c.n} leituras / ${c.weeks.size} sem.` : `${PAT_DOW[d]} ${h}h · sem dado`;
+          const title = c ? `${PAT_DOW[d]} ${h}h · ${v >= 0 ? "+" : ""}${v.toFixed(0)}% vs média · ${c.n} leituras / ${c.weeks.size} sem.` : `${PAT_DOW[d]} ${h}h · sem dado`;
           const label = c ? (v >= 0 ? "+" : "") + v.toFixed(0) : "·";
           html += `<td class="text-center font-mono" style="${colorFor(v, c ? c.n : 0)};min-width:22px;padding:3px 1px" title="${title}">${label}</td>`;
         }
@@ -2939,6 +2949,16 @@
           Number(d.sold_per_day_regional) > 0
             ? Number(d.sold_per_day_regional).toFixed(1) + "/dia regional"
             : "sem linha regional"]);
+        // VENDA REAL: o que VOCÊ de fato vendeu (TSM Accounting lido do .lua).
+        // É o dado mais confiável de giro — regional costuma vir zerado.
+        const vrV = Number(d.venda_real_vendas_30d);
+        if (isFinite(vrV) && (vrV > 0 || Number(d.venda_real_receita_g) > 0)) {
+          kpis.push(["você vendeu (30d)",
+            (vrV > 0 ? vrV + " vendas" : "—"),
+            Number(d.venda_real_unid_dia) > 0
+              ? Number(d.venda_real_unid_dia).toFixed(1) + " un/dia · média " + invG(Number(d.venda_real_preco_medio_g))
+              : "sem venda nos últimos 30d"]);
+        }
         if ((d.insumos_baratos || []).length) {
           kpis.push(["insumos baratos", (d.insumos_baratos || []).length + " de " + (d.ingredientes || []).length,
             (d.insumos_baratos || []).slice(0, 2).join(", ")]);
