@@ -1,7 +1,7 @@
 {
  "meta": {
-  "geradoEm": "2026-10-31T17:05",
-  "rev": 97,
+  "geradoEm": "2026-10-31T17:16",
+  "rev": 98,
   "unidade": "gold",
   "moedaRef": 55,
   "tokenGold": 280000.0,
@@ -19,19 +19,19 @@
   "saldoBase": 2800000.0,
   "saldoRealJogo": 2209345.0,
   "fechamento": 42649345.0,
-  "menorSaldo": 1403425.0,
+  "menorSaldo": 1405244.0,
   "menorSaldoData": "13/10",
   "piso": 1000000.0,
   "semanasAbaixoPiso": 0,
-  "ritmo": 106462.33333333333,
-  "estimativa": 8703547.333333332,
+  "ritmo": 105856.0,
+  "estimativa": 8666561.0,
   "temReal": true,
   "semanasReais": 3,
   "reancorada": true,
   "ganhosJanela": 6546272.0,
-  "gastosJanela": 6226885.0,
+  "gastosJanela": 6228704.0,
   "ganhosTotal": 50680550.0,
-  "gastosTotal": 36523053.0,
+  "gastosTotal": 36524872.0,
   "ultimaSemana": "Ter 27/10 → Seg 02/11",
   "saldoRealUltima": 2209345.0,
   "planoNaUltima": 2780000.0,
@@ -248,7 +248,9 @@
  "screener": {
   "geradoEm": "2026-10-31T19:30:02Z",
   "receitas": 115,
-  "insumos": null
+  "insumos": null,
+  "com_demanda": 39,
+  "fonte": "Undermine Exchange (web app ?umx=120) + TSM Public Data + TSM Accounting"
  },
  "mercado": {
   "atributos": [
@@ -257,30 +259,43 @@
     "res": 15,
     "mc": 36.4,
     "ing": 28.9,
-    "refund": 50
+    "refund": 50,
+    "res_planilha": 15.0,
+    "mc_planilha": 36.4,
+    "refund_canonico": 50.0
    },
    {
     "prof": "Joalheria",
     "res": 17.8,
     "mc": 33.4,
     "ing": 21.6,
-    "refund": 50
+    "refund": 50,
+    "res_planilha": 17.8,
+    "mc_planilha": 33.4,
+    "refund_canonico": 50.0
    },
    {
     "prof": "Encantamento",
     "res": 14.7,
     "mc": 0,
     "ing": 38.5,
-    "refund": 100
+    "refund": 100,
+    "res_planilha": 14.7,
+    "mc_planilha": 0.0,
+    "refund_canonico": 100.0
    },
    {
     "prof": "Inscrição",
     "res": 12.2,
     "mc": 22.7,
     "ing": 11.6,
-    "refund": 50
+    "refund": 50,
+    "res_planilha": 12.2,
+    "mc_planilha": 22.7,
+    "refund_canonico": 50.0
    }
   ],
+  "divergencias": [],
   "receitas": [
    {
     "id": "alchemy:potion-of-devoured-dreams-tier-2",
@@ -295,7 +310,18 @@
     "concentracao": 294.0,
     "demanda": 538.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 538.0,
+    "dias_sem_movimento": 151.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 998.0,
     "venda_real_unid_dia": 538.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 132.97,
+    "preco_planilha": 67.5,
+    "ah_hoje": 80.1,
+    "mediana_7d": 79.99,
+    "tendencia": 1.3,
+    "oferta_umx": 533,
     "flags": [
      "demanda_so_propria",
      "liquidez_parada"
@@ -314,7 +340,18 @@
     "concentracao": 294.0,
     "demanda": 455.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 81,
+    "oferta_unidades": 19619.0,
     "venda_real_unid_dia": 455.0,
+    "venda_real_30d": 1,
+    "venda_real_preco": 154.64,
+    "preco_planilha": 132.55,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "demanda_so_propria"
     ]
@@ -332,7 +369,18 @@
     "concentracao": 157.0,
     "demanda": 189.52,
     "sold_regional": 0.0,
+    "liquidez_dia": 189.5,
+    "dias_sem_movimento": 3.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 27207.0,
     "venda_real_unid_dia": 144.5,
+    "venda_real_30d": 8,
+    "venda_real_preco": 121.74,
+    "preco_planilha": 69.7,
+    "ah_hoje": 86.89,
+    "mediana_7d": 73.94,
+    "tendencia": -1.7,
+    "oferta_umx": 49504,
     "flags": [
      "demanda_so_propria"
     ]
@@ -350,7 +398,18 @@
     "concentracao": 294.0,
     "demanda": 8.05,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 3657.0,
     "venda_real_unid_dia": 8.05,
+    "venda_real_30d": 0,
+    "venda_real_preco": 206.36,
+    "preco_planilha": 90.0,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "demanda_so_propria"
     ]
@@ -368,7 +427,18 @@
     "concentracao": 294.0,
     "demanda": 547.89,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 81,
+    "oferta_unidades": 16441.0,
     "venda_real_unid_dia": 547.89,
+    "venda_real_30d": 2,
+    "venda_real_preco": 134.56,
+    "preco_planilha": 128.82,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "demanda_so_propria"
     ]
@@ -386,7 +456,18 @@
     "concentracao": 294.0,
     "demanda": 1.83,
     "sold_regional": 0.0,
+    "liquidez_dia": 1.8,
+    "dias_sem_movimento": 25.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 3859.0,
     "venda_real_unid_dia": 13.09,
+    "venda_real_30d": 0,
+    "venda_real_preco": 399.25,
+    "preco_planilha": 87.9,
+    "ah_hoje": 98.95,
+    "mediana_7d": 84.25,
+    "tendencia": -6.3,
+    "oferta_umx": 10895,
     "flags": [
      "demanda_so_propria"
     ]
@@ -404,7 +485,18 @@
     "concentracao": 294.0,
     "demanda": 111.81,
     "sold_regional": 0.0,
+    "liquidez_dia": 111.8,
+    "dias_sem_movimento": 13.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 24056.0,
     "venda_real_unid_dia": 105.87,
+    "venda_real_30d": 2,
+    "venda_real_preco": 274.71,
+    "preco_planilha": 99.8,
+    "ah_hoje": 100.58,
+    "mediana_7d": 100.58,
+    "tendencia": 4.2,
+    "oferta_umx": 34425,
     "flags": [
      "demanda_so_propria"
     ]
@@ -422,7 +514,18 @@
     "concentracao": 394.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 4688.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 389.9,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -440,7 +543,18 @@
     "concentracao": 129.0,
     "demanda": 0.72,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.7,
+    "dias_sem_movimento": 6.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 1784.0,
     "venda_real_unid_dia": 0.75,
+    "venda_real_30d": 9,
+    "venda_real_preco": 84.82,
+    "preco_planilha": 44.6,
+    "ah_hoje": 33.74,
+    "mediana_7d": 43.0,
+    "tendencia": 5.8,
+    "oferta_umx": 2112,
     "flags": [
      "demanda_so_propria"
     ]
@@ -458,7 +572,18 @@
     "concentracao": 294.0,
     "demanda": 9.62,
     "sold_regional": 0.0,
+    "liquidez_dia": 9.6,
+    "dias_sem_movimento": 95.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 2745.0,
     "venda_real_unid_dia": 12.14,
+    "venda_real_30d": 0,
+    "venda_real_preco": 323.15,
+    "preco_planilha": 124.9,
+    "ah_hoje": 85.98,
+    "mediana_7d": 88.13,
+    "tendencia": -4.2,
+    "oferta_umx": 2362,
     "flags": [
      "demanda_so_propria",
      "liquidez_parada"
@@ -477,7 +602,18 @@
     "concentracao": 294.0,
     "demanda": 10.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 10.0,
+    "dias_sem_movimento": 173.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 785.0,
     "venda_real_unid_dia": 10.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 418.0,
+    "preco_planilha": 129.7,
+    "ah_hoje": 89.0,
+    "mediana_7d": 89.46,
+    "tendencia": -34.0,
+    "oferta_umx": 2525,
     "flags": [
      "demanda_so_propria",
      "liquidez_parada"
@@ -496,7 +632,18 @@
     "concentracao": 394.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 3055.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 94.6,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -514,7 +661,18 @@
     "concentracao": 404.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 2384.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 549.98,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "custo_modelo_divergente",
      "sem_demanda_regional"
@@ -533,7 +691,18 @@
     "concentracao": 404.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 1391.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 489.47,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "custo_modelo_divergente",
      "sem_demanda_regional"
@@ -552,7 +721,18 @@
     "concentracao": 394.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 829.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 161.0,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -570,7 +750,18 @@
     "concentracao": 394.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 7773.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 429.0,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -588,7 +779,18 @@
     "concentracao": 394.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 6080.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 356.4,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -606,7 +808,18 @@
     "concentracao": 294.0,
     "demanda": 4.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 4.0,
+    "dias_sem_movimento": 219.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 222.0,
     "venda_real_unid_dia": 2.32,
+    "venda_real_30d": 0,
+    "venda_real_preco": 173.58,
+    "preco_planilha": 78.9,
+    "ah_hoje": 65.6,
+    "mediana_7d": 95.89,
+    "tendencia": -4.0,
+    "oferta_umx": 2708,
     "flags": [
      "demanda_so_propria",
      "liquidez_parada"
@@ -625,7 +838,18 @@
     "concentracao": 404.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 344.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 563.07,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "custo_modelo_divergente",
      "sem_demanda_regional"
@@ -644,7 +868,18 @@
     "concentracao": 129.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 2014.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 18.5,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -662,7 +897,18 @@
     "concentracao": 394.0,
     "demanda": 8.73,
     "sold_regional": 0.0,
+    "liquidez_dia": 8.7,
+    "dias_sem_movimento": 16.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 893.0,
     "venda_real_unid_dia": 5.42,
+    "venda_real_30d": 1,
+    "venda_real_preco": 178.15,
+    "preco_planilha": 256.0,
+    "ah_hoje": 135.65,
+    "mediana_7d": 141.45,
+    "tendencia": -13.8,
+    "oferta_umx": 2971,
     "flags": [
      "demanda_so_propria"
     ]
@@ -680,7 +926,18 @@
     "concentracao": 294.0,
     "demanda": 8.41,
     "sold_regional": 0.0,
+    "liquidez_dia": 8.4,
+    "dias_sem_movimento": 179.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 4899.0,
     "venda_real_unid_dia": 34.72,
+    "venda_real_30d": 0,
+    "venda_real_preco": 633.15,
+    "preco_planilha": 69.9,
+    "ah_hoje": 59.0,
+    "mediana_7d": 63.0,
+    "tendencia": -14.8,
+    "oferta_umx": 5897,
     "flags": [
      "demanda_so_propria",
      "liquidez_parada"
@@ -699,7 +956,18 @@
     "concentracao": 404.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 763.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 675.75,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "custo_modelo_divergente",
      "sem_demanda_regional"
@@ -718,7 +986,18 @@
     "concentracao": 394.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 4307.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 381.0,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -736,7 +1015,18 @@
     "concentracao": 294.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 78,
+    "oferta_unidades": 1665.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 122.0,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -754,7 +1044,18 @@
     "concentracao": 324.0,
     "demanda": 22.36,
     "sold_regional": 0.0,
+    "liquidez_dia": 22.4,
+    "dias_sem_movimento": 2.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 12387.0,
     "venda_real_unid_dia": 22.84,
+    "venda_real_30d": 8,
+    "venda_real_preco": 373.77,
+    "preco_planilha": 280.89,
+    "ah_hoje": 269.99,
+    "mediana_7d": 279.0,
+    "tendencia": 0.2,
+    "oferta_umx": 22961,
     "flags": [
      "demanda_so_propria"
     ]
@@ -772,7 +1073,18 @@
     "concentracao": 324.0,
     "demanda": 6.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 6.0,
+    "dias_sem_movimento": 140.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 468.0,
     "venda_real_unid_dia": 6.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 275.49,
+    "preco_planilha": 169.64,
+    "ah_hoje": 193.92,
+    "mediana_7d": 239.84,
+    "tendencia": 41.1,
+    "oferta_umx": 1405,
     "flags": [
      "demanda_so_propria",
      "liquidez_parada"
@@ -791,7 +1103,18 @@
     "concentracao": 360.0,
     "demanda": 1.5,
     "sold_regional": 0.0,
+    "liquidez_dia": 1.5,
+    "dias_sem_movimento": 156.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 644.0,
     "venda_real_unid_dia": 1.64,
+    "venda_real_30d": 0,
+    "venda_real_preco": 1603.02,
+    "preco_planilha": 888.1,
+    "ah_hoje": 986.71,
+    "mediana_7d": 986.71,
+    "tendencia": 6.9,
+    "oferta_umx": 808,
     "flags": [
      "demanda_so_propria",
      "liquidez_parada"
@@ -810,7 +1133,18 @@
     "concentracao": 404.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 336.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 400.0,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "custo_modelo_divergente",
      "sem_demanda_regional"
@@ -829,7 +1163,18 @@
     "concentracao": 360.0,
     "demanda": 5.14,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 1355.0,
     "venda_real_unid_dia": 5.14,
+    "venda_real_30d": 0,
+    "venda_real_preco": 3946.6,
+    "preco_planilha": 899.88,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "demanda_so_propria"
     ]
@@ -847,7 +1192,18 @@
     "concentracao": 360.0,
     "demanda": 4.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 4.0,
+    "dias_sem_movimento": 151.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 1537.0,
     "venda_real_unid_dia": 4.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 1805.42,
+    "preco_planilha": 733.0,
+    "ah_hoje": 713.7,
+    "mediana_7d": 655.0,
+    "tendencia": -34.5,
+    "oferta_umx": 1692,
     "flags": [
      "demanda_so_propria",
      "liquidez_parada"
@@ -866,7 +1222,18 @@
     "concentracao": 324.0,
     "demanda": 0.02,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 13.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 707.0,
     "venda_real_unid_dia": 0.11,
+    "venda_real_30d": 1,
+    "venda_real_preco": 804.25,
+    "preco_planilha": 141.52,
+    "ah_hoje": 166.13,
+    "mediana_7d": 166.99,
+    "tendencia": 6.6,
+    "oferta_umx": 395,
     "flags": [
      "demanda_so_propria"
     ]
@@ -884,7 +1251,18 @@
     "concentracao": 330.0,
     "demanda": 0.8,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.8,
+    "dias_sem_movimento": 3.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 2171.0,
     "venda_real_unid_dia": 2.04,
+    "venda_real_30d": 8,
+    "venda_real_preco": 105.68,
+    "preco_planilha": 64.16,
+    "ah_hoje": 76.07,
+    "mediana_7d": 76.07,
+    "tendencia": 15.3,
+    "oferta_umx": 5460,
     "flags": [
      "demanda_so_propria"
     ]
@@ -902,7 +1280,18 @@
     "concentracao": 324.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 98.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 135.0,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -920,7 +1309,18 @@
     "concentracao": 324.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 612.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 111.88,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -938,7 +1338,18 @@
     "concentracao": 324.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 154.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 133.42,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -956,7 +1367,18 @@
     "concentracao": 324.0,
     "demanda": 1.5,
     "sold_regional": 0.0,
+    "liquidez_dia": 1.5,
+    "dias_sem_movimento": 3.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 1543.0,
     "venda_real_unid_dia": 1.88,
+    "venda_real_30d": 9,
+    "venda_real_preco": 310.02,
+    "preco_planilha": 216.0,
+    "ah_hoje": 228.79,
+    "mediana_7d": 240.9,
+    "tendencia": 9.5,
+    "oferta_umx": 2492,
     "flags": [
      "demanda_so_propria"
     ]
@@ -974,7 +1396,18 @@
     "concentracao": 432.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 396.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 68.0,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -992,7 +1425,18 @@
     "concentracao": 404.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 1278.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 370.51,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1010,7 +1454,18 @@
     "concentracao": 404.0,
     "demanda": 4.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 919.0,
     "venda_real_unid_dia": 4.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 2707.5,
+    "preco_planilha": 402.64,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "demanda_so_propria"
     ]
@@ -1028,7 +1483,18 @@
     "concentracao": 404.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 707.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 371.89,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1046,7 +1512,18 @@
     "concentracao": 404.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 1094.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 326.95,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1064,7 +1541,18 @@
     "concentracao": 360.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 259.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 615.94,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1082,7 +1570,18 @@
     "concentracao": 404.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 696.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 389.06,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1100,7 +1599,18 @@
     "concentracao": 360.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 1159.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 480.0,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1118,7 +1628,18 @@
     "concentracao": 404.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 753.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 373.99,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1136,7 +1657,18 @@
     "concentracao": 404.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 704.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 355.0,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1154,7 +1686,18 @@
     "concentracao": 404.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 510.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 377.0,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1172,7 +1715,18 @@
     "concentracao": 404.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 514.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 392.08,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1190,7 +1744,18 @@
     "concentracao": 404.0,
     "demanda": 10.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 10.0,
+    "dias_sem_movimento": 156.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 840.0,
     "venda_real_unid_dia": 10.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 1472.96,
+    "preco_planilha": 405.96,
+    "ah_hoje": 543.13,
+    "mediana_7d": 440.04,
+    "tendencia": 2.6,
+    "oferta_umx": 1815,
     "flags": [
      "demanda_so_propria",
      "liquidez_parada"
@@ -1209,7 +1774,18 @@
     "concentracao": 360.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 1608.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 2376.0,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1227,7 +1803,18 @@
     "concentracao": 360.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 1203.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 622.0,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1245,7 +1832,18 @@
     "concentracao": 404.0,
     "demanda": 6.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 1128.0,
     "venda_real_unid_dia": 6.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 2587.86,
+    "preco_planilha": 374.22,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "demanda_so_propria"
     ]
@@ -1263,7 +1861,18 @@
     "concentracao": 404.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 626.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 375.0,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1281,7 +1890,18 @@
     "concentracao": 404.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 552.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 461.46,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1299,7 +1919,18 @@
     "concentracao": 324.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 154.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 160.0,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1317,7 +1948,18 @@
     "concentracao": 324.0,
     "demanda": 1.6,
     "sold_regional": 0.0,
+    "liquidez_dia": 1.6,
+    "dias_sem_movimento": 152.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 156.0,
     "venda_real_unid_dia": 0.35,
+    "venda_real_30d": 0,
+    "venda_real_preco": 132.94,
+    "preco_planilha": 159.99,
+    "ah_hoje": 95.04,
+    "mediana_7d": 45.9,
+    "tendencia": 35.0,
+    "oferta_umx": 349,
     "flags": [
      "demanda_so_propria",
      "liquidez_parada"
@@ -1336,7 +1978,18 @@
     "concentracao": 360.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 1483.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 744.02,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1354,7 +2007,18 @@
     "concentracao": 360.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 1750.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 744.0,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1372,7 +2036,18 @@
     "concentracao": 360.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 1952.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 511.0,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1390,7 +2065,18 @@
     "concentracao": 324.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 543.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 133.12,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1408,7 +2094,18 @@
     "concentracao": 324.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 495.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 122.44,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1426,7 +2123,18 @@
     "concentracao": 360.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 1574.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 997.0,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1444,7 +2152,18 @@
     "concentracao": 909.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 1103.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 199.99,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1462,7 +2181,18 @@
     "concentracao": 360.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 1264.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 750.0,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1480,7 +2210,18 @@
     "concentracao": 404.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 1238.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 383.99,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1498,7 +2239,18 @@
     "concentracao": 360.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 2129.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 518.99,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1516,7 +2268,18 @@
     "concentracao": 360.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 810.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 878.18,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1534,7 +2297,18 @@
     "concentracao": 360.0,
     "demanda": 0.46,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.5,
+    "dias_sem_movimento": 72.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 1087.0,
     "venda_real_unid_dia": 0.47,
+    "venda_real_30d": 0,
+    "venda_real_preco": 1081.77,
+    "preco_planilha": 477.94,
+    "ah_hoje": 380.85,
+    "mediana_7d": 450.45,
+    "tendencia": 1.1,
+    "oferta_umx": 1856,
     "flags": [
      "demanda_so_propria",
      "liquidez_parada"
@@ -1553,7 +2327,18 @@
     "concentracao": 360.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 1940.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 19.99,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1571,7 +2356,18 @@
     "concentracao": 360.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 41.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 18.98,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1589,7 +2385,18 @@
     "concentracao": 360.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 253.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 618.92,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1607,7 +2414,18 @@
     "concentracao": 360.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 122.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 12.0,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1625,7 +2443,18 @@
     "concentracao": 360.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 324.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 19.0,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1643,7 +2472,18 @@
     "concentracao": 360.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 167.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 19.81,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "ah_corrompido",
      "fora_do_ranking",
@@ -1663,7 +2503,18 @@
     "concentracao": 360.0,
     "demanda": 1.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 1220.0,
     "venda_real_unid_dia": 1.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 3384.7,
+    "preco_planilha": 533.04,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "demanda_so_propria"
     ]
@@ -1681,7 +2532,18 @@
     "concentracao": 404.0,
     "demanda": 2.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 2.0,
+    "dias_sem_movimento": 198.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 818.0,
     "venda_real_unid_dia": 2.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 2232.78,
+    "preco_planilha": 369.98,
+    "ah_hoje": 469.98,
+    "mediana_7d": 499.77,
+    "tendencia": 17.7,
+    "oferta_umx": 1653,
     "flags": [
      "demanda_so_propria",
      "liquidez_parada"
@@ -1700,7 +2562,18 @@
     "concentracao": 360.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 2014.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 499.0,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1718,7 +2591,18 @@
     "concentracao": 324.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 1250.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 58.57,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1736,7 +2620,18 @@
     "concentracao": 360.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 65.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 20.5,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1754,7 +2649,18 @@
     "concentracao": 360.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 1436.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 511.0,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1772,7 +2678,18 @@
     "concentracao": 360.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 733.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 799.99,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1790,7 +2707,18 @@
     "concentracao": 343.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 111.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 189.99,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "custo_modelo_divergente",
      "sem_demanda_regional"
@@ -1809,7 +2737,18 @@
     "concentracao": 343.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 100.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 399.0,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "ah_corrompido",
      "custo_modelo_divergente",
@@ -1830,7 +2769,18 @@
     "concentracao": 360.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 548.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 590.43,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1848,7 +2798,18 @@
     "concentracao": 909.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 81,
+    "oferta_unidades": 110.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 349.99,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1866,7 +2827,18 @@
     "concentracao": 360.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 1028.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 984.99,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1884,7 +2856,18 @@
     "concentracao": 324.0,
     "demanda": 2.75,
     "sold_regional": 0.0,
+    "liquidez_dia": 2.8,
+    "dias_sem_movimento": 159.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 192.0,
     "venda_real_unid_dia": 0.66,
+    "venda_real_30d": 0,
+    "venda_real_preco": 124.9,
+    "preco_planilha": 144.0,
+    "ah_hoje": 53.51,
+    "mediana_7d": 33.33,
+    "tendencia": -12.3,
+    "oferta_umx": 497,
     "flags": [
      "demanda_so_propria",
      "liquidez_parada"
@@ -1903,7 +2886,18 @@
     "concentracao": 432.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 64.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 70.0,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "ah_corrompido",
      "fora_do_ranking",
@@ -1923,7 +2917,18 @@
     "concentracao": 432.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 0.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 80.87,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "ah_corrompido",
      "fora_do_ranking",
@@ -1944,7 +2949,18 @@
     "concentracao": 432.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 114.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 150.99,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -1962,7 +2978,18 @@
     "concentracao": 404.0,
     "demanda": 2.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 2.0,
+    "dias_sem_movimento": 56.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 827.0,
     "venda_real_unid_dia": 2.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 960.23,
+    "preco_planilha": 349.95,
+    "ah_hoje": 478.98,
+    "mediana_7d": 478.98,
+    "tendencia": 1.9,
+    "oferta_umx": 2287,
     "flags": [
      "demanda_so_propria",
      "liquidez_parada"
@@ -1981,7 +3008,18 @@
     "concentracao": 325.0,
     "demanda": 1.33,
     "sold_regional": 0.0,
+    "liquidez_dia": 1.3,
+    "dias_sem_movimento": 159.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 1374.0,
     "venda_real_unid_dia": 0.23,
+    "venda_real_30d": 0,
+    "venda_real_preco": 184.66,
+    "preco_planilha": 198.79,
+    "ah_hoje": 99.45,
+    "mediana_7d": 116.57,
+    "tendencia": 16.6,
+    "oferta_umx": 4931,
     "flags": [
      "demanda_so_propria",
      "liquidez_parada"
@@ -2000,7 +3038,18 @@
     "concentracao": 294.0,
     "demanda": 8.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 8.0,
+    "dias_sem_movimento": 98.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 891.0,
     "venda_real_unid_dia": 4.83,
+    "venda_real_30d": 1,
+    "venda_real_preco": 70.77,
+    "preco_planilha": 144.0,
+    "ah_hoje": 38.99,
+    "mediana_7d": 44.71,
+    "tendencia": 49.0,
+    "oferta_umx": 1147,
     "flags": [
      "demanda_so_propria",
      "liquidez_parada"
@@ -2019,7 +3068,18 @@
     "concentracao": 360.0,
     "demanda": 0.46,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 981.0,
     "venda_real_unid_dia": 0.46,
+    "venda_real_30d": 0,
+    "venda_real_preco": 4239.74,
+    "preco_planilha": 888.88,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "demanda_so_propria"
     ]
@@ -2037,7 +3097,18 @@
     "concentracao": 324.0,
     "demanda": 6.5,
     "sold_regional": 0.0,
+    "liquidez_dia": 6.5,
+    "dias_sem_movimento": 157.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 528.0,
     "venda_real_unid_dia": 0.43,
+    "venda_real_30d": 0,
+    "venda_real_preco": 77.17,
+    "preco_planilha": 149.0,
+    "ah_hoje": 44.55,
+    "mediana_7d": 44.07,
+    "tendencia": 49.9,
+    "oferta_umx": 1080,
     "flags": [
      "demanda_so_propria",
      "liquidez_parada"
@@ -2056,7 +3127,18 @@
     "concentracao": 432.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 81,
+    "oferta_unidades": 112.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 196.99,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -2074,7 +3156,18 @@
     "concentracao": 360.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 2754.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 519.99,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -2092,7 +3185,18 @@
     "concentracao": 324.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 332.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 104.28,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -2110,7 +3214,18 @@
     "concentracao": 324.0,
     "demanda": 3.25,
     "sold_regional": 0.0,
+    "liquidez_dia": 3.2,
+    "dias_sem_movimento": 159.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 186.0,
     "venda_real_unid_dia": 0.39,
+    "venda_real_30d": 0,
+    "venda_real_preco": 154.62,
+    "preco_planilha": 149.99,
+    "ah_hoje": 30.93,
+    "mediana_7d": 30.8,
+    "tendencia": -8.7,
+    "oferta_umx": 169,
     "flags": [
      "demanda_so_propria",
      "liquidez_parada"
@@ -2129,7 +3244,18 @@
     "concentracao": 360.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 364.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 1300.62,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -2147,7 +3273,18 @@
     "concentracao": 360.0,
     "demanda": 6.24,
     "sold_regional": 0.0,
+    "liquidez_dia": 6.2,
+    "dias_sem_movimento": 2.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 1132.0,
     "venda_real_unid_dia": 5.71,
+    "venda_real_30d": 7,
+    "venda_real_preco": 2911.98,
+    "preco_planilha": 1021.65,
+    "ah_hoje": 744.38,
+    "mediana_7d": 940.16,
+    "tendencia": -49.5,
+    "oferta_umx": 2413,
     "flags": [
      "demanda_so_propria"
     ]
@@ -2165,7 +3302,18 @@
     "concentracao": 343.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 55.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 189.41,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "custo_modelo_divergente",
      "sem_demanda_regional"
@@ -2184,7 +3332,18 @@
     "concentracao": 360.0,
     "demanda": 6.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 1211.0,
     "venda_real_unid_dia": 6.0,
+    "venda_real_30d": 1,
+    "venda_real_preco": 854.05,
+    "preco_planilha": 1033.0,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "demanda_so_propria"
     ]
@@ -2202,7 +3361,18 @@
     "concentracao": 343.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 76.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 394.0,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "ah_corrompido",
      "custo_modelo_divergente",
@@ -2223,7 +3393,18 @@
     "concentracao": 360.0,
     "demanda": 0.62,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.6,
+    "dias_sem_movimento": 140.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 705.0,
     "venda_real_unid_dia": 0.63,
+    "venda_real_30d": 0,
+    "venda_real_preco": 1190.88,
+    "preco_planilha": 662.17,
+    "ah_hoje": 499.95,
+    "mediana_7d": 590.06,
+    "tendencia": -13.2,
+    "oferta_umx": 488,
     "flags": [
      "demanda_so_propria",
      "liquidez_parada"
@@ -2242,7 +3423,18 @@
     "concentracao": 360.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 509.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 1097.9,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -2260,7 +3452,18 @@
     "concentracao": 330.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 855.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 75.09,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -2278,7 +3481,18 @@
     "concentracao": 360.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 578.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 824.98,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -2296,7 +3510,18 @@
     "concentracao": 360.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 81,
+    "oferta_unidades": 6.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 921.99,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -2314,7 +3539,18 @@
     "concentracao": 360.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 925.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 950.97,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -2332,7 +3568,18 @@
     "concentracao": 360.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 401.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 355.14,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -2350,7 +3597,18 @@
     "concentracao": 324.0,
     "demanda": 21.3,
     "sold_regional": 0.0,
+    "liquidez_dia": 21.3,
+    "dias_sem_movimento": 3.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 2030.0,
     "venda_real_unid_dia": 16.94,
+    "venda_real_30d": 9,
+    "venda_real_preco": 903.59,
+    "preco_planilha": 537.82,
+    "ah_hoje": 678.65,
+    "mediana_7d": 599.87,
+    "tendencia": 8.7,
+    "oferta_umx": 5973,
     "flags": [
      "demanda_so_propria"
     ]
@@ -2368,7 +3626,18 @@
     "concentracao": 360.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 529.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 500.96,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
     ]
@@ -2386,9 +3655,80 @@
     "concentracao": 404.0,
     "demanda": 0.0,
     "sold_regional": 0.0,
+    "liquidez_dia": 0.0,
+    "dias_sem_movimento": 0.0,
+    "serie_pontos": 90,
+    "oferta_unidades": 286.0,
     "venda_real_unid_dia": 0.0,
+    "venda_real_30d": 0,
+    "venda_real_preco": 0.0,
+    "preco_planilha": 305.0,
+    "ah_hoje": null,
+    "mediana_7d": null,
+    "tendencia": null,
+    "oferta_umx": null,
     "flags": [
      "sem_demanda_regional"
+    ]
+   }
+  ],
+  "outliers": [
+   {
+    "receita": "Darkmoon Sigil: Void Tier 2",
+    "profissao": "Inscrição",
+    "preco": 344.52,
+    "custo": 458.68,
+    "flags": [
+     "ah_corrompido",
+     "custo_modelo_divergente",
+     "fora_do_ranking",
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "receita": "Darkmoon Sigil: Hunt Tier 2",
+    "profissao": "Inscrição",
+    "preco": 219.0,
+    "custo": 461.33,
+    "flags": [
+     "ah_corrompido",
+     "custo_modelo_divergente",
+     "fora_do_ranking",
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "receita": "Enchant Helm - Hex of Leeching Tier 2",
+    "profissao": "Encantamento",
+    "preco": 18.0,
+    "custo": 17.76,
+    "flags": [
+     "ah_corrompido",
+     "fora_do_ranking",
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "receita": "Contract: The Silvermoon Court Tier 2",
+    "profissao": "Inscrição",
+    "preco": 13.0,
+    "custo": 91.82,
+    "flags": [
+     "ah_corrompido",
+     "fora_do_ranking",
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "receita": "Contract: The Singularity Tier 2",
+    "profissao": "Inscrição",
+    "preco": 10.98,
+    "custo": 91.03,
+    "flags": [
+     "ah_corrompido",
+     "fora_do_ranking",
+     "sem_demanda_regional",
+     "sem_estoque_agora"
     ]
    }
   ],
@@ -2398,718 +3738,1774 @@
     "preco": 1592.98,
     "percentil": 3.3,
     "barato": true,
-    "n_receitas": 1
+    "n_receitas": 1,
+    "n_barato": 1,
+    "usado_em": [
+     "enchant-chest-mark-of-the-worldsoul-tier-2"
+    ]
    },
    {
     "nome": "Petrified Root",
     "preco": 70.69,
     "percentil": 6.7,
     "barato": true,
-    "n_receitas": 48
+    "n_receitas": 48,
+    "n_barato": 48,
+    "usado_em": [
+     "enchant-boots-farstrider-s-hunt-tier-2",
+     "enchant-boots-lynx-s-dexterity-tier-2",
+     "enchant-boots-shaladrassil-s-roots-tier-2",
+     "enchant-chest-mark-of-nalorakk-tier-2",
+     "enchant-chest-mark-of-the-magister-tier-2",
+     "enchant-chest-mark-of-the-rootwarden-tier-2",
+     "enchant-chest-mark-of-the-worldsoul-tier-2",
+     "enchant-helm-empowered-blessing-of-speed-tier-2"
+    ]
    },
    {
     "nome": "Arcanoweave Bolt Tier 1",
     "preco": 41.99,
     "percentil": 6.7,
     "barato": true,
-    "n_receitas": 2
+    "n_receitas": 2,
+    "n_barato": 2,
+    "usado_em": [
+     "enchant-chest-mark-of-the-magister-tier-2",
+     "enchant-weapon-arcane-mastery-tier-2"
+    ]
    },
    {
     "nome": "Sunfire Silk Bolt Tier 1",
     "preco": 113.78,
     "percentil": 6.7,
     "barato": true,
-    "n_receitas": 1
+    "n_receitas": 1,
+    "n_barato": 1,
+    "usado_em": [
+     "enchant-weapon-flames-of-the-sin-dorei-tier-2"
+    ]
    },
    {
     "nome": "Majestic Fin",
     "preco": 250.0,
     "percentil": 13.3,
     "barato": true,
-    "n_receitas": 2
+    "n_receitas": 2,
+    "n_barato": 2,
+    "usado_em": [
+     "enchant-chest-mark-of-the-rootwarden-tier-2",
+     "enchant-weapon-jan-alai-s-precision-tier-2"
+    ]
    },
    {
     "nome": "Argentleaf Tier 1",
     "preco": 3.5,
     "percentil": 16.7,
     "barato": true,
-    "n_receitas": 4
+    "n_receitas": 4,
+    "n_barato": 4,
+    "usado_em": [
+     "flask-of-the-blood-knights-tier-2",
+     "flask-of-the-shattered-sun-tier-2",
+     "haranir-phial-of-perception-tier-2",
+     "light-s-potential-tier-2"
+    ]
    },
    {
     "nome": "Dawn Crystal Tier 1",
     "preco": 163.97,
     "percentil": 16.7,
     "barato": true,
-    "n_receitas": 34
+    "n_receitas": 34,
+    "n_barato": 34,
+    "usado_em": [
+     "enchant-boots-farstrider-s-hunt-tier-2",
+     "enchant-boots-lynx-s-dexterity-tier-2",
+     "enchant-boots-shaladrassil-s-roots-tier-2",
+     "enchant-chest-mark-of-nalorakk-tier-2",
+     "enchant-chest-mark-of-the-magister-tier-2",
+     "enchant-chest-mark-of-the-rootwarden-tier-2",
+     "enchant-chest-mark-of-the-worldsoul-tier-2",
+     "enchant-helm-empowered-blessing-of-speed-tier-2"
+    ]
    },
    {
     "nome": "Mana Lily Pigment Tier 1",
     "preco": 13.44,
     "percentil": 16.7,
     "barato": true,
-    "n_receitas": 2
+    "n_receitas": 2,
+    "n_barato": 2,
+    "usado_em": [
+     "munsell-ink-tier-2",
+     "sienna-ink-tier-2"
+    ]
    },
    {
     "nome": "Eversinging Dust Tier 1",
     "preco": 0.81,
     "percentil": 20.0,
     "barato": true,
-    "n_receitas": 40
+    "n_receitas": 40,
+    "n_barato": 40,
+    "usado_em": [
+     "enchant-boots-farstrider-s-hunt-tier-2",
+     "enchant-boots-lynx-s-dexterity-tier-2",
+     "enchant-boots-shaladrassil-s-roots-tier-2",
+     "enchant-chest-mark-of-nalorakk-tier-2",
+     "enchant-chest-mark-of-the-magister-tier-2",
+     "enchant-chest-mark-of-the-rootwarden-tier-2",
+     "enchant-chest-mark-of-the-worldsoul-tier-2",
+     "enchant-helm-blessing-of-speed-tier-2"
+    ]
    },
    {
     "nome": "Vantus Rune: Radiant Tier 1",
     "preco": 25.0,
     "percentil": 23.3,
     "barato": true,
-    "n_receitas": 1
+    "n_receitas": 1,
+    "n_barato": 1,
+    "usado_em": [
+     "vantus-rune-tides-tier-2"
+    ]
    },
    {
     "nome": "Sanguithorn Tier 1",
     "preco": 0.56,
     "percentil": 26.7,
     "barato": true,
-    "n_receitas": 8
+    "n_receitas": 8,
+    "n_barato": 8,
+    "usado_em": [
+     "alluring-nostrum-tier-2",
+     "draught-of-rampant-abandon-tier-2",
+     "flask-of-the-blood-knights-tier-2",
+     "flask-of-the-magisters-tier-2",
+     "haranir-phial-of-ingenuity-tier-2",
+     "liquid-luster-tier-2",
+     "refreshing-serum-tier-2",
+     "void-shrouded-tincture-tier-2"
+    ]
    },
    {
     "nome": "Mana Lily Tier 1",
     "preco": 17.82,
     "percentil": 30.0,
     "barato": true,
-    "n_receitas": 8
+    "n_receitas": 8,
+    "n_barato": 8,
+    "usado_em": [
+     "alluring-nostrum-tier-2",
+     "draught-of-rampant-abandon-tier-2",
+     "flask-of-thalassian-resistance-tier-2",
+     "flask-of-the-magisters-tier-2",
+     "haranir-phial-of-finesse-tier-2",
+     "haranir-phial-of-ingenuity-tier-2",
+     "lightfused-mana-potion-tier-2",
+     "potion-of-devoured-dreams-tier-2"
+    ]
    },
    {
     "nome": "Fantastic Fur",
     "preco": 89.74,
     "percentil": 30.0,
     "barato": true,
-    "n_receitas": 1
+    "n_receitas": 1,
+    "n_barato": 1,
+    "usado_em": [
+     "enchant-boots-farstrider-s-hunt-tier-2"
+    ]
    },
    {
     "nome": "Carving Canine",
     "preco": 0.62,
     "percentil": 30.0,
     "barato": true,
-    "n_receitas": 1
+    "n_receitas": 1,
+    "n_barato": 1,
+    "usado_em": [
+     "enchant-boots-lynx-s-dexterity-tier-2"
+    ]
    },
    {
     "nome": "Duskshrouded Stone Tier 1",
     "preco": 2.24,
     "percentil": 36.7,
     "barato": false,
-    "n_receitas": 2
+    "n_receitas": 2,
+    "n_barato": 0,
+    "usado_em": [
+     "soul-cipher-tier-2",
+     "sunglass-vial-tier-2"
+    ]
    },
    {
     "nome": "Radiant Shard Tier 1",
     "preco": 2.2,
     "percentil": 36.7,
     "barato": false,
-    "n_receitas": 40
+    "n_receitas": 40,
+    "n_barato": 0,
+    "usado_em": [
+     "enchant-boots-farstrider-s-hunt-tier-2",
+     "enchant-boots-lynx-s-dexterity-tier-2",
+     "enchant-boots-shaladrassil-s-roots-tier-2",
+     "enchant-chest-mark-of-nalorakk-tier-2",
+     "enchant-chest-mark-of-the-magister-tier-2",
+     "enchant-chest-mark-of-the-rootwarden-tier-2",
+     "enchant-chest-mark-of-the-worldsoul-tier-2",
+     "enchant-helm-blessing-of-speed-tier-2"
+    ]
    },
    {
     "nome": "Majestic Claw",
     "preco": 44.0,
     "percentil": 36.7,
     "barato": false,
-    "n_receitas": 2
+    "n_receitas": 2,
+    "n_barato": 0,
+    "usado_em": [
+     "enchant-chest-mark-of-nalorakk-tier-2",
+     "enchant-weapon-strength-of-halazzi-tier-2"
+    ]
    },
    {
     "nome": "Sienna Ink Tier 1",
     "preco": 84.25,
     "percentil": 40.0,
     "barato": false,
-    "n_receitas": 19
+    "n_receitas": 19,
+    "n_barato": 0,
+    "usado_em": [
+     "contract-the-amani-tribe-tier-2",
+     "contract-the-hara-ti-tier-2",
+     "contract-the-silvermoon-court-tier-2",
+     "contract-the-singularity-tier-2",
+     "contract-zul-jarra-s-forces-tier-2",
+     "soul-cipher-tier-2",
+     "thalassian-missive-of-crafting-speed-tier-2",
+     "thalassian-missive-of-deftness-tier-2"
+    ]
    },
    {
     "nome": "Mote of Wild Magic",
     "preco": 0.63,
     "percentil": 43.3,
     "barato": false,
-    "n_receitas": 24
+    "n_receitas": 24,
+    "n_barato": 0,
+    "usado_em": [
+     "codified-azeroot-tier-2",
+     "contract-the-silvermoon-court-tier-2",
+     "darkmoon-sigil-hunt-tier-2",
+     "enchant-boots-lynx-s-dexterity-tier-2",
+     "enchant-chest-mark-of-nalorakk-tier-2",
+     "enchant-helm-empowered-hex-of-leeching-tier-2",
+     "enchant-ring-eyes-of-the-eagle-tier-2",
+     "enchant-ring-zul-jin-s-mastery-tier-2"
+    ]
    },
    {
     "nome": "Silvermoon Health Potion Tier 1",
     "preco": 3.41,
     "percentil": 43.3,
     "barato": false,
-    "n_receitas": 1
+    "n_receitas": 1,
+    "n_barato": 0,
+    "usado_em": [
+     "concentrated-silvermoon-health-potion-tier-2"
+    ]
    },
    {
     "nome": "Nocturnal Lotus",
     "preco": 260.95,
     "percentil": 60.0,
     "barato": false,
-    "n_receitas": 4
+    "n_receitas": 4,
+    "n_barato": 0,
+    "usado_em": [
+     "flask-of-thalassian-resistance-tier-2",
+     "flask-of-the-blood-knights-tier-2",
+     "flask-of-the-magisters-tier-2",
+     "flask-of-the-shattered-sun-tier-2"
+    ]
    },
    {
     "nome": "Mote of Light",
     "preco": 0.72,
     "percentil": 63.3,
     "barato": false,
-    "n_receitas": 24
+    "n_receitas": 24,
+    "n_barato": 0,
+    "usado_em": [
+     "contract-the-amani-tribe-tier-2",
+     "darkmoon-sigil-blood-tier-2",
+     "enchant-boots-farstrider-s-hunt-tier-2",
+     "enchant-chest-mark-of-the-magister-tier-2",
+     "enchant-helm-empowered-rune-of-avoidance-tier-2",
+     "enchant-ring-silvermoon-s-alacrity-tier-2",
+     "enchant-ring-silvermoon-s-tenacity-tier-2",
+     "enchant-shoulders-silvermoon-s-mending-tier-2"
+    ]
    },
    {
     "nome": "Argentleaf Pigment Tier 1",
     "preco": 26.89,
     "percentil": 66.7,
     "barato": false,
-    "n_receitas": 1
+    "n_receitas": 1,
+    "n_barato": 0,
+    "usado_em": [
+     "sienna-ink-tier-2"
+    ]
    },
    {
     "nome": "Cursebound Globe",
     "preco": 11.13,
     "percentil": 73.3,
     "barato": false,
-    "n_receitas": 5
+    "n_receitas": 5,
+    "n_barato": 0,
+    "usado_em": [
+     "alluring-nostrum-tier-2",
+     "concentrated-silvermoon-health-potion-tier-2",
+     "enchant-weapon-rite-of-the-hash-ey-tier-2",
+     "liquid-luster-tier-2",
+     "vantus-rune-tides-tier-2"
+    ]
    },
    {
     "nome": "Crystalline Glass Tier 1",
     "preco": 8.79,
     "percentil": 80.0,
     "barato": false,
-    "n_receitas": 2
+    "n_receitas": 2,
+    "n_barato": 0,
+    "usado_em": [
+     "sin-dorei-lens-tier-2",
+     "sunglass-vial-tier-2"
+    ]
    },
    {
     "nome": "Refulgent Copper Ingot Tier 1",
     "preco": 53.95,
     "percentil": 80.0,
     "barato": false,
-    "n_receitas": 3
+    "n_receitas": 3,
+    "n_barato": 0,
+    "usado_em": [
+     "enchant-tool-amani-perception-tier-2",
+     "enchant-tool-amani-resourcefulness-tier-2",
+     "enchant-tool-haranir-finesse-tier-2"
+    ]
    },
    {
     "nome": "Soul Cipher Tier 1",
     "preco": 68.7,
     "percentil": 80.0,
     "barato": false,
-    "n_receitas": 7
+    "n_receitas": 7,
+    "n_barato": 0,
+    "usado_em": [
+     "codified-azeroot-tier-2",
+     "darkmoon-sigil-blood-tier-2",
+     "darkmoon-sigil-hunt-tier-2",
+     "darkmoon-sigil-rot-tier-2",
+     "darkmoon-sigil-void-tier-2",
+     "vantus-rune-radiant-tier-2",
+     "vantus-rune-tides-tier-2"
+    ]
    },
    {
     "nome": "Powder Pigment Tier 1",
     "preco": 2.41,
     "percentil": 80.0,
     "barato": false,
-    "n_receitas": 2
+    "n_receitas": 2,
+    "n_barato": 0,
+    "usado_em": [
+     "munsell-ink-tier-2",
+     "sienna-ink-tier-2"
+    ]
    },
    {
     "nome": "Sanguithorn Pigment Tier 1",
     "preco": 15.99,
     "percentil": 83.3,
     "barato": false,
-    "n_receitas": 1
+    "n_receitas": 1,
+    "n_barato": 0,
+    "usado_em": [
+     "munsell-ink-tier-2"
+    ]
    },
    {
     "nome": "Azeroot Tier 1",
     "preco": 31.42,
     "percentil": 86.7,
     "barato": false,
-    "n_receitas": 11
+    "n_receitas": 11,
+    "n_barato": 0,
+    "usado_em": [
+     "amani-extract-tier-2",
+     "codified-azeroot-tier-2",
+     "enchant-boots-shaladrassil-s-roots-tier-2",
+     "flask-of-thalassian-resistance-tier-2",
+     "flask-of-the-shattered-sun-tier-2",
+     "haranir-phial-of-finesse-tier-2",
+     "haranir-phial-of-perception-tier-2",
+     "light-s-potential-tier-2"
+    ]
    },
    {
     "nome": "Amani Lapis Tier 1",
     "preco": 30.86,
     "percentil": 90.0,
     "barato": false,
-    "n_receitas": 1
+    "n_receitas": 1,
+    "n_barato": 0,
+    "usado_em": [
+     "stabilizing-gemstone-bandolier-tier-2"
+    ]
    },
    {
     "nome": "Flawless Harandar Peridot Tier 1",
     "preco": 41.88,
     "percentil": 90.0,
     "barato": false,
-    "n_receitas": 8
+    "n_receitas": 8,
+    "n_barato": 0,
+    "usado_em": [
+     "enchant-weapon-worldsoul-aegis-tier-2",
+     "enchant-weapon-worldsoul-cradle-tier-2",
+     "enchant-weapon-worldsoul-tenacity-tier-2",
+     "flawless-deadly-peridot-tier-2",
+     "flawless-masterful-peridot-tier-2",
+     "flawless-quick-peridot-tier-2",
+     "flawless-versatile-peridot-tier-2",
+     "kaleidoscopic-prism-tier-2"
+    ]
    },
    {
     "nome": "Munsell Ink Tier 1",
     "preco": 10.8,
     "percentil": 90.0,
     "barato": false,
-    "n_receitas": 19
+    "n_receitas": 19,
+    "n_barato": 0,
+    "usado_em": [
+     "contract-the-amani-tribe-tier-2",
+     "contract-the-hara-ti-tier-2",
+     "contract-the-silvermoon-court-tier-2",
+     "contract-the-singularity-tier-2",
+     "contract-zul-jarra-s-forces-tier-2",
+     "soul-cipher-tier-2",
+     "thalassian-missive-of-crafting-speed-tier-2",
+     "thalassian-missive-of-deftness-tier-2"
+    ]
    },
    {
     "nome": "Neutralized Venom Clot",
     "preco": 13.0,
     "percentil": 93.3,
     "barato": false,
-    "n_receitas": 3
+    "n_receitas": 3,
+    "n_barato": 0,
+    "usado_em": [
+     "alluring-nostrum-tier-2",
+     "contract-zul-jarra-s-forces-tier-2",
+     "liquid-luster-tier-2"
+    ]
    },
    {
     "nome": "Gloaming Alloy Tier 1",
     "preco": 79.67,
     "percentil": 93.3,
     "barato": false,
-    "n_receitas": 1
+    "n_receitas": 1,
+    "n_barato": 0,
+    "usado_em": [
+     "enchant-tool-ren-dorei-ingenuity-tier-2"
+    ]
    },
    {
     "nome": "Tranquility Bloom Tier 1",
     "preco": 2.31,
     "percentil": 96.7,
     "barato": false,
-    "n_receitas": 17
+    "n_receitas": 17,
+    "n_barato": 0,
+    "usado_em": [
+     "alluring-nostrum-tier-2",
+     "amani-extract-tier-2",
+     "draught-of-rampant-abandon-tier-2",
+     "enlightenment-tonic-tier-2",
+     "haranir-phial-of-finesse-tier-2",
+     "haranir-phial-of-ingenuity-tier-2",
+     "haranir-phial-of-perception-tier-2",
+     "light-s-potential-tier-2"
+    ]
    },
    {
     "nome": "Flawless Amani Lapis Tier 1",
     "preco": 38.98,
     "percentil": 96.7,
     "barato": false,
-    "n_receitas": 7
+    "n_receitas": 7,
+    "n_barato": 0,
+    "usado_em": [
+     "enchant-weapon-berserker-s-rage-tier-2",
+     "enchant-weapon-rite-of-the-hash-ey-tier-2",
+     "flawless-deadly-lapis-tier-2",
+     "flawless-masterful-lapis-tier-2",
+     "flawless-quick-lapis-tier-2",
+     "flawless-versatile-lapis-tier-2",
+     "kaleidoscopic-prism-tier-2"
+    ]
    },
    {
     "nome": "Flawless Sanguine Garnet Tier 1",
     "preco": 100.29,
     "percentil": 96.7,
     "barato": false,
-    "n_receitas": 5
+    "n_receitas": 5,
+    "n_barato": 0,
+    "usado_em": [
+     "flawless-deadly-garnet-tier-2",
+     "flawless-masterful-garnet-tier-2",
+     "flawless-quick-garnet-tier-2",
+     "flawless-versatile-garnet-tier-2",
+     "kaleidoscopic-prism-tier-2"
+    ]
    },
    {
     "nome": "Flawless Tenebrous Amethyst Tier 1",
     "preco": 33.95,
     "percentil": 96.7,
     "barato": false,
-    "n_receitas": 6
+    "n_receitas": 6,
+    "n_barato": 0,
+    "usado_em": [
+     "enchant-weapon-acuity-of-the-ren-dorei-tier-2",
+     "flawless-deadly-amethyst-tier-2",
+     "flawless-masterful-amethyst-tier-2",
+     "flawless-quick-amethyst-tier-2",
+     "flawless-versatile-amethyst-tier-2",
+     "kaleidoscopic-prism-tier-2"
+    ]
    },
    {
     "nome": "Tenebrous Amethyst Tier 1",
     "preco": 103.29,
     "percentil": 100.0,
     "barato": false,
-    "n_receitas": 1
+    "n_receitas": 1,
+    "n_barato": 0,
+    "usado_em": [
+     "stabilizing-gemstone-bandolier-tier-2"
+    ]
    },
    {
     "nome": "Harandar Peridot Tier 1",
     "preco": 32.3,
     "percentil": 100.0,
     "barato": false,
-    "n_receitas": 1
+    "n_receitas": 1,
+    "n_barato": 0,
+    "usado_em": [
+     "stabilizing-gemstone-bandolier-tier-2"
+    ]
    },
    {
     "nome": "Sanguine Garnet Tier 1",
     "preco": 97.29,
     "percentil": 100.0,
     "barato": false,
-    "n_receitas": 1
+    "n_receitas": 1,
+    "n_barato": 0,
+    "usado_em": [
+     "stabilizing-gemstone-bandolier-tier-2"
+    ]
    },
    {
     "nome": "Glimmering Gemdust Tier 1",
     "preco": 123.87,
     "percentil": 100.0,
     "barato": false,
-    "n_receitas": 20
+    "n_receitas": 20,
+    "n_barato": 0,
+    "usado_em": [
+     "flawless-deadly-amethyst-tier-2",
+     "flawless-deadly-garnet-tier-2",
+     "flawless-deadly-lapis-tier-2",
+     "flawless-deadly-peridot-tier-2",
+     "flawless-masterful-amethyst-tier-2",
+     "flawless-masterful-garnet-tier-2",
+     "flawless-masterful-lapis-tier-2",
+     "flawless-masterful-peridot-tier-2"
+    ]
    },
    {
     "nome": "Sterling Alloy Tier 1",
     "preco": 77.88,
     "percentil": 100.0,
     "barato": false,
-    "n_receitas": 2
+    "n_receitas": 2,
+    "n_barato": 0,
+    "usado_em": [
+     "enchant-tool-haranir-multicrafting-tier-2",
+     "enchant-tool-sin-dorei-deftness-tier-2"
+    ]
    },
    {
     "nome": "Peerless Plumage",
     "preco": 67.93,
     "percentil": 100.0,
     "barato": false,
-    "n_receitas": 1
+    "n_receitas": 1,
+    "n_barato": 0,
+    "usado_em": [
+     "enchant-ring-eyes-of-the-eagle-tier-2"
+    ]
    },
    {
     "nome": "Sunglass Vial Tier 1",
     "preco": 2.97,
     "percentil": null,
     "barato": false,
-    "n_receitas": 2
+    "n_receitas": 2,
+    "n_barato": 0,
+    "usado_em": [
+     "alluring-nostrum-tier-2",
+     "liquid-luster-tier-2"
+    ]
    },
    {
     "nome": "Mote of Pure Void",
     "preco": 0.35,
     "percentil": null,
     "barato": false,
-    "n_receitas": 15
+    "n_receitas": 15,
+    "n_barato": 0,
+    "usado_em": [
+     "contract-the-singularity-tier-2",
+     "darkmoon-sigil-void-tier-2",
+     "enchant-tool-ren-dorei-ingenuity-tier-2",
+     "enchant-weapon-acuity-of-the-ren-dorei-tier-2",
+     "flask-of-the-magisters-tier-2",
+     "flawless-deadly-amethyst-tier-2",
+     "flawless-masterful-amethyst-tier-2",
+     "flawless-quick-amethyst-tier-2"
+    ]
    },
    {
     "nome": "Mote of Primal Energy",
     "preco": 0.54,
     "percentil": null,
     "barato": false,
-    "n_receitas": 25
+    "n_receitas": 25,
+    "n_barato": 0,
+    "usado_em": [
+     "codified-azeroot-tier-2",
+     "contract-the-hara-ti-tier-2",
+     "darkmoon-sigil-rot-tier-2",
+     "draught-of-rampant-abandon-tier-2",
+     "enchant-boots-shaladrassil-s-roots-tier-2",
+     "enchant-chest-mark-of-the-rootwarden-tier-2",
+     "enchant-chest-mark-of-the-worldsoul-tier-2",
+     "enchant-helm-empowered-blessing-of-speed-tier-2"
+    ]
    },
    {
     "nome": "Eversong Diamond Tier 1",
     "preco": 30.01,
     "percentil": null,
     "barato": false,
-    "n_receitas": 4
+    "n_receitas": 4,
+    "n_barato": 0,
+    "usado_em": [
+     "indecipherable-eversong-diamond-tier-2",
+     "powerful-eversong-diamond-tier-2",
+     "stoic-eversong-diamond-tier-2",
+     "telluric-eversong-diamond-tier-2"
+    ]
    },
    {
     "nome": "Thalassian Songwater",
     "preco": 0.36,
     "percentil": null,
     "barato": false,
-    "n_receitas": 6
+    "n_receitas": 6,
+    "n_barato": 0,
+    "usado_em": [
+     "darkmoon-sigil-blood-tier-2",
+     "darkmoon-sigil-hunt-tier-2",
+     "darkmoon-sigil-rot-tier-2",
+     "darkmoon-sigil-void-tier-2",
+     "vantus-rune-radiant-tier-2",
+     "vantus-rune-tides-tier-2"
+    ]
    },
    {
     "nome": "Darkmoon Deck: Hunt",
     "preco": 137.97,
     "percentil": null,
     "barato": false,
-    "n_receitas": 1
+    "n_receitas": 1,
+    "n_barato": 0,
+    "usado_em": [
+     "darkmoon-sigil-hunt-tier-2"
+    ]
    },
    {
     "nome": "Lexicologist's Vellum",
     "preco": 0.21,
     "percentil": null,
     "barato": false,
-    "n_receitas": 20
+    "n_receitas": 20,
+    "n_barato": 0,
+    "usado_em": [
+     "contract-the-amani-tribe-tier-2",
+     "contract-the-hara-ti-tier-2",
+     "contract-the-silvermoon-court-tier-2",
+     "contract-the-singularity-tier-2",
+     "contract-zul-jarra-s-forces-tier-2",
+     "thalassian-missive-of-crafting-speed-tier-2",
+     "thalassian-missive-of-deftness-tier-2",
+     "thalassian-missive-of-finesse-tier-2"
+    ]
    },
    {
     "nome": "Darkmoon Deck: Void",
     "preco": 137.97,
     "percentil": null,
     "barato": false,
-    "n_receitas": 1
+    "n_receitas": 1,
+    "n_barato": 0,
+    "usado_em": [
+     "darkmoon-sigil-void-tier-2"
+    ]
    },
    {
     "nome": "Darkmoon Deck: Blood",
     "preco": 137.97,
     "percentil": null,
     "barato": false,
-    "n_receitas": 1
+    "n_receitas": 1,
+    "n_barato": 0,
+    "usado_em": [
+     "darkmoon-sigil-blood-tier-2"
+    ]
    },
    {
     "nome": "Darkmoon Deck: Rot",
     "preco": 137.97,
     "percentil": null,
     "barato": false,
-    "n_receitas": 1
+    "n_receitas": 1,
+    "n_barato": 0,
+    "usado_em": [
+     "darkmoon-sigil-rot-tier-2"
+    ]
    }
   ],
   "caixa_tsm": {
    "faturamento": 47582794.0,
-   "compras": 29927787.0,
-   "saldo": 17655007.0,
+   "compras": 29929605.0,
+   "saldo": 17653188.0,
+   "fora_do_teto": 2543326.0,
    "janela": {
     "de": "2026-03-17",
     "ate": "2026-10-31"
    },
    "itens_vendidos": 588,
+   "itens_comprados": 452,
    "itens": [
     {
      "nome": "item 241308",
      "unid": 20793,
      "receita": 5712047.2,
      "preco_medio": 274.71,
-     "vendas": 33
+     "vendas": 33,
+     "vendas_30d": 2,
+     "vendas_7d": 0,
+     "unid_dia": 105.87,
+     "dias_hist": 196,
+     "ah_hoje": 100.58,
+     "tendencia": 4.2
     },
     {
      "nome": "item 239202",
      "unid": 5663,
      "receita": 4769568.4,
      "preco_medio": 842.23,
-     "vendas": 61
+     "vendas": 61,
+     "vendas_30d": 7,
+     "vendas_7d": 1,
+     "unid_dia": 25.5,
+     "dias_hist": 222,
+     "ah_hoje": 108.97,
+     "tendencia": -5.5
     },
     {
      "nome": "item 259085",
      "unid": 6238,
      "receita": 3513344.7,
      "preco_medio": 563.22,
-     "vendas": 94
+     "vendas": 94,
+     "vendas_30d": 15,
+     "vendas_7d": 5,
+     "unid_dia": 27.41,
+     "dias_hist": 227,
+     "ah_hoje": 370.0,
+     "tendencia": 5.8
     },
     {
      "nome": "item 240975",
      "unid": 3445,
      "receita": 3112875.9,
      "preco_medio": 903.59,
-     "vendas": 36
+     "vendas": 36,
+     "vendas_30d": 9,
+     "vendas_7d": 3,
+     "unid_dia": 16.94,
+     "dias_hist": 203,
+     "ah_hoje": 678.65,
+     "tendencia": 8.7
     },
     {
      "nome": "item 241288",
      "unid": 23440,
      "receita": 2853556.7,
      "preco_medio": 121.74,
-     "vendas": 24
+     "vendas": 24,
+     "vendas_30d": 8,
+     "vendas_7d": 1,
+     "unid_dia": 144.5,
+     "dias_hist": 162,
+     "ah_hoje": 86.89,
+     "tendencia": -1.7
     },
     {
      "nome": "item 244029",
      "unid": 979,
      "receita": 2850831.5,
      "preco_medio": 2911.98,
-     "vendas": 29
+     "vendas": 29,
+     "vendas_30d": 7,
+     "vendas_7d": 1,
+     "unid_dia": 5.71,
+     "dias_hist": 171,
+     "ah_hoje": 744.38,
+     "tendencia": -49.5
     },
     {
      "nome": "item 239200",
      "unid": 1925,
      "receita": 1937328.2,
      "preco_medio": 1006.4,
-     "vendas": 59
+     "vendas": 59,
+     "vendas_30d": 7,
+     "vendas_7d": 1,
+     "unid_dia": 8.67,
+     "dias_hist": 222,
+     "ah_hoje": 42.49,
+     "tendencia": -20.7
     },
     {
      "nome": "item 251285",
      "unid": 9308,
      "receita": 1879749.3,
      "preco_medio": 201.95,
-     "vendas": 12
+     "vendas": 12,
+     "vendas_30d": 8,
+     "vendas_7d": 8,
+     "unid_dia": 56.15,
+     "dias_hist": 165,
+     "ah_hoje": 67.9,
+     "tendencia": -72.0
     },
     {
      "nome": "item 240990",
      "unid": 4886,
      "receita": 1826245.0,
      "preco_medio": 373.77,
-     "vendas": 52
+     "vendas": 52,
+     "vendas_30d": 8,
+     "vendas_7d": 1,
+     "unid_dia": 22.84,
+     "dias_hist": 213,
+     "ah_hoje": 269.99,
+     "tendencia": 0.2
     },
     {
      "nome": "item 236780",
      "unid": 3152,
      "receita": 1484274.6,
      "preco_medio": 470.9,
-     "vendas": 54
+     "vendas": 54,
+     "vendas_30d": 10,
+     "vendas_7d": 1,
+     "unid_dia": 14.61,
+     "dias_hist": 215,
+     "ah_hoje": 260.94,
+     "tendencia": -2.6
     },
     {
      "nome": "item 242273",
      "unid": 2984,
      "receita": 945048.9,
      "preco_medio": 316.71,
-     "vendas": 12
+     "vendas": 12,
+     "vendas_30d": 0,
+     "vendas_7d": 0,
+     "unid_dia": 90.15,
+     "dias_hist": 33,
+     "ah_hoje": 137.25,
+     "tendencia": -40.7
     },
     {
      "nome": "item 241300",
      "unid": 2329,
      "receita": 929849.2,
      "preco_medio": 399.25,
-     "vendas": 10
+     "vendas": 10,
+     "vendas_30d": 0,
+     "vendas_7d": 0,
+     "unid_dia": 13.09,
+     "dias_hist": 177,
+     "ah_hoje": 98.95,
+     "tendencia": -6.3
     },
     {
      "nome": "item 237361",
      "unid": 20317,
      "receita": 925908.1,
      "preco_medio": 45.57,
-     "vendas": 52
+     "vendas": 52,
+     "vendas_30d": 9,
+     "vendas_7d": 2,
+     "unid_dia": 94.28,
+     "dias_hist": 215,
+     "ah_hoje": 28.64,
+     "tendencia": 19.1
     },
     {
      "nome": "item 243606",
      "unid": 1693,
      "receita": 918115.6,
      "preco_medio": 542.3,
-     "vendas": 63
+     "vendas": 63,
+     "vendas_30d": 20,
+     "vendas_7d": 6,
+     "unid_dia": 8.15,
+     "dias_hist": 207,
+     "ah_hoje": 159.73,
+     "tendencia": -20.8
     },
     {
      "nome": "item 241304",
      "unid": 1401,
      "receita": 887038.7,
      "preco_medio": 633.15,
-     "vendas": 34
+     "vendas": 34,
+     "vendas_30d": 0,
+     "vendas_7d": 0,
+     "unid_dia": 34.72,
+     "dias_hist": 40,
+     "ah_hoje": 59.0,
+     "tendencia": -14.8
+    },
+    {
+     "nome": "item 246449",
+     "unid": 2039,
+     "receita": 807018.1,
+     "preco_medio": 395.79,
+     "vendas": 67,
+     "vendas_30d": 10,
+     "vendas_7d": 2,
+     "unid_dia": 9.03,
+     "dias_hist": 225,
+     "ah_hoje": 80.98,
+     "tendencia": -10.0
+    },
+    {
+     "nome": "item 236775",
+     "unid": 14920,
+     "receita": 779401.9,
+     "preco_medio": 52.24,
+     "vendas": 50,
+     "vendas_30d": 9,
+     "vendas_7d": 3,
+     "unid_dia": 69.24,
+     "dias_hist": 215,
+     "ah_hoje": 30.54,
+     "tendencia": -0.8
+    },
+    {
+     "nome": "item 236777",
+     "unid": 12027,
+     "receita": 591104.8,
+     "preco_medio": 49.15,
+     "vendas": 51,
+     "vendas_30d": 9,
+     "vendas_7d": 2,
+     "unid_dia": 55.81,
+     "dias_hist": 215,
+     "ah_hoje": 35.45,
+     "tendencia": 5.5
+    },
+    {
+     "nome": "item 237365",
+     "unid": 8848,
+     "receita": 463977.7,
+     "preco_medio": 52.44,
+     "vendas": 50,
+     "vendas_30d": 9,
+     "vendas_7d": 2,
+     "unid_dia": 41.06,
+     "dias_hist": 215,
+     "ah_hoje": 27.89,
+     "tendencia": 9.7
+    },
+    {
+     "nome": "item 238525",
+     "unid": 3142,
+     "receita": 416695.9,
+     "preco_medio": 132.62,
+     "vendas": 31,
+     "vendas_30d": 7,
+     "vendas_7d": 3,
+     "unid_dia": 14.31,
+     "dias_hist": 219,
+     "ah_hoje": 89.74,
+     "tendencia": 0.0
     }
    ]
   },
   "estoque": {
+   "lido_em": "2026-10-31T09:07:54",
+   "lido_idade_h": 0.0,
+   "plano_em": "2026-10-31T09:07:58",
+   "regras": {
+    "vender_agora": "percentil >= 65",
+    "guardar": "percentil <= 35 e cobertura < 45 dias",
+    "qtd_sugerida": "min(giro de 7 dias, 25% do estoque)",
+    "piso": "preco realizado mediano; fallback 90% do preco de hoje"
+   },
+   "semana": [
+    {
+     "dia": "Seg",
+     "media_g": 316942.0
+    },
+    {
+     "dia": "Ter",
+     "media_g": 230888.0
+    },
+    {
+     "dia": "Qua",
+     "media_g": 161231.0
+    },
+    {
+     "dia": "Qui",
+     "media_g": 281256.0
+    },
+    {
+     "dia": "Sex",
+     "media_g": 482321.0
+    },
+    {
+     "dia": "Sab",
+     "media_g": 233313.0
+    },
+    {
+     "dia": "Dom",
+     "media_g": 317716.0
+    }
+   ],
+   "produzidos": [
+    {
+     "nome": "Pulsos Cortesãos",
+     "qtd": 109
+    },
+    {
+     "nome": "Estilhaço Radiante",
+     "qtd": 27
+    },
+    {
+     "nome": "Raiz Petrificada",
+     "qtd": 18
+    },
+    {
+     "nome": "Pedra-ume de Oxxeína Forjada",
+     "qtd": 15
+    },
+    {
+     "nome": "Bastão de Mistura do Alquimista Dourado",
+     "qtd": 10
+    },
+    {
+     "nome": "Estilhaço Radiante",
+     "qtd": 9
+    },
+    {
+     "nome": "Supertorquês Gigagema",
+     "qtd": 8
+    },
+    {
+     "nome": "Lodo Pútrido",
+     "qtd": 6
+    },
+    {
+     "nome": "Cepa da Peste Estabilizada",
+     "qtd": 6
+    },
+    {
+     "nome": "Carne Delgada",
+     "qtd": 5
+    },
+    {
+     "nome": "Lodo Apanhador de Almas",
+     "qtd": 5
+    },
+    {
+     "nome": "Componente de Armadura Testada em Combate",
+     "qtd": 5
+    },
+    {
+     "nome": "Medalha Valiosa do Guardião",
+     "qtd": 5
+    },
+    {
+     "nome": "Cogumorto Lacrimoso",
+     "qtd": 4
+    },
+    {
+     "nome": "Aeterlúmen",
+     "qtd": 4
+    }
+   ],
+   "leiloes_lista": [
+    {
+     "nome": "Encantamento das Raízes de Shaladrassil - Botas",
+     "qtd": 3,
+     "personagem": "Pyrogalth-Azralon",
+     "expira_em": "2026-10-31 09:20"
+    },
+    {
+     "nome": "Encantamento de Rito dos Hash'ey - Arma",
+     "qtd": 4,
+     "personagem": "Pyrogalth-Azralon",
+     "expira_em": "2026-10-31 09:20"
+    },
+    {
+     "nome": "Minério de Elétio",
+     "qtd": 8,
+     "personagem": "Pyrogalth-Azralon",
+     "expira_em": "2026-10-31 09:22"
+    },
+    {
+     "nome": "Minério de Laestrita",
+     "qtd": 16,
+     "personagem": "Pyrogalth-Azralon",
+     "expira_em": "2026-10-31 09:22"
+    },
+    {
+     "nome": "Estilhaço Orbóreo",
+     "qtd": 1,
+     "personagem": "Pyrogalth-Azralon",
+     "expira_em": "2026-10-31 09:22"
+    },
+    {
+     "nome": "Minério de Oxxeína",
+     "qtd": 5,
+     "personagem": "Pyrogalth-Azralon",
+     "expira_em": "2026-10-31 09:22"
+    },
+    {
+     "nome": "Pernil Fantasmagórico",
+     "qtd": 4,
+     "personagem": "Pyrogalth-Azralon",
+     "expira_em": "2026-10-31 09:22"
+    },
+    {
+     "nome": "Pelagem Protogênica",
+     "qtd": 40,
+     "personagem": "Pyrogalth-Azralon",
+     "expira_em": "2026-10-31 09:22"
+    },
+    {
+     "nome": "Asa Seráfica Crua",
+     "qtd": 2,
+     "personagem": "Pyrogalth-Azralon",
+     "expira_em": "2026-10-31 09:22"
+    },
+    {
+     "nome": "Mocotó Sombrio",
+     "qtd": 3,
+     "personagem": "Pyrogalth-Azralon",
+     "expira_em": "2026-10-31 09:22"
+    },
+    {
+     "nome": "Minério de Pecavyr",
+     "qtd": 4,
+     "personagem": "Pyrogalth-Azralon",
+     "expira_em": "2026-10-31 09:22"
+    },
+    {
+     "nome": "Costela Tenebrosa",
+     "qtd": 5,
+     "personagem": "Pyrogalth-Azralon",
+     "expira_em": "2026-10-31 09:22"
+    }
+   ],
    "valor_total": 1045151.0,
    "unidades": 71209,
    "avaliados": 316,
    "giro": 56,
    "sem_giro": 260,
    "dia_top": "Sex",
+   "entrou_desde": "2026-10-30",
+   "entrou_unidades": 292,
+   "leiloes": 76,
+   "ouro_total": 2209345.0,
+   "ouro_warband": 2065863.0,
+   "ouro_personagens": 143481.0,
    "itens": [
     {
      "nome": "Pó de Gema Luzente",
      "qtd": 989,
+     "qtd_warband": 989,
+     "qtd_leilao": 0,
+     "entrou": 0,
      "valor": 743154.0,
      "decisao": "vender_parcial",
      "vender": 140,
      "piso": 676.28,
      "dia": "Sex",
-     "unid_dia": 20.0
+     "unid_dia": 20.0,
+     "cobertura": 49.5,
+     "percentil": null,
+     "preco_hoje": null,
+     "preco_realizado": 751.42,
+     "tem_giro": true,
+     "ah_hoje": null,
+     "tendencia": null,
+     "nota": "preco na media da faixa: girar sem inundar"
     },
     {
      "nome": "Ametista Tenebrosa Impecável",
      "qtd": 131,
+     "qtd_warband": 131,
+     "qtd_leilao": 0,
+     "entrou": 0,
      "valor": 76649.0,
      "decisao": "vender_parcial",
      "vender": 14,
      "piso": 526.6,
      "dia": "Sex",
-     "unid_dia": 2.0
+     "unid_dia": 2.0,
+     "cobertura": 65.5,
+     "percentil": null,
+     "preco_hoje": null,
+     "preco_realizado": 585.11,
+     "tem_giro": true,
+     "ah_hoje": null,
+     "tendencia": null,
+     "nota": "preco na media da faixa: girar sem inundar"
     },
     {
      "nome": "Bastão de Prata Brilhante Rúnico",
      "qtd": 9,
+     "qtd_warband": 0,
+     "qtd_leilao": 0,
+     "entrou": 0,
      "valor": 36765.0,
      "decisao": "vender_parcial",
      "vender": 2,
      "piso": 3676.47,
      "dia": "Sex",
-     "unid_dia": 1.0
+     "unid_dia": 1.0,
+     "cobertura": 9.0,
+     "percentil": null,
+     "preco_hoje": null,
+     "preco_realizado": 4084.97,
+     "tem_giro": true,
+     "ah_hoje": null,
+     "tendencia": null,
+     "nota": "preco na media da faixa: girar sem inundar"
     },
     {
      "nome": "Raiz Petrificada",
      "qtd": 439,
+     "qtd_warband": 418,
+     "qtd_leilao": 0,
+     "entrou": 18,
      "valor": 33184.0,
      "decisao": "vender_parcial",
      "vender": 63,
      "piso": 68.03,
      "dia": "Sex",
-     "unid_dia": 8.96
+     "unid_dia": 8.96,
+     "cobertura": 49.0,
+     "percentil": 13.3,
+     "preco_hoje": 75.59,
+     "preco_realizado": 478.29,
+     "tem_giro": true,
+     "ah_hoje": 67.9,
+     "tendencia": -72.0,
+     "nota": "preco na media da faixa: girar sem inundar | realizado (478) foi 6.3x o mercado de hoje"
     },
     {
      "nome": "Peridoto de Harandar",
      "qtd": 44,
+     "qtd_warband": 44,
+     "qtd_leilao": 0,
+     "entrou": 0,
      "valor": 22125.0,
      "decisao": "vender_parcial",
      "vender": 11,
      "piso": 452.56,
      "dia": "Sex",
-     "unid_dia": 2.0
+     "unid_dia": 2.0,
+     "cobertura": 22.0,
+     "percentil": null,
+     "preco_hoje": null,
+     "preco_realizado": 502.84,
+     "tem_giro": true,
+     "ah_hoje": null,
+     "tendencia": null,
+     "nota": "preco na media da faixa: girar sem inundar"
     },
     {
      "nome": "Torquês Sin'dorei",
      "qtd": 20,
+     "qtd_warband": 0,
+     "qtd_leilao": 0,
+     "entrou": 0,
      "valor": 16019.0,
      "decisao": "guardar",
      "vender": 0,
      "piso": 720.85,
      "dia": "Sex",
-     "unid_dia": 3.67
+     "unid_dia": 3.67,
+     "cobertura": 5.5,
+     "percentil": 13.3,
+     "preco_hoje": 800.94,
+     "preco_realizado": 3133.1,
+     "tem_giro": true,
+     "ah_hoje": 800.94,
+     "tendencia": -5.9,
+     "nota": "preco barato (percentil 13) e estoque cobre 5 dias | encalhe: 198 dias sem movimento | realizado (3133) foi 3.9x o mercado de hoje"
     },
     {
      "nome": "Globo Pragatado",
      "qtd": 1360,
+     "qtd_warband": 1360,
+     "qtd_leilao": 0,
+     "entrou": 0,
      "valor": 13342.0,
      "decisao": "vender_parcial",
      "vender": 5,
      "piso": 8.83,
      "dia": "Sex",
-     "unid_dia": 0.7
+     "unid_dia": 0.7,
+     "cobertura": 1951.2,
+     "percentil": 60.0,
+     "preco_hoje": 9.81,
+     "preco_realizado": 17.48,
+     "tem_giro": true,
+     "ah_hoje": 10.59,
+     "tendencia": -9.1,
+     "nota": "preco na media da faixa: girar sem inundar | realizado (17) foi 1.8x o mercado de hoje"
     },
     {
      "nome": "Estilhaço Radiante",
      "qtd": 3944,
+     "qtd_warband": 3925,
+     "qtd_leilao": 0,
+     "entrou": 9,
      "valor": 9742.0,
      "decisao": "vender_parcial",
      "vender": 14,
      "piso": 2.22,
      "dia": "Sex",
-     "unid_dia": 2.0
+     "unid_dia": 2.0,
+     "cobertura": 1972.0,
+     "percentil": null,
+     "preco_hoje": null,
+     "preco_realizado": 2.47,
+     "tem_giro": true,
+     "ah_hoje": null,
+     "tendencia": null,
+     "nota": "preco na media da faixa: girar sem inundar"
     },
     {
      "nome": "Raizeroth",
      "qtd": 404,
+     "qtd_warband": 404,
+     "qtd_leilao": 0,
+     "entrou": 0,
      "valor": 8040.0,
      "decisao": "vender_agora",
      "vender": 28,
      "piso": 17.91,
      "dia": "Sex",
-     "unid_dia": 4.0
+     "unid_dia": 4.0,
+     "cobertura": 101.0,
+     "percentil": 83.3,
+     "preco_hoje": 19.9,
+     "preco_realizado": 11.44,
+     "tem_giro": true,
+     "ah_hoje": 19.98,
+     "tendencia": 15.6,
+     "nota": "preco no percentil 83 da faixa de 30 dias"
     },
     {
      "nome": "Asteroide Encalhado",
      "qtd": 486,
+     "qtd_warband": 486,
+     "qtd_leilao": 0,
+     "entrou": 0,
      "valor": 7261.0,
      "decisao": "vender_parcial",
      "vender": 10,
      "piso": 13.45,
      "dia": "Sex",
-     "unid_dia": 1.47
+     "unid_dia": 1.47,
+     "cobertura": 331.3,
+     "percentil": 46.7,
+     "preco_hoje": 14.94,
+     "preco_realizado": 26.98,
+     "tem_giro": true,
+     "ah_hoje": 12.91,
+     "tendencia": -2.4,
+     "nota": "preco na media da faixa: girar sem inundar | realizado (27) foi 1.8x o mercado de hoje"
     },
     {
      "nome": "Minério de Cobre Refulgente",
      "qtd": 1173,
+     "qtd_warband": 1168,
+     "qtd_leilao": 0,
+     "entrou": 0,
      "valor": 6627.0,
      "decisao": "vender_agora",
      "vender": 293,
      "piso": 5.09,
      "dia": "Sex",
-     "unid_dia": 155.73
+     "unid_dia": 155.73,
+     "cobertura": 7.5,
+     "percentil": 86.7,
+     "preco_hoje": 5.65,
+     "preco_realizado": 4.75,
+     "tem_giro": true,
+     "ah_hoje": 5.45,
+     "tendencia": 13.0,
+     "nota": "preco no percentil 87 da faixa de 30 dias"
     },
     {
      "nome": "Guarnição Terrosa",
      "qtd": 949,
+     "qtd_warband": 949,
+     "qtd_leilao": 0,
+     "entrou": 0,
      "valor": 6406.0,
      "decisao": "vender_parcial",
      "vender": 68,
      "piso": 6.08,
      "dia": "Sex",
-     "unid_dia": 9.77
+     "unid_dia": 9.77,
+     "cobertura": 97.1,
+     "percentil": 50.0,
+     "preco_hoje": 6.75,
+     "preco_realizado": 9.83,
+     "tem_giro": true,
+     "ah_hoje": 6.13,
+     "tendencia": 4.0,
+     "nota": "preco na media da faixa: girar sem inundar | encalhe: 151 dias sem movimento"
     },
     {
      "nome": "Bentônico Bulboso",
      "qtd": 93,
+     "qtd_warband": 93,
+     "qtd_leilao": 0,
+     "entrou": 0,
      "valor": 6369.0,
      "decisao": "vender_agora",
      "vender": 23,
      "piso": 61.63,
      "dia": "Sex",
-     "unid_dia": 6.0
+     "unid_dia": 6.0,
+     "cobertura": 15.5,
+     "percentil": 90.0,
+     "preco_hoje": 68.48,
+     "preco_realizado": 50.58,
+     "tem_giro": true,
+     "ah_hoje": 68.48,
+     "tendencia": 31.7,
+     "nota": "preco no percentil 90 da faixa de 30 dias"
     },
     {
      "nome": "Corante em Pó",
      "qtd": 2961,
+     "qtd_warband": 2961,
+     "qtd_leilao": 0,
+     "entrou": 0,
      "valor": 5922.0,
      "decisao": "vender_parcial",
      "vender": 740,
      "piso": 1.8,
      "dia": "Sex",
-     "unid_dia": 3365.0
+     "unid_dia": 3365.0,
+     "cobertura": 0.9,
+     "percentil": null,
+     "preco_hoje": null,
+     "preco_realizado": 2.0,
+     "tem_giro": true,
+     "ah_hoje": null,
+     "tendencia": null,
+     "nota": "preco na media da faixa: girar sem inundar"
     },
     {
      "nome": "Liga Crepuscular",
      "qtd": 14,
+     "qtd_warband": 14,
+     "qtd_leilao": 0,
+     "entrou": 0,
      "valor": 5785.0,
      "decisao": "vender_parcial",
      "vender": 4,
      "piso": 371.87,
      "dia": "Sex",
-     "unid_dia": 2.0
+     "unid_dia": 2.0,
+     "cobertura": 7.0,
+     "percentil": null,
+     "preco_hoje": null,
+     "preco_realizado": 413.19,
+     "tem_giro": true,
+     "ah_hoje": null,
+     "tendencia": null,
+     "nota": "preco na media da faixa: girar sem inundar"
     },
     {
      "nome": "Poção de Vida de Luaprata",
      "qtd": 1517,
+     "qtd_warband": 1517,
+     "qtd_leilao": 0,
+     "entrou": 0,
      "valor": 5598.0,
      "decisao": "vender_agora",
      "vender": 77,
      "piso": 3.32,
      "dia": "Sex",
-     "unid_dia": 11.0
+     "unid_dia": 11.0,
+     "cobertura": 137.9,
+     "percentil": 66.7,
+     "preco_hoje": 3.69,
+     "preco_realizado": 3.98,
+     "tem_giro": true,
+     "ah_hoje": 3.4,
+     "tendencia": -3.9,
+     "nota": "preco no percentil 67 da faixa de 30 dias | encalhe: 154 dias sem movimento"
     },
     {
      "nome": "Floração da Tranquilidade",
      "qtd": 2780,
+     "qtd_warband": 2780,
+     "qtd_leilao": 0,
+     "entrou": 0,
      "valor": 5115.0,
      "decisao": "vender_agora",
      "vender": 4,
      "piso": 1.66,
      "dia": "Sex",
-     "unid_dia": 0.52
+     "unid_dia": 0.52,
+     "cobertura": 5387.6,
+     "percentil": 73.3,
+     "preco_hoje": 1.84,
+     "preco_realizado": 1.78,
+     "tem_giro": true,
+     "ah_hoje": 2.02,
+     "tendencia": -2.6,
+     "nota": "preco no percentil 73 da faixa de 30 dias"
     },
     {
      "nome": "Bolsa de Reagentes de Trama da Tecelã",
      "qtd": 17,
+     "qtd_warband": 0,
+     "qtd_leilao": 0,
+     "entrou": 0,
      "valor": 3756.0,
      "decisao": "vender_parcial",
      "vender": 4,
      "piso": 198.87,
      "dia": "Sex",
-     "unid_dia": 1.5
+     "unid_dia": 1.5,
+     "cobertura": 11.3,
+     "percentil": 46.7,
+     "preco_hoje": 220.97,
+     "preco_realizado": 356.25,
+     "tem_giro": true,
+     "ah_hoje": 220.35,
+     "tendencia": -26.3,
+     "nota": "preco na media da faixa: girar sem inundar | encalhe: 211 dias sem movimento | realizado (356) foi 1.6x o mercado de hoje"
     },
     {
      "nome": "Escamas Revenidas pelo Caos",
      "qtd": 2277,
+     "qtd_warband": 2276,
+     "qtd_leilao": 0,
+     "entrou": 1,
      "valor": 3712.0,
      "decisao": "guardar",
      "vender": 0,
      "piso": 1.47,
      "dia": "Sex",
-     "unid_dia": 376.5
+     "unid_dia": 376.5,
+     "cobertura": 6.0,
+     "percentil": 33.3,
+     "preco_hoje": 1.63,
+     "preco_realizado": 2.07,
+     "tem_giro": true,
+     "ah_hoje": 1.18,
+     "tendencia": -10.4,
+     "nota": "preco barato (percentil 33) e estoque cobre 6 dias"
     },
     {
      "nome": "Folhargêntea",
      "qtd": 967,
+     "qtd_warband": 967,
+     "qtd_leilao": 0,
+     "entrou": 0,
      "valor": 3278.0,
      "decisao": "guardar",
      "vender": 0,
      "piso": 3.05,
      "dia": "Sex",
-     "unid_dia": 83.58
+     "unid_dia": 83.58,
+     "cobertura": 11.6,
+     "percentil": 20.0,
+     "preco_hoje": 3.39,
+     "preco_realizado": 3.77,
+     "tem_giro": true,
+     "ah_hoje": 3.33,
+     "tendencia": -10.3,
+     "nota": "preco barato (percentil 20) e estoque cobre 12 dias"
+    },
+    {
+     "nome": "Coágulo de Peçonha Neutralizada",
+     "qtd": 324,
+     "qtd_warband": 324,
+     "qtd_leilao": 0,
+     "entrou": 0,
+     "valor": 3049.0,
+     "decisao": "vender_parcial",
+     "vender": 14,
+     "piso": 8.47,
+     "dia": "Sex",
+     "unid_dia": 1.93,
+     "cobertura": 168.0,
+     "percentil": 50.0,
+     "preco_hoje": 9.41,
+     "preco_realizado": 11.85,
+     "tem_giro": true,
+     "ah_hoje": 12.0,
+     "tendencia": -7.7,
+     "nota": "preco na media da faixa: girar sem inundar | encalhe: 58 dias sem movimento"
+    },
+    {
+     "nome": "Lótus Noturno",
+     "qtd": 10,
+     "qtd_warband": 10,
+     "qtd_leilao": 0,
+     "entrou": 0,
+     "valor": 2610.0,
+     "decisao": "vender_parcial",
+     "vender": 2,
+     "piso": 234.88,
+     "dia": "Sex",
+     "unid_dia": 15.49,
+     "cobertura": 0.6,
+     "percentil": 63.3,
+     "preco_hoje": 260.98,
+     "preco_realizado": 327.81,
+     "tem_giro": true,
+     "ah_hoje": 260.94,
+     "tendencia": -2.6,
+     "nota": "preco na media da faixa: girar sem inundar"
+    },
+    {
+     "nome": "Minério de Prata Brilhante",
+     "qtd": 394,
+     "qtd_warband": 394,
+     "qtd_leilao": 0,
+     "entrou": 0,
+     "valor": 2439.0,
+     "decisao": "vender_agora",
+     "vender": 98,
+     "piso": 5.57,
+     "dia": "Sex",
+     "unid_dia": 176.53,
+     "cobertura": 2.2,
+     "percentil": 90.0,
+     "preco_hoje": 6.19,
+     "preco_realizado": 5.22,
+     "tem_giro": true,
+     "ah_hoje": 5.79,
+     "tendencia": 20.7,
+     "nota": "preco no percentil 90 da faixa de 30 dias"
+    },
+    {
+     "nome": "Minério de Estanho Umbrático",
+     "qtd": 370,
+     "qtd_warband": 370,
+     "qtd_leilao": 0,
+     "entrou": 0,
+     "valor": 2213.0,
+     "decisao": "vender_agora",
+     "vender": 92,
+     "piso": 5.38,
+     "dia": "Sex",
+     "unid_dia": 79.24,
+     "cobertura": 4.7,
+     "percentil": 90.0,
+     "preco_hoje": 5.98,
+     "preco_realizado": 4.95,
+     "tem_giro": true,
+     "ah_hoje": 5.25,
+     "tendencia": 15.0,
+     "nota": "preco no percentil 90 da faixa de 30 dias"
+    },
+    {
+     "nome": "Grânulo de Luz",
+     "qtd": 2724,
+     "qtd_warband": 2720,
+     "qtd_leilao": 0,
+     "entrou": 0,
+     "valor": 2179.0,
+     "decisao": "vender_agora",
+     "vender": 14,
+     "piso": 0.72,
+     "dia": "Sex",
+     "unid_dia": 2.0,
+     "cobertura": 1362.0,
+     "percentil": 73.3,
+     "preco_hoje": 0.8,
+     "preco_realizado": 0.83,
+     "tem_giro": true,
+     "ah_hoje": 0.72,
+     "tendencia": 37.9,
+     "nota": "preco no percentil 73 da faixa de 30 dias"
     }
    ]
   },
   "screener": {
    "geradoEm": "2026-10-31T19:30:02Z",
    "receitas": 115,
-   "insumos": null
+   "insumos": null,
+   "com_demanda": 39,
+   "fonte": "Undermine Exchange (web app ?umx=120) + TSM Public Data + TSM Accounting"
   }
  },
  "serie": [
@@ -3120,9 +5516,9 @@
    "y": 2026,
    "mo": 10,
    "mes": "out",
-   "proj": 1403425.0,
+   "proj": 1405244.0,
    "plan": 1380000.0,
-   "real": 1403425.0,
+   "real": 1405244.0,
    "estimativa": null,
    "renda": 700000.0,
    "gasto": 2120000.0,
@@ -3141,9 +5537,9 @@
    "y": 2026,
    "mo": 10,
    "mes": "out",
-   "proj": 3079723.0,
+   "proj": 3081542.0,
    "plan": 2080000.0,
-   "real": 3079723.0,
+   "real": 3081542.0,
    "estimativa": null,
    "renda": 700000.0,
    "gasto": 0,
@@ -3174,7 +5570,7 @@
    "proj": 2629345.0,
    "plan": 3200000.0,
    "real": null,
-   "estimativa": 2315807.33,
+   "estimativa": 2315201.0,
    "renda": 700000.0,
    "gasto": 280000.0,
    "compras": [
@@ -3195,7 +5591,7 @@
    "proj": 3329345.0,
    "plan": 3900000.0,
    "real": null,
-   "estimativa": 2422269.67,
+   "estimativa": 2421057.0,
    "renda": 700000.0,
    "gasto": 0,
    "compras": []
@@ -3210,7 +5606,7 @@
    "proj": 4029345.0,
    "plan": 4600000.0,
    "real": null,
-   "estimativa": 2528732.0,
+   "estimativa": 2526913.0,
    "renda": 700000.0,
    "gasto": 0,
    "compras": []
@@ -3225,7 +5621,7 @@
    "proj": 4729345.0,
    "plan": 5300000.0,
    "real": null,
-   "estimativa": 2635194.33,
+   "estimativa": 2632769.0,
    "renda": 700000.0,
    "gasto": 0,
    "compras": []
@@ -3240,7 +5636,7 @@
    "proj": 4869345.0,
    "plan": 5440000.0,
    "real": null,
-   "estimativa": 2741656.67,
+   "estimativa": 2738625.0,
    "renda": 700000.0,
    "gasto": 560000.0,
    "compras": [
@@ -3266,7 +5662,7 @@
    "proj": 5569345.0,
    "plan": 6140000.0,
    "real": null,
-   "estimativa": 2848119.0,
+   "estimativa": 2844481.0,
    "renda": 700000.0,
    "gasto": 0,
    "compras": []
@@ -3281,7 +5677,7 @@
    "proj": 6269345.0,
    "plan": 6840000.0,
    "real": null,
-   "estimativa": 2954581.33,
+   "estimativa": 2950337.0,
    "renda": 700000.0,
    "gasto": 0,
    "compras": []
@@ -3296,7 +5692,7 @@
    "proj": 6969345.0,
    "plan": 7540000.0,
    "real": null,
-   "estimativa": 3061043.67,
+   "estimativa": 3056193.0,
    "renda": 700000.0,
    "gasto": 0,
    "compras": []
@@ -3311,7 +5707,7 @@
    "proj": 7669345.0,
    "plan": 8240000.0,
    "real": null,
-   "estimativa": 3167506.0,
+   "estimativa": 3162049.0,
    "renda": 700000.0,
    "gasto": 0,
    "compras": []
@@ -3326,7 +5722,7 @@
    "proj": 7809345.0,
    "plan": 8380000.0,
    "real": null,
-   "estimativa": 3273968.33,
+   "estimativa": 3267905.0,
    "renda": 700000.0,
    "gasto": 560000.0,
    "compras": [
@@ -3352,7 +5748,7 @@
    "proj": 8509345.0,
    "plan": 9080000.0,
    "real": null,
-   "estimativa": 3380430.67,
+   "estimativa": 3373761.0,
    "renda": 700000.0,
    "gasto": 0,
    "compras": []
@@ -3367,7 +5763,7 @@
    "proj": 9209345.0,
    "plan": 9780000.0,
    "real": null,
-   "estimativa": 3486893.0,
+   "estimativa": 3479617.0,
    "renda": 700000.0,
    "gasto": 0,
    "compras": []
@@ -3382,7 +5778,7 @@
    "proj": 9909345.0,
    "plan": 10480000.0,
    "real": null,
-   "estimativa": 3593355.33,
+   "estimativa": 3585473.0,
    "renda": 700000.0,
    "gasto": 0,
    "compras": []
@@ -3397,7 +5793,7 @@
    "proj": 3399345.0,
    "plan": 3970000.0,
    "real": null,
-   "estimativa": 3699817.67,
+   "estimativa": 3691329.0,
    "renda": 1050000.0,
    "gasto": 7560000.0,
    "compras": [
@@ -3428,7 +5824,7 @@
    "proj": 4449345.0,
    "plan": 5020000.0,
    "real": null,
-   "estimativa": 3806280.0,
+   "estimativa": 3797185.0,
    "renda": 1050000.0,
    "gasto": 0,
    "compras": []
@@ -3443,7 +5839,7 @@
    "proj": 5499345.0,
    "plan": 6070000.0,
    "real": null,
-   "estimativa": 3912742.33,
+   "estimativa": 3903041.0,
    "renda": 1050000.0,
    "gasto": 0,
    "compras": []
@@ -3458,7 +5854,7 @@
    "proj": 6549345.0,
    "plan": 7120000.0,
    "real": null,
-   "estimativa": 4019204.67,
+   "estimativa": 4008897.0,
    "renda": 1050000.0,
    "gasto": 0,
    "compras": []
@@ -3473,7 +5869,7 @@
    "proj": 7039345.0,
    "plan": 7610000.0,
    "real": null,
-   "estimativa": 4125667.0,
+   "estimativa": 4114753.0,
    "renda": 1050000.0,
    "gasto": 560000.0,
    "compras": [
@@ -3499,7 +5895,7 @@
    "proj": 8089345.0,
    "plan": 8660000.0,
    "real": null,
-   "estimativa": 4232129.33,
+   "estimativa": 4220609.0,
    "renda": 1050000.0,
    "gasto": 0,
    "compras": []
@@ -3514,7 +5910,7 @@
    "proj": 9139345.0,
    "plan": 9710000.0,
    "real": null,
-   "estimativa": 4338591.67,
+   "estimativa": 4326465.0,
    "renda": 1050000.0,
    "gasto": 0,
    "compras": []
@@ -3529,7 +5925,7 @@
    "proj": 10189345.0,
    "plan": 10760000.0,
    "real": null,
-   "estimativa": 4445054.0,
+   "estimativa": 4432321.0,
    "renda": 1050000.0,
    "gasto": 0,
    "compras": []
@@ -3544,7 +5940,7 @@
    "proj": 11239345.0,
    "plan": 11810000.0,
    "real": null,
-   "estimativa": 4551516.33,
+   "estimativa": 4538177.0,
    "renda": 1050000.0,
    "gasto": 0,
    "compras": []
@@ -3559,7 +5955,7 @@
    "proj": 11729345.0,
    "plan": 12300000.0,
    "real": null,
-   "estimativa": 4657978.67,
+   "estimativa": 4644033.0,
    "renda": 1050000.0,
    "gasto": 560000.0,
    "compras": [
@@ -3585,7 +5981,7 @@
    "proj": 12779345.0,
    "plan": 13350000.0,
    "real": null,
-   "estimativa": 4764441.0,
+   "estimativa": 4749889.0,
    "renda": 1050000.0,
    "gasto": 0,
    "compras": []
@@ -3600,7 +5996,7 @@
    "proj": 13829345.0,
    "plan": 14400000.0,
    "real": null,
-   "estimativa": 4870903.33,
+   "estimativa": 4855745.0,
    "renda": 1050000.0,
    "gasto": 0,
    "compras": []
@@ -3615,7 +6011,7 @@
    "proj": 14879345.0,
    "plan": 15450000.0,
    "real": null,
-   "estimativa": 4977365.67,
+   "estimativa": 4961601.0,
    "renda": 1050000.0,
    "gasto": 0,
    "compras": []
