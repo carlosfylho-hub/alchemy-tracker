@@ -1,7 +1,7 @@
 {
  "meta": {
-  "geradoEm": "2026-10-31T16:30",
-  "rev": 96,
+  "geradoEm": "2026-10-31T16:48",
+  "rev": 97,
   "unidade": "gold",
   "moedaRef": 55,
   "tokenGold": 280000.0,
@@ -19,19 +19,19 @@
   "saldoBase": 2800000.0,
   "saldoRealJogo": 2209345.0,
   "fechamento": 42649345.0,
-  "menorSaldo": 1401606.0,
+  "menorSaldo": 1403425.0,
   "menorSaldoData": "13/10",
   "piso": 1000000.0,
   "semanasAbaixoPiso": 0,
-  "ritmo": 107068.66666666667,
-  "estimativa": 8740533.666666668,
+  "ritmo": 106462.33333333333,
+  "estimativa": 8703547.333333332,
   "temReal": true,
   "semanasReais": 3,
   "reancorada": true,
   "ganhosJanela": 6546272.0,
-  "gastosJanela": 6225066.0,
+  "gastosJanela": 6226885.0,
   "ganhosTotal": 50680550.0,
-  "gastosTotal": 36521234.0,
+  "gastosTotal": 36523053.0,
   "ultimaSemana": "Ter 27/10 → Seg 02/11",
   "saldoRealUltima": 2209345.0,
   "planoNaUltima": 2780000.0,
@@ -2781,8 +2781,8 @@
   ],
   "caixa_tsm": {
    "faturamento": 47582794.0,
-   "compras": 29925968.0,
-   "saldo": 17656826.0,
+   "compras": 29927787.0,
+   "saldo": 17655007.0,
    "janela": {
     "de": "2026-03-17",
     "ate": "2026-10-31"
@@ -3120,9 +3120,9 @@
    "y": 2026,
    "mo": 10,
    "mes": "out",
-   "proj": 1401606.0,
+   "proj": 1403425.0,
    "plan": 1380000.0,
-   "real": 1401606.0,
+   "real": 1403425.0,
    "estimativa": null,
    "renda": 700000.0,
    "gasto": 2120000.0,
@@ -3141,9 +3141,9 @@
    "y": 2026,
    "mo": 10,
    "mes": "out",
-   "proj": 3077904.0,
+   "proj": 3079723.0,
    "plan": 2080000.0,
-   "real": 3077904.0,
+   "real": 3079723.0,
    "estimativa": null,
    "renda": 700000.0,
    "gasto": 0,
@@ -3174,7 +3174,7 @@
    "proj": 2629345.0,
    "plan": 3200000.0,
    "real": null,
-   "estimativa": 2316413.67,
+   "estimativa": 2315807.33,
    "renda": 700000.0,
    "gasto": 280000.0,
    "compras": [
@@ -3195,7 +3195,7 @@
    "proj": 3329345.0,
    "plan": 3900000.0,
    "real": null,
-   "estimativa": 2423482.33,
+   "estimativa": 2422269.67,
    "renda": 700000.0,
    "gasto": 0,
    "compras": []
@@ -3210,7 +3210,7 @@
    "proj": 4029345.0,
    "plan": 4600000.0,
    "real": null,
-   "estimativa": 2530551.0,
+   "estimativa": 2528732.0,
    "renda": 700000.0,
    "gasto": 0,
    "compras": []
@@ -3225,7 +3225,7 @@
    "proj": 4729345.0,
    "plan": 5300000.0,
    "real": null,
-   "estimativa": 2637619.67,
+   "estimativa": 2635194.33,
    "renda": 700000.0,
    "gasto": 0,
    "compras": []
@@ -3240,7 +3240,7 @@
    "proj": 4869345.0,
    "plan": 5440000.0,
    "real": null,
-   "estimativa": 2744688.33,
+   "estimativa": 2741656.67,
    "renda": 700000.0,
    "gasto": 560000.0,
    "compras": [
@@ -3266,7 +3266,7 @@
    "proj": 5569345.0,
    "plan": 6140000.0,
    "real": null,
-   "estimativa": 2851757.0,
+   "estimativa": 2848119.0,
    "renda": 700000.0,
    "gasto": 0,
    "compras": []
@@ -3281,7 +3281,7 @@
    "proj": 6269345.0,
    "plan": 6840000.0,
    "real": null,
-   "estimativa": 2958825.67,
+   "estimativa": 2954581.33,
    "renda": 700000.0,
    "gasto": 0,
    "compras": []
@@ -3296,7 +3296,7 @@
    "proj": 6969345.0,
    "plan": 7540000.0,
    "real": null,
-   "estimativa": 3065894.33,
+   "estimativa": 3061043.67,
    "renda": 700000.0,
    "gasto": 0,
    "compras": []
@@ -3311,7 +3311,7 @@
    "proj": 7669345.0,
    "plan": 8240000.0,
    "real": null,
-   "estimativa": 3172963.0,
+   "estimativa": 3167506.0,
    "renda": 700000.0,
    "gasto": 0,
    "compras": []
@@ -3326,7 +3326,7 @@
    "proj": 7809345.0,
    "plan": 8380000.0,
    "real": null,
-   "estimativa": 3280031.67,
+   "estimativa": 3273968.33,
    "renda": 700000.0,
    "gasto": 560000.0,
    "compras": [
@@ -3352,7 +3352,7 @@
    "proj": 8509345.0,
    "plan": 9080000.0,
    "real": null,
-   "estimativa": 3387100.33,
+   "estimativa": 3380430.67,
    "renda": 700000.0,
    "gasto": 0,
    "compras": []
@@ -3367,7 +3367,7 @@
    "proj": 9209345.0,
    "plan": 9780000.0,
    "real": null,
-   "estimativa": 3494169.0,
+   "estimativa": 3486893.0,
    "renda": 700000.0,
    "gasto": 0,
    "compras": []
@@ -3382,7 +3382,7 @@
    "proj": 9909345.0,
    "plan": 10480000.0,
    "real": null,
-   "estimativa": 3601237.67,
+   "estimativa": 3593355.33,
    "renda": 700000.0,
    "gasto": 0,
    "compras": []
@@ -3397,7 +3397,7 @@
    "proj": 3399345.0,
    "plan": 3970000.0,
    "real": null,
-   "estimativa": 3708306.33,
+   "estimativa": 3699817.67,
    "renda": 1050000.0,
    "gasto": 7560000.0,
    "compras": [
@@ -3428,7 +3428,7 @@
    "proj": 4449345.0,
    "plan": 5020000.0,
    "real": null,
-   "estimativa": 3815375.0,
+   "estimativa": 3806280.0,
    "renda": 1050000.0,
    "gasto": 0,
    "compras": []
@@ -3443,7 +3443,7 @@
    "proj": 5499345.0,
    "plan": 6070000.0,
    "real": null,
-   "estimativa": 3922443.67,
+   "estimativa": 3912742.33,
    "renda": 1050000.0,
    "gasto": 0,
    "compras": []
@@ -3458,7 +3458,7 @@
    "proj": 6549345.0,
    "plan": 7120000.0,
    "real": null,
-   "estimativa": 4029512.33,
+   "estimativa": 4019204.67,
    "renda": 1050000.0,
    "gasto": 0,
    "compras": []
@@ -3473,7 +3473,7 @@
    "proj": 7039345.0,
    "plan": 7610000.0,
    "real": null,
-   "estimativa": 4136581.0,
+   "estimativa": 4125667.0,
    "renda": 1050000.0,
    "gasto": 560000.0,
    "compras": [
@@ -3499,7 +3499,7 @@
    "proj": 8089345.0,
    "plan": 8660000.0,
    "real": null,
-   "estimativa": 4243649.67,
+   "estimativa": 4232129.33,
    "renda": 1050000.0,
    "gasto": 0,
    "compras": []
@@ -3514,7 +3514,7 @@
    "proj": 9139345.0,
    "plan": 9710000.0,
    "real": null,
-   "estimativa": 4350718.33,
+   "estimativa": 4338591.67,
    "renda": 1050000.0,
    "gasto": 0,
    "compras": []
@@ -3529,7 +3529,7 @@
    "proj": 10189345.0,
    "plan": 10760000.0,
    "real": null,
-   "estimativa": 4457787.0,
+   "estimativa": 4445054.0,
    "renda": 1050000.0,
    "gasto": 0,
    "compras": []
@@ -3544,7 +3544,7 @@
    "proj": 11239345.0,
    "plan": 11810000.0,
    "real": null,
-   "estimativa": 4564855.67,
+   "estimativa": 4551516.33,
    "renda": 1050000.0,
    "gasto": 0,
    "compras": []
@@ -3559,7 +3559,7 @@
    "proj": 11729345.0,
    "plan": 12300000.0,
    "real": null,
-   "estimativa": 4671924.33,
+   "estimativa": 4657978.67,
    "renda": 1050000.0,
    "gasto": 560000.0,
    "compras": [
@@ -3585,7 +3585,7 @@
    "proj": 12779345.0,
    "plan": 13350000.0,
    "real": null,
-   "estimativa": 4778993.0,
+   "estimativa": 4764441.0,
    "renda": 1050000.0,
    "gasto": 0,
    "compras": []
@@ -3600,7 +3600,7 @@
    "proj": 13829345.0,
    "plan": 14400000.0,
    "real": null,
-   "estimativa": 4886061.67,
+   "estimativa": 4870903.33,
    "renda": 1050000.0,
    "gasto": 0,
    "compras": []
@@ -3615,7 +3615,7 @@
    "proj": 14879345.0,
    "plan": 15450000.0,
    "real": null,
-   "estimativa": 4993130.33,
+   "estimativa": 4977365.67,
    "renda": 1050000.0,
    "gasto": 0,
    "compras": []
