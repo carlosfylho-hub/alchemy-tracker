@@ -1,11 +1,11 @@
 {
  "meta": {
-  "geradoEm": "2026-10-31T14:30",
+  "geradoEm": "2026-10-31T15:51",
   "rev": 94,
   "unidade": "gold",
   "moedaRef": 55,
   "tokenGold": 280000.0,
-  "fonteMercado": "ao vivo (Apps Script, série de 7 dias)",
+  "fonteMercado": "2026-10-31T15:46:09Z",
   "config": "MIDNIGHT_Economia_Config.json"
  },
  "janela": {
@@ -248,7 +248,2869 @@
  "screener": {
   "geradoEm": "2026-10-31T15:46:09Z",
   "receitas": 115,
-  "insumos": 55
+  "insumos": null
+ },
+ "mercado": {
+  "atributos": [
+   {
+    "prof": "Alquimia",
+    "res": 15,
+    "mc": 36.4,
+    "ing": 28.9,
+    "refund": 50
+   },
+   {
+    "prof": "Joalheria",
+    "res": 17.8,
+    "mc": 33.4,
+    "ing": 21.6,
+    "refund": 50
+   },
+   {
+    "prof": "Encantamento",
+    "res": 14.7,
+    "mc": 0,
+    "ing": 38.5,
+    "refund": 100
+   },
+   {
+    "prof": "Inscrição",
+    "res": 12.2,
+    "mc": 22.7,
+    "ing": 11.6,
+    "refund": 50
+   }
+  ],
+  "receitas": [
+   {
+    "id": "alchemy:potion-of-devoured-dreams-tier-2",
+    "receita": "Potion of Devoured Dreams Tier 2",
+    "profissao": "Alquimia",
+    "profissaoId": "alchemy",
+    "custo": 100.06,
+    "venda": 169.44,
+    "lucro": 1153.98,
+    "margem": 1153.34,
+    "g_conc": 4.59,
+    "concentracao": 294.0,
+    "demanda": 538.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 538.0,
+    "flags": [
+     "demanda_so_propria",
+     "liquidez_parada"
+    ]
+   },
+   {
+    "id": "alchemy:liquid-luster-tier-2",
+    "receita": "Liquid Luster Tier 2",
+    "profissao": "Alquimia",
+    "profissaoId": "alchemy",
+    "custo": 58.08,
+    "venda": 149.0,
+    "lucro": 1044.68,
+    "margem": 1798.59,
+    "g_conc": 4.15,
+    "concentracao": 294.0,
+    "demanda": 455.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 455.0,
+    "flags": [
+     "demanda_so_propria"
+    ]
+   },
+   {
+    "id": "alchemy:potion-of-recklessness-tier-2",
+    "receita": "Potion of Recklessness Tier 2",
+    "profissao": "Alquimia",
+    "profissaoId": "alchemy",
+    "custo": 151.84,
+    "venda": 86.89,
+    "lucro": 491.24,
+    "margem": 323.54,
+    "g_conc": 3.66,
+    "concentracao": 157.0,
+    "demanda": 189.52,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 144.5,
+    "flags": [
+     "demanda_so_propria"
+    ]
+   },
+   {
+    "id": "alchemy:light-s-preservation-tier-2",
+    "receita": "Light's Preservation Tier 2",
+    "profissao": "Alquimia",
+    "profissaoId": "alchemy",
+    "custo": 113.35,
+    "venda": 134.33,
+    "lucro": 880.84,
+    "margem": 777.1,
+    "g_conc": 3.5,
+    "concentracao": 294.0,
+    "demanda": 8.05,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 8.05,
+    "flags": [
+     "demanda_so_propria"
+    ]
+   },
+   {
+    "id": "alchemy:concentrated-silvermoon-health-potion-tier-2",
+    "receita": "Concentrated Silvermoon Health Potion Tier 2",
+    "profissao": "Alquimia",
+    "profissaoId": "alchemy",
+    "custo": 102.67,
+    "venda": 120.88,
+    "lucro": 791.97,
+    "margem": 771.36,
+    "g_conc": 3.15,
+    "concentracao": 294.0,
+    "demanda": 547.89,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 547.89,
+    "flags": [
+     "demanda_so_propria"
+    ]
+   },
+   {
+    "id": "alchemy:lightfused-mana-potion-tier-2",
+    "receita": "Lightfused Mana Potion Tier 2",
+    "profissao": "Alquimia",
+    "profissaoId": "alchemy",
+    "custo": 81.83,
+    "venda": 98.94,
+    "lucro": 650.43,
+    "margem": 794.81,
+    "g_conc": 2.59,
+    "concentracao": 294.0,
+    "demanda": 1.83,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 13.09,
+    "flags": [
+     "demanda_so_propria"
+    ]
+   },
+   {
+    "id": "alchemy:light-s-potential-tier-2",
+    "receita": "Light's Potential Tier 2",
+    "profissao": "Alquimia",
+    "profissaoId": "alchemy",
+    "custo": 131.51,
+    "venda": 100.47,
+    "lucro": 612.07,
+    "margem": 465.41,
+    "g_conc": 2.43,
+    "concentracao": 294.0,
+    "demanda": 111.81,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 105.87,
+    "flags": [
+     "demanda_so_propria"
+    ]
+   },
+   {
+    "id": "alchemy:refreshing-serum-tier-2",
+    "receita": "Refreshing Serum Tier 2",
+    "profissao": "Alquimia",
+    "profissaoId": "alchemy",
+    "custo": 32.38,
+    "venda": 39.53,
+    "lucro": 260.18,
+    "margem": 803.42,
+    "g_conc": 2.36,
+    "concentracao": 129.0,
+    "demanda": 0.72,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.75,
+    "flags": [
+     "demanda_so_propria"
+    ]
+   },
+   {
+    "id": "alchemy:flask-of-the-blood-knights-tier-2",
+    "receita": "Flask of the Blood Knights Tier 2",
+    "profissao": "Alquimia",
+    "profissaoId": "alchemy",
+    "custo": 285.61,
+    "venda": 361.89,
+    "lucro": 785.66,
+    "margem": 275.08,
+    "g_conc": 2.33,
+    "concentracao": 394.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "alchemy:haranir-phial-of-ingenuity-tier-2",
+    "receita": "Haranir Phial of Ingenuity Tier 2",
+    "profissao": "Alquimia",
+    "profissaoId": "alchemy",
+    "custo": 82.87,
+    "venda": 145.0,
+    "lucro": 768.97,
+    "margem": 927.87,
+    "g_conc": 2.28,
+    "concentracao": 394.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "alchemy:draught-of-rampant-abandon-tier-2",
+    "receita": "Draught of Rampant Abandon Tier 2",
+    "profissao": "Alquimia",
+    "profissaoId": "alchemy",
+    "custo": 84.99,
+    "venda": 85.96,
+    "lucro": 551.21,
+    "margem": 648.59,
+    "g_conc": 2.19,
+    "concentracao": 294.0,
+    "demanda": 9.62,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 12.14,
+    "flags": [
+     "demanda_so_propria",
+     "liquidez_parada"
+    ]
+   },
+   {
+    "id": "alchemy:amani-extract-tier-2",
+    "receita": "Amani Extract Tier 2",
+    "profissao": "Alquimia",
+    "profissaoId": "alchemy",
+    "custo": 120.8,
+    "venda": 89.0,
+    "lucro": 537.9,
+    "margem": 445.29,
+    "g_conc": 2.14,
+    "concentracao": 294.0,
+    "demanda": 10.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 10.0,
+    "flags": [
+     "demanda_so_propria",
+     "liquidez_parada"
+    ]
+   },
+   {
+    "id": "jewelcrafting:indecipherable-eversong-diamond-tier-2",
+    "receita": "Indecipherable Eversong Diamond Tier 2",
+    "profissao": "Joalheria",
+    "profissaoId": "jewelcrafting",
+    "custo": 158.47,
+    "venda": 650.0,
+    "lucro": 768.4,
+    "margem": 484.88,
+    "g_conc": 2.13,
+    "concentracao": 404.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "custo_modelo_divergente",
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "jewelcrafting:powerful-eversong-diamond-tier-2",
+    "receita": "Powerful Eversong Diamond Tier 2",
+    "profissao": "Joalheria",
+    "profissaoId": "jewelcrafting",
+    "custo": 158.47,
+    "venda": 625.35,
+    "lucro": 733.25,
+    "margem": 462.7,
+    "g_conc": 2.03,
+    "concentracao": 404.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "custo_modelo_divergente",
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "alchemy:haranir-phial-of-perception-tier-2",
+    "receita": "Haranir Phial of Perception Tier 2",
+    "profissao": "Alquimia",
+    "profissaoId": "alchemy",
+    "custo": 219.42,
+    "venda": 150.0,
+    "lucro": 661.8,
+    "margem": 301.61,
+    "g_conc": 1.96,
+    "concentracao": 394.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "jewelcrafting:stoic-eversong-diamond-tier-2",
+    "receita": "Stoic Eversong Diamond Tier 2",
+    "profissao": "Joalheria",
+    "profissaoId": "jewelcrafting",
+    "custo": 158.47,
+    "venda": 580.0,
+    "lucro": 668.58,
+    "margem": 421.89,
+    "g_conc": 1.86,
+    "concentracao": 404.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "custo_modelo_divergente",
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "alchemy:flask-of-the-magisters-tier-2",
+    "receita": "Flask of the Magisters Tier 2",
+    "profissao": "Alquimia",
+    "profissaoId": "alchemy",
+    "custo": 361.31,
+    "venda": 328.98,
+    "lucro": 612.55,
+    "margem": 169.54,
+    "g_conc": 1.82,
+    "concentracao": 394.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "alchemy:void-shrouded-tincture-tier-2",
+    "receita": "Void-Shrouded Tincture Tier 2",
+    "profissao": "Alquimia",
+    "profissaoId": "alchemy",
+    "custo": 33.38,
+    "venda": 65.59,
+    "lucro": 452.06,
+    "margem": 1354.39,
+    "g_conc": 1.8,
+    "concentracao": 294.0,
+    "demanda": 4.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 2.32,
+    "flags": [
+     "demanda_so_propria",
+     "liquidez_parada"
+    ]
+   },
+   {
+    "id": "alchemy:flask-of-the-shattered-sun-tier-2",
+    "receita": "Flask of the Shattered Sun Tier 2",
+    "profissao": "Alquimia",
+    "profissaoId": "alchemy",
+    "custo": 515.59,
+    "venda": 370.99,
+    "lucro": 582.62,
+    "margem": 113.0,
+    "g_conc": 1.73,
+    "concentracao": 394.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "alchemy:haranir-phial-of-finesse-tier-2",
+    "receita": "Haranir Phial of Finesse Tier 2",
+    "profissao": "Alquimia",
+    "profissaoId": "alchemy",
+    "custo": 221.31,
+    "venda": 135.88,
+    "lucro": 576.96,
+    "margem": 260.7,
+    "g_conc": 1.71,
+    "concentracao": 394.0,
+    "demanda": 8.73,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 5.42,
+    "flags": [
+     "demanda_so_propria"
+    ]
+   },
+   {
+    "id": "alchemy:silvermoon-health-potion-tier-2",
+    "receita": "Silvermoon Health Potion Tier 2",
+    "profissao": "Alquimia",
+    "profissaoId": "alchemy",
+    "custo": 26.37,
+    "venda": 61.0,
+    "lucro": 425.1,
+    "margem": 1612.2,
+    "g_conc": 1.69,
+    "concentracao": 294.0,
+    "demanda": 8.41,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 34.72,
+    "flags": [
+     "demanda_so_propria",
+     "liquidez_parada"
+    ]
+   },
+   {
+    "id": "jewelcrafting:telluric-eversong-diamond-tier-2",
+    "receita": "Telluric Eversong Diamond Tier 2",
+    "profissao": "Joalheria",
+    "profissaoId": "jewelcrafting",
+    "custo": 158.47,
+    "venda": 526.8,
+    "lucro": 592.72,
+    "margem": 374.02,
+    "g_conc": 1.64,
+    "concentracao": 404.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "custo_modelo_divergente",
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "alchemy:flask-of-thalassian-resistance-tier-2",
+    "receita": "Flask of Thalassian Resistance Tier 2",
+    "profissao": "Alquimia",
+    "profissaoId": "alchemy",
+    "custo": 572.02,
+    "venda": 376.96,
+    "lucro": 543.87,
+    "margem": 95.08,
+    "g_conc": 1.61,
+    "concentracao": 394.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "alchemy:alluring-nostrum-tier-2",
+    "receita": "Alluring Nostrum Tier 2",
+    "profissao": "Alquimia",
+    "profissaoId": "alchemy",
+    "custo": 107.53,
+    "venda": 60.0,
+    "lucro": 336.53,
+    "margem": 312.96,
+    "g_conc": 1.34,
+    "concentracao": 294.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "jewelcrafting:sunglass-vial-tier-2",
+    "receita": "Sunglass Vial Tier 2",
+    "profissao": "Joalheria",
+    "profissaoId": "jewelcrafting",
+    "custo": 44.19,
+    "venda": 268.32,
+    "lucro": 338.42,
+    "margem": 765.79,
+    "g_conc": 1.17,
+    "concentracao": 324.0,
+    "demanda": 22.36,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 22.84,
+    "flags": [
+     "demanda_so_propria"
+    ]
+   },
+   {
+    "id": "inscription:thalassian-missive-of-the-fireflash-tier-2",
+    "receita": "Thalassian Missive of the Fireflash Tier 2",
+    "profissao": "Inscrição",
+    "profissaoId": "inscription",
+    "custo": 180.38,
+    "venda": 193.92,
+    "lucro": 313.53,
+    "margem": 173.82,
+    "g_conc": 1.03,
+    "concentracao": 324.0,
+    "demanda": 6.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 6.0,
+    "flags": [
+     "demanda_so_propria",
+     "liquidez_parada"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-tool-haranir-multicrafting-tier-2",
+    "receita": "Enchant Tool - Haranir Multicrafting Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 726.35,
+    "venda": 986.69,
+    "lucro": 211.0,
+    "margem": 29.05,
+    "g_conc": 0.95,
+    "concentracao": 360.0,
+    "demanda": 1.5,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 1.64,
+    "flags": [
+     "demanda_so_propria",
+     "liquidez_parada"
+    ]
+   },
+   {
+    "id": "jewelcrafting:prismatic-focusing-iris-tier-2",
+    "receita": "Prismatic Focusing Iris Tier 2",
+    "profissao": "Joalheria",
+    "profissaoId": "jewelcrafting",
+    "custo": 227.9,
+    "venda": 395.4,
+    "lucro": 335.92,
+    "margem": 147.4,
+    "g_conc": 0.93,
+    "concentracao": 404.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "custo_modelo_divergente",
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-helm-empowered-blessing-of-speed-tier-2",
+    "receita": "Enchant Helm - Empowered Blessing of Speed Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 490.89,
+    "venda": 719.09,
+    "lucro": 192.24,
+    "margem": 39.16,
+    "g_conc": 0.87,
+    "concentracao": 360.0,
+    "demanda": 4.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 4.0,
+    "flags": [
+     "demanda_so_propria",
+     "liquidez_parada"
+    ]
+   },
+   {
+    "id": "alchemy:enlightenment-tonic-tier-2",
+    "receita": "Enlightenment Tonic Tier 2",
+    "profissao": "Alquimia",
+    "profissaoId": "alchemy",
+    "custo": 19.75,
+    "venda": 15.11,
+    "lucro": 92.08,
+    "margem": 466.25,
+    "g_conc": 0.83,
+    "concentracao": 129.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "inscription:thalassian-missive-of-multicraft-tier-2",
+    "receita": "Thalassian Missive of Multicraft Tier 2",
+    "profissao": "Inscrição",
+    "profissaoId": "inscription",
+    "custo": 180.55,
+    "venda": 166.13,
+    "lucro": 242.58,
+    "margem": 134.36,
+    "g_conc": 0.79,
+    "concentracao": 324.0,
+    "demanda": 0.02,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.11,
+    "flags": [
+     "demanda_so_propria"
+    ]
+   },
+   {
+    "id": "inscription:munsell-ink-tier-2",
+    "receita": "Munsell Ink Tier 2",
+    "profissao": "Inscrição",
+    "profissaoId": "inscription",
+    "custo": 260.19,
+    "venda": 75.0,
+    "lucro": 217.37,
+    "margem": 83.54,
+    "g_conc": 0.7,
+    "concentracao": 330.0,
+    "demanda": 0.8,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 2.04,
+    "flags": [
+     "demanda_so_propria"
+    ]
+   },
+   {
+    "id": "inscription:thalassian-missive-of-perception-tier-2",
+    "receita": "Thalassian Missive of Perception Tier 2",
+    "profissao": "Inscrição",
+    "profissaoId": "inscription",
+    "custo": 180.55,
+    "venda": 153.4,
+    "lucro": 210.15,
+    "margem": 116.4,
+    "g_conc": 0.69,
+    "concentracao": 324.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "inscription:thalassian-missive-of-the-quickblade-tier-2",
+    "receita": "Thalassian Missive of the Quickblade Tier 2",
+    "profissao": "Inscrição",
+    "profissaoId": "inscription",
+    "custo": 180.09,
+    "venda": 145.0,
+    "lucro": 189.21,
+    "margem": 105.06,
+    "g_conc": 0.62,
+    "concentracao": 324.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "inscription:thalassian-missive-of-finesse-tier-2",
+    "receita": "Thalassian Missive of Finesse Tier 2",
+    "profissao": "Inscrição",
+    "profissaoId": "inscription",
+    "custo": 180.46,
+    "venda": 144.25,
+    "lucro": 186.94,
+    "margem": 103.59,
+    "g_conc": 0.61,
+    "concentracao": 324.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "jewelcrafting:sin-dorei-lens-tier-2",
+    "receita": "Sin'dorei Lens Tier 2",
+    "profissao": "Joalheria",
+    "profissaoId": "jewelcrafting",
+    "custo": 139.23,
+    "venda": 215.75,
+    "lucro": 168.42,
+    "margem": 120.97,
+    "g_conc": 0.58,
+    "concentracao": 324.0,
+    "demanda": 1.5,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 1.88,
+    "flags": [
+     "demanda_so_propria"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-shoulders-akil-zon-s-swiftness-tier-2",
+    "receita": "Enchant Shoulders - Akil'zon's Swiftness Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 358.7,
+    "venda": 488.0,
+    "lucro": 104.9,
+    "margem": 29.25,
+    "g_conc": 0.47,
+    "concentracao": 360.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "inscription:contract-the-hara-ti-tier-2",
+    "receita": "Contract: The Hara'ti Tier 2",
+    "profissao": "Inscrição",
+    "profissaoId": "inscription",
+    "custo": 91.57,
+    "venda": 103.0,
+    "lucro": 170.77,
+    "margem": 186.5,
+    "g_conc": 0.42,
+    "concentracao": 432.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "inscription:thalassian-missive-of-ingenuity-tier-2",
+    "receita": "Thalassian Missive of Ingenuity Tier 2",
+    "profissao": "Inscrição",
+    "profissaoId": "inscription",
+    "custo": 180.55,
+    "venda": 120.16,
+    "lucro": 125.49,
+    "margem": 69.51,
+    "g_conc": 0.41,
+    "concentracao": 324.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "jewelcrafting:flawless-quick-amethyst-tier-2",
+    "receita": "Flawless Quick Amethyst Tier 2",
+    "profissao": "Joalheria",
+    "profissaoId": "jewelcrafting",
+    "custo": 666.7,
+    "venda": 570.0,
+    "lucro": 146.09,
+    "margem": 21.91,
+    "g_conc": 0.41,
+    "concentracao": 404.0,
+    "demanda": 4.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 4.0,
+    "flags": [
+     "demanda_so_propria"
+    ]
+   },
+   {
+    "id": "jewelcrafting:flawless-deadly-peridot-tier-2",
+    "receita": "Flawless Deadly Peridot Tier 2",
+    "profissao": "Joalheria",
+    "profissaoId": "jewelcrafting",
+    "custo": 675.8,
+    "venda": 575.0,
+    "lucro": 144.12,
+    "margem": 21.33,
+    "g_conc": 0.4,
+    "concentracao": 404.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "jewelcrafting:flawless-quick-peridot-tier-2",
+    "receita": "Flawless Quick Peridot Tier 2",
+    "profissao": "Joalheria",
+    "profissaoId": "jewelcrafting",
+    "custo": 675.8,
+    "venda": 574.99,
+    "lucro": 144.1,
+    "margem": 21.32,
+    "g_conc": 0.4,
+    "concentracao": 404.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-tool-ren-dorei-ingenuity-tier-2",
+    "receita": "Enchant Tool - Ren'dorei Ingenuity Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 728.91,
+    "venda": 859.0,
+    "lucro": 87.14,
+    "margem": 11.95,
+    "g_conc": 0.39,
+    "concentracao": 360.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "jewelcrafting:flawless-deadly-lapis-tier-2",
+    "receita": "Flawless Deadly Lapis Tier 2",
+    "profissao": "Joalheria",
+    "profissaoId": "jewelcrafting",
+    "custo": 673.29,
+    "venda": 569.99,
+    "lucro": 139.48,
+    "margem": 20.72,
+    "g_conc": 0.39,
+    "concentracao": 404.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "jewelcrafting:flawless-versatile-amethyst-tier-2",
+    "receita": "Flawless Versatile Amethyst Tier 2",
+    "profissao": "Joalheria",
+    "profissaoId": "jewelcrafting",
+    "custo": 666.7,
+    "venda": 565.0,
+    "lucro": 138.96,
+    "margem": 20.84,
+    "g_conc": 0.39,
+    "concentracao": 404.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "jewelcrafting:flawless-masterful-peridot-tier-2",
+    "receita": "Flawless Masterful Peridot Tier 2",
+    "profissao": "Joalheria",
+    "profissaoId": "jewelcrafting",
+    "custo": 675.8,
+    "venda": 570.0,
+    "lucro": 136.99,
+    "margem": 20.27,
+    "g_conc": 0.38,
+    "concentracao": 404.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-shoulders-amirdrassil-s-grace-tier-2",
+    "receita": "Enchant Shoulders - Amirdrassil's Grace Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 490.89,
+    "venda": 599.0,
+    "lucro": 78.16,
+    "margem": 15.92,
+    "g_conc": 0.35,
+    "concentracao": 360.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-helm-empowered-hex-of-leeching-tier-2",
+    "receita": "Enchant Helm - Empowered Hex of Leeching Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 492.6,
+    "venda": 599.0,
+    "lucro": 76.45,
+    "margem": 15.52,
+    "g_conc": 0.35,
+    "concentracao": 360.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "jewelcrafting:flawless-masterful-lapis-tier-2",
+    "receita": "Flawless Masterful Lapis Tier 2",
+    "profissao": "Joalheria",
+    "profissaoId": "jewelcrafting",
+    "custo": 673.29,
+    "venda": 550.0,
+    "lucro": 110.98,
+    "margem": 16.48,
+    "g_conc": 0.31,
+    "concentracao": 404.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "jewelcrafting:flawless-masterful-amethyst-tier-2",
+    "receita": "Flawless Masterful Amethyst Tier 2",
+    "profissao": "Joalheria",
+    "profissaoId": "jewelcrafting",
+    "custo": 666.7,
+    "venda": 545.0,
+    "lucro": 110.45,
+    "margem": 16.57,
+    "g_conc": 0.31,
+    "concentracao": 404.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "jewelcrafting:flawless-versatile-peridot-tier-2",
+    "receita": "Flawless Versatile Peridot Tier 2",
+    "profissao": "Joalheria",
+    "profissaoId": "jewelcrafting",
+    "custo": 675.8,
+    "venda": 549.78,
+    "lucro": 108.15,
+    "margem": 16.0,
+    "g_conc": 0.3,
+    "concentracao": 404.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "jewelcrafting:flawless-deadly-amethyst-tier-2",
+    "receita": "Flawless Deadly Amethyst Tier 2",
+    "profissao": "Joalheria",
+    "profissaoId": "jewelcrafting",
+    "custo": 666.7,
+    "venda": 543.13,
+    "lucro": 107.78,
+    "margem": 16.17,
+    "g_conc": 0.3,
+    "concentracao": 404.0,
+    "demanda": 10.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 10.0,
+    "flags": [
+     "demanda_so_propria",
+     "liquidez_parada"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-chest-mark-of-the-worldsoul-tier-2",
+    "receita": "Enchant Chest - Mark of the Worldsoul Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 1988.06,
+    "venda": 2161.88,
+    "lucro": 65.72,
+    "margem": 3.31,
+    "g_conc": 0.3,
+    "concentracao": 360.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "jewelcrafting:flawless-versatile-garnet-tier-2",
+    "receita": "Flawless Versatile Garnet Tier 2",
+    "profissao": "Joalheria",
+    "profissaoId": "jewelcrafting",
+    "custo": 729.01,
+    "venda": 570.0,
+    "lucro": 83.78,
+    "margem": 11.49,
+    "g_conc": 0.23,
+    "concentracao": 404.0,
+    "demanda": 6.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 6.0,
+    "flags": [
+     "demanda_so_propria"
+    ]
+   },
+   {
+    "id": "jewelcrafting:flawless-deadly-garnet-tier-2",
+    "receita": "Flawless Deadly Garnet Tier 2",
+    "profissao": "Joalheria",
+    "profissaoId": "jewelcrafting",
+    "custo": 729.01,
+    "venda": 569.99,
+    "lucro": 83.77,
+    "margem": 11.49,
+    "g_conc": 0.23,
+    "concentracao": 404.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "inscription:thalassian-missive-of-resourcefulness-tier-2",
+    "receita": "Thalassian Missive of Resourcefulness Tier 2",
+    "profissao": "Inscrição",
+    "profissaoId": "inscription",
+    "custo": 180.55,
+    "venda": 95.88,
+    "lucro": 63.65,
+    "margem": 35.26,
+    "g_conc": 0.21,
+    "concentracao": 324.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "jewelcrafting:flawless-versatile-lapis-tier-2",
+    "receita": "Flawless Versatile Lapis Tier 2",
+    "profissao": "Joalheria",
+    "profissaoId": "jewelcrafting",
+    "custo": 673.29,
+    "venda": 524.09,
+    "lucro": 74.03,
+    "margem": 11.0,
+    "g_conc": 0.21,
+    "concentracao": 404.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "inscription:thalassian-missive-of-the-feverflare-tier-2",
+    "receita": "Thalassian Missive of the Feverflare Tier 2",
+    "profissao": "Inscrição",
+    "profissaoId": "inscription",
+    "custo": 180.38,
+    "venda": 95.04,
+    "lucro": 61.69,
+    "margem": 34.2,
+    "g_conc": 0.2,
+    "concentracao": 324.0,
+    "demanda": 1.6,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.35,
+    "flags": [
+     "demanda_so_propria",
+     "liquidez_parada"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-ring-silvermoon-s-alacrity-tier-2",
+    "receita": "Enchant Ring - Silvermoon's Alacrity Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 317.18,
+    "venda": 376.9,
+    "lucro": 40.88,
+    "margem": 12.89,
+    "g_conc": 0.18,
+    "concentracao": 360.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "jewelcrafting:flawless-masterful-garnet-tier-2",
+    "receita": "Flawless Masterful Garnet Tier 2",
+    "profissao": "Joalheria",
+    "profissaoId": "jewelcrafting",
+    "custo": 729.01,
+    "venda": 550.0,
+    "lucro": 55.26,
+    "margem": 7.58,
+    "g_conc": 0.15,
+    "concentracao": 404.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-weapon-worldsoul-tenacity-tier-2",
+    "receita": "Enchant Weapon - Worldsoul Tenacity Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 657.83,
+    "venda": 726.8,
+    "lucro": 32.63,
+    "margem": 4.96,
+    "g_conc": 0.15,
+    "concentracao": 360.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "inscription:thalassian-missive-of-deftness-tier-2",
+    "receita": "Thalassian Missive of Deftness Tier 2",
+    "profissao": "Inscrição",
+    "profissaoId": "inscription",
+    "custo": 180.46,
+    "venda": 86.62,
+    "lucro": 40.15,
+    "margem": 22.25,
+    "g_conc": 0.13,
+    "concentracao": 324.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "inscription:vantus-rune-radiant-tier-2",
+    "receita": "Vantus Rune: Radiant Tier 2",
+    "profissao": "Inscrição",
+    "profissaoId": "inscription",
+    "custo": 199.09,
+    "venda": 237.65,
+    "lucro": 103.55,
+    "margem": 52.01,
+    "g_conc": 0.12,
+    "concentracao": 909.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-helm-empowered-rune-of-avoidance-tier-2",
+    "receita": "Enchant Helm - Empowered Rune of Avoidance Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 494.3,
+    "venda": 544.09,
+    "lucro": 22.59,
+    "margem": 4.57,
+    "g_conc": 0.1,
+    "concentracao": 360.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-chest-mark-of-nalorakk-tier-2",
+    "receita": "Enchant Chest - Mark of Nalorakk Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 521.48,
+    "venda": 566.88,
+    "lucro": 17.05,
+    "margem": 3.27,
+    "g_conc": 0.08,
+    "concentracao": 360.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "inscription:thalassian-missive-of-crafting-speed-tier-2",
+    "receita": "Thalassian Missive of Crafting Speed Tier 2",
+    "profissao": "Inscrição",
+    "profissaoId": "inscription",
+    "custo": 180.46,
+    "venda": 79.75,
+    "lucro": 22.66,
+    "margem": 12.56,
+    "g_conc": 0.07,
+    "concentracao": 324.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-boots-farstrider-s-hunt-tier-2",
+    "receita": "Enchant Boots - Farstrider's Hunt Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 398.76,
+    "venda": 433.0,
+    "lucro": 12.59,
+    "margem": 3.16,
+    "g_conc": 0.06,
+    "concentracao": 360.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-ring-zul-jin-s-mastery-tier-2",
+    "receita": "Enchant Ring - Zul'jin's Mastery Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 315.9,
+    "venda": 343.94,
+    "lucro": 10.84,
+    "margem": 3.43,
+    "g_conc": 0.05,
+    "concentracao": 360.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-shoulders-silvermoon-s-mending-tier-2",
+    "receita": "Enchant Shoulders - Silvermoon's Mending Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 360.4,
+    "venda": 380.85,
+    "lucro": 1.41,
+    "margem": 0.39,
+    "g_conc": 0.01,
+    "concentracao": 360.0,
+    "demanda": 0.46,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.47,
+    "flags": [
+     "demanda_so_propria",
+     "liquidez_parada"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-helm-hex-of-leeching-tier-2",
+    "receita": "Enchant Helm - Hex of Leeching Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 17.76,
+    "venda": 20.0,
+    "lucro": 1.24,
+    "margem": 7.0,
+    "g_conc": 0.01,
+    "concentracao": 360.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "ah_corrompido",
+     "fora_do_ranking",
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-helm-rune-of-avoidance-tier-2",
+    "receita": "Enchant Helm - Rune of Avoidance Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 17.76,
+    "venda": 19.97,
+    "lucro": 1.21,
+    "margem": 6.84,
+    "g_conc": 0.01,
+    "concentracao": 360.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-shoulders-thalassian-recovery-tier-2",
+    "receita": "Enchant Shoulders - Thalassian Recovery Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 17.76,
+    "venda": 19.87,
+    "lucro": 1.12,
+    "margem": 6.3,
+    "g_conc": 0.01,
+    "concentracao": 360.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-boots-lynx-s-dexterity-tier-2",
+    "receita": "Enchant Boots - Lynx's Dexterity Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 313.5,
+    "venda": 329.99,
+    "lucro": -0.01,
+    "margem": -0.0,
+    "g_conc": -0.0,
+    "concentracao": 360.0,
+    "demanda": 1.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 1.0,
+    "flags": [
+     "demanda_so_propria"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-helm-blessing-of-speed-tier-2",
+    "receita": "Enchant Helm - Blessing of Speed Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 17.76,
+    "venda": 18.0,
+    "lucro": -0.66,
+    "margem": -3.7,
+    "g_conc": -0.0,
+    "concentracao": 360.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-shoulders-flight-of-the-eagle-tier-2",
+    "receita": "Enchant Shoulders - Flight of the Eagle Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 17.76,
+    "venda": 18.0,
+    "lucro": -0.66,
+    "margem": -3.7,
+    "g_conc": -0.0,
+    "concentracao": 360.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-tool-sin-dorei-deftness-tier-2",
+    "receita": "Enchant Tool - Sin'dorei Deftness Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 729.76,
+    "venda": 767.33,
+    "lucro": -0.8,
+    "margem": -0.11,
+    "g_conc": -0.0,
+    "concentracao": 360.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "jewelcrafting:flawless-quick-lapis-tier-2",
+    "receita": "Flawless Quick Lapis Tier 2",
+    "profissao": "Joalheria",
+    "profissaoId": "jewelcrafting",
+    "custo": 673.29,
+    "venda": 469.98,
+    "lucro": -3.13,
+    "margem": -0.46,
+    "g_conc": -0.01,
+    "concentracao": 404.0,
+    "demanda": 2.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 2.0,
+    "flags": [
+     "demanda_so_propria",
+     "liquidez_parada"
+    ]
+   },
+   {
+    "id": "inscription:soul-cipher-tier-2",
+    "receita": "Soul Cipher Tier 2",
+    "profissao": "Inscrição",
+    "profissaoId": "inscription",
+    "custo": 92.86,
+    "venda": 13.99,
+    "lucro": -3.78,
+    "margem": -4.07,
+    "g_conc": -0.01,
+    "concentracao": 324.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-weapon-berserker-s-rage-tier-2",
+    "receita": "Enchant Weapon - Berserker's Rage Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 655.42,
+    "venda": 685.91,
+    "lucro": -3.8,
+    "margem": -0.58,
+    "g_conc": -0.02,
+    "concentracao": 360.0,
+    "demanda": 5.14,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 5.14,
+    "flags": [
+     "demanda_so_propria"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-shoulders-nature-s-grace-tier-2",
+    "receita": "Enchant Shoulders - Nature's Grace Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 17.76,
+    "venda": 13.14,
+    "lucro": -5.27,
+    "margem": -29.7,
+    "g_conc": -0.02,
+    "concentracao": 360.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-chest-mark-of-the-magister-tier-2",
+    "receita": "Enchant Chest - Mark of the Magister Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 559.77,
+    "venda": 579.99,
+    "lucro": -8.78,
+    "margem": -1.57,
+    "g_conc": -0.04,
+    "concentracao": 360.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-ring-nature-s-fury-tier-2",
+    "receita": "Enchant Ring - Nature's Fury Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 314.62,
+    "venda": 318.5,
+    "lucro": -12.04,
+    "margem": -3.83,
+    "g_conc": -0.05,
+    "concentracao": 360.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "inscription:darkmoon-sigil-void-tier-2",
+    "receita": "Darkmoon Sigil: Void Tier 2",
+    "profissao": "Inscrição",
+    "profissaoId": "inscription",
+    "custo": 457.65,
+    "venda": 344.52,
+    "lucro": -18.91,
+    "margem": -4.13,
+    "g_conc": -0.06,
+    "concentracao": 343.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "ah_corrompido",
+     "custo_modelo_divergente",
+     "fora_do_ranking",
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "inscription:darkmoon-sigil-blood-tier-2",
+    "receita": "Darkmoon Sigil: Blood Tier 2",
+    "profissao": "Inscrição",
+    "profissaoId": "inscription",
+    "custo": 462.18,
+    "venda": 348.0,
+    "lucro": -19.01,
+    "margem": -4.11,
+    "g_conc": -0.06,
+    "concentracao": 343.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "custo_modelo_divergente",
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-ring-silvermoon-s-tenacity-tier-2",
+    "receita": "Enchant Ring - Silvermoon's Tenacity Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 317.18,
+    "venda": 310.95,
+    "lucro": -21.77,
+    "margem": -6.87,
+    "g_conc": -0.1,
+    "concentracao": 360.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-tool-amani-resourcefulness-tier-2",
+    "receita": "Enchant Tool - Amani Resourcefulness Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 614.17,
+    "venda": 619.93,
+    "lucro": -25.24,
+    "margem": -4.11,
+    "g_conc": -0.11,
+    "concentracao": 360.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "inscription:vantus-rune-tides-tier-2",
+    "receita": "Vantus Rune: Tides Tier 2",
+    "profissao": "Inscrição",
+    "profissaoId": "inscription",
+    "custo": 243.75,
+    "venda": 109.99,
+    "lucro": -103.69,
+    "margem": -42.54,
+    "g_conc": -0.12,
+    "concentracao": 909.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-chest-mark-of-the-rootwarden-tier-2",
+    "receita": "Enchant Chest - Mark of the Rootwarden Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 716.15,
+    "venda": 725.0,
+    "lucro": -27.4,
+    "margem": -3.83,
+    "g_conc": -0.12,
+    "concentracao": 360.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "inscription:thalassian-missive-of-the-harmonious-tier-2",
+    "receita": "Thalassian Missive of the Harmonious Tier 2",
+    "profissao": "Inscrição",
+    "profissaoId": "inscription",
+    "custo": 180.09,
+    "venda": 53.51,
+    "lucro": -43.81,
+    "margem": -24.32,
+    "g_conc": -0.14,
+    "concentracao": 324.0,
+    "demanda": 2.75,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.66,
+    "flags": [
+     "demanda_so_propria",
+     "liquidez_parada"
+    ]
+   },
+   {
+    "id": "inscription:contract-the-silvermoon-court-tier-2",
+    "receita": "Contract: The Silvermoon Court Tier 2",
+    "profissao": "Inscrição",
+    "profissaoId": "inscription",
+    "custo": 91.82,
+    "venda": 13.0,
+    "lucro": -58.71,
+    "margem": -63.94,
+    "g_conc": -0.14,
+    "concentracao": 432.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "ah_corrompido",
+     "fora_do_ranking",
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "inscription:contract-the-singularity-tier-2",
+    "receita": "Contract: The Singularity Tier 2",
+    "profissao": "Inscrição",
+    "profissaoId": "inscription",
+    "custo": 90.72,
+    "venda": 10.98,
+    "lucro": -62.75,
+    "margem": -69.17,
+    "g_conc": -0.15,
+    "concentracao": 432.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "ah_corrompido",
+     "fora_do_ranking",
+     "sem_demanda_regional",
+     "sem_estoque_agora"
+    ]
+   },
+   {
+    "id": "inscription:contract-the-amani-tribe-tier-2",
+    "receita": "Contract: The Amani Tribe Tier 2",
+    "profissao": "Inscrição",
+    "profissaoId": "inscription",
+    "custo": 92.08,
+    "venda": 10.99,
+    "lucro": -64.09,
+    "margem": -69.6,
+    "g_conc": -0.16,
+    "concentracao": 432.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "jewelcrafting:flawless-quick-garnet-tier-2",
+    "receita": "Flawless Quick Garnet Tier 2",
+    "profissao": "Joalheria",
+    "profissaoId": "jewelcrafting",
+    "custo": 729.01,
+    "venda": 471.24,
+    "lucro": -57.05,
+    "margem": -7.83,
+    "g_conc": -0.16,
+    "concentracao": 404.0,
+    "demanda": 2.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 2.0,
+    "flags": [
+     "demanda_so_propria",
+     "liquidez_parada"
+    ]
+   },
+   {
+    "id": "inscription:codified-azeroot-tier-2",
+    "receita": "Codified Azeroot Tier 2",
+    "profissao": "Inscrição",
+    "profissaoId": "inscription",
+    "custo": 303.59,
+    "venda": 99.45,
+    "lucro": -50.3,
+    "margem": -16.57,
+    "g_conc": -0.16,
+    "concentracao": 325.0,
+    "demanda": 1.33,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.23,
+    "flags": [
+     "demanda_so_propria",
+     "liquidez_parada"
+    ]
+   },
+   {
+    "id": "alchemy:potion-of-zealotry-tier-2",
+    "receita": "Potion of Zealotry Tier 2",
+    "profissao": "Alquimia",
+    "profissaoId": "alchemy",
+    "custo": 331.53,
+    "venda": 38.99,
+    "lucro": -42.96,
+    "margem": -12.96,
+    "g_conc": -0.17,
+    "concentracao": 294.0,
+    "demanda": 8.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 4.83,
+    "flags": [
+     "demanda_so_propria",
+     "liquidez_parada"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-ring-eyes-of-the-eagle-tier-2",
+    "receita": "Enchant Ring - Eyes of the Eagle Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 444.57,
+    "venda": 418.0,
+    "lucro": -47.47,
+    "margem": -10.68,
+    "g_conc": -0.21,
+    "concentracao": 360.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-weapon-arcane-mastery-tier-2",
+    "receita": "Enchant Weapon - Arcane Mastery Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 707.92,
+    "venda": 691.95,
+    "lucro": -50.57,
+    "margem": -7.14,
+    "g_conc": -0.23,
+    "concentracao": 360.0,
+    "demanda": 0.46,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.46,
+    "flags": [
+     "demanda_so_propria"
+    ]
+   },
+   {
+    "id": "inscription:thalassian-missive-of-the-peerless-tier-2",
+    "receita": "Thalassian Missive of the Peerless Tier 2",
+    "profissao": "Inscrição",
+    "profissaoId": "inscription",
+    "custo": 180.09,
+    "venda": 43.22,
+    "lucro": -70.01,
+    "margem": -38.88,
+    "g_conc": -0.23,
+    "concentracao": 324.0,
+    "demanda": 6.5,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.43,
+    "flags": [
+     "demanda_so_propria",
+     "liquidez_parada"
+    ]
+   },
+   {
+    "id": "inscription:contract-zul-jarra-s-forces-tier-2",
+    "receita": "Contract: Zul'jarra's Forces Tier 2",
+    "profissao": "Inscrição",
+    "profissaoId": "inscription",
+    "custo": 126.89,
+    "venda": 11.0,
+    "lucro": -98.88,
+    "margem": -77.92,
+    "g_conc": -0.24,
+    "concentracao": 432.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "inscription:thalassian-missive-of-the-aurora-tier-2",
+    "receita": "Thalassian Missive of the Aurora Tier 2",
+    "profissao": "Inscrição",
+    "profissaoId": "inscription",
+    "custo": 180.38,
+    "venda": 30.93,
+    "lucro": -101.6,
+    "margem": -56.33,
+    "g_conc": -0.33,
+    "concentracao": 324.0,
+    "demanda": 3.25,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.39,
+    "flags": [
+     "demanda_so_propria",
+     "liquidez_parada"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-boots-shaladrassil-s-roots-tier-2",
+    "receita": "Enchant Boots - Shaladrassil's Roots Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 907.54,
+    "venda": 877.0,
+    "lucro": -74.39,
+    "margem": -8.2,
+    "g_conc": -0.34,
+    "concentracao": 360.0,
+    "demanda": 6.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 6.0,
+    "flags": [
+     "demanda_so_propria"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-weapon-worldsoul-cradle-tier-2",
+    "receita": "Enchant Weapon - Worldsoul Cradle Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 657.83,
+    "venda": 600.73,
+    "lucro": -87.14,
+    "margem": -13.25,
+    "g_conc": -0.39,
+    "concentracao": 360.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-weapon-acuity-of-the-ren-dorei-tier-2",
+    "receita": "Enchant Weapon - Acuity of the Ren'dorei Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 803.18,
+    "venda": 744.38,
+    "lucro": -96.02,
+    "margem": -11.95,
+    "g_conc": -0.43,
+    "concentracao": 360.0,
+    "demanda": 6.24,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 5.71,
+    "flags": [
+     "demanda_so_propria"
+    ]
+   },
+   {
+    "id": "inscription:darkmoon-sigil-rot-tier-2",
+    "receita": "Darkmoon Sigil: Rot Tier 2",
+    "profissao": "Inscrição",
+    "profissaoId": "inscription",
+    "custo": 460.48,
+    "venda": 248.99,
+    "lucro": -143.4,
+    "margem": -31.14,
+    "g_conc": -0.44,
+    "concentracao": 343.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "custo_modelo_divergente",
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "inscription:darkmoon-sigil-hunt-tier-2",
+    "receita": "Darkmoon Sigil: Hunt Tier 2",
+    "profissao": "Inscrição",
+    "profissaoId": "inscription",
+    "custo": 461.33,
+    "venda": 219.0,
+    "lucro": -182.44,
+    "margem": -39.55,
+    "g_conc": -0.56,
+    "concentracao": 343.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "ah_corrompido",
+     "custo_modelo_divergente",
+     "fora_do_ranking",
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-tool-amani-perception-tier-2",
+    "receita": "Enchant Tool - Amani Perception Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 614.17,
+    "venda": 499.98,
+    "lucro": -139.19,
+    "margem": -22.66,
+    "g_conc": -0.63,
+    "concentracao": 360.0,
+    "demanda": 0.62,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.63,
+    "flags": [
+     "demanda_so_propria",
+     "liquidez_parada"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-weapon-strength-of-halazzi-tier-2",
+    "receita": "Enchant Weapon - Strength of Halazzi Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 648.8,
+    "venda": 499.9,
+    "lucro": -173.89,
+    "margem": -26.8,
+    "g_conc": -0.79,
+    "concentracao": 360.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "inscription:sienna-ink-tier-2",
+    "receita": "Sienna Ink Tier 2",
+    "profissao": "Inscrição",
+    "profissaoId": "inscription",
+    "custo": 363.2,
+    "venda": 17.5,
+    "lucro": -251.77,
+    "margem": -69.32,
+    "g_conc": -0.81,
+    "concentracao": 330.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-weapon-flames-of-the-sin-dorei-tier-2",
+    "receita": "Enchant Weapon - Flames of the Sin'Dorei Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 847.74,
+    "venda": 700.01,
+    "lucro": -182.73,
+    "margem": -21.56,
+    "g_conc": -0.83,
+    "concentracao": 360.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-weapon-rite-of-the-hash-ey-tier-2",
+    "receita": "Enchant Weapon - Rite of the Hash'ey Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 705.14,
+    "venda": 533.5,
+    "lucro": -198.31,
+    "margem": -28.12,
+    "g_conc": -0.9,
+    "concentracao": 360.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-weapon-jan-alai-s-precision-tier-2",
+    "receita": "Enchant Weapon - Jan'alai's Precision Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 843.9,
+    "venda": 675.98,
+    "lucro": -201.71,
+    "margem": -23.9,
+    "g_conc": -0.91,
+    "concentracao": 360.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-weapon-worldsoul-aegis-tier-2",
+    "receita": "Enchant Weapon - Worldsoul Aegis Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 657.83,
+    "venda": 400.0,
+    "lucro": -277.83,
+    "margem": -42.23,
+    "g_conc": -1.25,
+    "concentracao": 360.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "jewelcrafting:kaleidoscopic-prism-tier-2",
+    "receita": "Kaleidoscopic Prism Tier 2",
+    "profissao": "Joalheria",
+    "profissaoId": "jewelcrafting",
+    "custo": 1339.34,
+    "venda": 678.92,
+    "lucro": -371.23,
+    "margem": -27.72,
+    "g_conc": -1.28,
+    "concentracao": 324.0,
+    "demanda": 21.3,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 16.94,
+    "flags": [
+     "demanda_so_propria"
+    ]
+   },
+   {
+    "id": "jewelcrafting:stabilizing-gemstone-bandolier-tier-2",
+    "receita": "Stabilizing Gemstone Bandolier Tier 2",
+    "profissao": "Joalheria",
+    "profissaoId": "jewelcrafting",
+    "custo": 587.05,
+    "venda": 70.0,
+    "lucro": -487.24,
+    "margem": -83.0,
+    "g_conc": -1.35,
+    "concentracao": 404.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   },
+   {
+    "id": "enchanting:enchant-tool-haranir-finesse-tier-2",
+    "receita": "Enchant Tool - Haranir Finesse Tier 2",
+    "profissao": "Encantamento",
+    "profissaoId": "enchanting",
+    "custo": 612.47,
+    "venda": 294.01,
+    "lucro": -333.16,
+    "margem": -54.4,
+    "g_conc": -1.5,
+    "concentracao": 360.0,
+    "demanda": 0.0,
+    "sold_regional": 0.0,
+    "venda_real_unid_dia": 0.0,
+    "flags": [
+     "sem_demanda_regional"
+    ]
+   }
+  ],
+  "insumos": [
+   {
+    "nome": "Majestic Hide",
+    "preco": 1592.98,
+    "percentil": 3.3,
+    "barato": true,
+    "n_receitas": 1
+   },
+   {
+    "nome": "Petrified Root",
+    "preco": 70.69,
+    "percentil": 6.7,
+    "barato": true,
+    "n_receitas": 48
+   },
+   {
+    "nome": "Arcanoweave Bolt Tier 1",
+    "preco": 41.99,
+    "percentil": 6.7,
+    "barato": true,
+    "n_receitas": 2
+   },
+   {
+    "nome": "Sunfire Silk Bolt Tier 1",
+    "preco": 113.78,
+    "percentil": 6.7,
+    "barato": true,
+    "n_receitas": 1
+   },
+   {
+    "nome": "Majestic Fin",
+    "preco": 250.0,
+    "percentil": 13.3,
+    "barato": true,
+    "n_receitas": 2
+   },
+   {
+    "nome": "Argentleaf Tier 1",
+    "preco": 3.5,
+    "percentil": 16.7,
+    "barato": true,
+    "n_receitas": 4
+   },
+   {
+    "nome": "Dawn Crystal Tier 1",
+    "preco": 163.97,
+    "percentil": 16.7,
+    "barato": true,
+    "n_receitas": 34
+   },
+   {
+    "nome": "Mana Lily Pigment Tier 1",
+    "preco": 13.44,
+    "percentil": 16.7,
+    "barato": true,
+    "n_receitas": 2
+   },
+   {
+    "nome": "Eversinging Dust Tier 1",
+    "preco": 0.81,
+    "percentil": 20.0,
+    "barato": true,
+    "n_receitas": 40
+   },
+   {
+    "nome": "Vantus Rune: Radiant Tier 1",
+    "preco": 25.0,
+    "percentil": 23.3,
+    "barato": true,
+    "n_receitas": 1
+   },
+   {
+    "nome": "Sanguithorn Tier 1",
+    "preco": 0.56,
+    "percentil": 26.7,
+    "barato": true,
+    "n_receitas": 8
+   },
+   {
+    "nome": "Mana Lily Tier 1",
+    "preco": 17.82,
+    "percentil": 30.0,
+    "barato": true,
+    "n_receitas": 8
+   },
+   {
+    "nome": "Fantastic Fur",
+    "preco": 89.74,
+    "percentil": 30.0,
+    "barato": true,
+    "n_receitas": 1
+   },
+   {
+    "nome": "Carving Canine",
+    "preco": 0.62,
+    "percentil": 30.0,
+    "barato": true,
+    "n_receitas": 1
+   },
+   {
+    "nome": "Duskshrouded Stone Tier 1",
+    "preco": 2.24,
+    "percentil": 36.7,
+    "barato": false,
+    "n_receitas": 2
+   },
+   {
+    "nome": "Radiant Shard Tier 1",
+    "preco": 2.2,
+    "percentil": 36.7,
+    "barato": false,
+    "n_receitas": 40
+   },
+   {
+    "nome": "Majestic Claw",
+    "preco": 44.0,
+    "percentil": 36.7,
+    "barato": false,
+    "n_receitas": 2
+   },
+   {
+    "nome": "Sienna Ink Tier 1",
+    "preco": 84.25,
+    "percentil": 40.0,
+    "barato": false,
+    "n_receitas": 19
+   },
+   {
+    "nome": "Mote of Wild Magic",
+    "preco": 0.63,
+    "percentil": 43.3,
+    "barato": false,
+    "n_receitas": 24
+   },
+   {
+    "nome": "Silvermoon Health Potion Tier 1",
+    "preco": 3.41,
+    "percentil": 43.3,
+    "barato": false,
+    "n_receitas": 1
+   },
+   {
+    "nome": "Nocturnal Lotus",
+    "preco": 260.95,
+    "percentil": 60.0,
+    "barato": false,
+    "n_receitas": 4
+   },
+   {
+    "nome": "Mote of Light",
+    "preco": 0.72,
+    "percentil": 63.3,
+    "barato": false,
+    "n_receitas": 24
+   },
+   {
+    "nome": "Argentleaf Pigment Tier 1",
+    "preco": 26.89,
+    "percentil": 66.7,
+    "barato": false,
+    "n_receitas": 1
+   },
+   {
+    "nome": "Cursebound Globe",
+    "preco": 11.13,
+    "percentil": 73.3,
+    "barato": false,
+    "n_receitas": 5
+   },
+   {
+    "nome": "Crystalline Glass Tier 1",
+    "preco": 9.16,
+    "percentil": 80.0,
+    "barato": false,
+    "n_receitas": 2
+   },
+   {
+    "nome": "Refulgent Copper Ingot Tier 1",
+    "preco": 53.95,
+    "percentil": 80.0,
+    "barato": false,
+    "n_receitas": 3
+   },
+   {
+    "nome": "Soul Cipher Tier 1",
+    "preco": 68.7,
+    "percentil": 80.0,
+    "barato": false,
+    "n_receitas": 7
+   },
+   {
+    "nome": "Powder Pigment Tier 1",
+    "preco": 2.41,
+    "percentil": 80.0,
+    "barato": false,
+    "n_receitas": 2
+   },
+   {
+    "nome": "Sanguithorn Pigment Tier 1",
+    "preco": 15.99,
+    "percentil": 83.3,
+    "barato": false,
+    "n_receitas": 1
+   },
+   {
+    "nome": "Azeroot Tier 1",
+    "preco": 31.42,
+    "percentil": 86.7,
+    "barato": false,
+    "n_receitas": 11
+   },
+   {
+    "nome": "Amani Lapis Tier 1",
+    "preco": 31.99,
+    "percentil": 90.0,
+    "barato": false,
+    "n_receitas": 1
+   },
+   {
+    "nome": "Flawless Harandar Peridot Tier 1",
+    "preco": 42.99,
+    "percentil": 90.0,
+    "barato": false,
+    "n_receitas": 8
+   },
+   {
+    "nome": "Munsell Ink Tier 1",
+    "preco": 10.8,
+    "percentil": 90.0,
+    "barato": false,
+    "n_receitas": 19
+   },
+   {
+    "nome": "Neutralized Venom Clot",
+    "preco": 13.0,
+    "percentil": 93.3,
+    "barato": false,
+    "n_receitas": 3
+   },
+   {
+    "nome": "Gloaming Alloy Tier 1",
+    "preco": 79.74,
+    "percentil": 93.3,
+    "barato": false,
+    "n_receitas": 1
+   },
+   {
+    "nome": "Tranquility Bloom Tier 1",
+    "preco": 2.31,
+    "percentil": 96.7,
+    "barato": false,
+    "n_receitas": 17
+   },
+   {
+    "nome": "Flawless Amani Lapis Tier 1",
+    "preco": 39.99,
+    "percentil": 96.7,
+    "barato": false,
+    "n_receitas": 7
+   },
+   {
+    "nome": "Flawless Sanguine Garnet Tier 1",
+    "preco": 100.29,
+    "percentil": 96.7,
+    "barato": false,
+    "n_receitas": 5
+   },
+   {
+    "nome": "Flawless Tenebrous Amethyst Tier 1",
+    "preco": 33.99,
+    "percentil": 96.7,
+    "barato": false,
+    "n_receitas": 6
+   },
+   {
+    "nome": "Tenebrous Amethyst Tier 1",
+    "preco": 103.29,
+    "percentil": 100.0,
+    "barato": false,
+    "n_receitas": 1
+   },
+   {
+    "nome": "Harandar Peridot Tier 1",
+    "preco": 33.99,
+    "percentil": 100.0,
+    "barato": false,
+    "n_receitas": 1
+   },
+   {
+    "nome": "Sanguine Garnet Tier 1",
+    "preco": 97.29,
+    "percentil": 100.0,
+    "barato": false,
+    "n_receitas": 1
+   },
+   {
+    "nome": "Glimmering Gemdust Tier 1",
+    "preco": 123.87,
+    "percentil": 100.0,
+    "barato": false,
+    "n_receitas": 20
+   },
+   {
+    "nome": "Sterling Alloy Tier 1",
+    "preco": 78.0,
+    "percentil": 100.0,
+    "barato": false,
+    "n_receitas": 2
+   },
+   {
+    "nome": "Peerless Plumage",
+    "preco": 67.93,
+    "percentil": 100.0,
+    "barato": false,
+    "n_receitas": 1
+   },
+   {
+    "nome": "Sunglass Vial Tier 1",
+    "preco": 2.97,
+    "percentil": null,
+    "barato": false,
+    "n_receitas": 2
+   },
+   {
+    "nome": "Mote of Pure Void",
+    "preco": 0.24,
+    "percentil": null,
+    "barato": false,
+    "n_receitas": 15
+   },
+   {
+    "nome": "Mote of Primal Energy",
+    "preco": 0.54,
+    "percentil": null,
+    "barato": false,
+    "n_receitas": 25
+   },
+   {
+    "nome": "Eversong Diamond Tier 1",
+    "preco": 30.89,
+    "percentil": null,
+    "barato": false,
+    "n_receitas": 4
+   },
+   {
+    "nome": "Thalassian Songwater",
+    "preco": 0.36,
+    "percentil": null,
+    "barato": false,
+    "n_receitas": 6
+   },
+   {
+    "nome": "Darkmoon Deck: Hunt",
+    "preco": 137.97,
+    "percentil": null,
+    "barato": false,
+    "n_receitas": 1
+   },
+   {
+    "nome": "Lexicologist's Vellum",
+    "preco": 0.21,
+    "percentil": null,
+    "barato": false,
+    "n_receitas": 20
+   },
+   {
+    "nome": "Darkmoon Deck: Void",
+    "preco": 137.97,
+    "percentil": null,
+    "barato": false,
+    "n_receitas": 1
+   },
+   {
+    "nome": "Darkmoon Deck: Blood",
+    "preco": 137.97,
+    "percentil": null,
+    "barato": false,
+    "n_receitas": 1
+   },
+   {
+    "nome": "Darkmoon Deck: Rot",
+    "preco": 137.97,
+    "percentil": null,
+    "barato": false,
+    "n_receitas": 1
+   }
+  ],
+  "caixa_tsm": {
+   "faturamento": 47582794.0,
+   "compras": 29922542.0,
+   "saldo": 17660251.0,
+   "janela": {
+    "de": "2026-03-17",
+    "ate": "2026-10-31"
+   },
+   "itens_vendidos": 588,
+   "itens": [
+    {
+     "nome": "item 241308",
+     "unid": 20793,
+     "receita": 5712047.2,
+     "preco_medio": 274.71,
+     "vendas": 33
+    },
+    {
+     "nome": "item 239202",
+     "unid": 5663,
+     "receita": 4769568.4,
+     "preco_medio": 842.23,
+     "vendas": 61
+    },
+    {
+     "nome": "item 259085",
+     "unid": 6238,
+     "receita": 3513344.7,
+     "preco_medio": 563.22,
+     "vendas": 94
+    },
+    {
+     "nome": "item 240975",
+     "unid": 3445,
+     "receita": 3112875.9,
+     "preco_medio": 903.59,
+     "vendas": 36
+    },
+    {
+     "nome": "item 241288",
+     "unid": 23440,
+     "receita": 2853556.7,
+     "preco_medio": 121.74,
+     "vendas": 24
+    },
+    {
+     "nome": "item 244029",
+     "unid": 979,
+     "receita": 2850831.5,
+     "preco_medio": 2911.98,
+     "vendas": 29
+    },
+    {
+     "nome": "item 239200",
+     "unid": 1925,
+     "receita": 1937328.2,
+     "preco_medio": 1006.4,
+     "vendas": 59
+    },
+    {
+     "nome": "item 251285",
+     "unid": 9308,
+     "receita": 1879749.3,
+     "preco_medio": 201.95,
+     "vendas": 12
+    },
+    {
+     "nome": "item 240990",
+     "unid": 4886,
+     "receita": 1826245.0,
+     "preco_medio": 373.77,
+     "vendas": 52
+    },
+    {
+     "nome": "item 236780",
+     "unid": 3152,
+     "receita": 1484274.6,
+     "preco_medio": 470.9,
+     "vendas": 54
+    },
+    {
+     "nome": "item 242273",
+     "unid": 2984,
+     "receita": 945048.9,
+     "preco_medio": 316.71,
+     "vendas": 12
+    },
+    {
+     "nome": "item 241300",
+     "unid": 2329,
+     "receita": 929849.2,
+     "preco_medio": 399.25,
+     "vendas": 10
+    },
+    {
+     "nome": "item 237361",
+     "unid": 20317,
+     "receita": 925908.1,
+     "preco_medio": 45.57,
+     "vendas": 52
+    },
+    {
+     "nome": "item 243606",
+     "unid": 1693,
+     "receita": 918115.6,
+     "preco_medio": 542.3,
+     "vendas": 63
+    },
+    {
+     "nome": "item 241304",
+     "unid": 1401,
+     "receita": 887038.7,
+     "preco_medio": 633.15,
+     "vendas": 34
+    }
+   ]
+  },
+  "estoque": {
+   "valor_total": 1045151.0,
+   "unidades": 71209,
+   "avaliados": 316,
+   "giro": 56,
+   "sem_giro": 260,
+   "dia_top": "Sex",
+   "itens": [
+    {
+     "nome": "Pó de Gema Luzente",
+     "qtd": 989,
+     "valor": 743154.0,
+     "decisao": "vender_parcial",
+     "vender": 140,
+     "piso": 676.28,
+     "dia": "Sex",
+     "unid_dia": 20.0
+    },
+    {
+     "nome": "Ametista Tenebrosa Impecável",
+     "qtd": 131,
+     "valor": 76649.0,
+     "decisao": "vender_parcial",
+     "vender": 14,
+     "piso": 526.6,
+     "dia": "Sex",
+     "unid_dia": 2.0
+    },
+    {
+     "nome": "Bastão de Prata Brilhante Rúnico",
+     "qtd": 9,
+     "valor": 36765.0,
+     "decisao": "vender_parcial",
+     "vender": 2,
+     "piso": 3676.47,
+     "dia": "Sex",
+     "unid_dia": 1.0
+    },
+    {
+     "nome": "Raiz Petrificada",
+     "qtd": 439,
+     "valor": 33184.0,
+     "decisao": "vender_parcial",
+     "vender": 63,
+     "piso": 68.03,
+     "dia": "Sex",
+     "unid_dia": 8.96
+    },
+    {
+     "nome": "Peridoto de Harandar",
+     "qtd": 44,
+     "valor": 22125.0,
+     "decisao": "vender_parcial",
+     "vender": 11,
+     "piso": 452.56,
+     "dia": "Sex",
+     "unid_dia": 2.0
+    },
+    {
+     "nome": "Torquês Sin'dorei",
+     "qtd": 20,
+     "valor": 16019.0,
+     "decisao": "guardar",
+     "vender": 0,
+     "piso": 720.85,
+     "dia": "Sex",
+     "unid_dia": 3.67
+    },
+    {
+     "nome": "Globo Pragatado",
+     "qtd": 1360,
+     "valor": 13342.0,
+     "decisao": "vender_parcial",
+     "vender": 5,
+     "piso": 8.83,
+     "dia": "Sex",
+     "unid_dia": 0.7
+    },
+    {
+     "nome": "Estilhaço Radiante",
+     "qtd": 3944,
+     "valor": 9742.0,
+     "decisao": "vender_parcial",
+     "vender": 14,
+     "piso": 2.22,
+     "dia": "Sex",
+     "unid_dia": 2.0
+    },
+    {
+     "nome": "Raizeroth",
+     "qtd": 404,
+     "valor": 8040.0,
+     "decisao": "vender_agora",
+     "vender": 28,
+     "piso": 17.91,
+     "dia": "Sex",
+     "unid_dia": 4.0
+    },
+    {
+     "nome": "Asteroide Encalhado",
+     "qtd": 486,
+     "valor": 7261.0,
+     "decisao": "vender_parcial",
+     "vender": 10,
+     "piso": 13.45,
+     "dia": "Sex",
+     "unid_dia": 1.47
+    },
+    {
+     "nome": "Minério de Cobre Refulgente",
+     "qtd": 1173,
+     "valor": 6627.0,
+     "decisao": "vender_agora",
+     "vender": 293,
+     "piso": 5.09,
+     "dia": "Sex",
+     "unid_dia": 155.73
+    },
+    {
+     "nome": "Guarnição Terrosa",
+     "qtd": 949,
+     "valor": 6406.0,
+     "decisao": "vender_parcial",
+     "vender": 68,
+     "piso": 6.08,
+     "dia": "Sex",
+     "unid_dia": 9.77
+    },
+    {
+     "nome": "Bentônico Bulboso",
+     "qtd": 93,
+     "valor": 6369.0,
+     "decisao": "vender_agora",
+     "vender": 23,
+     "piso": 61.63,
+     "dia": "Sex",
+     "unid_dia": 6.0
+    },
+    {
+     "nome": "Corante em Pó",
+     "qtd": 2961,
+     "valor": 5922.0,
+     "decisao": "vender_parcial",
+     "vender": 740,
+     "piso": 1.8,
+     "dia": "Sex",
+     "unid_dia": 3365.0
+    },
+    {
+     "nome": "Liga Crepuscular",
+     "qtd": 14,
+     "valor": 5785.0,
+     "decisao": "vender_parcial",
+     "vender": 4,
+     "piso": 371.87,
+     "dia": "Sex",
+     "unid_dia": 2.0
+    },
+    {
+     "nome": "Poção de Vida de Luaprata",
+     "qtd": 1517,
+     "valor": 5598.0,
+     "decisao": "vender_agora",
+     "vender": 77,
+     "piso": 3.32,
+     "dia": "Sex",
+     "unid_dia": 11.0
+    },
+    {
+     "nome": "Floração da Tranquilidade",
+     "qtd": 2780,
+     "valor": 5115.0,
+     "decisao": "vender_agora",
+     "vender": 4,
+     "piso": 1.66,
+     "dia": "Sex",
+     "unid_dia": 0.52
+    },
+    {
+     "nome": "Bolsa de Reagentes de Trama da Tecelã",
+     "qtd": 17,
+     "valor": 3756.0,
+     "decisao": "vender_parcial",
+     "vender": 4,
+     "piso": 198.87,
+     "dia": "Sex",
+     "unid_dia": 1.5
+    },
+    {
+     "nome": "Escamas Revenidas pelo Caos",
+     "qtd": 2277,
+     "valor": 3712.0,
+     "decisao": "guardar",
+     "vender": 0,
+     "piso": 1.47,
+     "dia": "Sex",
+     "unid_dia": 376.5
+    },
+    {
+     "nome": "Folhargêntea",
+     "qtd": 967,
+     "valor": 3278.0,
+     "decisao": "guardar",
+     "vender": 0,
+     "piso": 3.05,
+     "dia": "Sex",
+     "unid_dia": 83.58
+    }
+   ]
+  },
+  "screener": {
+   "geradoEm": "2026-10-31T15:46:09Z",
+   "receitas": 115,
+   "insumos": null
+  }
  },
  "serie": [
   {
