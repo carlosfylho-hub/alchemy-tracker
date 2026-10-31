@@ -799,6 +799,51 @@
           Oportunidades · top por g/conc</div>
         <div id="ecoOportunidades" class="overflow-x-auto"></div>
       </div>
+
+      <!-- ===== MERCADO (o antigo snapshot de texto, agora em tabelas) ===== -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div class="card overflow-hidden shadow-lg">
+          <div class="table-header px-4 py-2 border-b border-slate-700 text-xs font-bold text-sky-300 uppercase">
+            Atributos por profissão</div>
+          <div id="ecoAtributos"></div>
+        </div>
+        <div class="card p-4 shadow-lg lg:col-span-2">
+          <div class="text-xs font-bold uppercase text-sky-300 mb-2">Caixa real do TSM</div>
+          <div id="ecoCaixa" class="text-slate-300"></div>
+        </div>
+      </div>
+
+      <div class="card overflow-hidden shadow-lg">
+        <div class="table-header px-4 py-2 border-b border-slate-700 flex flex-wrap items-center justify-between gap-2">
+          <span class="text-xs font-bold text-sky-300 uppercase">Receitas <span id="ecoReceitasInfo"
+              class="text-slate-400 font-normal normal-case"></span></span>
+          <span class="flex items-center gap-2">
+            <select id="ecoProfFiltro" onchange="renderReceitasEconomia()"
+              class="bg-slate-800 border border-slate-700 rounded-lg px-2 py-1 text-xs text-slate-200">
+              <option value="todas">Todas as profissões</option>
+              <option value="alchemy">🧪 Alquimia</option>
+              <option value="jewelcrafting">💎 Joalheria</option>
+              <option value="enchanting">✨ Encantamento</option>
+              <option value="inscription">📜 Inscrição</option>
+            </select>
+            <input id="ecoBusca" placeholder="filtrar receita…" oninput="renderReceitasEconomia()"
+              class="bg-slate-800 border border-slate-700 rounded-lg px-2 py-1 text-xs text-slate-200 w-44" />
+          </span>
+        </div>
+        <div id="ecoReceitas" class="overflow-auto" style="max-height:60vh"></div>
+      </div>
+
+      <div class="card overflow-hidden shadow-lg">
+        <div class="table-header px-4 py-2 border-b border-slate-700 text-xs font-bold text-sky-300 uppercase">
+          Insumos · preço e percentil 30d</div>
+        <div id="ecoInsumos" class="overflow-auto" style="max-height:50vh"></div>
+      </div>
+
+      <div class="card overflow-hidden shadow-lg">
+        <div class="table-header px-4 py-2 border-b border-slate-700 text-xs font-bold text-sky-300 uppercase">
+          Estoque e plano de venda</div>
+        <div id="ecoEstoque" class="overflow-auto" style="max-height:50vh"></div>
+      </div>
     </div>
 
     <!-- ========================================== -->
@@ -2329,7 +2374,100 @@
           '</tbody></table>';
       }
 
+      renderMercado();
       desenharEconomia();
+    }
+
+    /* ---- MERCADO: as tabelas que substituem o snapshot de texto ---- */
+    function ecoTabelaSimples(cols, linhas) {
+      return '<table class="w-full text-xs"><thead><tr class="text-slate-400 border-b border-slate-700">' +
+        cols.map(c => '<th class="' + (c.r ? 'text-right' : 'text-left') + ' py-1.5 px-2 sticky top-0 bg-slate-800 z-10">' +
+          c.t + '</th>').join('') + '</tr></thead><tbody>' + linhas + '</tbody></table>';
+    }
+
+    function renderReceitasEconomia() {
+      if (!ecoDados || !ecoDados.mercado) return;
+      const todas = ecoDados.mercado.receitas || [];
+      const prof = (document.getElementById('ecoProfFiltro') || {}).value || 'todas';
+      const q = ((document.getElementById('ecoBusca') || {}).value || '').toLowerCase().trim();
+      const lst = todas.filter(r => (prof === 'todas' || r.profissaoId === prof) &&
+        (!q || String(r.receita || '').toLowerCase().includes(q)));
+      const info = document.getElementById('ecoReceitasInfo');
+      if (info) info.textContent = '· ' + lst.length + ' de ' + todas.length;
+      const box = document.getElementById('ecoReceitas');
+      if (!box) return;
+      box.innerHTML = ecoTabelaSimples(
+        [{ t: '#' }, { t: 'Receita' }, { t: 'Prof' }, { t: 'g/conc', r: 1 }, { t: 'lucro/craft', r: 1 },
+        { t: 'custo', r: 1 }, { t: 'venda', r: 1 }, { t: 'demanda/dia', r: 1 }, { t: 'venda real/dia', r: 1 }, { t: 'flags' }],
+        lst.map((r, i) => '<tr class="border-b border-slate-800/60 hover:bg-slate-800/40">' +
+          '<td class="py-1.5 px-2 text-slate-500">' + (i + 1) + '</td>' +
+          '<td class="px-2">' + r.receita + '</td>' +
+          '<td class="px-2 text-slate-400">' + r.profissao + '</td>' +
+          '<td class="px-2 text-right font-bold text-amber-300">' + ecoNum(r.g_conc, 2) + '</td>' +
+          '<td class="px-2 text-right text-emerald-400">' + ecoK(r.lucro) + ' g</td>' +
+          '<td class="px-2 text-right">' + ecoK(r.custo) + ' g</td>' +
+          '<td class="px-2 text-right">' + ecoK(r.venda) + ' g</td>' +
+          '<td class="px-2 text-right">' + ecoNum(r.demanda, 2) + '</td>' +
+          '<td class="px-2 text-right">' + ecoNum(r.venda_real_unid_dia, 2) + '</td>' +
+          '<td class="px-2 text-[10px] text-slate-500">' + ((r.flags || []).join(', ') || '—') + '</td></tr>').join(''));
+    }
+
+    function renderEstoqueEconomia() {
+      if (!ecoDados || !ecoDados.mercado) return;
+      const es = ecoDados.mercado.estoque || { itens: [] };
+      const box = document.getElementById('ecoEstoque');
+      if (!box) return;
+      box.innerHTML = '<div class="text-[11.5px] text-slate-400 px-3 py-2">' + (es.avaliados || 0) + ' itens · ' +
+        ecoNum(es.unidades, 0) + ' un · valor <b class="text-amber-300">' + ecoK(es.valor_total) + ' g</b> · giro ' +
+        (es.giro || 0) + ' · sem giro ' + (es.sem_giro || 0) + ' · melhor dia <b class="text-sky-300">' +
+        (es.dia_top || '—') + '</b></div>' +
+        ecoTabelaSimples(
+          [{ t: 'Item' }, { t: 'qtd', r: 1 }, { t: 'valor', r: 1 }, { t: 'decisão' }, { t: 'vender', r: 1 },
+          { t: 'piso', r: 1 }, { t: 'dia' }],
+          (es.itens || []).map(i => '<tr class="border-b border-slate-800/60"><td class="py-1.5 px-2">' + i.nome +
+            '</td><td class="px-2 text-right">' + i.qtd + '</td><td class="px-2 text-right">' + ecoK(i.valor) + ' g</td>' +
+            '<td class="px-2 text-slate-400">' + (i.decisao || '—') + '</td><td class="px-2 text-right">' +
+            (i.vender || '—') + '</td><td class="px-2 text-right">' + ecoK(i.piso) + ' g</td>' +
+            '<td class="px-2 text-slate-400">' + (i.dia || '—') + '</td></tr>').join(''));
+    }
+
+    function renderMercado() {
+      if (!ecoDados || !ecoDados.mercado) return;
+      const mk = ecoDados.mercado;
+
+      const at = document.getElementById('ecoAtributos');
+      if (at) at.innerHTML = ecoTabelaSimples(
+        [{ t: 'Profissão' }, { t: 'Res %', r: 1 }, { t: 'MC %', r: 1 }, { t: 'Ing %', r: 1 }, { t: 'Refund %', r: 1 }],
+        (mk.atributos || []).map(a => '<tr class="border-b border-slate-800/60"><td class="py-1.5 px-2">' + a.prof +
+          '</td><td class="px-2 text-right">' + (a.res ?? '—') + '</td><td class="px-2 text-right">' + (a.mc ?? '—') +
+          '</td><td class="px-2 text-right">' + (a.ing ?? '—') + '</td><td class="px-2 text-right">' +
+          (a.refund ?? '—') + '</td></tr>').join(''));
+
+      const ck = mk.caixa_tsm || { itens: [] };
+      const cx = document.getElementById('ecoCaixa');
+      if (cx) cx.innerHTML = '<div class="text-[11.5px] text-slate-400 mb-2">Janela ' +
+        ((ck.janela || {}).de || '?') + ' → ' + ((ck.janela || {}).ate || '?') +
+        ' · faturamento <b class="text-amber-300">' + ecoK(ck.faturamento) + ' g</b> · compras ' +
+        '<b class="text-red-400">−' + ecoK(ck.compras) + ' g</b> · saldo <b class="text-emerald-400">' +
+        ecoK(ck.saldo) + ' g</b></div>' +
+        ecoTabelaSimples(
+          [{ t: 'Item' }, { t: 'un.', r: 1 }, { t: 'receita', r: 1 }, { t: 'média g/un', r: 1 }, { t: 'vendas', r: 1 }],
+          (ck.itens || []).map(i => '<tr class="border-b border-slate-800/60"><td class="py-1.5 px-2">' + i.nome +
+            '</td><td class="px-2 text-right">' + i.unid + '</td><td class="px-2 text-right text-amber-300">' +
+            ecoK(i.receita) + ' g</td><td class="px-2 text-right">' + ecoK(i.preco_medio) + ' g</td>' +
+            '<td class="px-2 text-right">' + i.vendas + '</td></tr>').join(''));
+
+      const ins = document.getElementById('ecoInsumos');
+      if (ins) ins.innerHTML = ecoTabelaSimples(
+        [{ t: 'Insumo' }, { t: 'preço', r: 1 }, { t: 'percentil 30d', r: 1 }, { t: 'receitas', r: 1 }, { t: 'sinal' }],
+        (mk.insumos || []).map(i => '<tr class="border-b border-slate-800/60"><td class="py-1.5 px-2">' + i.nome +
+          '</td><td class="px-2 text-right text-amber-300">' + ecoK(i.preco) + ' g</td>' +
+          '<td class="px-2 text-right">' + (i.percentil == null ? '—' : ecoNum(i.percentil, 0)) + '</td>' +
+          '<td class="px-2 text-right">' + i.n_receitas + '</td><td class="px-2 ' +
+          (i.barato ? 'text-emerald-400' : 'text-slate-600') + '">' + (i.barato ? 'barato' : '') + '</td></tr>').join(''));
+
+      renderReceitasEconomia();
+      renderEstoqueEconomia();
     }
 
     function desenharEconomia() {
